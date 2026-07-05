@@ -18,6 +18,8 @@ import json
 import re
 from pathlib import Path
 
+import shutil
+
 import markdown
 from PIL import Image
 
@@ -49,6 +51,8 @@ header.site p { margin: .4rem 0 0; opacity: .82; font-size: .95rem; }
 main.article { padding: 2.5rem 1.5rem 3rem; }
 h1, h2, h3 { line-height: 1.4; color: var(--sea-deep); }
 article h1 { font-size: 1.55rem; }
+main.article h2.day { border: none; padding: 0; margin-top: 2.2rem; }
+main.article h2.day:first-child { margin-top: 0; }
 main.article h2 {
   font-size: 1.25rem; margin-top: 2.6rem; padding-left: .7rem;
   border-left: 4px solid var(--sea);
@@ -398,62 +402,72 @@ def render_paper(date: str, paper: dict, lang: str) -> str | None:
     )
 
 
-def render_index(date: str, papers: list[dict]) -> str:
-    cards = []
-    for p in papers:
-        has_dive = (DATA_DIR / date / p["arxiv_id"] / "deep_dive.zh.md").exists()
-        link = f'{date}/{p["arxiv_id"]}/zh.html' if has_dive else p["arxiv_url"]
-        note = "" if has_dive else '<span class="badge">深潜未生成 · 链接原文</span>'
-        org = (
-            f'<span class="badge">{p["organization"]}</span>'
-            if p.get("organization")
-            else ""
+def render_index(days: list[tuple[str, list[dict]]]) -> str:
+    sections = []
+    for date, papers in days:
+        cards = []
+        for p in papers:
+            has_dive = (DATA_DIR / date / p["arxiv_id"] / "deep_dive.zh.md").exists()
+            link = f'{date}/{p["arxiv_id"]}/zh.html' if has_dive else p["arxiv_url"]
+            note = "" if has_dive else '<span class="badge">深潜未生成 · 链接原文</span>'
+            org = (
+                f'<span class="badge">{p["organization"]}</span>'
+                if p.get("organization")
+                else ""
+            )
+            cards.append(
+                f'<div class="card"><h3><a href="{link}">{p["title"]}</a></h3>'
+                f'<span class="badge">▲ {p["upvotes"]}</span>{org}{note}'
+                f'<p class="abs">{p["abstract"]}</p></div>'
+            )
+        sections.append(
+            f"<h2 class='day'>潮汐 · {date}</h2>" + "".join(cards)
         )
-        cards.append(
-            f'<div class="card"><h3><a href="{link}">{p["title"]}</a></h3>'
-            f'<span class="badge">▲ {p["upvotes"]}</span>{org}{note}'
-            f'<p class="abs">{p["abstract"]}</p></div>'
-        )
-    body = (
-        "<main class=\"article\">"
-        f"<h2 style='margin-top:0;border:none;padding:0'>今日潮汐 · {date}</h2>"
-        + "".join(cards)
-        + "</main>"
-    )
+    body = '<main class="article">' + "".join(sections) + "</main>"
     return PAGE.format(
-        lang="zh", title=f"今日潮汐 {date}", css=CSS, js="", home="index.html",
+        lang="zh", title="Tide 潮汐", css=CSS, js="", home="index.html",
         tagline=TAGLINE_ZH, body=body,
     )
 
 
-def publish(date: str) -> Path:
-    day_dir = DATA_DIR / date
-    papers = json.loads((day_dir / "selected.json").read_text())
-    out_day = SITE_DIR / date
-    out_day.mkdir(parents=True, exist_ok=True)
+def publish(dates: list[str] | None = None) -> Path:
+    if not dates:
+        dates = sorted(
+            (d.name for d in DATA_DIR.iterdir()
+             if d.is_dir() and (d / "selected.json").exists()),
+            reverse=True,
+        )
+    days = []
+    for date in dates:
+        day_dir = DATA_DIR / date
+        papers = json.loads((day_dir / "selected.json").read_text())
+        days.append((date, papers))
+        out_day = SITE_DIR / date
+        out_day.mkdir(parents=True, exist_ok=True)
+        for p in papers:
+            paper_dir = day_dir / p["arxiv_id"]
+            out_paper = out_day / p["arxiv_id"]
+            out_paper.mkdir(exist_ok=True)
+            for lang in ("zh", "en"):
+                html = render_paper(date, p, lang)
+                if html is None:
+                    continue
+                (out_paper / f"{lang}.html").write_text(html)
+            for img in paper_dir.glob("fig*_*.webp"):
+                shutil.copy(img, out_paper / img.name)
+            for img in paper_dir.glob("fig*_*.png"):
+                _to_webp(img, out_paper / (img.stem + ".webp"))
 
-    for p in papers:
-        paper_dir = day_dir / p["arxiv_id"]
-        out_paper = out_day / p["arxiv_id"]
-        out_paper.mkdir(exist_ok=True)
-        for lang in ("zh", "en"):
-            html = render_paper(date, p, lang)
-            if html is None:
-                continue
-            (out_paper / f"{lang}.html").write_text(html)
-        for img in paper_dir.glob("fig*_*.*"):
-            _to_webp(img, out_paper / (img.stem + ".webp"))
-
-    (SITE_DIR / "index.html").write_text(render_index(date, papers))
-    print(f"Site written to {SITE_DIR}")
+    (SITE_DIR / "index.html").write_text(render_index(days))
+    print(f"Site written to {SITE_DIR} ({len(days)} day(s))")
     return SITE_DIR
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--date", required=True)
+    ap.add_argument("--date", help="publish one date only (default: all in data/)")
     args = ap.parse_args()
-    publish(args.date)
+    publish([args.date] if args.date else None)
 
 
 if __name__ == "__main__":

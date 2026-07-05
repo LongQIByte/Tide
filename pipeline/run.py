@@ -27,17 +27,22 @@ def run(date: str | None, top: int, skip_figures: bool) -> Path:
     out_dir = DATA_DIR / day
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"[1/3] Fetching HF Daily Papers ({date or 'latest'}) ...")
-    candidates = hf_daily.fetch_candidates(date=date)
-    (out_dir / "candidates.json").write_text(
-        json.dumps(candidates, ensure_ascii=False, indent=2)
-    )
-    print(f"      {len(candidates)} candidates -> {out_dir / 'candidates.json'}")
-    if not candidates:
-        print("      No papers for this date (weekend/holiday?). Done.")
-        return out_dir
-
-    selected = hf_daily.select_top(candidates, n=top)
+    selected_file = out_dir / "selected.json"
+    if selected_file.exists():
+        # Date already ingested: keep the frozen selection (idempotent re-runs).
+        selected = json.loads(selected_file.read_text())
+        print(f"[1/3] {day}: selection exists ({len(selected)} papers), reusing")
+    else:
+        print(f"[1/3] Fetching HF Daily Papers ({date or 'latest'}) ...")
+        candidates = hf_daily.fetch_candidates(date=date)
+        (out_dir / "candidates.json").write_text(
+            json.dumps(candidates, ensure_ascii=False, indent=2)
+        )
+        print(f"      {len(candidates)} candidates -> {out_dir / 'candidates.json'}")
+        if not candidates:
+            print("      No papers for this date (weekend/holiday?). Done.")
+            return out_dir
+        selected = hf_daily.select_top(candidates, n=top)
     print(f"[2/3] Selected top {len(selected)} by upvotes:")
     for c in selected:
         print(f"      {c['upvotes']:>4}▲  {c['arxiv_id']}  {c['title'][:70]}")
@@ -46,6 +51,9 @@ def run(date: str | None, top: int, skip_figures: bool) -> Path:
     for c in selected:
         paper_dir = out_dir / c["arxiv_id"]
         paper_dir.mkdir(exist_ok=True)
+        if (paper_dir / "deep_dive.zh.md").exists() or (paper_dir / "paper.html").exists():
+            print(f"      {c['arxiv_id']}: already fetched/interpreted, skipping")
+            continue
         result = arxiv_fetch.fetch_html(c["arxiv_id"])
         if result is None:
             print(f"      {c['arxiv_id']}: no HTML version available, skipped")
@@ -60,9 +68,7 @@ def run(date: str | None, top: int, skip_figures: bool) -> Path:
         c["figures"] = figures
         print(f"      {c['arxiv_id']}: html ok, {len(figures)} figures")
 
-    (out_dir / "selected.json").write_text(
-        json.dumps(selected, ensure_ascii=False, indent=2)
-    )
+    selected_file.write_text(json.dumps(selected, ensure_ascii=False, indent=2))
     print(f"Done. Output in {out_dir}")
     return out_dir
 

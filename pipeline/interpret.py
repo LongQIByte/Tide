@@ -17,6 +17,11 @@ from pathlib import Path
 
 from . import llm
 
+try:
+    from PIL import Image
+except ImportError:  # pillow only needed for --prune webp conversion
+    Image = None
+
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 ZH_EN_SPLIT = "===EN==="  # legacy marker, still handled in _split_bilingual
 
@@ -200,7 +205,7 @@ def _clean(text: str) -> str:
 # ---------- assembly ----------
 
 
-def deep_dive(date: str, arxiv_id: str, max_figures: int = 5) -> None:
+def deep_dive(date: str, arxiv_id: str, max_figures: int = 5, prune: bool = False) -> None:
     day_dir = DATA_DIR / date
     paper_dir = day_dir / arxiv_id
     selected = json.loads((day_dir / "selected.json").read_text())
@@ -223,11 +228,13 @@ def deep_dive(date: str, arxiv_id: str, max_figures: int = 5) -> None:
     key_idx = pick_key_figures(figures, max_figures)
     print(f"[4/4] Explaining {len(key_idx)} key figures (of {len(figures)}): {key_idx}")
     fig_sections_zh, fig_sections_en = [], []
+    kept_images = []
     for i in key_idx:
         fig = figures[i]
         img = next(p for p in fig["local_paths"] if p)
         zh, en = explain_figure(paper, fig, img)
-        rel = Path(img).name
+        rel = _webp_name(Path(img))
+        kept_images.append(paper_dir / rel)
         cap = fig.get("caption", "")
         fig_sections_zh.append(f"![{cap[:80]}]({rel})\n\n> {cap}\n\n{zh}")
         fig_sections_en.append(f"![{cap[:80]}]({rel})\n\n> {cap}\n\n{en}")
@@ -237,7 +244,33 @@ def deep_dive(date: str, arxiv_id: str, max_figures: int = 5) -> None:
     en_md = _render_en(paper, background_en, fig_sections_en)
     (paper_dir / "deep_dive.zh.md").write_text(zh_md)
     (paper_dir / "deep_dive.en.md").write_text(en_md)
+    _convert_figures(figures, key_idx)
+    if prune:
+        _prune(paper_dir, kept_images)
     print(f"Done: {paper_dir}/deep_dive.zh.md, deep_dive.en.md")
+
+
+def _webp_name(img: Path) -> str:
+    return img.stem + ".webp"
+
+
+def _convert_figures(figures: list[dict], key_idx: list[int]) -> None:
+    """Convert the chosen figures to WebP next to the originals (~8x smaller)."""
+    if Image is None:
+        raise RuntimeError("pillow required: pip install pillow")
+    for i in key_idx:
+        src_img = Path(next(p for p in figures[i]["local_paths"] if p))
+        dest = src_img.with_suffix(".webp")
+        if not dest.exists():
+            Image.open(src_img).convert("RGB").save(dest, "WEBP", quality=85)
+
+
+def _prune(paper_dir: Path, kept_images: list[Path]) -> None:
+    """Keep only what gets committed: deep_dive md + chosen webp figures."""
+    keep = {p.name for p in kept_images} | {"deep_dive.zh.md", "deep_dive.en.md"}
+    for f in paper_dir.iterdir():
+        if f.name not in keep:
+            f.unlink()
 
 
 def _render_zh(paper, abstract_zh, background, fig_sections) -> str:
@@ -289,8 +322,10 @@ def main() -> None:
     ap.add_argument("--date", required=True)
     ap.add_argument("--id", required=True, help="arXiv id")
     ap.add_argument("--max-figures", type=int, default=5)
+    ap.add_argument("--prune", action="store_true",
+                    help="delete paper.html and unused figures afterwards")
     args = ap.parse_args()
-    deep_dive(args.date, args.id, args.max_figures)
+    deep_dive(args.date, args.id, args.max_figures, args.prune)
 
 
 if __name__ == "__main__":

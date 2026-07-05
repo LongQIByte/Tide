@@ -1,0 +1,589 @@
+[
+  {
+    "arxiv_id": "2606.30534",
+    "title": "Orca: The World is in Your Mind",
+    "abstract": "We introduce Orca, an initial instantiation of a general world foundation model. Orca learns a unified world latent space from multimodal world signals and exposes it through multimodal readout interfaces. Rather than optimizing isolated next-token, next-frame, or next-action prediction, we are centered on Next-State-Prediction modeling, offering a unified state-transition modeling route toward understanding, predicting, and acting upon the world. Orca learns through two complementary paradigms: unconscious learning captures dense natural state transitions from continuous videos, and conscious learning models sparse meaningful state transitions by language-described events and VQA supervision. For pre-training, we construct a large-scale world-learning inventory data, including 125K hours of video data and 160M event annotations. After pre-training, Orca learns a unified world latent space. To examine whether the learned latent supports downstream, we evaluate it by three representative downstream readouts: text generation, image prediction, and embodied action generation. Orca's backbone is frozen, and only the lightweight modality-specific decoders are trainable. Experiments show the scalability of the proposed paradigm and verify that stronger world latent enables stronger downstream readouts. Orca outperforms similar-sized specialized baselines. These results show that Orca, as a general world foundation model, presents a promising approach to understanding, predicting, and acting upon the world. Finally, we discuss the current limitations, aiming to provide useful insights and inspiration for the community.",
+    "upvotes": 230,
+    "authors": [
+      "Yihao Wang",
+      "Yuheng Ji",
+      "Mingyu Cao",
+      "Yanqing Shen",
+      "Runze Xiao",
+      "Huaihai Lyu",
+      "Senwei Xie",
+      "Euan Liu",
+      "Klara Tian",
+      "Tianfeng Long",
+      "Yichi Zhang",
+      "Zhengliang Cai",
+      "Ruike Chen",
+      "Jifan Zhao",
+      "Ruochuan Shi",
+      "Zihan Tang",
+      "Jing Lyu",
+      "Wenxing Tan",
+      "Ningbo Zhang",
+      "Yangtao Hu",
+      "Yuming Gao",
+      "Xiansheng Chen",
+      "Junkai Zhao",
+      "Congsheng Xu",
+      "Boan Zhu",
+      "Ziqi Wang",
+      "Yupu Feng",
+      "Qiongqiong Zhang",
+      "Yingli Zhao",
+      "Yulong Ao",
+      "Shaoxuan Xie",
+      "You Liu",
+      "Guocai Yao",
+      "Leiduo Zhang",
+      "Xiaodan Liu",
+      "Yunyan Zhang",
+      "Yance Jiao",
+      "Xinyan Yang",
+      "Jiaxing Wei",
+      "Xu Liu",
+      "Tengfei Pan",
+      "Shaokai Nie",
+      "Chunlei Men",
+      "Sen Cui",
+      "Xiaojie Jin",
+      "Hongyang Li",
+      "Jianlan Luo",
+      "Yao Mu",
+      "Yunchao Wei",
+      "Jun Yan",
+      "Hang Zhao",
+      "Xiaolong Zheng",
+      "Jiaming Li",
+      "Yonghua Lin",
+      "Tiejun Huang",
+      "Zhongyuan Wang",
+      "Pengwei Wang"
+    ],
+    "organization": null,
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [
+      "world foundation model",
+      "world latent space",
+      "multimodal readout interfaces",
+      "next-state-prediction modeling",
+      "unconscious learning",
+      "conscious learning",
+      "world-learning inventory data",
+      "embodied action generation",
+      "downstream readouts",
+      "modality-specific decoders"
+    ],
+    "published_at": "2026-06-29T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2606.30534",
+    "arxiv_url": "https://arxiv.org/abs/2606.30534",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x1.png"
+        ],
+        "caption": "Figure 1 : The Orca’s overall framework. Orca follows an Encoder-Decoder architecture. Given multimodal world signals, the Encoder learns a world latent through two complementary paradigms: unconscious learning and conscious learning . Unconscious learning captures dense natural state transitions, while conscious learning captures sparse meaningful state transitions. To prove that the learned latent is effective, the Encoder is frozen after pre-training, and only the lightweight modality-specific decoders are trainable separately. The Decoder reads out the latent into text, images, actions, and other modalities.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x2.png"
+        ],
+        "caption": "Figure 2 : Overview of Encoder. Orca learns a world latent representation through two learning paradigms. Unconscious learning uses video data to capture dense and natural state transitions. Conscious learning uses language instructions as explicit semantic conditions to capture sparse and meaningful state transitions.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x3.png"
+        ],
+        "caption": "Figure 3 : Overview of pre-training data. Orca’s pre-training data includes video, event, and VQA data. A. Video Data supports 1) Observation-only state transition , A. Video Data and B. Event Data support 2) Event-conditioned state transition , and C. VQA Data supports 3) VQA response generation .",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x4.png"
+        ],
+        "caption": "Figure 4 : Downstream readout architectures. To language reuses the LM head for text readout. To vision only trains an MLP adaptor and LoRA on top of a frozen SD3.5 to readout images. To action trains an MLP adaptor and a DiT-based Action Expert from scratch. Action Expert receives the latent, robot proprioception state, and noisy action to generate action chunks. The specific settings are shown in Appendix C.2 .",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x5.png"
+        ],
+        "caption": "Figure 5 : Loss of model and data scaling.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x6.png"
+        ],
+        "caption": "Figure 6 : Scaling behavior on downstream readouts performance.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x7.png"
+        ],
+        "caption": "Figure 7 : Visual comparison of image prediction in the real world.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x8.png"
+        ],
+        "caption": "Figure 8 : Recovery after repeated grasp failures. Orca recovers from early spoon-grasp failures and eventually makes progress, while π 0.5 \\pi_{0.5} remains unstable with repeated failed attempts.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x9.png"
+        ],
+        "caption": "Figure A1 : Conceptual illustration of Orca . Existing models are often organized around passive task-driven prediction, including next-token, next-frame, and next-action prediction. Orca shifts the modeling target toward next-state prediction, where multimodal world signals are used to learn a unified world latent. Unconscious learning captures dense natural dynamics from continuous observation, while conscious learning captures meaningful state transitions guided by language, events, and intentions. The learned world latent supports downstream readouts to language, vision, and action.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x10.png"
+        ],
+        "caption": "Figure C1 : The implementation of Queries.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x11.png"
+        ],
+        "caption": "Figure E1 : PRICE-V0.1 Examples.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x12.png"
+        ],
+        "caption": "Figure E2 : Real-robot benchmark. We evaluate the dual-arm wheeled robot on five manipulation tasks and construct OOD settings for environment and object generalization.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig12_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x13.png"
+        ],
+        "caption": "Figure E3 : Failure with higher intermediate progress in Stamp. Orca grasps and transports the stamp toward the ink pad before dropping it near the end, while Qwen3.5 fails to maintain a meaningful stamp grasp and remains at low progress.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig13_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x14.png"
+        ],
+        "caption": "Figure E4 : Failure with higher intermediate progress in Pull Out Tissue. Orca reaches the tissue-grasping stage and achieves substantially higher intermediate progress, while π 0.5 \\pi_{0.5} only approaches the tissue box and fails to grasp the tissue.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig14_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x15.png"
+        ],
+        "caption": "Figure E5 : Failure with higher intermediate progress in Stacked Bowls. Orca advances through multiple bowl-stacking stages, while π 0.5 \\pi_{0.5} repeatedly fails to grasp the bowl and remains at lower progress.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig15_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x16.png"
+        ],
+        "caption": "Figure E6 : Partial recovery after spoon-grasp failure in Scoop Sugar. Orca retries after failing to grasp the spoon and recovers some lost progress, while Qwen3.5 shakes in place without effective re-grasping.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig16_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x17.png"
+        ],
+        "caption": "Figure E7 : Recovery through repeated spoon-grasp attempts in Scoop Sugar. Orca makes multiple recovery attempts and eventually grasps the spoon successfully, while JEPA remains largely stagnant with limited task progress.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig17_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x18.png"
+        ],
+        "caption": "Figure F1 : Cross-benchmark examples of state transition. This dimension evaluates a model’s understanding of causal temporal dynamics and physical state changes, namely its ability to predict or recognize the evolution of an object from state A to state B. The improvement is particularly evident in tasks involving irreversible physical processes.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig18_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x19.png"
+        ],
+        "caption": "Figure F2 : More cross-benchmark examples of state transition.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig19_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x20.png"
+        ],
+        "caption": "Figure F3 : Cross-benchmark examples of commonsense reasoning. The advantage of Orca is particularly pronounced in complex VQA scenarios that require reasoning beyond the visible scene and inferring hypothetical outcomes.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig20_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x21.png"
+        ],
+        "caption": "Figure F4 : Cross-benchmark examples of dynamic motion. The proposed unconscious learning paradigm enables Orca to naturally acquire temporal continuity and motion inertia, leading to stronger forward simulation capabilities for dynamic object behaviors.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig21_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30534v1/x22.png"
+        ],
+        "caption": "Figure F5 : Cross-benchmark examples of spatial relations. The results demonstrate strong robustness in scenarios involving complex occlusions and multi-object spatial reasoning.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30534/fig22_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2606.28436",
+    "title": "Dockerless: Environment-Free Program Verifier for Coding Agents",
+    "abstract": "Program verifiers play a central role in training coding agents, including selecting trajectories for supervised fine-tuning (SFT) and providing rewards for reinforcement learning (RL). Standard execution-based verification requires running unit tests inside per-repository environments such as Docker images, incurring substantial environment setup costs. We propose Dockerless, an environment-free agentic patch verifier that evaluates generated code patches without executing them. Rather than simply matching candidate patches to references, Dockerless judges patch correctness using evidence gathered through agentic repository exploration. On a verifier evaluation benchmark, Dockerless outperforms the strongest open-source verifier by 14.3 AUC points. Using Dockerless as both the SFT trajectory filter and the RL reward enables a fully environment-free post-training pipeline. The resulting model reaches 62.0%, 50.0%, and 35.2% resolve rate on SWE-bench Verified, Multilingual, and Pro, respectively. It surpasses the Qwen3.5-9B baseline by 2.4, 8.7, and 2.9 points, matching environment-based post-training.",
+    "upvotes": 103,
+    "authors": [
+      "Wenhao Zeng",
+      "Yuling Shi",
+      "Xiaodong Gu",
+      "Chao Hu",
+      "Chaofan Wang",
+      "Yuhao Cui",
+      "Hongting Zhou",
+      "Mengnan Qi",
+      "Jianqiao Wangni",
+      "Zhaojian Yu",
+      "Shuzheng Gao",
+      "Kai Cai",
+      "Shilin He"
+    ],
+    "organization": "ByteDance",
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [
+      "program verifiers",
+      "supervised fine-tuning",
+      "reinforcement learning",
+      "Dockerless",
+      "agentic patch verifier",
+      "environment-free",
+      "repository exploration",
+      "SWE-bench Verified",
+      "Multilingual",
+      "Pro"
+    ],
+    "published_at": "2026-06-26T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2606.28436",
+    "arxiv_url": "https://arxiv.org/abs/2606.28436",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28436v1/x1.png"
+        ],
+        "caption": "Figure 1 : Comparison of verifiers for SWE agents. Docker-based tests are accurate but depend on costly per-repository environments. LLM scorers sidestep that cost but score patches based on surface-level information, without actively inspecting the repository. Dockerless instead deeply explores the codebase to judge the patch, requiring no per-repository environment while retaining repository grounding.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.28436/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28436v1/x2.png"
+        ],
+        "caption": "Figure 2 : Architecture of Dockerless. The verifier takes the issue x x , reference patch y ref y_{\\text{ref}} , and candidate patch y y , and proceeds in two stages. (1) Question generation and exploration: the verifier first generates K K verification questions and dispatches parallel sub-agents to collect evidence-backed answers from the codebase. (2) Judgment: the verifier conditions on the issue, the patches, and the collected ( Q k , A k ) (Q_{k},A_{k}) pairs to produce a binary verdict token, whose logits define the continuous score r ϕ ​ ( x , y ) r_{\\phi}(x,y) .",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.28436/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28436v1/x3.png"
+        ],
+        "caption": "Figure 3 : Training pipeline for Dockerless: teacher-generated question-answer-judge trajectories are rejection-sampled by matching the predicted verdict against the ground-truth, and used to fine-tune a base model.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.28436/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28436v1/x4.png"
+        ],
+        "caption": "Figure 4 : Env-free post-training pipeline for Dockerless. (A) Environment-free RFT: candidate rollouts are scored by Dockerless, and the top- K K are kept to fine-tune the base model, yielding the SFT model. (B) Environment-free RL: starting from the SFT model, GRPO uses Dockerless as the per-rollout reward source, yielding the RL model.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.28436/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28436v1/x5.png"
+        ],
+        "caption": "Figure 5 : Verifier AUC vs. number of verification questions K K on SWE-bench Verified verifier evaluation benchmark.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.28436/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28436v1/x6.png"
+        ],
+        "caption": "Figure 6 : Per-rollout wall-clock breakdown during RL under three reward sources.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.28436/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28436v1/x7.png"
+        ],
+        "caption": "Figure 7 : Representative case where the candidate patch resolves the issue but uses a different surface form from the reference patch.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.28436/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28436v1/x8.png"
+        ],
+        "caption": "Figure 8 : Frontier-model resolve rate (%) on SWE-bench Verified, Multilingual, and Pro under env-based and env-free settings. Solid bars are env-free; hatched extensions show the additional gain from per-repository environments, so the full bar height equals the env-based score.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.28436/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28436v1/x9.png"
+        ],
+        "caption": "Figure 9 : Per-language comparison of SFT (w/o env) and SFT (w/ env) resolve rate, aggregated across SWE-bench Verified, Multilingual, and Pro. Bubble size encodes the number of test instances per language. Points above the diagonal mark languages where SFT (w/ env) wins, below the diagonal where SFT (w/o env) wins.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.28436/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28436v1/x10.png"
+        ],
+        "caption": "Figure 10 : Distribution of total per-rollout wall-clock time (rollout + reward) under three reward sources, on 7680 7680 rollouts collected during RL training. All three sources produce near-identical distributions; the long right tail is set by slow rollouts, not by the verifier.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.28436/fig10_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2606.30626",
+    "title": "DOPD: Dual On-policy Distillation",
+    "abstract": "On-policy distillation (OPD) offers superior capacity transfer by supervising student-sampled trajectories with dense token-level signals. To furnish high-quality supervision sources and thereby elevate the performance frontier of distillation, an intuitive direction is to infuse privileged information to either teacher or student itself. However, this additional input induces a potential failure mode we dub privilege illusion: a pattern that conflates the transferable capability gap that students are meant to close, and the information asymmetry gap that can only be mimicked but never replicated. This issue is further amplified by the inherent non-uniformity of token-level supervision, where only a small subset of tokens carries pivotal capability-bearing signals. To this end, we propose DOPD, an advantage-aware dual distillation paradigm that dynamically routes token-level supervision between privileged teacher and privileged student policies based on their advantage gap and relative probabilities. Each token receives supervision of different strength, objective, and strategy from either teacher or student itself, which transfers credible capability while simultaneously receiving auxiliary signals, to alleviate privilege illusion. Extensive experiments on both large language model (LLM) and vision-language model (VLM) settings demonstrate that DOPD consistently outperforms Vanilla OPD and other counterparts. Further results on stability, robustness, continual learning, and out-of-distribution tasks validate its superiority.",
+    "upvotes": 93,
+    "authors": [
+      "Xinlei Yu",
+      "Gen Li",
+      "Qingyi Si",
+      "Guibin Zhang",
+      "Yuqi Xu",
+      "Congcong Wang",
+      "Shuai Dong",
+      "Kaiwen Tuo",
+      "Xiangyu Zeng",
+      "Kaituo Feng",
+      "Qunzhong Wang",
+      "Yang Shi",
+      "Xiaobin Hu",
+      "Xiangyu Yue",
+      "Jiaqi Wang",
+      "Shuicheng Yan"
+    ],
+    "organization": null,
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [
+      "on-policy distillation",
+      "token-level signals",
+      "privileged information",
+      "privilege illusion",
+      "advantage-aware dual distillation",
+      "dynamic routing",
+      "capability transfer",
+      "large language models",
+      "vision-language models"
+    ],
+    "published_at": "2026-06-29T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2606.30626",
+    "arxiv_url": "https://arxiv.org/abs/2606.30626",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30626v1/x1.png"
+        ],
+        "caption": "Figure 1 : Performance comparison of our DOPD with competing approaches across eight benchmarks in terms of average across all benchmarks (upper bigger bars) and individual values of each benchmark (lower small bars).",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30626v1/x2.png"
+        ],
+        "caption": "Figure 2 : Comparison of existing (a) standard distillation, (b) self distillation, and (c) adaptive distillation paradigms with our proposed (d) dual distillation paradigm.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30626v1/x3.png",
+          "https://arxiv.org/html/2606.30626v1/x4.png"
+        ],
+        "caption": "(a) Performance vs. Training Step (b) Entropy vs. Training Step Figure 3 : Comparison of (a) performance and (b) entropy on OPD variants with privileged information. Here, T., S., and Priv. denote teacher policy, student policy and with privileged information, respectively.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig3_1.png",
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig3_2.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30626v1/x5.png",
+          "https://arxiv.org/html/2606.30626v1/x6.png"
+        ],
+        "caption": "(a) Qwen3-8B Qwen3-1.7B (LiveBench) (b) Qwen3-VL-8B Qwen3-VL-2B (MMStar) Figure 4 : Token ablations on random tokens, and tokens with high or low advantage gap.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig4_1.png",
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig4_2.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30626v1/x7.png"
+        ],
+        "caption": "Figure 5 : Overview of our proposed DOPD.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30626v1/x8.png",
+          "https://arxiv.org/html/2606.30626v1/x9.png"
+        ],
+        "caption": "(a) Performance Gain vs. Teacher-student Size Ratio (b) Gap Reduction vs. Teacher-student Size Ratio Figure 6 : Scalability comparison of proposed DOPD and Vanilla OPD on (a) performance gain and (b) teacher-student gap reduction ratio. Here, the solid and dashed lines represent the 0.6B and 1.7B student policy, respectively.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig6_1.png",
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig6_2.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30626v1/x10.png",
+          "https://arxiv.org/html/2606.30626v1/x11.png"
+        ],
+        "caption": "(a) Normalized Performance on Three-stage Continual Learning (b) Out-of-distribution Evaluation Figure 7 : Comparison of proposed DOPD and Vanilla OPD on (a) continual learning, where we conduct a three-stage continual learning with general, reasoning, and coding training sub-datasets sequentially. The solid and dashed lines denote the results on general benchmark (LiveBench) and corresponding specific benchmarks (MATH500 and BFCLv3); and (b) out-of-distribution tasks, where we optimize the student policy on coding or reasoning dataset, but evaluated on another out-of-domain benchmarks (MATH500 and BFCLv3).",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig7_1.png",
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig7_2.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30626v1/x12.png",
+          "https://arxiv.org/html/2606.30626v1/x13.png"
+        ],
+        "caption": "(a) Performance vs. Training Step (b) Entropy vs. Training Step Figure 8 : Training stability comparison of proposed DOPD and representative baselines, reporting the (a) performance and (b) entropy trends over training steps on LiveBench.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig8_1.png",
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig8_2.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30626v1/x14.png"
+        ],
+        "caption": "Figure 9 : Token-level visualization of the four token types, where each token is colored based on their privilege advantage gap 𝒜 \\mathcal{A} and predicted probabilities of teacher q T q_{T} and student q S q_{S} policies.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30626v1/x15.png"
+        ],
+        "caption": "Table 6 : Effectiveness of individual or combinations of four tokens, and adaptive mechanism on LiveBench. Table 7 : Impact of different divergence objectives and strategies on LiveBench. Table 8 : Ablation study on our DOPD, covering the main designs of advantage-aware dual distillation. Figure 10 : Sensitivity study on the intensity coefficient of weak β w \\beta_{w} and light β l \\beta_{l} distillation.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30626v1/x16.png"
+        ],
+        "caption": "Figure 11 : Demonstrations of LLM-based privileged input.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30626v1/x17.png"
+        ],
+        "caption": "Figure 12 : Demonstrations of VLM-based privileged input.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig12_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30626v1/x18.png"
+        ],
+        "caption": "Figure 13 : Prompts of Privileged Input Generation.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-05/2606.30626/fig13_1.png"
+        ]
+      }
+    ]
+  }
+]
