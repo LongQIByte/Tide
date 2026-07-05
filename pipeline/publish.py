@@ -80,16 +80,48 @@ code { background: var(--foam); padding: .1em .35em; border-radius: 4px;
 footer { text-align: center; color: var(--ink-soft); font-size: .85rem;
          padding: 2rem 0 3rem; }
 
-/* ---------- figure deck (fullscreen slideshow) ---------- */
-.deck-lead { text-align: center; color: var(--ink-soft); font-size: .9rem;
-             margin: 0 0 1.2rem; }
+/* ---------- deck launcher (inline, in the article flow) ---------- */
+.launcher {
+  position: relative; display: block; width: 100%; overflow: hidden;
+  border: none; border-radius: 14px; cursor: pointer; padding: 0;
+  margin: 1.4rem 0 2.2rem; text-align: left; color: var(--moon);
+  background: linear-gradient(180deg, var(--night-2), var(--night));
+  box-shadow: 0 10px 34px rgba(10,79,102,.25);
+  transition: transform .25s ease, box-shadow .25s ease;
+  font: inherit;
+}
+.launcher:hover { transform: translateY(-2px);
+  box-shadow: 0 16px 44px rgba(10,79,102,.35); }
+.launcher .thumb {
+  display: block; width: 100%; height: 240px; object-fit: cover;
+  object-position: top; opacity: .9;
+  -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
+  background: #fff; border: none; border-radius: 0; padding: 10px;
+}
+.launcher .cta {
+  display: flex; align-items: center; gap: .9rem;
+  padding: 1.05rem 1.4rem 1.15rem;
+}
+.launcher .play {
+  flex: 0 0 auto; width: 2.6rem; height: 2.6rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--moon); color: var(--night); padding-left: .25rem;
+}
+.launcher .cta b { font-size: 1.02rem; letter-spacing: .02em; }
+.launcher .cta span { display: block; color: var(--moon-soft);
+  font-size: .84rem; margin-top: .15rem; }
+.launcher .cta span.play { display: flex; margin-top: 0; color: var(--night); }
+
+/* ---------- figure deck (fullscreen slideshow overlay) ---------- */
 .deck {
-  position: relative; height: 100svh;
+  position: fixed; inset: 0; z-index: 50; display: none;
   background:
     radial-gradient(1200px 500px at 50% -10%, #17435a 0%, transparent 60%),
     linear-gradient(180deg, var(--night-2), var(--night) 55%);
-  color: var(--moon); display: flex; flex-direction: column;
+  color: var(--moon); flex-direction: column;
 }
+.deck.open { display: flex; }
 .deck-top {
   display: flex; align-items: center; gap: 1rem;
   padding: 1rem 1.6rem; font-size: .9rem; color: var(--moon-soft);
@@ -169,7 +201,8 @@ footer { text-align: center; color: var(--ink-soft); font-size: .85rem;
 DECK_JS = """
 (function () {
   const deck = document.getElementById('deck');
-  if (!deck) return;
+  const launcher = document.getElementById('launcher');
+  if (!deck || !launcher) return;
   const slides = deck.querySelectorAll('.slide');
   const dots = deck.querySelectorAll('.dot');
   const cur = deck.querySelector('.count b');
@@ -188,22 +221,31 @@ DECK_JS = """
   prev.onclick = () => go(i - 1);
   next.onclick = () => go(i + 1);
   dots.forEach((d, k) => d.onclick = () => go(k));
-  function deckVisible() {
-    const r = deck.getBoundingClientRect();
-    return r.top < innerHeight * 0.5 && r.bottom > innerHeight * 0.5;
+  function open() {
+    deck.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if (deck.requestFullscreen) deck.requestFullscreen().catch(() => {});
+    go(i);
   }
-  document.addEventListener('keydown', (e) => {
-    if (!deckVisible()) return;
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); go(i + 1); }
-    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(i - 1); }
-    else if (e.key.toLowerCase() === 'f') {
-      document.fullscreenElement ? document.exitFullscreen() : deck.requestFullscreen();
+  function close() {
+    deck.classList.remove('open');
+    document.body.style.overflow = '';
+    if (document.fullscreenElement) document.exitFullscreen();
+  }
+  launcher.onclick = open;
+  deck.querySelector('.close').onclick = close;
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement && deck.classList.contains('open')) {
+      deck.classList.remove('open');
+      document.body.style.overflow = '';
     }
   });
-  deck.querySelector('.fs').onclick = () => {
-    document.fullscreenElement ? document.exitFullscreen() : deck.requestFullscreen();
-  };
-  go(0);
+  document.addEventListener('keydown', (e) => {
+    if (!deck.classList.contains('open')) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); go(i + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(i - 1); }
+    else if (e.key === 'Escape') { close(); }
+  });
 })();
 """
 
@@ -264,31 +306,40 @@ def _parse_slides(deck_md: str) -> list[dict]:
 
 def _render_deck(slides: list[dict], lang: str) -> str:
     title = "方 法 图 解" if lang == "zh" else "M E T H O D"
-    fs_label = "全屏" if lang == "zh" else "Fullscreen"
-    hint = "← → 切换 · F 全屏" if lang == "zh" else "← → to flip · F fullscreen"
-    lead = (
-        "下面进入放映模式：一张图讲一步方法，用 ← → 或两侧箭头翻页。"
+    n = len(slides)
+    cta_b = "进入方法图解" if lang == "zh" else "Enter the figure walkthrough"
+    cta_s = (
+        f"{n} 张论文原图 · 全屏放映 · ← → 翻页 · Esc 退出"
         if lang == "zh"
-        else "Slideshow mode: one figure per step. Flip with ← → or the side arrows."
+        else f"{n} figures from the paper · fullscreen · flip with ← → · Esc to exit"
     )
+    close_label = "✕ 退出" if lang == "zh" else "✕ Exit"
+    hint = "← → 切换 · Esc 退出" if lang == "zh" else "← → to flip · Esc to exit"
     slide_html = "".join(
         f'<div class="slide"><div class="stage"><img src="{s["img"]}" alt=""></div>'
         f'<div class="note"><p class="cap">{s["caption"]}</p>{s["html"]}</div></div>'
         for s in slides
     )
     dots = "".join('<button class="dot"></button>' for _ in slides)
-    return (
-        f'<p class="deck-lead">{lead}</p>'
+    launcher = (
+        f'<button class="launcher" id="launcher">'
+        f'<img class="thumb" src="{slides[0]["img"]}" alt="">'
+        f'<span class="cta"><span class="play"><svg width="14" height="16" viewBox="0 0 14 16"><path d="M1 1.5v13l12-6.5z" fill="currentColor"/></svg></span>'
+        f"<span><b>{cta_b}</b><span>{cta_s}</span></span></span>"
+        f"</button>"
+    )
+    deck = (
         f'<section class="deck" id="deck">'
         f'<div class="deck-top"><span class="t">{title}</span>'
-        f'<span class="count"><b>1</b> / {len(slides)}</span>'
-        f'<button class="fs">⛶ {fs_label}</button></div>'
+        f'<span class="count"><b>1</b> / {n}</span>'
+        f'<button class="close">{close_label}</button></div>'
         f'<div class="slides">{slide_html}</div>'
         f'<button class="nav prev">‹</button><button class="nav next">›</button>'
         f'<div class="deck-bottom">{dots}</div>'
         f'<div class="deck-hint">{hint}</div>'
         f"</section>"
     )
+    return launcher, deck
 
 
 def render_paper(date: str, paper: dict, lang: str) -> str | None:
@@ -314,7 +365,12 @@ def render_paper(date: str, paper: dict, lang: str) -> str | None:
         f'<p class="meta"><a href="../../index.html">{back}</a></p>'
         f"<article>{_md(article_md)}</article></main>"
     )
-    deck = _render_deck(slides, lang) if slides else ""
+    if slides:
+        launcher, deck = _render_deck(slides, lang)
+        heading_html = "<h2>方法图解</h2>" if lang == "zh" else "<h2>Method, Figure by Figure</h2>"
+        article = article.replace("</article></main>", f"{heading_html}{launcher}</article></main>")
+    else:
+        deck = ""
     return PAGE.format(
         lang=lang,
         title=paper["title"],
