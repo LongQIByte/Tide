@@ -2,6 +2,8 @@
 
 **English** | [中文](./README.zh-CN.md)
 
+> 🌐 **Read today's tide: [longqibyte.github.io/Tide](https://longqibyte.github.io/Tide/)** — updated weekly, fully automated.
+
 > Information arrives like the tide — wave after wave, never stopping. You cannot hold back the ocean, but you can learn to read it.
 
 **Tide** is an open-source AI information website: every day it ingests the sources that matter (arXiv papers, Twitter/X voices, AI lab blogs…), selects the waves worth reading, and publishes **deep interpretations** — not one-line summaries — on a web page anyone can open and read. A daily tide report for people who want to actually understand what's happening, not just scroll past it.
