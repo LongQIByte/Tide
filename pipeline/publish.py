@@ -16,10 +16,10 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import shutil
 from pathlib import Path
 
 import markdown
+from PIL import Image
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 SITE_DIR = Path(__file__).resolve().parent.parent / "site"
@@ -301,12 +301,19 @@ def _parse_slides(deck_md: str) -> list[dict]:
                 rest.append(line)
         slides.append(
             {
-                "img": img_m.group(1),
+                "img": re.sub(r"\.(png|jpe?g)$", ".webp", img_m.group(1)),
                 "caption": " ".join(c for c in cap_lines if c),
                 "html": _md("\n".join(rest).strip()),
             }
         )
     return slides
+
+
+def _to_webp(src: Path, dest: Path, quality: int = 85) -> None:
+    """Store figures as WebP: ~7-14x smaller than arXiv PNGs, no visible loss."""
+    if dest.exists() and dest.stat().st_mtime >= src.stat().st_mtime:
+        return
+    Image.open(src).convert("RGB").save(dest, "WEBP", quality=quality)
 
 
 def _render_deck(slides: list[dict], lang: str) -> str:
@@ -435,7 +442,7 @@ def publish(date: str) -> Path:
                 continue
             (out_paper / f"{lang}.html").write_text(html)
         for img in paper_dir.glob("fig*_*.*"):
-            shutil.copy(img, out_paper / img.name)
+            _to_webp(img, out_paper / (img.stem + ".webp"))
 
     (SITE_DIR / "index.html").write_text(render_index(date, papers))
     print(f"Site written to {SITE_DIR}")
