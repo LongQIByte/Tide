@@ -31,6 +31,8 @@ Think of it as a research assistant that pre-reads for everyone — not a replac
 
 ## What Tide Is
 
+![Tide design overview](./assets/design-en.png)
+
 A website, updated daily, where you can:
 
 - 🌊 **Browse today's tide** — the day's selected papers, tweets, and posts, each with a deep interpretation, not a one-liner.
