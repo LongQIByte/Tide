@@ -1,1 +1,9 @@
+__pycache__/
+site/
+# heavy intermediates never enter git; deep_dive md + webp figures do
+data/**/paper.html
+data/**/*.png
+data/**/*.jpg
+data/**/*.jpeg
+data/**/candidates.json
 .DS_Store
