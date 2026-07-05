@@ -4,7 +4,7 @@
 
 > Information arrives like the tide — wave after wave, never stopping. You cannot hold back the ocean, but you can learn to read it.
 
-**Tide** is an open-source personal information intake engine: it subscribes to the sources that matter to you (arXiv papers, Twitter/X voices, AI lab blogs…), and instead of merely summarizing them, it produces **deep interpretations** that flow into your personal knowledge base — so that the information you consume actually becomes understanding you own.
+**Tide** is an open-source AI information website: every day it ingests the sources that matter (arXiv papers, Twitter/X voices, AI lab blogs…), selects the waves worth reading, and publishes **deep interpretations** — not one-line summaries — on a web page anyone can open and read. A daily tide report for people who want to actually understand what's happening, not just scroll past it.
 
 ## Why "Tide"?
 
@@ -22,20 +22,29 @@ In the AI era, it has never been easier to outsource *reading*. Any LLM will hap
 
 So Tide deliberately does **not** aim to "save you from reading." It aims to:
 
-1. **Filter** — surface the small number of items genuinely worth your attention, instead of a 50-item daily dump.
-2. **Interpret deeply** — for each selected item, generate a real analysis: what problem it attacks, what's actually new, how it connects to what you already know, and where it might be wrong.
-3. **Feed your knowledge base** — the output is written to be *merged into* a personal wiki (à la Karpathy's LLM-maintained wiki), not consumed and discarded.
+1. **Filter** — surface the small number of items genuinely worth attention each day, instead of a 50-item dump.
+2. **Interpret deeply** — for each selected item, publish a real analysis: what problem it attacks, what's actually new, why it matters, and where it might be wrong.
+3. **Invite you in** — every interpretation links back to the original source. Tide's write-up is the on-ramp, not the destination.
 4. **Leave the understanding to you** — Tide prepares the material and asks the questions; the final act of understanding stays human.
 
-Think of it as a research assistant that pre-reads for you — not a replacement for your own reading.
+Think of it as a research assistant that pre-reads for everyone — not a replacement for your own reading.
 
-## What Tide Does
+## What Tide Is
 
-- 📡 **Subscribe** — arXiv topics/keywords, selected Twitter/X accounts (researchers, builders, labs), blogs and other RSS-able sources.
-- 🌊 **Collect & deduplicate** — daily ingestion, cross-source dedup, noise removal. Collection is the dirty work; it should be boring and reliable.
-- 🔍 **Score & select** — relevance scoring against *your* stated interests, so the daily selection is small and personal.
-- 🧠 **Deep interpretation** — a multi-step LLM analysis chain (not one-shot summarization): background → contribution → critique → connection to your existing notes.
-- 📚 **Knowledge-base output** — Markdown output designed to live inside an Obsidian-style personal wiki, with backlinks to related concepts.
+A website, updated daily, where you can:
+
+- 🌊 **Browse today's tide** — the day's selected papers, tweets, and posts, each with a deep interpretation, not a one-liner.
+- 📄 **Read paper deep-dives** — background → contribution → critique → connections, written to be read, with a link to the original.
+- 🐦 **Follow the conversation** — what the researchers and builders worth listening to are actually saying, with context on why it matters.
+- 🗂 **Look back** — a browsable archive by date and topic, so the tide leaves a record instead of washing away.
+
+Behind the page, a fully automated pipeline:
+
+- 📡 **Subscribe** — arXiv topics/keywords, selected Twitter/X accounts, blogs and other RSS-able sources.
+- 🧹 **Collect & deduplicate** — daily ingestion, cross-source dedup, noise removal. Collection is the dirty work; it should be boring and reliable.
+- 🔍 **Score & select** — relevance scoring so the daily selection stays small and worth reading.
+- 🧠 **Deep interpretation** — a multi-step LLM analysis chain (not one-shot summarization).
+- 🚀 **Publish** — the day's report goes live on the site automatically, every morning.
 
 ## Status
 
@@ -43,10 +52,10 @@ Think of it as a research assistant that pre-reads for you — not a replacement
 
 Rough roadmap:
 
-- [ ] v0: arXiv subscription → daily selection → deep-interpretation Markdown reports
-- [ ] v1: Twitter/X source ingestion
-- [ ] v2: knowledge-base integration (backlinks into an existing personal wiki)
-- [ ] v3: delivery channels (email / Feishu / GitHub Pages)
+- [ ] v0: the website — arXiv ingestion → daily selection → deep-interpretation pages, auto-published daily
+- [ ] v1: Twitter/X sources on the site
+- [ ] v2: archive & topic navigation, search
+- [ ] v3: subscriptions on top of the site (RSS / email / Feishu)
 
 ## Acknowledgements
 
