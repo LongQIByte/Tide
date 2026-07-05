@@ -242,8 +242,13 @@ DECK_JS = """
   });
   document.addEventListener('keydown', (e) => {
     if (!deck.classList.contains('open')) return;
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); go(i + 1); }
-    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(i - 1); }
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(i + 1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); go(i - 1); }
+    else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const note = slides[i].querySelector('.note');
+      note.scrollBy({ top: e.key === 'ArrowDown' ? 120 : -120, behavior: 'smooth' });
+    }
     else if (e.key === 'Escape') { close(); }
   });
 })();
@@ -314,7 +319,11 @@ def _render_deck(slides: list[dict], lang: str) -> str:
         else f"{n} figures from the paper · fullscreen · flip with ← → · Esc to exit"
     )
     close_label = "✕ 退出" if lang == "zh" else "✕ Exit"
-    hint = "← → 切换 · Esc 退出" if lang == "zh" else "← → to flip · Esc to exit"
+    hint = (
+        "← → 翻页 · ↑ ↓ 滚动讲解 · Esc 退出"
+        if lang == "zh"
+        else "← → flip · ↑ ↓ scroll notes · Esc exit"
+    )
     slide_html = "".join(
         f'<div class="slide"><div class="stage"><img src="{s["img"]}" alt=""></div>'
         f'<div class="note"><p class="cap">{s["caption"]}</p>{s["html"]}</div></div>'
