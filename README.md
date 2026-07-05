@@ -34,16 +34,27 @@ Think of it as a research assistant that pre-reads for everyone — not a replac
 A website, updated daily, where you can:
 
 - 🌊 **Browse today's tide** — the day's selected papers, tweets, and posts, each with a deep interpretation, not a one-liner.
-- 📄 **Read paper deep-dives** — background → contribution → critique → connections, written to be read, with a link to the original.
+- 📄 **Read paper deep-dives** — original abstract → background retold → figure-driven walkthrough of method & experiments, with a link to the original (see below).
 - 🐦 **Follow the conversation** — what the researchers and builders worth listening to are actually saying, with context on why it matters.
 - 🗂 **Look back** — a browsable archive by date and topic, so the tide leaves a record instead of washing away.
 
-Behind the page, a fully automated pipeline:
+## Anatomy of a Paper Deep-Dive
+
+Every paper page on Tide follows the same shape. We link to the original, and we add exactly one thing of our own: **interpretation**.
+
+1. **Abstract, preserved verbatim** — the paper's own abstract, untouched, plus the link to the original. That's the ground truth; we don't paraphrase it away.
+2. **Background, told properly** — the part most summaries skip. Why does this problem exist? Why does it matter? What did prior work try, and where did it fall short? What is this paper's angle of attack? Essentially the Introduction, retold slower and clearer.
+3. **Method & experiments, through the paper's own figures** — this section is *always* figure-driven. We walk through the method and the results coarsely, anchored to the figures and tables the authors themselves drew. If a part of the paper has no figure to anchor to, we skip it rather than wall-of-text it.
+4. **Understanding over formulas** — we don't reproduce derivations. If you want the math, that's what the original link is for. Our job is to make you understand *what* the method does and *why it works*, not to re-typeset it.
+
+The guiding image: a wave should **splash you, not drown you**. Tide gets the paper out of the water and onto your skin — enough that you know whether to dive in. The diving is yours to do, at the source.
+
+## The Pipeline Behind the Page
 
 - 📡 **Subscribe** — arXiv topics/keywords, selected Twitter/X accounts, blogs and other RSS-able sources.
 - 🧹 **Collect & deduplicate** — daily ingestion, cross-source dedup, noise removal. Collection is the dirty work; it should be boring and reliable.
 - 🔍 **Score & select** — relevance scoring so the daily selection stays small and worth reading.
-- 🧠 **Deep interpretation** — a multi-step LLM analysis chain (not one-shot summarization).
+- 🧠 **Deep interpretation** — a multi-step LLM analysis chain producing the page structure above (not one-shot summarization).
 - 🚀 **Publish** — the day's report goes live on the site automatically, every morning.
 
 ## Status
