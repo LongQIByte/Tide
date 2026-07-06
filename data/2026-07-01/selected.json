@@ -63,7 +63,7 @@
       "Zhongyuan Wang",
       "Pengwei Wang"
     ],
-    "organization": null,
+    "organization": "Beijing Academy of Artificial Intelligence",
     "github_repo": "https://github.com/orca-wm/Orca",
     "github_stars": 5,
     "ai_keywords": [
@@ -438,7 +438,7 @@
       "Jiaqi Wang",
       "Shuicheng Yan"
     ],
-    "organization": null,
+    "organization": "NUS, MMLab, CUHK, PKU",
     "github_repo": null,
     "github_stars": null,
     "ai_keywords": [
@@ -599,7 +599,7 @@
       "Xin Xiao",
       "Xiangxiang Chu"
     ],
-    "organization": null,
+    "organization": "AMAP, Alibaba Group",
     "github_repo": "https://github.com/AMAP-ML/BlockPilot",
     "github_stars": 60,
     "ai_keywords": [
@@ -680,7 +680,7 @@
       "Alexey K. Kovalev",
       "Vlad Shakhuro"
     ],
-    "organization": null,
+    "organization": "CogAI Lab, FusionBrain Lab, HSE University",
     "github_repo": "https://github.com/CognitiveAISystems/Act2Answer",
     "github_stars": 7,
     "ai_keywords": [

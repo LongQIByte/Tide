@@ -95,6 +95,23 @@ def find_introduction(sections: list[tuple[str, str]]) -> str:
 # ---------- LLM stages ----------
 
 
+def extract_affiliation(html: str) -> str | None:
+    """Best-effort: pull author institutions from the paper's front matter."""
+    # The LaTeXML author block is well past the boilerplate head scripts.
+    idx = html.find("ltx_authors")
+    chunk = html[idx : idx + 10000] if idx != -1 else html[:20000]
+    head = re.sub(r"<[^>]+>", " ", chunk)
+    head = re.sub(r"\s+", " ", head)[:2500]
+    out = llm.chat(
+        "下面是一篇 arXiv 论文首页的纯文本（含标题、作者、单位）。"
+        "提取作者所属机构，输出 1-3 个机构名（用原文语言），逗号分隔。"
+        "只输出机构名本身；实在找不到就只输出 Unknown。\n\n" + head
+    ).strip()
+    if not out or "unknown" in out.lower() or len(out) > 120:
+        return None
+    return out
+
+
 def translate_abstract(abstract: str) -> str:
     return llm.chat(
         "把下面这段论文摘要翻译成中文。只翻译，不总结、不增删内容，保留术语的英文原词"
@@ -215,6 +232,13 @@ def deep_dive(date: str, arxiv_id: str, max_figures: int = 5, prune: bool = Fals
     print(f"[1/4] Extracting introduction ...")
     intro = find_introduction(extract_sections(html))
     print(f"      intro length: {len(intro)} chars")
+
+    if not paper.get("organization"):
+        paper["organization"] = extract_affiliation(html)
+        (day_dir / "selected.json").write_text(
+            json.dumps(selected, ensure_ascii=False, indent=2)
+        )
+        print(f"      affiliation: {paper['organization']}")
 
     print(f"[2/4] Translating abstract ...")
     abstract_zh = translate_abstract(paper["abstract"])
