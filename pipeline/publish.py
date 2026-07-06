@@ -415,9 +415,14 @@ def render_index(days: list[tuple[str, list[dict]]]) -> str:
                 if p.get("organization")
                 else ""
             )
+            vote = (
+                '<span class="badge">✦ 编辑精选</span>'
+                if p.get("source") == "manual"
+                else f'<span class="badge">▲ {p["upvotes"]}</span>'
+            )
             cards.append(
                 f'<div class="card"><h3><a href="{link}">{p["title"]}</a></h3>'
-                f'<span class="badge">▲ {p["upvotes"]}</span>{org}{note}'
+                f'{vote}{org}{note}'
                 f'<p class="abs">{p["abstract"]}</p></div>'
             )
         sections.append(

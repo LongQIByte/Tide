@@ -512,5 +512,196 @@
         ]
       }
     ]
+  },
+  {
+    "arxiv_id": "2407.04152",
+    "title": "VoxAct-B: Voxel-Based Acting and Stabilizing Policy for Bimanual Manipulation",
+    "abstract": "Bimanual manipulation is critical to many robotics applications. In contrast to single-arm manipulation, bimanual manipulation tasks are challenging due to higher-dimensional action spaces. Prior works leverage large amounts of data and primitive actions to address this problem, but may suffer from sample inefficiency and limited generalization across various tasks. To this end, we propose VoxAct-B, a language-conditioned, voxel-based method that leverages Vision Language Models (VLMs) to prioritize key regions within the scene and reconstruct a voxel grid. We provide this voxel grid to our bimanual manipulation policy to learn acting and stabilizing actions. This approach enables more efficient policy learning from voxels and is generalizable to different tasks. In simulation, we show that VoxAct-B outperforms strong baselines on fine-grained bimanual manipulation tasks. Furthermore, we demonstrate VoxAct-B on real-world $\\texttt{Open Drawer}$ and $\\texttt{Open Jar}$ tasks using two UR5s. Code, data, and videos are available at https://voxact-b.github.io.",
+    "upvotes": 0,
+    "authors": [
+      "I-Chun Arthur Liu",
+      "Sicheng He",
+      "Daniel Seita",
+      "Gaurav Sukhatme"
+    ],
+    "organization": null,
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [],
+    "published_at": "2024-07-04",
+    "hf_url": null,
+    "arxiv_url": "https://arxiv.org/abs/2407.04152",
+    "source": "manual",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2407.04152v1/x1.png",
+            "https://arxiv.org/html/x1.png"
+          ]
+        ],
+        "caption": "Figure 1: VoxAct-B uses voxel representations and language to perform bimanual manipulation with 6-DoF manipulation from both arms. We test three language-conditioned bimanual tasks in simulation and two ( Open Drawer and Open Jar ) on a real-world setup with two UR5s. The prompt for Open Drawer assumes the left arm is stabilizing and the right arm is acting, while the reverse is true for the Open Jar prompt.",
+        "local_paths": [
+          null
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2407.04152v1/x2.png",
+            "https://arxiv.org/html/x2.png"
+          ]
+        ],
+        "caption": "Figure 2: Overview of VoxAct-B. Given RGB-D images and a language goal, we input an RGB image from the front camera and a text query extracted from the language goal into the Vision Language Models (VLMs). The VLMs output the pose of the object of interest with respect to the front camera. This information determines the language goal and the roles of each arm (i.e., acting or stabilizing ). Additionally, we use the object’s position with the RGB-D images to reconstruct a voxel grid that spans α ⁢ x 3 𝛼 superscript 𝑥 3 \\alpha x^{3} italic_α italic_x start_POSTSUPERSCRIPT 3 end_POSTSUPERSCRIPT meters of the workspace using V 3 superscript 𝑉 3 V^{3} italic_V start_POSTSUPERSCRIPT 3 end_POSTSUPERSCRIPT voxels. The zoomed-in voxel grid, the language goal, proprioception data of both robot arms, and an arm ID are provided to an acting policy π a subscript 𝜋 𝑎 \\pi_{a} italic_π start_POSTSUBSCRIPT italic_a end_POSTSUBSCRIPT and a stabilizing policy π s subscript 𝜋 𝑠 \\pi_{s} italic_π start_POSTSUBSCRIPT italic_s end_POSTSUBSCRIPT . The policies predict the discretized pose of the next best voxel, gripper open action, collision avoidance flag, and arm ID for fine-grained bimanual manipulation.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2407.04152/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2407.04152v1/x3.png",
+            "https://arxiv.org/html/x3.png"
+          ]
+        ],
+        "caption": "Figure 3: Top : VLMs usage as part of VoxAct-B, visualizing the Open Jar task in simulation, showing the role of OWL-ViT and Segment Anything. The RGB images from the front camera shown above are examples of actual (uncropped) images provided as input to the models. Bottom : visualization of different α 𝛼 \\alpha italic_α values resulting in coarser grids ( α = 1.0 𝛼 1.0 \\alpha=1.0 italic_α = 1.0 ) to finer grids ( α = 0.1 𝛼 0.1 \\alpha=0.1 italic_α = 0.1 ). We use α = 0.3 𝛼 0.3 \\alpha=0.3 italic_α = 0.3 for Open Jar .",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2407.04152/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2407.04152v1/x4.png",
+            "https://arxiv.org/html/x4.png"
+          ]
+        ],
+        "caption": "Figure 4: Example successful rollouts (one per row) of VoxAct-B on a real-world bimanual setup with UR5s.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2407.04152/fig4_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2202.07074",
+    "title": "Benchmarking Robot Manipulation with the Rubik's Cube",
+    "abstract": "Benchmarks for robot manipulation are crucial to measuring progress in the field, yet there are few benchmarks that demonstrate critical manipulation skills, possess standardized metrics, and can be attempted by a wide array of robot platforms. To address a lack of such benchmarks, we propose Rubik's cube manipulation as a benchmark to measure simultaneous performance of precise manipulation and sequential manipulation. The sub-structure of the Rubik's cube demands precise positioning of the robot's end effectors, while its highly reconfigurable nature enables tasks that require the robot to manage pose uncertainty throughout long sequences of actions. We present a protocol for quantitatively measuring both the accuracy and speed of Rubik's cube manipulation. This protocol can be attempted by any general-purpose manipulator, and only requires a standard 3x3 Rubik's cube and a flat surface upon which the Rubik's cube initially rests (e.g. a table). We demonstrate this protocol for two distinct baseline approaches on a PR2 robot. The first baseline provides a fundamental approach for pose-based Rubik's cube manipulation. The second baseline demonstrates the benchmark's ability to quantify improved performance by the system, particularly that resulting from the integration of pre-touch sensing. To demonstrate the benchmark's applicability to other robot platforms and algorithmic approaches, we present the functional blocks required to enable the HERB robot to manipulate the Rubik's cube via push-grasping.",
+    "upvotes": 0,
+    "authors": [
+      "Boling Yang",
+      "Patrick E. Lancaster",
+      "Siddhartha S. Srinivasa",
+      "Joshua R. Smith"
+    ],
+    "organization": null,
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [],
+    "published_at": "2022-02-14",
+    "hf_url": null,
+    "arxiv_url": "https://arxiv.org/abs/2202.07074",
+    "source": "manual",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://ar5iv.labs.arxiv.org/html/2202.07074/assets/figs/HobbesHerbs.png"
+        ],
+        "caption": "Figure 1 : Rubik’s cube manipulation can be used to benchmark robot manipulation across a wide array of algorithmic approaches and robot platforms, such as the PR2 and HERB.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2202.07074/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://ar5iv.labs.arxiv.org/html/2202.07074/assets/figs/combineBoxsBoxed.png"
+        ],
+        "caption": "Figure 2 : The robot must precisely position its grippers to rotate the left column of the Rubik’s cube while constraining the middle and right columns in place. Top Row: The robot correctly positions its grippers: it is constraining the two right columns of the cube. The yellow box highlights the position of the constraining gripper. Middle Row: The robot only touches one column of the Rubik’s cube and therefore fails to constrain its middle column. Bottom Row: The right gripper is touching all three columns of the cube; this prevents the left gripper from rotating the left column of the cube.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2202.07074/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://ar5iv.labs.arxiv.org/html/2202.07074/assets/figs/HERBGrasp.png"
+        ],
+        "caption": "Figure 3 : HERB’s simulated Barrett hands manipulate the Rubik’s cube in blue. Left: The right gripper uses a push-grasp to make contact with the Rubik’s cube. Upon making contact, the right gripper reaches the desired pre-grasp. Right: The right gripper closes its outer fingers to transition from pre-grasp to grasp.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2202.07074/fig3_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2503.19281",
+    "title": "CubeRobot: Grounding Language in Rubik's Cube Manipulation via Vision-Language Model",
+    "abstract": "Proving Rubik's Cube theorems at the high level represents a notable milestone in human-level spatial imagination and logic thinking and reasoning. Traditional Rubik's Cube robots, relying on complex vision systems and fixed algorithms, often struggle to adapt to complex and dynamic scenarios. To overcome this limitation, we introduce CubeRobot, a novel vision-language model (VLM) tailored for solving 3x3 Rubik's Cubes, empowering embodied agents with multimodal understanding and execution capabilities. We used the CubeCoT image dataset, which contains multiple-level tasks (43 subtasks in total) that humans are unable to handle, encompassing various cube states. We incorporate a dual-loop VisionCoT architecture and Memory Stream, a paradigm for extracting task-related features from VLM-generated planning queries, thus enabling CubeRobot to independent planning, decision-making, reflection and separate management of high- and low-level Rubik's Cube tasks. Furthermore, in low-level Rubik's Cube restoration tasks, CubeRobot achieved a high accuracy rate of 100%, similar to 100% in medium-level tasks, and achieved an accuracy rate of 80% in high-level tasks.",
+    "upvotes": 0,
+    "authors": [
+      "Feiyang Wang",
+      "Xiaomin Yu",
+      "Wangyu Wu"
+    ],
+    "organization": null,
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [],
+    "published_at": "2025-03-25",
+    "hf_url": null,
+    "arxiv_url": "https://arxiv.org/abs/2503.19281",
+    "source": "manual",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2503.19281v1/x1.png",
+            "https://arxiv.org/html/x1.png"
+          ]
+        ],
+        "caption": "Figure 1. Comparison of Rubik’s Cube Solving Performance.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2503.19281/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2503.19281v1/extracted/6302589/main.png",
+            "https://arxiv.org/html/extracted/6302589/main.png"
+          ]
+        ],
+        "caption": "Figure 2. Framework of CubeRobot. The orange arrow shows the vision-language planning process, while the gray arrow represents that we leverage the queried language plans for better policy learning in Rubik’s Cube Manipulation tasks.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2503.19281/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2503.19281v1/extracted/6302589/loop.png",
+            "https://arxiv.org/html/extracted/6302589/loop.png"
+          ]
+        ],
+        "caption": "Figure 3. Dual-loop CoT. The outer-loop manages high-level tasks, including initial action planning and iterative refinements, while tracking task progress. The inner-loop executes specific sub-tasks assigned by the outer-loop, employing thought, reasoning, and reflection.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2503.19281/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2503.19281v1/x2.png",
+            "https://arxiv.org/html/x2.png"
+          ]
+        ],
+        "caption": "Figure 4. Visualization results of CubeRobot. We accurately emulated the movements of the CubeRobot equipped with LR Mate 200iD robotic arm.",
+        "local_paths": [
+          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2503.19281/fig4_1.png"
+        ]
+      }
+    ]
   }
 ]

@@ -275,9 +275,12 @@ def _prune(paper_dir: Path, kept_images: list[Path]) -> None:
 
 def _render_zh(paper, abstract_zh, background, fig_sections) -> str:
     figs = "\n\n---\n\n".join(fig_sections) or "（本文无可讲解的插图）"
+    links = f"[arXiv]({paper['arxiv_url']})"
+    if paper.get("hf_url"):
+        links += f" · [HuggingFace]({paper['hf_url']}) · ▲{paper['upvotes']}"
     return f"""# {paper['title']}
 
-[arXiv]({paper['arxiv_url']}) · [HuggingFace]({paper['hf_url']}) · ▲{paper['upvotes']}
+{links}
 
 ## 摘要（原文）
 
@@ -299,9 +302,12 @@ def _render_zh(paper, abstract_zh, background, fig_sections) -> str:
 
 def _render_en(paper, background, fig_sections) -> str:
     figs = "\n\n---\n\n".join(fig_sections) or "(No figures to walk through.)"
+    links = f"[arXiv]({paper['arxiv_url']})"
+    if paper.get("hf_url"):
+        links += f" · [HuggingFace]({paper['hf_url']}) · ▲{paper['upvotes']}"
     return f"""# {paper['title']}
 
-[arXiv]({paper['arxiv_url']}) · [HuggingFace]({paper['hf_url']}) · ▲{paper['upvotes']}
+{links}
 
 ## Abstract (verbatim)
 
