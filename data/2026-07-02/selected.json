@@ -1,0 +1,657 @@
+[
+  {
+    "arxiv_id": "2606.28322",
+    "title": "PerceptionRubrics: Calibrating Multimodal Evaluation to Human Perception",
+    "abstract": "We introduce PerceptionRubrics, a rubric-based evaluation framework that addresses the gap between saturated benchmark scores and real-world brittleness. Shifting evaluation from holistic semantic matching to rigorous atomic auditing, PerceptionRubrics pairs 1,038 information-dense images with over 12,000 instance-specific rubrics. These criteria are derived from golden captions constructed via a novel Circular Peer-Review consensus pipeline and then distilled into a dual-stream system of Must-Right (essential facts) and Easy-Wrong (fine-grained details) rubrics. Crucially, PerceptionRubrics implements a Gated Scoring mechanism: unlike linear averages, failure on mandatory visual facts triggers sharp binary penalties. Extensive evaluation yields critical insights: (1) The Reliability Gap: models often verify fragmented elements correctly yet fail strict conjunctive constraints, exposing brittleness in dense domains; (2) Open-Closed Stratification: contrary to reasoning trends, we reveal a persistent 8% perception deficit between open-source and proprietary frontiers; and (3) Human-Aligned Rigor: our gated metrics substantially out-align conventional benchmarks, validating that strict perceptual fidelity is the prerequisite for reliable generation.",
+    "upvotes": 39,
+    "authors": [
+      "Yana Wei",
+      "Hongbo Peng",
+      "Yanlin Lai",
+      "Liang Zhao",
+      "Kangheng Lin",
+      "En Yu",
+      "Keyu Lv",
+      "Han Zhou",
+      "Yin Tang",
+      "Haodong Li",
+      "Mitt Huang",
+      "Hangyu Guo",
+      "Jianjian Sun",
+      "Zheng Ge",
+      "Xiangyu Zhang",
+      "Daxin Jiang",
+      "Vishal M. Patel"
+    ],
+    "organization": "Johns Hopkins University",
+    "github_repo": "https://github.com/M1chaelPeng/PerceptionRubrics",
+    "github_stars": 11,
+    "ai_keywords": [
+      "rubric-based evaluation",
+      "atomic auditing",
+      "golden captions",
+      "Circular Peer-Review consensus",
+      "dual-stream system",
+      "Must-Right",
+      "Easy-Wrong",
+      "gated scoring mechanism",
+      "Reliability Gap",
+      "Open-Closed Stratification",
+      "human-aligned rigor"
+    ],
+    "published_at": "2026-06-26T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2606.28322",
+    "arxiv_url": "https://arxiv.org/abs/2606.28322",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28322v1/x1.png"
+        ],
+        "caption": "Figure 1 : Motivation of PerceptionRubrics . Top: An existing benchmark favors GPT-4o despite key omissions, while humans prefer responses that capture more perceptually important details. Bottom: Compared with DetailCaps and DOCCI, PerceptionRubrics more clearly distinguishes model capabilities.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28322v1/x2.png",
+          "https://arxiv.org/html/2606.28322v1/x5.png",
+          "https://arxiv.org/html/2606.28322v1/x6.png"
+        ],
+        "caption": "Figure 2 : Rubric Demonstration of PerceptionRubrics . Representative examples are selected for each task, highlighting “Must Right” ( ; essential features) and “Easy Wrong” pitfalls ( ; error-prone fine-grained details).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig2_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig2_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig2_3.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28322v1/x7.png"
+        ],
+        "caption": "Figure 3 : Benchmark Statistics of PerceptionRubrics : The distribution of tasks across 7 main categories.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28322v1/x8.png"
+        ],
+        "caption": "Figure 4 : The PerceptionRubrics Construction Pipeline. Adopting a caption-centric approach, we first synthesize golden captions via circular peer-review (Top). These captions then serve as anchors to generate Must-Right and Easy-Wrong rubrics through domain-specific prompting (Bottom).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28322v1/x9.png"
+        ],
+        "caption": "Figure 5 : Distribution of golden caption lengths in our benchmark. The histogram shows the word count frequency across the dataset.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28322v1/x10.png"
+        ],
+        "caption": "Figure 6 : Comprehensive Failure Analysis. (Left) Distribution of error sources across different models. (Right) Reliability Gap Analysis comparing Atomic Accuracy (the average pass rate over individual rubrics) with the stricter Must-Right-All-Pass Rate, highlighting the difficulty of maintaining consistency across all constraints.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28322v1/x11.png"
+        ],
+        "caption": "Figure 7 : Correlation Analysis between basic perceptual reliability (Must-Right) and fine-grained understanding (Easy-Wrong) across six representative models.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28322v1/x12.png"
+        ],
+        "caption": "Figure 8 : Rubric Coverage vs. Evaluation Stability. As the sampled rubric ratio increases from 20 % 20\\% to 80 % 80\\% , the standard deviation of model scores decreases.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28322v1/x13.png"
+        ],
+        "caption": "Figure 9 : Alignment with Human Preference. We compare benchmark scores from DOCCI (Onoe et al. , 2024 ) , DetailCaps (Dong et al. , 2024 ) , and PerceptionRubrics against human preference scores from Vision Arena for the five overlapping models. Each point denotes one model. PerceptionRubrics shows the strongest correlation with Vision Arena, achieving Pearson 0.916 0.916 and Spearman 1.000 1.000 .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28322v1/x14.png",
+          "https://arxiv.org/html/2606.28322v1/x15.png",
+          "https://arxiv.org/html/2606.28322v1/x16.png"
+        ],
+        "caption": "(a) (b) (c) Figure 10 : (a-b) Length Bias. The two figures examine the correlation between response length (word count) and benchmark scores. (c) Evaluation Robustness. Results obtained with different judges exhibit consistent and stable performance trends.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig10_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig10_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig10_3.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28322v1/x17.png"
+        ],
+        "caption": "Figure 11 : Distribution analysis of rubrics. (a) Frequency distribution of the total rubrics count across the dataset. (b) Probability density comparison of rubrics count between Must-Right and Easy-Wrong categories.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28322v1/x18.png"
+        ],
+        "caption": "Figure 12 : Qualitative examples of the fine-grained rubrics across four categories: Natural Scene, Document & OCR, Digital UI & UX, and Structured Data. Each example consists of an image and two tiers of rubrics: Must-Right (top group) focusing on core facts, and Easy-Wrong (bottom group) focusing on challenging details, negative constraints, and logical reasoning.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig12_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28322v1/x19.png"
+        ],
+        "caption": "Figure 13 : Qualitative examples of the fine-grained rubrics across three additional categories: Logic & Puzzle, STEM & Expert, and Creative & Cultural. Each example consists of an image and two tiers of rubrics: Must-Right (top group) focusing on core facts, and Easy-Wrong (bottom group) focusing on challenging details, negative constraints, and logical reasoning.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.28322/fig13_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2606.19271",
+    "title": "TurboServe: Serving Streaming Video Generation Efficiently and Economically",
+    "abstract": "Streaming video generation is emerging as a new serving workload in which users interact with long-lived sessions that generate video progressively, chunk by chunk. Unlike offline video generation or typical LLM serving, streaming video generation must preserve session state across active and idle periods, repeatedly schedule ongoing sessions, and deliver each chunk under a tight latency target. This creates two key serving challenges in multi-user, multi-GPU environments: session duration heterogeneity, where long-running sessions make placement decisions suboptimal over time, and temporal user-demand heterogeneity, where the number of active sessions fluctuates sharply across bursts and idle periods.\n  We present TurboServe, the first serving system designed specifically for streaming video generation workloads. TurboServe formulates serving as an online scheduling problem that jointly coordinates session placement and GPU provisioning. Its closed-loop scheduling algorithm combines a migration-aware placement controller, which rebalances sessions across GPUs to reduce the maximum per-chunk latency, with a load-driven autoscaling controller, which adapts the GPU budget to workload variation for improved cost efficiency. To support these decisions at runtime, TurboServe implements coalesced chunk processing for batching concurrent active sessions on the same GPU, GPU-CPU offloading for session suspension and resumption, and NCCL-based GPU-GPU migration for online rebalancing. We evaluate TurboServe on real-world production traces from Shengshu Technology across multiple model sizes and GPU clusters with up to 64 NVIDIA B300 GPUs. Compared with baseline serving configurations, TurboServe reduces worst-case per-chunk latency by 37.5% and total GPU operating cost by 37.2% on average. Our code is publicly available at https://github.com/shengshu-ai/TurboServe.",
+    "upvotes": 30,
+    "authors": [
+      "Youhe Jiang",
+      "Haoxu Wang",
+      "Haotong Bao",
+      "Kai Jiang",
+      "Jianfei Chen",
+      "Jun Zhu",
+      "Fangcheng Fu",
+      "Jintao Zhang"
+    ],
+    "organization": "Tsinghua University",
+    "github_repo": "https://github.com/shengshu-ai/TurboServe",
+    "github_stars": 20,
+    "ai_keywords": [
+      "streaming video generation",
+      "session state preservation",
+      "online scheduling",
+      "GPU provisioning",
+      "closed-loop scheduling",
+      "migration-aware placement",
+      "load-driven autoscaling",
+      "coalesced chunk processing",
+      "GPU-CPU offloading",
+      "NCCL-based GPU-GPU migration"
+    ],
+    "published_at": "2026-06-17T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2606.19271",
+    "arxiv_url": "https://arxiv.org/abs/2606.19271",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2606.19271v1/x1.png"
+        ],
+        "caption": "Figure 1 : Stateless isolated generation jobs ( top ) compared with stateful streaming generation sessions ( bottom ) in multi-user scenarios. In stateless generation, each user request initializes temporary generation state, starts generation, and releases the state once the generation job completes. In stateful streaming generation, each user corresponds to a persistent session that alternates between active generation and idle periods; generation can be suspended and later resumed while preserving the session state across periods.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.19271/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.19271v1/x2.png"
+        ],
+        "caption": "Figure 2 : Example streaming generation workload characteristics from Shengshu Technology ’s production trace. Left: distribution of session durations. Right: number of active sessions over a 30-minute period.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.19271/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.19271v1/x3.png"
+        ],
+        "caption": "Figure 3 : Illustration of the observations. ( a ) Evolving session activity causes load imbalance across GPUs, where the most heavily loaded GPU determines the worst-case per-chunk latency. ( b ) During low-demand periods, a fixed GPU allocation leads to resource underutilization. ( c ) During high-demand periods, the same static allocation becomes overutilized, resulting in high per-chunk latency.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.19271/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.19271v1/x4.png"
+        ],
+        "caption": "Figure 4 : Case study on the impact of session and GPU management on latency and cost. Latency is the worst-case per-chunk latency; Cost is the total GPU operating cost. A1-3 represents Approach 1-3.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.19271/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.19271v1/x5.png"
+        ],
+        "caption": "Figure 5 : TurboServe system overview. TurboServe processes streaming requests and session events through a closed-loop scheduler that places and migrates sessions across GPU workers, adjusts GPU provisioning, and offloads suspended states to host memory. Runtime load, utilization, and latency feedback guide these decisions to balance serving latency and GPU cost.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.19271/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.19271v1/x6.png"
+        ],
+        "caption": "Figure 6 : Illustrative examples of closed-loop GPU autoscaling and session rebalancing. The top example shows scale-out followed by session rebalancing, where new GPUs are added and sessions are redistributed to reduce load concentration. The bottom example shows rebalancing followed by scale-in, where sessions are first consolidated onto fewer GPUs before underutilized GPUs are removed.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.19271/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.19271v1/x7.png"
+        ],
+        "caption": "Figure 7 : End-to-end experimental results comparing TurboServe against baseline systems across different models, traces, and clusters. The first two rows report the maximum per-chunk latency under the same cost budget, while the last two rows report the per-chunk cost under the same latency constraint.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.19271/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.19271v1/x8.png"
+        ],
+        "caption": "Figure 8 : Cost efficiency ablation of TurboServe mechanisms, including session migration and GPU autoscaling, across different model sizes and workload traces under matched latency constraints.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.19271/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.19271v1/x9.png"
+        ],
+        "caption": "Figure 9 : Left: Scheduling efficiency of the migration-aware min-max rebalancing. Right: Scheduling effectiveness of the migration-aware min-max rebalancing (vs. oracle).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2606.19271/fig9_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.00248",
+    "title": "Seed2.0 Model Card: Towards Intelligence Frontier for Real-World Complexity",
+    "abstract": "We present Seed2.0, a model series that takes a meaningful step toward solving complex, real-world tasks. Our approach begins with identifying users' genuine needs and constructing a reliable, forward-looking evaluation system by selecting and abstracting benchmarks grounded in these needs and in realistic, complex scenarios. Guided by this evaluation system, Seed2.0 targets two persistent challenges, long-tail knowledge and complex instruction following, substantially improving the model's reliability on intricate, long-horizon tasks. Beyond these, Seed2.0 delivers world-leading reasoning intelligence, visual understanding, and search capabilities that address the most common needs of a broad user base. Through extensive real-world use cases documented in this model card, we demonstrate that Seed2.0 begins to exhibit the ability to handle initial complex real-world tasks, delivering greater value to hundreds of millions of users.",
+    "upvotes": 25,
+    "authors": [
+      "Bytedance Seed"
+    ],
+    "organization": "ByteDance Seed",
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [
+      ""
+    ],
+    "published_at": "2026-06-30T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.00248",
+    "arxiv_url": "https://arxiv.org/abs/2607.00248",
+    "html_available": true,
+    "figures": []
+  },
+  {
+    "arxiv_id": "2607.01071",
+    "title": "MemSyco-Bench: Benchmarking Sycophancy in Agent Memory",
+    "abstract": "Memory has emerged as a cornerstone of modern LLM-based agents, supporting their evolution from single-turn assistants to long-term collaborators. However, memory is not always beneficial: retrieved memories often induce a critical issue of sycophancy, causing agents to over-align with the user at the cost of factual accuracy or objective reasoning. Despite this emerging risk, existing memory benchmarks primarily evaluate whether memories are correctly stored, retrieved, or updated, while overlooking how retrieved memories influence downstream reasoning and decision-making. To bridge this gap, we propose MemSyco-Bench, a comprehensive benchmark for evaluating memory-induced sycophancy in agent systems. MemSyco-Bench measures when memory should influence a decision and how valid memory should be used. Specifically, it covers five tasks that assess whether agents can reject memory as factual evidence, respect its applicable scope, resolve conflicts between memory and objective evidence, track memory updates, and use valid memory for personalization. All related resources are collected for the community at https://github.com/XMUDeepLIT/MemSyco-Bench.",
+    "upvotes": 24,
+    "authors": [
+      "Zhishang Xiang",
+      "Zerui Chen",
+      "Yunbo Tang",
+      "Zhimin Wei",
+      "Ruqin Ning",
+      "Yujie Lin",
+      "Qinggang Zhang",
+      "Jinsong Su"
+    ],
+    "organization": null,
+    "github_repo": "https://github.com/XMUDeepLIT/MemSyco-Bench",
+    "github_stars": 12,
+    "ai_keywords": [
+      "memory",
+      "LLM-based agents",
+      "sycophancy",
+      "downstream reasoning",
+      "decision-making",
+      "MemSyco-Bench",
+      "memory-induced sycophancy",
+      "factual accuracy",
+      "objective reasoning",
+      "memory evaluation"
+    ],
+    "published_at": "2026-07-01T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.01071",
+    "arxiv_url": "https://arxiv.org/abs/2607.01071",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01071v1/resources/intro.png"
+        ],
+        "caption": "Figure 1: We introduce MemSyco-Bench, a comprehensive benchmark for evaluating sycophancy in agent systems, where retrieved historical memories improperly influence agent reasoning. MemSyco-Bench assesses whether agents can appropriately reject, constrain, update, reconcile, or leverage retrieved memories across diverse reasoning scenarios. Through extensive experiments, we show that existing memory systems often increase sycophancy and struggle with appropriate memory use.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.01071/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01071v1/resources/pre2.png"
+        ],
+        "caption": "Figure 2: Effect of memory snippets on objective accuracy and sycophancy rate. Each model is evaluated on the paired neutral and sycophantic questions.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.01071/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01071v1/resources/pre1.png"
+        ],
+        "caption": "Figure 3: Error-cause analysis on existing memory benchmarks. R+/R- denotes whether the retrieved memories contain sufficient evidence for the reference answer; A+/A- denotes whether the final answer is correct.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.01071/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01071v1/x1.png"
+        ],
+        "caption": "Figure 4: The construction framework of MemSyco-Bench. We first define memory-decision schemas for each task category, then instantiate semantically related historical memory fragments and current questions. The schema and memory fragments jointly determine the expected memory-use boundary and the memory-aligned failure direction. We then embed each instance into a natural multi-turn dialogue and retain samples that pass multi-stage quality validation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.01071/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01071v1/resources/analysis1.png"
+        ],
+        "caption": "Figure 5: Error attribution on MemSyco-Bench with Qwen3-8B. Red segments indicate errors caused by failing to retrieve relevant evidence, while orange segments indicate cases where relevant evidence is retrieved but the agent still answers incorrectly. The result with DeepSeek-V4-Flash is in Table 8",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.01071/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01071v1/resources/analysis2_new.png"
+        ],
+        "caption": "Figure 6: Effect of reasoning behavioral guidance on DeepSeek-V4-Flash. Values denote performance deltas after adding the instruction. Positive values indicate improvement.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.01071/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01071v1/resources/case_study.png"
+        ],
+        "caption": "Figure 7: Representative examples from MemSyco-Bench. Red memory cues denote retrieved historical memories, and green cues denote objective evidence or currently valid preference information. The top row shows cases where memory should not replace objective evidence. the bottom row shows cases where memory should be selected and used appropriately.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.01071/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01071v1/resources/analysis1_ds.png"
+        ],
+        "caption": "Figure 8: Error attribution on MemSyco-Bench with DeepSeek-V4-Flash. Red segments indicate errors caused by failing to retrieve relevant evidence, while orange segments indicate cases where relevant evidence is retrieved but the agent still answers incorrectly.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.01071/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01071v1/resources/case2.png"
+        ],
+        "caption": "Figure 9: Error case of Retrieved constraints are not enough.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.01071/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01071v1/resources/case1.png"
+        ],
+        "caption": "Figure 10: Error case of Memory should not override stronger evidence.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.01071/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01071v1/resources/case3.png"
+        ],
+        "caption": "Figure 11: Error case of Personal memory may not transfer.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.01071/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01071v1/resources/case4.png"
+        ],
+        "caption": "Figure 12: Error case of Old memory can linger after an update.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.01071/fig12_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01071v1/resources/case5.png"
+        ],
+        "caption": "Figure 13: Error case of Familiar memory should not become fact.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.01071/fig13_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.00466",
+    "title": "ELDR: Expert-Locality-Aware Decode Routing for PD-Disaggregated MoE Serving",
+    "abstract": "In prefill-decode (PD) disaggregated LLM serving, each request is assigned to a decode worker after prefill. Existing decode routers balance only load; for mixture-of-experts (MoE) models this is incomplete: equally loaded workers can differ in latency, since each decode step loads the weights of every distinct expert its batch activates. We present ELDR, an expert-locality-aware decode router for PD-disaggregated MoE serving. From a request's prefill expert activations, ELDR builds an expert signature predicting the experts it will activate during generation. Offline, balanced K-means partitions signature space across decode workers; online, locality-band routing sends each request to the least-loaded worker among those best matching its signature. A signature cache, co-indexed with the KV cache at KV-block granularity, keeps signatures exact under prefix caching. Implemented in vLLM and evaluated on deployments of up to 40 GPUs, ELDR reduces median TPOT by 5.9-13.9% over the strongest of four load-balancing baselines across three MoE models and two workloads, with model outputs unchanged.",
+    "upvotes": 24,
+    "authors": [
+      "Sangjin Choi",
+      "Sukmin Cho",
+      "Yifan Xiong",
+      "Ziyue Yang",
+      "Youngjin Kwon",
+      "Peng Cheng"
+    ],
+    "organization": "Microsoft Research",
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [
+      "prefill-decode",
+      "disaggregated LLM serving",
+      "mixture-of-experts",
+      "decode router",
+      "expert-locality-aware",
+      "K-means",
+      "locality-band routing",
+      "signature cache",
+      "KV cache",
+      "vLLM",
+      "TPOT"
+    ],
+    "published_at": "2026-07-01T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.00466",
+    "arxiv_url": "https://arxiv.org/abs/2607.00466",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x1.png"
+        ],
+        "caption": "Figure 1. Decode-phase per-expert activation relative to the cross-domain mean, for three MoE models along task (top) and language (bottom, WildChat (Zhao et al. , 2024 ) ) domains at each model’s most discriminative layer. Darker is above-average (below-average clipped to white); experts are reordered per panel into contiguous per-domain blocks. Each domain over-activates a distinct subset of experts. Task domains: Code (Chen et al. , 2021 ; Zhuo et al. , 2025 ; Lai et al. , 2023 ; Austin et al. , 2021 ) , Math (Cobbe et al. , 2021 ; Hendrycks et al. , 2021b ; Lightman et al. , 2023 ; He et al. , 2024 ; Ling et al. , 2017 ) , Medical (Jin et al. , 2021 , 2019 ; Hendrycks et al. , 2021a ) , and Legal (Chalkidis et al. , 2022 ) .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x2.png"
+        ],
+        "caption": "Figure 2. MoE layer latency scales with active experts, not batch size (single MoE layer, one MI300X).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x3.png"
+        ],
+        "caption": "Figure 3. Prefill expert activation predicts decode activation. Each point is one expert (normalized prefill x x vs. decode y y , pooled over domains); points near the diagonal are experts used about equally in both phases.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x4.png"
+        ],
+        "caption": "Figure 4. Same-domain batches (blue) activate fewer experts per decode step than mixed-domain (orange), for task (top) and language (bottom) across three MoE models.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x5.png"
+        ],
+        "caption": "Figure 5. WildChat (Zhao et al. , 2024 ) request volume is heavily skewed: English and Chinese alone are ∼ \\sim 75% of requests.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x6.png"
+        ],
+        "caption": "Figure 6. ELDR architecture: offline fitting of one centroid per decode worker over expert signatures, then online routing at the prefill?밺ecode handoff by signature similarity, subject to load.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x7.png"
+        ],
+        "caption": "Figure 7. Signature quality ρ \\rho (Eq. 1 ) for six candidate transformations T T . Bars are the mean across six cells (3 models × \\times 2 workloads); whiskers span the per-cell min/max.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x8.png"
+        ],
+        "caption": "Figure 8. Cumulative ρ \\rho (Eq. 1 ) versus the number of layers kept under greedy layer selection. One panel per model; task (blue) and language (orange) shown separately. The star marks the peak N ∗ N^{*} chosen by ELDR ’s offline fit.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x9.png"
+        ],
+        "caption": "Figure 9. PCA of calibration signatures with Hungarian-balanced centroids ( K = 8 K{=}8 for legibility), colored by task domain (top) or top-4 WildChat (Zhao et al. , 2024 ) language (bottom).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x10.png"
+        ],
+        "caption": "Figure 10. ELDR stores expert signatures at KV cache block granularity: the signature cache is co-indexed with KV cache.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x11.png",
+          "https://arxiv.org/html/2607.00466v1/x12.png"
+        ],
+        "caption": "Figure 11. TPOT (median, p99) and median TTFT vs request rate on the task workload at 8P16D. Figure 12. TPOT (median, p99) and median TTFT vs request rate on the language workload at 8P16D.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig11_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig11_2.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x13.png"
+        ],
+        "caption": "Figure 13. Mean active experts per decode step on Qwen3-30B-A3B in the task domain on an 8P16D cluster.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig12_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x14.png"
+        ],
+        "caption": "Figure 14. TPOT P50/P99 % Δ \\Delta vs. RR at r = 60 r{=}60 req/s (8P16D, six (model, dataset) cells) for two signature transforms: the IDF-reweighted top- k k count ( count ⋅ \\cdot idf ) vs. the continuous softmax gate ( gate-prob ). Rest of the recipe fixed (greedy mask, balanced K K -means K = 16 K{=}16 , τ = 0.1 \\tau{=}0.1 ).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig13_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x15.png"
+        ],
+        "caption": "Figure 15. Mean % Δ \\Delta vs. RR over five request rates ( 20 20 – 100 100 qps) at 8P16D with τ = 0.1 \\tau{=}0.1 .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig14_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x16.png"
+        ],
+        "caption": "Figure 16. Mean % Δ \\Delta vs RR (five rates, 20–100 qps; 8P16D) for six cells (three models × \\times two datasets) at four τ \\tau values.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig15_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x17.png"
+        ],
+        "caption": "Table 2. Topology generalization on Qwen3-30B-A3B, language workload: mean % Δ \\Delta vs RR across 20–100 qps.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig16_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00466v1/x18.png"
+        ],
+        "caption": "Figure 18. TPOT (median, p99) for Qwen3-235B-A22B on language workload at 2P8D with T ​ P = 4 TP{=}4 and E ​ P = 4 EP{=}4 per instance (40 GPUs across 5 nodes).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-02/2607.00466/fig17_1.png"
+        ]
+      }
+    ]
+  }
+]

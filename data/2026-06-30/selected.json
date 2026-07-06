@@ -1,0 +1,594 @@
+[
+  {
+    "arxiv_id": "2606.28733",
+    "title": "Agentic Abstention: Do Agents Know When to Stop Instead of Act?",
+    "abstract": "LLM agents are expected to act over multiple turns, using search, browsing interfaces, and terminal tools to complete user goals. Yet not every goal is well specified or achievable in the available environment. In such cases, a reliable agent should recognize that further interaction is unlikely to help and abstain from additional tool calls. We define Agentic Abstention, the problem of deciding when an agent should stop acting under uncertainty. Unlike standard LLM abstention, which is usually evaluated as a single-turn answer-or-abstain decision, agentic abstention is a sequential decision problem: an agent can answer, abstain, or gather more information at each turn, and the need to abstain may only become clear after interacting with the environment. We study this problem across web shopping, terminal environments, and question answering, evaluating 13 LLM-as-agent systems and 2 agent scaffolds on more than 28,000 tasks. Our results show that the main challenge is not only whether agents can abstain, but also when they abstain. Some agents never abstain when they should, while others do so only after many unnecessary interactions. This gap is especially large on tasks where the instruction appears feasible until the environment reveals otherwise (e.g., no valid result matches the instruction). We further find that model scale, reasoning, and agent scaffolding affect abstention in different ways, where larger or more capable models sometimes perform worse at timely abstention. Finally, we introduce CONVOLVE, a context engineering method for improving agentic abstention that distills full interaction trajectories into reusable stopping rules. On WebShop, CONVOLVE substantially improves timely abstention without updating model parameters, raising Llama-3.3-70B's timely recall rate from 26.7 to 57.4. Our dataset and code are available at https://lhannnn.github.io/agentic-abstention",
+    "upvotes": 144,
+    "authors": [
+      "Han Luo",
+      "Bingbing Wen",
+      "Lucy Lu Wang"
+    ],
+    "organization": "University of Washington",
+    "github_repo": "https://github.com/lhannnn/agentic-abstention",
+    "github_stars": 39,
+    "ai_keywords": [
+      "agentic abstention",
+      "LLM-as-agent systems",
+      "sequential decision problem",
+      "web shopping",
+      "terminal environments",
+      "question answering",
+      "context engineering",
+      "CONVOLVE",
+      "stopping rules"
+    ],
+    "published_at": "2026-06-27T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2606.28733",
+    "arxiv_url": "https://arxiv.org/abs/2606.28733",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28733v1/x1.png"
+        ],
+        "caption": "Figure 1 : This is an Environment-based Abstention example in a web shopping scenario, where the agent only discovers that the task is infeasible after interacting with the environment. We show three trajectories, (i) Timely success: where the agent abstains in the earliest possible step where is has enough information to do so, (ii) Delayed success: where the agent eventually abstains correctly following a few steps of unnecessary tool calls, and (iii) Failure to abstain: where the agent issues unnecessary tool calls for the remaining turns and does not abstain within the 10-turn budget.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28733v1/x2.png"
+        ],
+        "caption": "Figure 2 : (a) Each adapted task in TerminalBench 2.0 consists of four core components: (1) a containerized environment initialized with the relevant packages and files, (2) an instruction describing the task to be completed, (3) a set of tests for verifying completion, and (4) a manually written reference solution. For our abstention setting, we rewrite the original instruction to construct abstention-warranted variants. (b) Examples of rewritten instructions under two abstention scenarios: False Premise or Contradiction and Underspecified Intent.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28733v1/x3.png"
+        ],
+        "caption": "Figure 3 : Abstention is hard for agents, especially timely abstention. Abstention Recall increases with larger K K , but early abstention (e.g., AbsRec @ ​ 1 @1 ) remains low across settings and systems. This suggests that agents often abstain only after unnecessary interaction, rather than when abstention first becomes warranted.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28733v1/x4.png",
+          "https://arxiv.org/html/2606.28733v1/x5.png",
+          "https://arxiv.org/html/2606.28733v1/x6.png"
+        ],
+        "caption": "Figure 4 : AbsRec@ ​ K \\text{AbsRec@}K across Abstention Categories in Web, Terminal, and QA scenarios. From top to bottom, the rows show Web, Terminal, and QA results. Missing Target in Web, Underspecified Intent in Terminal, and False Premise and Underspecified Intent in QA are the most difficult cases across models. Performance for the same model varies significantly across abstention categories.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig4_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig4_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig4_3.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28733v1/x7.png"
+        ],
+        "caption": "Figure 5 : More reasoning leads to some improvement in AbsRec @ ​ 1 @1 while overall abstention recall (AbsRec @ ​ 10 @10 ) decreases on both Web and Terminal scenarios.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28733v1/x8.png",
+          "https://arxiv.org/html/2606.28733v1/x9.png"
+        ],
+        "caption": "Figure 6: Cumulative over-abstention rate by turn in Web and Terminal scenarios on solvable instances. Figure 7: Scaling improves overall recall but not timely recall.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig6_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig6_2.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28733v1/picture/webshop_rewrite249_gpt54_high_token_length_distribution_paper_aligned.png",
+          "https://arxiv.org/html/2606.28733v1/picture/webshop_rewrite249_gpt54_high_embeddings_tsne_paper_aligned.png",
+          "https://arxiv.org/html/2606.28733v1/picture/webshop_rewrite249_gpt54_high_word_cloud_paper_aligned.png"
+        ],
+        "caption": "Figure 8 : (a) Length distributions show similar token counts between original and rewritten WebShop instructions. (b) t-SNE visualization of instruction embeddings reveals substantial semantic overlap, demonstrating that original and rewritten WebShop instructions are semantically indistinguishable. The similarity breakdown across the three abstention scenarios is shown in Figure 9 . (c) Word clouds of original and rewritten WebShop instructions.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig7_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig7_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig7_3.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28733v1/picture/webshop_rewrite249_gpt54_high_category_tsne_paper_aligned_subjective.png",
+          "https://arxiv.org/html/2606.28733v1/picture/webshop_rewrite249_gpt54_high_category_tsne_paper_aligned_underspecified_intent.png",
+          "https://arxiv.org/html/2606.28733v1/picture/webshop_rewrite249_gpt54_high_category_tsne_paper_aligned_false_premises.png"
+        ],
+        "caption": "Figure 9 : t-SNE visualizations of original and rewritten WebShop instructions by abstention category: Subjective Preference, Underspecified Intent, and False Premise or Contradiction.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig8_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig8_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig8_3.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28733v1/x10.png"
+        ],
+        "caption": "Figure 10 : Composition of the selected AbstentionBench subset across datasets and scenarios. The subset contains 16 datasets and 5 scenarios, totaling 27,073 samples.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28733v1/x11.png"
+        ],
+        "caption": "Figure 12 : Agent scaffolds matter beyond the base model. With the same base model (GPT-5.4-mini), Codex CLI consistently achieves higher abstention recall than Terminus 2 across both request-based and environment-based task.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28733/fig10_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2606.30616",
+    "title": "Scaling the Horizon, Not the Parameters: Reaching Trillion-Parameter Performance with a 35B Agent",
+    "abstract": "We introduce Agents-A1, a 35B Mixture-of-Experts Agentic Model that reaches trillion-parameter-level performance by scaling the agent horizon. We investigate agent-horizon scaling from two perspectives: scaling long-horizon trajectories and scaling heterogeneous agent abilities. To support this goal, we build a long-horizon knowledge-action infrastructure that connects external knowledge, actions, observations, and verifier outcomes, producing agentic trajectories with an average length of 45K tokens. Based on this, we train Agents-A1 with a three-stage recipe. First, we perform full-domain supervised fine-tuning to align the base model with broad agentic behaviors. Second, we train domain-level teacher models to capture specialized expertise in each domain. Third, we propose a multi-teacher domain-routed on-policy distillation with salient vocabulary alignment to improve knowledge transfer efficiency across different domains, unifying six heterogeneous domains into one deployable student model. Agents-A1 achieves strong and broad performance for long-horizon agent benchmarks. Compared with 1T-parameter model such as Kimi-K2.6 and DeepSeek-V4-pro, Agents-A1 achieves leading results on SEAL-0 (56.4), IFBench (80.6), HiPhO (46.4), FrontierScience-Olympiad (79.0), and MolBench-Bind (56.8), and remains highly competitive on SciCode (44.3), HLE (47.6) and BrowseComp (75.5). We hope this work provides the community with a practical path for scaling the horizon using a 35B agent that can reach or match the performance of 1T models on long-horizon tasks.",
+    "upvotes": 88,
+    "authors": [
+      "Lei Bai",
+      "Zongsheng Cao",
+      "Yang Chen",
+      "Zhiyao Cui",
+      "Shangheng Du",
+      "Yue Fan",
+      "Shiyang Feng",
+      "Zijie Guo",
+      "Haonan He",
+      "Liang He",
+      "Xiaohan He",
+      "Shuyue Hu",
+      "Yusong Hu",
+      "Songtao Huang",
+      "Yichen Jiang",
+      "Hao Li",
+      "Xin Li",
+      "Dahua Lin",
+      "Weihao Lin",
+      "Fenghua Ling",
+      "Dongrui Liu",
+      "Zhuo Liu",
+      "Runmin Ma",
+      "Chunjiang Mu",
+      "Haoyang Peng",
+      "Tianshuo Peng",
+      "Jinxin Shi",
+      "Luohe Shi",
+      "Boyuan Sun",
+      "Zelin Tan",
+      "Shengji Tang",
+      "Qianyi Wang",
+      "Yiming Wu",
+      "Yi Xie",
+      "Xiangchao Yan",
+      "Jingqi Ye",
+      "Peng Ye",
+      "Fangchen Yu",
+      "Jiakang Yuan",
+      "Bihao Zhan",
+      "Bo Zhang",
+      "Chen Zhang",
+      "Shufei Zhang",
+      "Shuaiyu Zhang",
+      "Wenlong Zhang",
+      "Yiqun Zhang",
+      "Junpeng Zhao",
+      "Zhijie Zhong",
+      "Bowen Zhou",
+      "Yuhao Zhou"
+    ],
+    "organization": "Intern Science",
+    "github_repo": "https://github.com/InternScience/Agents-A1",
+    "github_stars": 338,
+    "ai_keywords": [
+      "Mixture-of-Experts",
+      "agentic model",
+      "agent horizon",
+      "long-horizon trajectories",
+      "heterogeneous agent abilities",
+      "knowledge-action infrastructure",
+      "agentic trajectories",
+      "supervised fine-tuning",
+      "domain-level teacher models",
+      "multi-teacher domain-routed on-policy distillation",
+      "salient vocabulary alignment",
+      "domain-routed training"
+    ],
+    "published_at": "2026-06-29T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2606.30616",
+    "arxiv_url": "https://arxiv.org/abs/2606.30616",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30616v1/x2.png"
+        ],
+        "caption": "Figure 1 : Benchmark performance of Agents-A1",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.30616/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30616v1/figures/train_framework.png"
+        ],
+        "caption": "Figure 2 : Overview of the three-stage training pipeline of Agents-A1. From multi-domain data to domain-specific teachers and multi-teacher on-policy distillation. First, Agents-A1 is trained with full-domain supervised fine-tuning on multi-domain long-horizon data, including search, scientific research, engineering, agentic tasks, and instruction following. Then, domain-specific teacher models are trained on each domain, and their expertise is transferred to the student model through domain-routed on-policy distillation with salient vocabulary alignment.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.30616/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30616v1/figures/KAG_infra.png"
+        ],
+        "caption": "Figure 3 : Overview of the knowledge-action infrastructure of Agents-A1. Heterogeneous corpora are decomposed into atomic abilities and organized into a knowledge-action graph (KAG) that records evidence, actions, observations, and verifier outcomes. A tool-augmented self-play loop expands the KAG into domain-specific sub-KAGs for downstream task construction.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.30616/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30616v1/figures/appendix_mle.png"
+        ],
+        "caption": "Figure 4 : Optimization trajectory of Agents-A1 on the ICML 2013 Whale Challenge [ undefal ] over a 12-hour run. The curve shows the best validation AUC achieved over wall-clock time, with annotated breakthrough moments corresponding to distinct algorithmic improvements. The shaded band indicates run-to-run variance across independent seeds.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.30616/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30616v1/figures/appendix_earth.png"
+        ],
+        "caption": "Figure 5 : Integrated track, intensity, and motion characteristics of Tropical Cyclone Nargis (2008) produced by Agents-A1. (a) Best-track map of Nargis, with track-segment colors indicating intensity class and marker colors indicating maximum sustained wind speed; key stages are labeled A–E. (b) Temporal evolution of maximum sustained wind speed from USA/JTWC and WMO/IMD estimates, with orange shading indicating the 6 h pre-landfall period, red shading indicating the post-landfall period, and the red dashed line denoting landfall at 12:00 UTC on 2 May 2008. (c) Temporal evolution of latitude and longitude, shown on the left and right y-axes, respectively. (d) Translation speed as a function of time, with triangles marking significant acceleration and deceleration events. (e) Track heading as a function of time, with red annotations indicating rapid turning events. All times are in UTC.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.30616/fig5_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2606.26740",
+    "title": "LiveEdit: Towards Real-Time Diffusion-Based Streaming Video Editing",
+    "abstract": "Streaming video editing has made rapid progress, yet practical deployment is still limited by two core issues: maintaining stable backgrounds and non-edited regions over time, and achieving the low latency required for real-time interactive scenarios. Meanwhile, recent streaming video generation methods are mostly developed for synthesis and cannot be directly applied to editing due to the strict preservation requirement and region-specific control. In this work, we present a novel streaming video editing framework that performs causal, frame-by-frame editing with strong content preservation and real-time responsiveness. Our key design is a three-stage distillation pipeline that progressively transfers editing capability from a powerful bidirectional foundation model to an efficient unidirectional streaming editor, enabling stable long-horizon edits without sacrificing visual fidelity. To further support real-time deployment, we introduce an AR-oriented mask cache that reuses region-related computation across frames, substantially reducing redundant processing and accelerating inference. Finally, we establish a dedicated benchmark for streaming video editing. Extensive evaluations demonstrate that our method achieves state-of-the-art visual quality among streaming baselines while drastically boosting inference speed to 12.66 FPS, making it suitable for interactive and augmented reality applications.",
+    "upvotes": 82,
+    "authors": [
+      "Xinyu Wang",
+      "Chongbo Zhao",
+      "Fangneng Zhan",
+      "Yue Ma"
+    ],
+    "organization": "Tsinghua University",
+    "github_repo": "https://github.com/cp-cp/LiveEdit",
+    "github_stars": 81,
+    "ai_keywords": [
+      "streaming video editing",
+      "causal editing",
+      "frame-by-frame editing",
+      "content preservation",
+      "real-time responsiveness",
+      "three-stage distillation pipeline",
+      "bidirectional foundation model",
+      "unidirectional streaming editor",
+      "long-horizon edits",
+      "AR-oriented mask cache",
+      "inference speed",
+      "interactive applications",
+      "augmented reality"
+    ],
+    "published_at": "2026-06-25T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2606.26740",
+    "arxiv_url": "https://arxiv.org/abs/2606.26740",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2606.26740v1/x2.png"
+        ],
+        "caption": "Figure 1 : Comparison of video editing paradigms. Unlike bidirectional models that suffer from inefficient inference, and past streaming models that fail to preserve accurate unedited content, our proposed streaming editing model leverages a Causal DiT with a mask-guided cache mechanism to achieve high-fidelity and efficient editing.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.26740/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.26740v1/x3.png"
+        ],
+        "caption": "Figure 2 : Visualization of the attention distribution shift. Left: The bidirectional prior exhibits localized attention gathering. Right: Direct causal truncation forces attention to spread uniformly across all historical frames.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.26740/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.26740v1/x4.png"
+        ],
+        "caption": "Figure 3 : Overview of the proposed streaming video editing framework. Our approach features a three-stage distillation pipeline that transfers editing capabilities from a bidirectional DiT to a 4-step causal model. Furthermore, an AR-oriented Mask Cache accelerates real-time inference by dynamically decoupling computation and reusing tokens in unedited background regions.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.26740/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.26740v1/x5.png"
+        ],
+        "caption": "Figure 4 : Visualization of the temporal consistency analysis and mask generation process. The left panels show (from top to bottom) the source video frames, the synthesized video frames, the computed difference matrices, and the resulting binary masks. The right panels display the statistical distributions of Temporal IoU and Pixel Difference across the sequence, with mean values of 0.016% and 0.126%, respectively, indicating high structural stability.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.26740/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.26740v1/x6.png"
+        ],
+        "caption": "Figure 5 : Qualitative comparison of streaming video editing performance. The source videos and instructions are displayed at the top. While existing methods exhibit significant limitations, leading to structural collapse or an inability to accurately follow the text, our approach precisely modifies the target regions and preserves the visual quality and temporal coherence of the original scenes.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.26740/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.26740v1/x7.png"
+        ],
+        "caption": "Figure 6 : Visual comparison of different cache locations. With the instruction ”Change the red currants to deep purple grapes with a thin layer of frost on their skins” .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.26740/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.26740v1/x8.png"
+        ],
+        "caption": "Figure 7 : Distribution of token cosine similarity between consecutive denoising step.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.26740/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.26740v1/x9.png"
+        ],
+        "caption": "Figure 1 : User study results. Volunteers ranked the generated videos from our method and six baselines across three metrics: Instruction Consistency, Background Preservation, and Overall Quality. The line plots indicate the proportion of top-3 selections. Our proposed approach overwhelmingly dominates the evaluations, securing the vast majority of absolute ”Best” rankings across all dimensions..",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.26740/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.26740v1/x10.png"
+        ],
+        "caption": "Figure 2 : More cases generated by LiveEdit .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.26740/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.26740v1/x11.png"
+        ],
+        "caption": "Figure 3 : More cases generated by LiveEdit .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.26740/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.26740v1/x12.png"
+        ],
+        "caption": "Figure 4 : More cases generated by LiveEdit .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.26740/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.26740v1/x13.png"
+        ],
+        "caption": "Figure 5 : More comparison between baseline and our LiveEdit .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.26740/fig12_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.26740v1/x14.png"
+        ],
+        "caption": "Figure 6 : More comparison between baseline and our LiveEdit .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.26740/fig13_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2606.28480",
+    "title": "TUA-Bench: A Benchmark for General-Purpose Terminal-Use Agents",
+    "abstract": "As large language models and harness frameworks continue to advance, agents operating in terminals are increasingly capable of performing a broader range of general computer-use tasks beyond coding. However, existing benchmarks do not adequately evaluate general-purpose terminal computer-use agents (TUAs): general computer-use benchmarks primarily target graphical user interfaces (GUIs), whereas terminal-based benchmarks largely emphasize technical and programming-centric workflows historically native to the shell. We introduce TUA-Bench, a general-purpose benchmark for terminal-use agents. TUA-Bench includes 120 real-world tasks across five task families, covering routine digital activities-including document editing, email management, and live-web information seeking-as well as scientific and engineering workflows co-designed with PhD-level domain experts that require specialized software. This breadth distinguishes TUA-Bench from prior shell-focused or domain-specific benchmarks. Each task is manually designed, runs in a real terminal with a deterministic setup script, and is evaluated by an execution-based scoring protocol. We find that the strongest frontier agent, Claude Code with Claude Opus 4.8 max reasoning effort, achieves 65.8% overall performance, with substantial gaps across both tracks. By providing a broad and realistic evaluation of terminal-use capabilities, TUA-Bench aims to accelerate the transition from narrow, task-specific assistants to general-purpose agents capable of operating reliably across diverse digital environments.",
+    "upvotes": 47,
+    "authors": [
+      "Shoufa Chen",
+      "Luyuan Wang",
+      "Xuan Yang",
+      "Zhiheng Liu",
+      "Yuren Cong",
+      "Yuanfeng Ji",
+      "Feiyan Zhou",
+      "Xiaohui Zhang",
+      "Fanny Yang",
+      "Belinda Zeng"
+    ],
+    "organization": "AI at Meta",
+    "github_repo": "https://github.com/facebookresearch/TUA-Bench",
+    "github_stars": 34,
+    "ai_keywords": [
+      "terminal-use agents",
+      "general-purpose agents",
+      "computer-use tasks",
+      "graphical user interfaces",
+      "shell-based workflows",
+      "execution-based scoring protocol",
+      "digital activities",
+      "specialized software",
+      "benchmark evaluation"
+    ],
+    "published_at": "2026-06-26T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2606.28480",
+    "arxiv_url": "https://arxiv.org/abs/2606.28480",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28480v1/x2.png"
+        ],
+        "caption": "Figure 1: Overview of TUA-Bench. TUA-Bench evaluates terminal-use agents on realistic, application-grounded tasks spanning a five-domain taxonomy of real-world workflows. Each workflow is instantiated as concrete tasks in a unified terminal environment. Tasks that would conventionally require graphical interfaces are reformulated as GUI-to-terminal problems, requiring agents to interact solely through the command line. Agents execute each task autonomously, and the resulting rollout is automatically verified against ground truth.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28480/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28480v1/x3.png"
+        ],
+        "caption": "Figure 2: TUA-Bench task distribution. The 120 tasks span five categories with fine-grained subcategories, covering both everyday digital work and expert professional workflows.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28480/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28480v1/figures/task_cell_detection.png",
+          "https://arxiv.org/html/2606.28480v1/figures/task_mri.png",
+          "https://arxiv.org/html/2606.28480v1/figures/task_building.png",
+          "https://arxiv.org/html/2606.28480v1/figures/task_thermal_sim.png"
+        ],
+        "caption": "Table 2: Scientific subjects spanning biology, medical physics, architectural engineering, and mechanical engineering. Each row shows the subject’s task scope and a representative task example.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28480/fig3_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28480/fig3_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28480/fig3_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28480/fig3_4.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28480v1/x4.png",
+          "https://arxiv.org/html/2606.28480v1/x5.png"
+        ],
+        "caption": "Figure 3 : Task-execution time budget for Terminus-2 + GPT-5.5 ( xhigh ). Larger budgets cut timed-out trials from 337 to just 4 of 600 and steadily raise the success rate. Figure 4 : Thinking-effort scaling results . Success rate across five thinking-effort settings for GPT-5.5; higher effort costs more tokens and steadily lifts performance.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28480/fig4_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28480/fig4_2.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28480v1/x6.png"
+        ],
+        "caption": "Figure 5 : Success rate vs. cost per run across agent–model–effort configurations. Each point is one configuration; the connected line marks the Pareto frontier (best success rate at a given cost). Low-cost efficiency comes from Terminus-2 with open-weight models ( ∼ \\sim 47–48% at $12–23/run), while Claude Code with Claude Opus 4.8 (max) reaches the highest success rate at 65.8% ($173.61/run); Codex with GPT-5.5 ( xhigh ) is close behind at 64.7% for ∼ \\sim $138/run. Returns flatten beyond ∼ \\sim $105/run.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28480/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28480v1/x7.png"
+        ],
+        "caption": "Figure 6 : Per-category success rates on TUA-Bench for eight models , each run with the Terminus-2 agent under the indicated reasoning-effort setting (in parentheses). Bars are grouped by task category, with the number of tasks per category shown below each group (n). A more detailed, task-level breakdown of success rates is provided in Figure ˜ 7 .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28480/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28480v1/x8.png"
+        ],
+        "caption": "Figure 7 : Task-level success rate heatmap. Mean success rate runs for eight models evaluated with the Terminus-2 agent on each TUA-Bench task. Rows correspond to model configurations and columns correspond to individual tasks, grouped by category and subcategory. Darker cells indicate higher success rate. The heatmap reveals substantial within-category heterogeneity: each category contains both broadly solved tasks and tasks that remain difficult for nearly all models, highlighting task-level capability gaps that are obscured by category-level averages.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28480/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28480v1/x9.png"
+        ],
+        "caption": "Figure 8 : Full task-level results on TUA-Bench across agent–model combinations. Each row is an individual task (identifier and short name on the left), grouped by the five top-level categories. Each column is an agent paired with a specific model under a given reasoning-effort setting (bottom labels, in the form agent + model (effort)). Cell color encodes mean reward across runs, from red (0.0%) to green (100.0%). Best viewed in color and zoomed in.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28480/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.28480v1/x10.png"
+        ],
+        "caption": "Figure 9 : Effect of reasoning effort on task-level performance in TUA-Bench. Rows are individual tasks (identifier and name on the left), grouped by the five task categories (right labels). Columns are organized into four agent–model blocks; within each block, columns correspond to increasing reasoning-effort settings (bottom labels: none , low , medium , high , xhigh , and additionally max for Claude Opus 4.7). Best viewed in color and zoomed in.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-06-30/2606.28480/fig9_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2502.16886",
+    "title": "ReFreeKV: Towards Threshold-Free KV Cache Compression",
+    "abstract": "To reduce memory consumption during LLM inference, a handful of methods have been proposed for KV cache pruning. While these techniques can accomplish lossless memory reduction on many datasets, they often hinge on an under-emphasized condition: an input/domain-specific threshold for KV cache budget needs to be pre-determined to achieve the optimal performance. However, such input-sensitive design may be considerably limited in real-world scenarios, as open-domain inputs span diverse domains, lengths and difficulty levels, without clear boundaries for threshold selection. As a result, the dependence of such input-sensitive threshold can be a fundamental limitation that causes large degradation on arbitrary inputs. In this work, we propose a new objective that lifts the threshold constraints for robust KV compression, advocating for \"threshold-free\" methods that adaptively adjust budget allocation while preserving full-cache performance. We then propose a novel method, ReFreeKV, serving as the first instantiation of this objective. Extensive experiments across 13 datasets with diverse context lengths, task types, and model sizes demonstrate its efficacy and efficiency. Our code is publicly released at https://github.com/Patrick-Ni/ReFreeKV.",
+    "upvotes": 47,
+    "authors": [
+      "Xuanfan Ni",
+      "Liyan Xu",
+      "Chenyang Lyu",
+      "Longyue Wang",
+      "Mo Yu",
+      "Lemao Liu",
+      "Fandong Meng",
+      "Jie Zhou",
+      "Piji Li"
+    ],
+    "organization": "Tencent",
+    "github_repo": "https://github.com/Patrick-Ni/ReFreeKV",
+    "github_stars": 3,
+    "ai_keywords": [
+      "KV cache pruning",
+      "threshold-free methods",
+      "adaptive budget allocation",
+      "KV cache compression",
+      "LLM inference"
+    ],
+    "published_at": "2026-06-26T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2502.16886",
+    "arxiv_url": "https://arxiv.org/abs/2502.16886",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/x1.png"
+        ],
+        "caption": "Figure 1: The overall workflow of DBudgetKV in Section 3.2 . Initially, tokens are ranked based on their positions, followed by the eviction of the least significant tokens (per layer), whose halting condition is determined by the norm value of the reduced attention matrix. The KV cache for the remaining tokens are then preserved.",
+        "local_paths": [
+          null
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/x2.png"
+        ],
+        "caption": "Figure 2: Preliminary experiments on the relationship between the Frobenius norm difference (in percentage) obtained from randomly masking tokens, and the corresponding model performance on GSM8K.",
+        "local_paths": [
+          null
+        ]
+      }
+    ]
+  }
+]

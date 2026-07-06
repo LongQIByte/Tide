@@ -1,0 +1,470 @@
+[
+  {
+    "arxiv_id": "2607.02512",
+    "title": "Program-as-Weights: A Programming Paradigm for Fuzzy Functions",
+    "abstract": "Many everyday programming tasks resist clean rule-based implementation, such as alerting on important log lines, repairing malformed JSON, or ranking search results by intent, and are increasingly outsourced to large language model APIs at the cost of locality, reproducibility, and price. We propose fuzzy-function programming: compiling such a function from a natural-language specification into a compact, locally-executable neural artifact. We instantiate this paradigm with Program-as-Weights (PAW), in which a 4B compiler trained on FuzzyBench, a 10M-example dataset we release, emits parameter-efficient adapters for a frozen, lightweight interpreter. A 0.6B Qwen3 interpreter executing PAW programs matches the performance of direct prompting of Qwen3-32B, while using roughly one fiftieth of the inference memory and running at 30 tokens/s on a MacBook M3. PAW reframes the foundation model from a per-input problem solver into a tool builder: invoked once per function definition, it produces a small reusable artifact whose subsequent calls per function application are cheap and offline.",
+    "upvotes": 87,
+    "authors": [
+      "Wentao Zhang",
+      "Liliana Hotsko",
+      "Woojeong Kim",
+      "Pengyu Nie",
+      "Stuart Shieber",
+      "Yuntian Deng"
+    ],
+    "organization": "University of Waterloo",
+    "github_repo": "https://github.com/programasweights/programasweights-python",
+    "github_stars": 147,
+    "ai_keywords": [
+      "Program-as-Weights",
+      "FuzzyBench",
+      "parameter-efficient adapters",
+      "frozen interpreter",
+      "neural artifact",
+      "foundation model",
+      "tool builder"
+    ],
+    "published_at": "2026-07-02T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.02512",
+    "arxiv_url": "https://arxiv.org/abs/2607.02512",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02512v1/x1.png"
+        ],
+        "caption": "Figure 1 : Overview of the Program-as-Weights paradigm. Top: compile once in the cloud. A natural-language description of a fuzzy function (here, “classify if this is urgent”) is fed to a neural compiler, which produces a neural program. Bottom: run locally. A small frozen neural interpreter loads the compiled program and runs the user’s input (“Need your signature by EOD!”) to produce the output (“urgent”). The compiled program is a single file that can be cached, version-controlled, and called offline like any other library function.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02512/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02512v1/figures/architecture_lora.png"
+        ],
+        "caption": "Figure 2 : Text-to-LoRA instantiation of PAW ( Section ˜ 3.2 ). Left. The trained LoRA compiler reads the function specification, the pseudo-program produced by an off-the-shelf prompted pseudo compiler C p C_{p} (not depicted), and a fixed sequence of learned prefix tokens; it emits prefix-position hidden states H H . Middle. The LoRA mapper mean-pools H H , passes it through an MLP, and projects into mixing coefficients that compose LoRA matrices ( A ex , B ex ) (A^{\\text{ex}},B^{\\text{ex}}) over shared learnable bases ( eq. ˜ 3 ). Right. The frozen interpreter ingests p discrete p_{\\text{discrete}} prepended to the user input x x , with the LoRA hot-attached, and generates the output autoregressively. The same pipeline holds for the prefix-tuning precursor ( Section ˜ 3.3 , with architecture in Figure ˜ 18 ); only the mapping from compiler hidden states to PEFT module changes (LoRA → \\to KV-cache mapper).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02512/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02512v1/x2.png"
+        ],
+        "caption": "Figure 3 : FuzzyBench-10M task-family distribution. 29 incremental thematic versions are mapped to 7 high-level families. “Core text processing & NLP” is the largest family because the v1 base layer (2.5M examples; 277 base categories) covers parsing, classification, NER, coreference, and sentiment; the remaining 7.5M examples spread across the other six families.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02512/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02512v1/figures/web_ui_1.png"
+        ],
+        "caption": "Figure 5 : Step 1: Compile a program from natural language. The user specifies a fuzzy function in natural language. Image inputs are also supported.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02512/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02512v1/figures/web_ui_2.png"
+        ],
+        "caption": "Figure 6 : Step 2: Interactively test the compiled program. Users can provide test inputs and inspect the corresponding outputs, enabling rapid validation and refinement before download.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02512/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02512v1/figures/web_ui_3.png"
+        ],
+        "caption": "Figure 7 : Step 3: Execute the program locally via Python. Once compiled, the program can be loaded and invoked through a simple Python API; subsequent execution requires no internet access.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02512/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02512v1/x3.png",
+          "https://arxiv.org/html/2607.02512v1/x4.png"
+        ],
+        "caption": "(a) Compile (b) Interpret Figure 18 : Prefix-tuning precursor architecture ( Section ˜ 3.3 ). (a) Compile. The user describes a fuzzy function (e.g., “extract the final answer”); the trained prefix compiler reads the description plus a handful of representative I/O examples and produces a per-example KV prefix — the “neural binary” that constitutes the compiled program. (b) Interpret. A small frozen interpreter loads the compiled KV prefix into its attention cache at every layer and processes user inputs locally as a callable function, in the manner of standard prefix-tuning [Li and Liang, 2021 ] . This is the prefix-tuning instantiation of the same compiler–interpreter abstraction depicted in Figure ˜ 2 ; only the mapping from compiler hidden states to per-example PEFT module differs (KV cache here, LoRA in Section ˜ 3.2 ). Note : our prefix-tuning precursor’s exact training-time input format follows the same [ s ​ ∣ p discrete ∣ ​ EOS ∣ τ 1 : T ] [s\\mid p_{\\text{discrete}}\\mid\\texttt{EOS}\\mid\\tau_{1{:}T}] structure as the LoRA instantiation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02512/fig7_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02512/fig7_2.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02512v1/figures/paw_program_library.png"
+        ],
+        "caption": "Figure 19 : A library of compiled PAW programs. Three example natural-language function specifications (“Classify message urgency”, “Fix malformed JSON”, “Remove personal information”; left) are each compiled into a separate neural program (middle): a discrete pseudo-program in a fixed format plus a continuous per-example LoRA (depicted as red, blue, green adapters). At deployment time (right), all three programs are served by a single device-resident interpreter ( LM ) with the appropriate LoRA hot-attached per call — the “one runtime, many programs” picture that motivates compile-once-run-locally.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02512/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02512v1/figures/alien_taboo_frame.png"
+        ],
+        "caption": "Figure 20 : The Alien-Taboo case-study UI. The player describes the secret word (here, “moon”) in free text without using any of the listed taboo words ( night , orbit , lunar , full ); the alien “Zog” — a one-PAW-function compiled program — must guess the word from the description. Each player turn is served by a 0.6B Qwen3 PAW interpreter on a small server, with one PAW program (and per-program LoRA adapter) per language hot-loaded by the same interpreter; the LLM is invoked only at compile time, not at every move.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02512/fig9_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.02255",
+    "title": "AgenticSTS: A Bounded-Memory Testbed for Long-Horizon LLM Agents",
+    "abstract": "Memory for a long-horizon LLM agent is a contract about what each future decision is allowed to see. The simplest contract appends past observations, tool calls, and reflections to every prompt, which makes prior context easy to access but also turns it into a jumbled mixture in which the effect of any single memory component is hard to isolate. We introduce and instrument an alternative bounded contract: every decision is made from a fresh user message assembled by typed retrieval, with no raw cross-decision transcript appended. The prompt thus stays bounded across runs of any length, and any single layer can be ablated in isolation. We instantiate the contract in Slay the Spire 2, a closed-rule stochastic deck-building game whose runs require hundreds of tactical and strategic decisions. A public online benchmark of frontier LLMs on the same game reports zero wins at the lowest difficulty across five configurations, and the developer-reported human win rate at the same difficulty is 16%; the task is hard but not saturated. Within our harness, a fixed-A0 ablation shows the largest observed difference when triggered strategic skills are enabled: the no-store baseline wins 3/10 games and adding the skill layer 6/10. At this sample size the comparison is directional rather than statistically decisive (Fisher exact p\\approx0.37); a cross-backbone probe and public accumulating-context baselines are reported as operational comparisons rather than controlled tests of the contract variable itself. We release a reproducible testbed: 298 completed trajectories with condition tags, frozen memory/skill snapshots, prompt records, and analysis scripts -- an agent design and a validated, reusable methodology for studying how explicit memory layers shape long-horizon LLM-agent decisions.",
+    "upvotes": 51,
+    "authors": [
+      "Xiangchen Cheng",
+      "Yunwei Jiang",
+      "Jianwen Sun",
+      "Zizhen Li",
+      "Chuanhao Li",
+      "Xiangcheng Cao",
+      "Yihao Liu",
+      "Fanrui Zhang",
+      "Li Jin",
+      "Kaipeng Zhang"
+    ],
+    "organization": "Alaya Studio",
+    "github_repo": "https://github.com/AlayaLab/AgenticSTS",
+    "github_stars": 71,
+    "ai_keywords": [
+      "long-horizon LLM agent",
+      "bounded contract",
+      "typed retrieval",
+      "prompt assembly",
+      "memory layers",
+      "strategic skills",
+      "ablation study",
+      "Slay the Spire 2",
+      "conditional reasoning",
+      "explicit memory"
+    ],
+    "published_at": "2026-07-02T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.02255",
+    "arxiv_url": "https://arxiv.org/abs/2607.02255",
+    "html_available": true,
+    "figures": []
+  },
+  {
+    "arxiv_id": "2607.02440",
+    "title": "EvoPolicyGym: Evaluating Autonomous Policy Evolution in Interactive Environments",
+    "abstract": "Autonomous agents are increasingly expected to improve executable policies through feedback, yet existing evaluations often collapse this process into a final score or confound it with open-ended software-engineering progress. We introduce Autonomous Policy Evolution, a controlled evaluation setting in which a harness-model agent repeatedly edits an executable policy system under a fixed interaction budget. We instantiate this setting in EvoPolicyGym, a benchmark built from compact interactive RL environments that evaluates how agents iteratively improve explored policies. On the EvoPolicyGym suite, GPT-5.5 achieves the strongest aggregate rank score and top-two performance on all 16 environments. Beyond leaderboard results, EvoPolicyGym also provides trajectory-level diagnostics that distinguish how agents allocate budget, convert feedback into parametric tuning. These analyses show that strong autonomous policy evolution depends not only on isolated task wins, but on discovering task-appropriate mechanisms and refining policies under bounded feedback.",
+    "upvotes": 43,
+    "authors": [
+      "Zhilin Wang",
+      "Han Song",
+      "Runzhe Zhan",
+      "Jusen Du",
+      "Jiacheng Chen",
+      "Tianle Li",
+      "Qingyu Yin",
+      "Yulun Wu",
+      "Zhennan Shen",
+      "Tong Zhu",
+      "Yanshu Li",
+      "Guanjie Chen",
+      "Derek F. Wong",
+      "Yafu Li",
+      "Yu Cheng",
+      "Yang Yang"
+    ],
+    "organization": null,
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [
+      "autonomous agents",
+      "executable policies",
+      "policy evolution",
+      "reinforcement learning",
+      "trajectory-level diagnostics",
+      "parametric tuning",
+      "task-appropriate mechanisms"
+    ],
+    "published_at": "2026-07-02T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.02440",
+    "arxiv_url": "https://arxiv.org/abs/2607.02440",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02440v1/x1.png"
+        ],
+        "caption": "Figure 1 : EvoPolicyGym framework. (a) Interaction loop : agents edit policies, submit episodic rollouts under a finite budget, and receive platform-mediated feedback. (b) Visibility boundary : training feedback is visible, while validation-based checkpoint selection and held-out evaluation are hidden. (c) Environment suite : a unified interface spanning control, navigation, driving, and robotics tasks under a shared evaluation protocol. (d) Measured aspects : feedback utilization, budget efficiency, and policy improvement dynamics, captured via the evolution of best-so-far performance over time.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02440/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02440v1/x2.png"
+        ],
+        "caption": "Figure 3 : Score evolution over each run’s episode-budget trajectory. Each curve tracks the post-hoc best-so-far hidden-validation score across candidate evaluations. Vertical jumps indicate improvements in the selected policy, while plateaus correspond to budget spent without improvement.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02440/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02440v1/x3.png"
+        ],
+        "caption": "Figure 4 : Relative held-out performance under different dominant task demands. Scores are macro means over synthesis-dominant and tuning-dominant environments, using the random-to-best normalization described in the text. Each row follows the same model and harness identity as the main leaderboard. Per-environment values are reported in Appendix Table 8 .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02440/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02440v1/x4.png"
+        ],
+        "caption": "Figure 5 : CarRacing code-phase timeline. Phase bands are inferred mechanically from the same policy source-bundle rule as Table 4 : synthesis-edit phases denote new AST topologies after numeric constants are stripped, and parametric-edit phases denote changed source bundles under the same topology. Symbols mark validation outcomes and candidate-management events; rollback/retest are event types, not additional edit types.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02440/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02440v1/x5.png"
+        ],
+        "caption": "Figure 6 : Bipedal code-phase timeline, rendered with the same synthesis-edit and parametric-edit phase rules as Figure 5 . The environment is tuning-dominant, but successful tuning still depends on first reaching a viable gait topology; same-topology source-bundle edits then expose whether an agent can improve that structure by adjusting constants and thresholds.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02440/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02440v1/x6.png"
+        ],
+        "caption": "Figure 7 : CarRacing feedback-utilization traces. Each row links evidence, attribution, policy revision, and outcome across agents. The submit column reports the submission index (s00k denotes the k-th submission) and the cumulative episode budget consumed prior to that submission. Labels are derived from logs, feedback summaries, and checkpoint diffs. The figure provides qualitative evidence of how feedback is translated into policy updates and is not an aggregate metric.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02440/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02440v1/x7.png"
+        ],
+        "caption": "Figure 8 : Observed association between policy edit size and improvement probability across adjacent submissions. Edit bins are computed from checkpoint code diffs; circle size indicates the number of transitions in each bin. The plot is diagnostic: large edits can represent useful mechanism synthesis, destructive rewrites, or interface repair depending on the surrounding run context.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02440/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02440v1/figs/gpt55_racing_diagnostics_panel.png"
+        ],
+        "caption": "Figure 9 : GPT-5.5 CarRacing visible diagnostics saved by the agent during the run. Panels A–B show how structural-synthesis edits turn pixel observations into road-geometry control signals: yellow points mark sampled road evidence, cyan/magenta lines mark guide estimates, and action bars/log text summarize the agent’s own rollout diagnostics. Panel C shows a later visible candidate comparison after a parametric-tuning edit. These images are qualitative evidence only and do not expose hidden-validation or held-out cases.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.02440/fig8_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2606.30562",
+    "title": "Morphing into Hybrid Attention Models",
+    "abstract": "Hybrid attention models improve long-context efficiency by retaining only a subset of full-attention layers and replacing the remaining layers with linear attention. However, the effectiveness of Transformer-to-hybrid conversion critically depends on which layers preserve full attention. Existing hybrid layer selection methods typically rely on heuristic strategies such as fixed placement patterns or layerwise scoring, implicitly treating layer importance as isolated and overlooking the interdependent layer effect under a global hybrid configuration. In this work, we formulate hybrid layer selection as a budget-constrained subset optimization problem. We further propose FlashMorph (Fast LAyer Selection for Hybrid MORPHing), an effective, efficient and scalable layer selection method for Transformer-to-hybrid conversion. FlashMorph first constructs a morphable model by equipping each full-attention layer with a converted linear-attention branch. It then freezes all model weights and jointly optimizes layerwise gates on synthetic long-context retrieval data, with a linearization regularization that encourages the model to rely on linear attention for efficiency. The learned gates are discretized under a preset full-attention budget to instantiate the hybrid architecture, followed by standard logits distillation and long-context finetuning. Extensive experiments show that FlashMorph discovers more effective hybrid configurations, preserves strong long-context recall and general benchmark performance while substantially reducing layer selection cost compared with existing layer selection methods, demonstrating its effectiveness, efficiency, and scalability.",
+    "upvotes": 42,
+    "authors": [
+      "Disen Lan",
+      "Jianbin Zheng",
+      "Yuxi Ren",
+      "Xin Xia",
+      "Xuanda Wang",
+      "Xuefeng Xiao",
+      "Xipeng Qiu",
+      "Yu Cheng"
+    ],
+    "organization": "ByteDance Seed",
+    "github_repo": "https://github.com/LanDisen/FlashMorph",
+    "github_stars": 10,
+    "ai_keywords": [
+      "hybrid attention models",
+      "full-attention layers",
+      "linear attention",
+      "Transformer-to-hybrid conversion",
+      "subset optimization problem",
+      "morphable model",
+      "layerwise gates",
+      "synthetic long-context retrieval data",
+      "linearization regularization",
+      "logits distillation",
+      "long-context finetuning"
+    ],
+    "published_at": "2026-06-29T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2606.30562",
+    "arxiv_url": "https://arxiv.org/abs/2606.30562",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30562v1/figs/flashmorph.png"
+        ],
+        "caption": "Figure 1 : Overview of FlashMorph. FlashMorph constructs morphable attention layers through hidden-state alignment, and performs layer selection by jointly optimizing one gate α ( l ) \\alpha^{(l)} per layer with a linearization regularization on synthetic retrieval data. The learned gate values are discretized to retain the top- K K full-attention layers and construct the hybrid attention model, followed by distillation and long-context finetuning.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2606.30562/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30562v1/figs/prefill_decode_efficiency.png"
+        ],
+        "caption": "Figure 2 : Prefilling and Decoding Efficiency Comparison. FlashMorph achieves substantially better long-context efficiency than Qwen3. For prefill, FlashMorph becomes increasingly faster as context length grows, reaching 2.24 × \\times speedup at 128K and 2.81 × \\times at 256K. For decode, FlashMorph also shows clear advantages at long lengths, with 1.56 × \\times speedup at 256K and 2.07 × \\times at 512K, while using much less GPU memory, demonstrating the efficiency of hybrid attention model. Hatched bars indicate out of memory (OOM).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2606.30562/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30562v1/figs/layer_selection_efficiency.png"
+        ],
+        "caption": "Figure 3 : Efficiency Scaling of Layer Selection Methods across Model Sizes . FlashMorph consistently requires substantially fewer FLOPs and GPU hours than HALO and KL-LS, with the efficiency gap becoming more pronounced as model size increases.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2606.30562/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.30562v1/figs/hybrid_ratio.png",
+          "https://arxiv.org/html/2606.30562v1/figs/ablation.png"
+        ],
+        "caption": "(a) RULER performance under different hybrid ratios. (b) Effect of layer selection supervision. Figure 4 : Analysis of FlashMorph under Different Hybrid Configurations and Supervision Signals. (a) We compare FlashMorph with prior layer selection methods on GLA and GDN backbones under different hybrid ratios. FlashMorph consistently achieves strong performance across hybrid ratios. (b) FlashMorph with language-modeling supervision already outperforms prior layer selection methods, while synthetic passkey-based supervision further improves performance on both GLA and GDN backbones.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2606.30562/fig4_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2606.30562/fig4_2.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.01642",
+    "title": "Multi-Resolution Flow Matching: Training-Free Diffusion Acceleration via Staged Sampling",
+    "abstract": "Hardware-agnostic strategies for accelerating text-to-image diffusion, such as timestep distillation and feature caching, can reduce inference time without custom kernels or system-level optimization. Among them, multi-resolution generation strategies have recently received broad attention, attaining more than 5x speedup without any training. However, the design of performing upsampling in the latent space, together with the selective modification of partial regions, causes these methods to exhibit noticeable blurring or artifacts. To this end, we propose MrFlow, a training-free multi-resolution acceleration strategy for pretrained flow-matching models built upon a staged low-to-high-resolution pipeline. MrFlow first rapidly generates the main structure at low resolution, then performs super-resolution in the pixel space using a lightweight pretrained GAN-based model, subsequently injects low-strength noise to enable high-frequency resampling, and finally refines the details at high resolution. Quantitative and qualitative results on FLUX.1-dev and Qwen-Image show that MrFlow exploits the quadratic token reduction and reduced step requirement of low-resolution sampling to achieve 10x end-to-end acceleration while keeping OneIG within a 1% gap relative to that before acceleration, significantly surpassing other training-free acceleration strategies, and requiring no training or runtime dynamic identification whatsoever. MrFlow can further be directly combined orthogonally with pre-trained timestep distillation strategies, achieving even higher generation acceleration of up to 25x.",
+    "upvotes": 32,
+    "authors": [
+      "Xingyu Zheng",
+      "Xianglong Liu",
+      "Yifu Ding",
+      "Weilun Feng",
+      "Junqing Lin",
+      "Jinyang Guo",
+      "Haotong Qin"
+    ],
+    "organization": null,
+    "github_repo": "https://github.com/Xingyu-Zheng/MrFlow",
+    "github_stars": 172,
+    "ai_keywords": [
+      "text-to-image diffusion",
+      "flow-matching models",
+      "multi-resolution generation",
+      "staged low-to-high-resolution pipeline",
+      "super-resolution",
+      "pretrained GAN-based model",
+      "noise injection",
+      "quadratic token reduction",
+      "timestep distillation"
+    ],
+    "published_at": "2026-07-02T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.01642",
+    "arxiv_url": "https://arxiv.org/abs/2607.01642",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01642v1/x1.png"
+        ],
+        "caption": "Figure 1: Qualitative comparison between MrFlow and various methods on Qwen-Image. The dashed lines separate the pretrained model, training-free strategies, and strategies that rely on or exploit timestep distillation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.01642/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01642v1/x2.png"
+        ],
+        "caption": "Figure 2: The framework of MrFlow. The compared strategies include the native inference scheme and methods that perform upsampling in the latent space such as LSSGen, RALU and SPEED.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.01642/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01642v1/x3.png"
+        ],
+        "caption": "Figure 3: Example comparison of MrFlow adopting different super-resolution strategies on Qwen-Image, where Low Resolution denotes the image after low-resolution generation followed by VAE decoding to the pixel space, with a resolution of 512 × 512 512\\times 512 . The rows of SR and High Resolution Refine are respectively the super-resolved image and the final image after high-resolution refinement, with a resolution of 1024 × 1024 1024\\times 1024 .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.01642/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01642v1/x4.png"
+        ],
+        "caption": "Figure 4: Images generated by MrFlow under different high-resolution step configurations on Qwen-Image.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.01642/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01642v1/x5.png"
+        ],
+        "caption": "Figure 5: Trade-off curves between GenEval score and speedup for various training-free methods on FLUX.1-dev and Qwen-Image. Different shades of MrFlow correspond to different numbers of steps used in the high-resolution refinement stage.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.01642/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01642v1/x6.png"
+        ],
+        "caption": "Figure 6: Stage-wise runtime breakdown of native Qwen-Image and MrFlow- 12 , 1 12,1 .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.01642/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01642v1/x7.png"
+        ],
+        "caption": "Figure 7: Comparison of the effects of various methods on FLUX.1-dev. The dashed lines separate the pretrained model, training-free strategies, and strategies that rely on or exploit timestep distillation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.01642/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01642v1/x8.png"
+        ],
+        "caption": "Figure 8: Detail comparison of multi-resolution acceleration methods on FLUX.1-dev.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.01642/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01642v1/x9.png"
+        ],
+        "caption": "Figure 9: Generation examples of MrFlow on Qwen-Image. The configuration is 12 12 steps at the low-resolution stage and 1 1 step at the high-resolution stage, with speedups all above 10 × 10\\times .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.01642/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01642v1/x10.png"
+        ],
+        "caption": "Figure 10: Generation examples of MrFlow on FLUX. The configuration is 12 12 steps at the low-resolution stage and 1 1 step at the high-resolution stage, with speedups all above 8 × 8\\times .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-03/2607.01642/fig10_1.png"
+        ]
+      }
+    ]
+  }
+]

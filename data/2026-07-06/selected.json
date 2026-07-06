@@ -1,0 +1,516 @@
+[
+  {
+    "arxiv_id": "2607.01804",
+    "title": "VLA-Corrector: Lightweight Detect-and-Correct Inference for Adaptive Action Horizon",
+    "abstract": "Vision-Language-Action (VLA) foundation models have recently achieved strong progress in embodied intelligence. To reduce policy-call frequency while preserving temporal coherence, most generative policies adopt an action chunk mechanism, executing multiple future actions in an open-loop manner under a fixed action horizon. However, this \"predict-then-blindly-execute\" paradigm sacrifices closed-loop reactivity: in contact-rich physical interactions, even small local perturbations can rapidly amplify within the open-loop blind spot, leading to compounding errors and ultimately task failure. To address this limitation, we propose VLA-Corrector, a lightweight corrective inference framework for action-chunked VLA policies. Without modifying the backbone policy weights, VLA-Corrector introduces a lightweight Latent-space Vision Monitor (LVM) that continuously compares predicted and actual visual feature evolution, enabling online detection of visual dynamics deviations. Once persistent deviation is detected, the system triggers a truncation event, discards the remaining stale actions, and invokes corrective replanning via Online Gradient Guidance (OGG). The detect-and-correct mechanism of VLA-Corrector naturally induces an event-triggered adaptive action horizon: it preserves long-horizon execution when the current chunk remains reliable, and invokes short-horizon corrective replanning when execution begins to drift. In doing so, VLA-Corrector mitigates the trade-off imposed by static horizons between execution robustness and policy-call frequency. It can be integrated into different VLA models without further retraining the VLA backbone, interrupting compounding errors while preserving much of the efficiency benefit of action chunking and substantially improving robustness in long-horizon, contact-rich robotic manipulation tasks.",
+    "upvotes": 9,
+    "authors": [
+      "Yi Pan",
+      "Miao Pan",
+      "Qi Lu",
+      "Jiaming Huang",
+      "Man Zhang",
+      "Siteng Huang",
+      "Xin Li",
+      "Jie Zhang",
+      "Yongliang Shen",
+      "Xuhong Zhang",
+      "Wenqi Zhang"
+    ],
+    "organization": "ZJU-OmniAI",
+    "github_repo": "https://github.com/ZJU-OmniAI/vla-corrector",
+    "github_stars": 18,
+    "ai_keywords": [
+      "Vision-Language-Action",
+      "action chunk mechanism",
+      "open-loop execution",
+      "closed-loop reactivity",
+      "latent-space Vision Monitor",
+      "visual feature evolution",
+      "truncation event",
+      "Online Gradient Guidance",
+      "event-triggered adaptive action horizon",
+      "corrective replanning"
+    ],
+    "published_at": "2026-07-02T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.01804",
+    "arxiv_url": "https://arxiv.org/abs/2607.01804",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01804v1/x1.png"
+        ],
+        "caption": "Figure 1 : Open-loop vs. Closed-loop execution. The top row ( H = 10 H=10 ) illustrates how blindly executing long action chunks leads to compounding errors, causing the robot to get stuck during a drawer-opening task. In contrast, the bottom row ( H = 1 H=1 ) demonstrates strict closed-loop execution, which maintains environmental reactivity and yields a smooth, successful manipulation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.01804/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01804v1/x2.png"
+        ],
+        "caption": "Figure 2 : Performance–efficiency trade-off across fixed action horizons. Smaller horizon achieves higher success rates, while larger horizon preserves the chunking efficiency.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.01804/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01804v1/x3.png"
+        ],
+        "caption": "Figure 3 : Overview of VLA-Corrector. Starting from a standard chunked VLA pipeline ( A ), we add a Latent-space Vision Monitor (LVM) that detects persistent execution drift and triggers an interrupt event ( B ). The event truncates stale actions and switches the next replan from normal flow matching to OGG-guided flow matching ( C ). OGG uses the expected and observed latent evolution to guide the replan back toward a recoverable trajectory ( D ).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.01804/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01804v1/x4.png",
+          "https://arxiv.org/html/2607.01804v1/x5.png"
+        ],
+        "caption": "Figure 4 : Performance–efficiency analysis on π 0.5 \\pi_{0.5} . Left : performance–efficiency trade-off across action horizons. Right : success-per-call efficiency. VLA-Corrector improves success rate across action horizons and yields consistent efficiency gains.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.01804/fig4_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.01804/fig4_2.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01804v1/x6.png",
+          "https://arxiv.org/html/2607.01804v1/x7.png"
+        ],
+        "caption": "Figure 5 : LVM detection analysis. Left : distribution of the inconsistency score E t E_{t} , where successful episodes concentrate at low values and failed episodes show a heavier high-score tail. Right : interrupt frequency, where failed episodes trigger more interrupt events than successful ones.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.01804/fig5_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.01804/fig5_2.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01804v1/x8.png"
+        ],
+        "caption": "Figure 6 : Task-phase analysis of LVM-triggered truncation. We manually divide MetaWorld trajectories into critical and non-critical phases. Left : representative trajectories show that truncation is triggered much more frequently during critical phases. Right : 83.7% of truncations occur in critical phases, while only 16.3% occur in non-critical phases.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.01804/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01804v1/x9.png"
+        ],
+        "caption": "Figure 7 : Post-interrupt recovery. OGG-guided inference consistently outperforms standard inference.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.01804/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01804v1/x10.png"
+        ],
+        "caption": "Figure 8 : Controlled recovery case. Given the same initial state and detected grasping error, the monitored baseline continues the original chunk and fails ( top ), while VLA-Corrector truncates stale actions, replans with OGG, and completes the task ( bottom ).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.01804/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01804v1/x11.png"
+        ],
+        "caption": "Figure 9 : Real-world disturbance recovery demo. A human shifts the blue bowl during execution, requiring the robot to recover from an outdated action chunk.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.01804/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01804v1/x12.png"
+        ],
+        "caption": "Figure 10 : Demo: Moving-object grasp. The robot picks up the cube and places it into the white bowl, while a human manually changes the cube’s position during the process.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.01804/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01804v1/x13.png"
+        ],
+        "caption": "Figure 11 : Demo: Moving-placement target. The robot picks up the cube and places it into the blue bowl, while a human manually changes the bowl’s position during the process.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.01804/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.01804v1/x14.png"
+        ],
+        "caption": "Figure 12 : Demo: Moving-insertion target. The robot picks up the cube and places it at the upper-left corner of the drawer top, while a human manually changes the drawer’s position during the process.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.01804/fig12_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2606.29526",
+    "title": "The Mirage of Optimizing Training Policies: Monotonic Inference Policies as the Real Objective for LLM Reinforcement Learning",
+    "abstract": "Reinforcement learning (RL) has gained growing attention in large language model (LLM) post-training, yet RL training remains fragile and can suffer from instability or collapse. One vital cause is training-inference mismatch: LLM adopts separate inference and training engines for generation efficiency and training precision, which in practice exhibits inconsistent probabilities for the same trajectories on training and inference sides, even with synchronized model parameters. This naturally induces a special type of off-policyness ever existing and poisoning the training. Prior works have made various efforts in addressing the off-policyness to stabilize the training policies under the mismatch. In this paper, we point out the objective misalignment neglected by existing works that an effective update to the policy in the training engine not necessarily ensures the improvement of the inference policy, i.e., the one used in deployment. To this end, we propose a new policy optimization objective for LLM RL, named Monotonic Inference Policy Improvement (MIPI). Following this principle, we introduce Monotonic Inference Policy Update (MIPU), a two-step LLM RL framework that constructs sampler-referenced candidate updates and selectively accepts synchronized candidates using an inference-side gap proxy. Experiments conducted on two model scales under high mismatch show that MIPU improves average reasoning performance and training stability.",
+    "upvotes": 6,
+    "authors": [
+      "Jing Liang",
+      "Hongyao Tang",
+      "Yi Ma",
+      "Yancheng He",
+      "Weixun Wang",
+      "Xiaoyang Li",
+      "Ju Huang",
+      "Wenbo Su",
+      "Jinyi Liu",
+      "Yan Zheng",
+      "Jianye Hao",
+      "Bo Zheng"
+    ],
+    "organization": null,
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [
+      "reinforcement learning",
+      "large language models",
+      "training-inference mismatch",
+      "off-policy",
+      "policy optimization",
+      "policy improvement",
+      "inference policy",
+      "training stability",
+      "reasoning performance"
+    ],
+    "published_at": "2026-06-28T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2606.29526",
+    "arxiv_url": "https://arxiv.org/abs/2606.29526",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2606.29526v1/x2.png"
+        ],
+        "caption": "Figure 1: Monotonic Inference Policy Update (MIPU) resolves the Objective Misalignment issue of LLM RL. Canonical LLM RL accepts synchronized updates by a training-side objective, which does not necessarily imply improvement of the inference policy. Here, π {\\color[rgb]{0,0,1}\\definecolor[named]{pgfstrokecolor}{rgb}{0,0,1}\\pi} and μ {\\color[rgb]{1,0,0}\\definecolor[named]{pgfstrokecolor}{rgb}{1,0,0}\\mu} denote the training policy and inference policy respectively, c c is a tolerance parameter accounting for proxy noise. To address this mismatch, we propose a new principle as monotonic improvement on the inference-policy trajectory (the MIPI principle). MIPU realizes this principle with two steps: Step 1 optimizes Terms ②+③, while Step 2 estimates and validates Term ①, jointly covering all three terms in the MIPI decomposition.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2606.29526/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.29526v1/x3.png"
+        ],
+        "caption": "Figure 2: Performance of different methods under FP8-quantized rollout. Compared methods show unstable training dynamics and may suffer from sharp performance drops, while MIPU maintains a stable score trajectory.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2606.29526/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.29526v1/x4.png"
+        ],
+        "caption": "Figure 3: Training curves for ablation studies under FP8-quantized rollout. We show the training score, the inference-training K3-KL, T ^ post \\widehat{T}_{\\mathrm{post}} (i.e., inference gap) and the rollback rate computed over a 100-step moving window. Step 1 improves the candidate update direction, while Step 2 introduces inference-gap-aware acceptance to filter unreliable synchronized candidates. The full method obtains stronger performance with a more controlled inference-policy trajectory.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2606.29526/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.29526v1/x5.png",
+          "https://arxiv.org/html/2606.29526v1/fig/random.png"
+        ],
+        "caption": "(a) Inference-training K3-KL and inference gap. (b) Step 2 vs. random rollback. Figure 4: (a) Inference-training K3-KL and T ^ post \\widehat{T}_{\\mathrm{post}} (i.e., inference gap) under FP8-quantized rollout. Qwen3-1.7B exhibits larger mismatch and a more volatile T ^ post \\widehat{T}_{\\mathrm{post}} than Qwen3-4B. (b) Comparison between inference-gap-aware Step 2 acceptance and a random rollback control. Random rollback rejects more updates, applying fewer effective policy changes, but still collapses.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2606.29526/fig4_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2606.29526/fig4_2.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.29526v1/x6.png"
+        ],
+        "caption": "Figure 5: Step 1 implementation analysis under the Qwen3-4B FP8-quantized rollout. Comparison of PPO-IS, Vanilla-IS, and TIS in terms of performance, gradient norm, inference-training K3-KL, and clip ratio.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2606.29526/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.29526v1/x7.png"
+        ],
+        "caption": "Figure 6: Sensitivity to the acceptance tolerance c c under the Qwen3-4B FP8-quantized rollout in terms of inference-training K3-KL, training score, and T ^ post \\widehat{T}_{\\mathrm{post}} .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2606.29526/fig6_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.02501",
+    "title": "Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots",
+    "abstract": "Embodied AI models now span vision-language-action (VLA) models and world-action models (WAMs), but practical deployment remains fragmented across model-specific Python stacks, backend assumptions, and robot-side glue code, especially on heterogeneous edge devices. Existing inference runtimes are designed mainly for request-response serving and therefore do not satisfy the runtime contract of embodied deployment: multi-rate execution inside closed-loop control, latency-first batch-1 inference on heterogeneous hardware, and extensible embodied interfaces beyond fixed token I/O. We present Embodied.cpp, a portable C++ inference runtime for embodied models. Based on an architectural analysis of representative VLA models and WAMs, Embodied.cpp captures a shared execution path and organizes it into five layers: input adapters, sequence builders, backbone execution, head plugins, and deployment adapters. The runtime provides modular multi-rate execution, latency-first fused inference, and extensible operator and I/O support, enabling deployment across heterogeneous devices, robots, and simulators through one backend abstraction. We evaluate Embodied.cpp on two VLA models, HY-VLA and pi0.5, and on a preliminary WAM benchmark using a LingBot-VA Transformer block. The VLA deployments achieve successful closed-loop execution with 100.0% and 91.0% task success rates, respectively. The WAM benchmark reduces block memory from 312.2 MiB to 88.1 MiB. These results show that Embodied.cpp improves deployment efficiency while preserving high accuracy across diverse embodied model architectures.",
+    "upvotes": 3,
+    "authors": [
+      "Ling Xu",
+      "Chuyu Han",
+      "Borui Li",
+      "Hao Wu",
+      "Shiqi Jiang",
+      "Ting Cao",
+      "Chuanyou Li",
+      "Sheng Zhong",
+      "Shuai Wang"
+    ],
+    "organization": "PhysicalAI System Group @ SAIL Lab, Southeast University",
+    "github_repo": "https://github.com/SEU-PAISys/Embodied.cpp",
+    "github_stars": 17,
+    "ai_keywords": [
+      "Vision-language-action models",
+      "world-action models",
+      "inference runtime",
+      "closed-loop control",
+      "multi-rate execution",
+      "latency-first inference",
+      "fused inference",
+      "embodied interfaces",
+      "hardware heterogeneity",
+      "model deployment"
+    ],
+    "published_at": "2026-07-02T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.02501",
+    "arxiv_url": "https://arxiv.org/abs/2607.02501",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02501v1/x4.png"
+        ],
+        "caption": "Figure 1: Architectural taxonomy of embodied models. We first separate VLA models (a-d) from WAMs (e-h), and then organize each family by internal inference structure.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.02501/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.02501v1/x5.png"
+        ],
+        "caption": "Figure 2: Project overview of Embodied.cpp . Diverse sensors and datasets enter through input adapters, model execution is unified around one embodied-model runtime that covers VLA models, WAMs, and future variants, and outputs are bridged to simulators and real robots through deployment adapters. Beneath this shared path, three runtime capabilities directly address the core challenges: modular multi-rate execution, latency-first batch-1 execution on heterogeneous hardware, and an embodied AI kernel warehouse for reusable operators and model-specific kernels.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.02501/fig2_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2606.31227",
+    "title": "Securing the AI Agent: A Unified Framework for Multi-Layer Agent Red Teaming",
+    "abstract": "The fast growth of open-source AI infrastructure, from model serving engines and agent platforms to the Model Context Protocol (MCP) ecosystem and the language models themselves, has outpaced the security tooling available to defend it. We present AI-Infra-Guard, an open-source framework that organizes AI red teaming around a single observation: the attack surface of an AI agent is stratified across layers (infrastructure, protocol/tool, agent behavior, and model), and no single detection paradigm fits all of them. The framework therefore matches a paradigm to each layer, from deterministic rule matching over 75+ AI components and 1{,}400+ vulnerability rules, through LLM-driven agentic auditing of MCP servers and agent-skill packages and multi-turn black-box agent red teaming, to a jailbreak harness with 26+ attack operators over sixteen datasets. To our knowledge it is the only open-source framework to span all of these, including supply-chain auditing of the agent skills that increasingly extend AI agents. We release AI-Infra-Guard as open source so that layer-paradigm matching can serve as a practical foundation for agent security and a shared base for the community to build on.",
+    "upvotes": 2,
+    "authors": [
+      "Yong Yang",
+      "Xing Zheng",
+      "Huiyu Wu",
+      "Huangsheng Cheng",
+      "Xiaorong Shi",
+      "Jing Guo",
+      "Bo Yang",
+      "Yi Zhou",
+      "Xiangfan Wu",
+      "Zonghao Ying"
+    ],
+    "organization": "Tencent",
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [
+      "AI red teaming",
+      "Model Context Protocol",
+      "LLM-driven agentic auditing",
+      "black-box agent red teaming",
+      "jailbreak harness",
+      "supply-chain auditing",
+      "layer-paradigm matching"
+    ],
+    "published_at": "2026-06-30T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2606.31227",
+    "arxiv_url": "https://arxiv.org/abs/2606.31227",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2606.31227v1/imgs/infra_scan.png"
+        ],
+        "caption": "Figure 2: The infrastructure-scanning pipeline (M1). Targets (IP lists, ranges, domains, or URLs) flow through fingerprint analysis (scanning-engine initialization, AI-framework identification, CVE matching, and framework risk analysis) and an infrastructure-scan agent (dynamic page rendering, visual asset capture, and multimodal risk assessment), producing a security score, an asset inventory, vulnerability details, and a business-impact summary.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2606.31227/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.31227v1/imgs/mcp_scan.png"
+        ],
+        "caption": "Figure 3: The MCP-auditing pipeline (M2). From a target (local source, a remote repository, or a live MCP URL), a recon agent builds project understanding, an MCP-scan agent performs static analysis and runtime interaction to find vulnerabilities and malicious behavior, and a vulnerability-review agent validates findings through dependency checks, sandboxed deployment, and dynamic risk validation, yielding a security score, risk details, and fix suggestions.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2606.31227/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.31227v1/imgs/agent_scan.png"
+        ],
+        "caption": "Figure 4: The jailbreak-evaluation harness (M4). Given test cases, a target model, and a judge model, a red-teaming agent initializes an attack strategy and applies a library of enhanced jailbreak attacks (role-play/DAN, cipher and encoding, context forcing, and more), verifying attack success through the judge. The output is a safety rating together with the successful jailbreak prompts and their evaluation basis.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2606.31227/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2606.31227v1/imgs/architecture.png"
+        ],
+        "caption": "Figure 5: The distributed server-agent architecture. A user interface (Web UI, CLI, or HTTP API) drives backend services (Gin web server, plugin management, storage, and LLM providers), which in turn invoke the core engines (AI infra scan, MCP server scan, and LLM jailbreak evaluation). The engines draw on an AI-agents layer and a shared knowledge base of fingerprints, CVEs, MCP plugins, and jailbreak datasets.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2606.31227/fig4_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.00052",
+    "title": "AGE: Adaptive-masking for Graph Embedding in Graph Retrieval-Augmented Generation",
+    "abstract": "GraphRAG is an extension of retrieval-augmented generation (RAG) that supports large language models (LLMs) by referring to graph-structured data as external knowledge. While this technique ideally captures intricate relationships, it often struggles with graph representations for LLMs, particularly for frozen LLMs, due to the misalignment between graph-based and text-based latent features. We tackle this issue by introducing the {\\it Adaptive-masking for Graph Embedding (AGE)}. AGE employs a Transformer in a mask-based self-supervised learning (SSL) approach. We designed the architecture similar to text embedding encoders, addressing the latent feature misalignment. In contrast to natural language texts, graphs are concise representations, and there exist {\\it key nodes} that hold dominant contextual information, which are challenging to predict from their surroundings. Masking such key nodes leads to inefficiency in the SSL process. Therefore, AGE focuses on predicting nodes apart from key nodes, utilizing a learnable node sampler. Our experimental results indicate that AGE significantly improves approaches using non-parametric search component in GraphQA tasks, achieving superior accuracy across four benchmark datasets with distinct characteristics.",
+    "upvotes": 2,
+    "authors": [
+      "Bao Long Nguyen Huu",
+      "Atsushi Hashimoto"
+    ],
+    "organization": "OMRON SINIC X Corp.",
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [
+      "retrieval-augmented generation",
+      "large language models",
+      "graph-structured data",
+      "latent feature misalignment",
+      "Transformer",
+      "self-supervised learning",
+      "GraphQA",
+      "key nodes",
+      "node sampler"
+    ],
+    "published_at": "2026-06-30T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.00052",
+    "arxiv_url": "https://arxiv.org/abs/2607.00052",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00052v1/x1.png"
+        ],
+        "caption": "Figure 1 : Overview of GraphRAG with the proposed Adaptive-masking for Graph Embedding (AGE) embedding. 1) Retrieval: Find graph elements relevant to the query using a non-parametric process. 2) Subgraph Construction: Extend retrieved graph elements with their adjacencies [ G-Retriever ] . 3) Embedding: Use tokenizer and text embedder for textualized graph and query. Apply AGE for structured relationships of the graph. 4) Inference: Input embeddings into LLM to generate an answer.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.00052/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00052v1/x2.png"
+        ],
+        "caption": "Figure 2 : Architecture for Adaptive-masking for Graph Embedding: During training, 𝒉 target {\\bm{h}}_{\\text{target}} is connected to the downstream for the target encoder training, while 𝒉 out {\\bm{h}}_{\\text{out}} is used during inference. The node sampler explores the optimal distribution for mask-based SSL for graphs. The loss functions train distinct sets of modules without overlap.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.00052/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00052v1/x3.png"
+        ],
+        "caption": "Figure 5 : Node embedding of G-Retriever and AGE G-Retriever with sampling rate ρ = 0.3 \\rho=0.3 using t-SNE [ vanDerMaaten2008 ] : Nodes are colored by clustering node’s text (left two), or target error (the rightest).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.00052/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00052v1/x4.png"
+        ],
+        "caption": "Figure H.6 : Investigation of core component arrangement: We tested our JEPA [ LeCun2022APT ] architecture with three different GNN arrangements, including (a) graph encoder only, (b) graph-structure-based aggregator only, and (c) both of them.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.00052/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00052v1/x5.png"
+        ],
+        "caption": "Figure H.7 : Adaptive-masking for Graph Embedding in Generation Architecture: The node embedding module is trained on both prompt tuning loss and target loss.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.00052/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00052v1/x6.png"
+        ],
+        "caption": "Figure H.11 : Training loss on Explain Graphs.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.00052/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00052v1/x7.png"
+        ],
+        "caption": "Figure H.12 : Training loss on WebQSP",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.00052/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00052v1/x8.png"
+        ],
+        "caption": "Figure H.13 : The landscape of existing KGQA methods. GNN-based methods reason on dense subgraphs as they can handle complex and graph information. LLM-based methods employ the same LLM for both retrieval and reasoning due to its ability to understand natural language.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.00052/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00052v1/x9.png"
+        ],
+        "caption": "Figure H.14 : Failure case visualization of AGE on WebQSP dataset.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.00052/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00052v1/x10.png"
+        ],
+        "caption": "Figure H.15 : An example visualization of AGE on the ExplaGraphs dataset.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.00052/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00052v1/x11.png"
+        ],
+        "caption": "Figure H.16 : Another example visualization of AGE on the ExplaGraphs dataset.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.00052/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          "https://arxiv.org/html/2607.00052v1/x12.png"
+        ],
+        "caption": "Figure H.17 : An example visualization of AGE on the WebQSP dataset.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-06/2607.00052/fig12_1.png"
+        ]
+      }
+    ]
+  }
+]
