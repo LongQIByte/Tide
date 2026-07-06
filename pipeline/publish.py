@@ -68,6 +68,7 @@ hr { border: none; border-top: 1px dashed var(--line); margin: 2.5rem 0; }
 code { background: var(--foam); padding: .1em .35em; border-radius: 4px;
        font-size: .88em; }
 .meta { color: var(--ink-soft); font-size: .92rem; }
+.paper-meta { margin: .2rem 0 0; padding-bottom: .6rem; border-bottom: 1px dashed var(--line); }
 .lang-switch { float: right; font-size: .85rem; }
 .card {
   border: 1px solid var(--line); border-radius: 10px; background: #fff;
@@ -380,9 +381,23 @@ def render_paper(date: str, paper: dict, lang: str) -> str | None:
     other_label = "English" if lang == "zh" else "中文"
     switch = f'<div class="lang-switch"><a href="{other}.html">{other_label}</a></div>'
     back = "← 今日潮汐" if lang == "zh" else "← Today's tide"
+    bits = []
+    pub = (paper.get("published_at") or "")[:10]
+    if pub:
+        bits.append(("发表于" if lang == "zh" else "Published") + f" {pub}")
+    if paper.get("organization"):
+        bits.append(paper["organization"])
+    authors = [a for a in (paper.get("authors") or []) if a]
+    if authors:
+        shown = ", ".join(authors[:3])
+        if len(authors) > 3:
+            shown += " 等" if lang == "zh" else " et al."
+        bits.append(shown)
+    meta_line = f'<p class="meta paper-meta">{" · ".join(bits)}</p>' if bits else ""
     article = (
         f'<main class="article">{switch}'
         f'<p class="meta"><a href="../../index.html">{back}</a></p>'
+        f"{meta_line}"
         f"<article>{_md(article_md)}</article></main>"
     )
     if slides:
@@ -420,6 +435,9 @@ def render_index(days: list[tuple[str, list[dict]]]) -> str:
                 if p.get("source") == "manual"
                 else f'<span class="badge">▲ {p["upvotes"]}</span>'
             )
+            pub = (p.get("published_at") or "")[:10]
+            if pub:
+                vote += f'<span class="badge">📅 {pub}</span>'
             cards.append(
                 f'<div class="card"><h3><a href="{link}">{p["title"]}</a></h3>'
                 f'{vote}{org}{note}'
