@@ -1,0 +1,623 @@
+[
+  {
+    "arxiv_id": "2607.03118",
+    "title": "Vidu S1: A Real-Time Interactive Video Generation Model",
+    "abstract": "We introduce Vidu S1, a real-time interactive video generation model supporting voice control of digital characters. Users can control video generation content at any moment through voice instructions. Vidu S1 supports infinite-length real-time video generation without blurring, drift, or visual distortion. Built with TurboDiffusion and TurboServe, Vidu S1 outputs 540p real-time videos at up to 42 FPS on regular consumer GPUs. Users can upload custom images of real people, anime, and pets, and choose different voice tones for personalized experiences. Experiments show that Vidu S1 achieves the best performance across all test metrics while fully meeting real-time inference requirements. A playable online demo is available at https://vidu.com/vidu-stream.",
+    "upvotes": 127,
+    "authors": [
+      "Jintao Zhang",
+      "Kai Jiang",
+      "Jintao Chen",
+      "Xu Wang",
+      "Yang Luo",
+      "Yuji Wang",
+      "Dechuang Chen",
+      "Jungang Li",
+      "Chengyang Ye",
+      "Marco Chen",
+      "Hongzhou Zhu",
+      "Min Zhao",
+      "Yuxuan Jiang",
+      "Zhengkun Huang",
+      "Chendong Xiang",
+      "Kaiwen Zheng",
+      "Haoxu Wang",
+      "Xiaohang Wang",
+      "Qi Jia",
+      "Xin Chen",
+      "Yimin Chen",
+      "Youhe Jiang",
+      "Fangcheng Fu",
+      "Zhijie Deng",
+      "Fan Bao",
+      "Jianfei Chen",
+      "Jun Zhu"
+    ],
+    "organization": "Tsinghua University",
+    "github_repo": "https://github.com/shengshu-ai/Vidu-S1",
+    "github_stars": 168,
+    "ai_keywords": [
+      "TurboDiffusion",
+      "TurboServe",
+      "real-time video generation",
+      "voice control",
+      "digital characters",
+      "infinite-length video",
+      "frame rate",
+      "consumer GPUs"
+    ],
+    "published_at": "2026-07-03T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.03118",
+    "arxiv_url": "https://arxiv.org/abs/2607.03118",
+    "html_available": true,
+    "figures": []
+  },
+  {
+    "arxiv_id": "2603.29616",
+    "title": "Video-Oasis: Rethinking Evaluation of Video Understanding",
+    "abstract": "The inherent complexity of video understanding makes it difficult to determine whether Video-LLM benchmark performance stems from visual perception, linguistic reasoning, or knowledge priors. While many benchmarks have emerged to assess high-level reasoning, shared criteria for evaluating video understanding remain largely overlooked. Instead of introducing yet another benchmark, we take a step back to re-examine the criteria for evaluating video understanding. In this work, we introduce Video-Oasis, a sustainable diagnostic suite for systematically auditing existing video understanding benchmarks. This audit reveals that 55\\% of existing benchmark samples are solvable without visual input or temporal context. After filtering these shortcuts, the remaining video-native challenges expose a substantial capability gap: state-of-the-art models perform only marginally above random guessing. Building on these findings, we use the distilled challenges as a testbed to investigate which algorithmic design choices contribute to robust video understanding. We hope our work provides a practical foundation for constructing rigorous video benchmarks and evaluating future Video-LLMs. Code is available at https://github.com/sejong-rcv/Video-Oasis.",
+    "upvotes": 58,
+    "authors": [
+      "Geuntaek Lim",
+      "Sungjune Park",
+      "Jaeyun Lee",
+      "Inwoong Lee",
+      "Taeoh Kim",
+      "Dongyoon Wee",
+      "Minho Shim",
+      "Yukyung Choi"
+    ],
+    "organization": "NAVER",
+    "github_repo": "https://github.com/sejong-rcv/Video-Oasis",
+    "github_stars": 26,
+    "ai_keywords": [
+      "Video-LLM",
+      "video understanding",
+      "benchmark evaluation",
+      "diagnostic suite",
+      "video-native challenges",
+      "algorithmic design choices",
+      "visual perception",
+      "linguistic reasoning",
+      "knowledge priors"
+    ],
+    "published_at": "2026-07-02T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2603.29616",
+    "arxiv_url": "https://arxiv.org/abs/2603.29616",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2603.29616v1/2603.29616v1/figure/fig1_intro.png",
+            "https://arxiv.org/html/2603.29616v1/figure/fig1_intro.png"
+          ]
+        ],
+        "caption": "Figure 1 : (a) Examples of video-QA instances that can be solved without spatio-temporal video understanding. (b) Benchmarks with higher ratios of video-independent samples tend to exhibit inflated video-QA scores.(c) Current SOTA models consistently exhibit a substantial drop when facing video-native challenges, revealing the inherent difficulty of robust spatio-temporal understanding.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2603.29616/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2603.29616v1/2603.29616v1/x1.png",
+            "https://arxiv.org/html/2603.29616v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 2 : Overview of the V-Oasis diagnostic suite, which assesses (a) whether visual information is required, (b) whether temporal context is necessary, and (c) whether the task contains ambiguity in video data, followed by human verification.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2603.29616/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2603.29616v1/2603.29616v1/x2.png",
+            "https://arxiv.org/html/2603.29616v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 3 : (a) Inaccurate annotations identified by the redundancy and consistency tests. (b) Questions incorrectly filtered by the shuffling test but manually restored.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2603.29616/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2603.29616v1/2603.29616v1/x3.png",
+            "https://arxiv.org/html/2603.29616v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 4 : Video-native challenges such as temporal continuity, causal interaction, and multi-event narratives distilled from existing benchmarks.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2603.29616/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2603.29616v1/2603.29616v1/x4.png",
+            "https://arxiv.org/html/2603.29616v1/x4.png"
+          ],
+          [
+            "https://arxiv.org/html/2603.29616v1/2603.29616v1/x5.png",
+            "https://arxiv.org/html/2603.29616v1/x5.png"
+          ],
+          [
+            "https://arxiv.org/html/2603.29616v1/2603.29616v1/x6.png",
+            "https://arxiv.org/html/2603.29616v1/x6.png"
+          ],
+          [
+            "https://arxiv.org/html/2603.29616v1/2603.29616v1/x7.png",
+            "https://arxiv.org/html/2603.29616v1/x7.png"
+          ],
+          [
+            "https://arxiv.org/html/2603.29616v1/2603.29616v1/x8.png",
+            "https://arxiv.org/html/2603.29616v1/x8.png"
+          ],
+          [
+            "https://arxiv.org/html/2603.29616v1/2603.29616v1/x9.png",
+            "https://arxiv.org/html/2603.29616v1/x9.png"
+          ]
+        ],
+        "caption": "Table 7 : Benchmarking state-of-the-art models under video-native challenges. The metric is accuracy. Table 8: Ablation study of temporal grounding in video-LLMs. The metric is accuracy. Table 9: Upper bound performance (%) with oracle temporal grounding. Table 10: Ablation study of reasoning depth modulation. The metric is accuracy. Table 11: Comparison of SFT and RLVR training paradigms for video understanding. All models share the same base LLM, Qwen2.5-VL [ 2 ] . The metric is accuracy. (a) Blind Test (b) Audio (c) Narrative (d) Center-Frame (e) Frame Shuffling (f) Bag-of-Frames Table S1 : Quantitative results of Video-Oasis under different diagnostic model configurations to evaluate robustness. The metric is accuracy. Table S2: Per-benchmark statistics before and after Video-Oasis filtering. Table S3: Benchmark-wise results (%) for the Blind Test, where the model answers without visual input or auxiliary context, relying only on linguistic priors. Table S4: Benchmark-wise results (%) for the Audio Test, where the model answers using only the speech transcript from the video’s audio. Table S5: Benchmark-wise results (%) for the Narrative Test, where the model answers using concatenated video captions as textual context. Table S6: Benchmark-wise results (%) for the Center-Frame Test, where the model answers using only the center frame of the video. Table S7: Benchmark-wise results (%) for the Frame Shuffling Test, where the temporal order of video frames is randomly permuted. Table S8: Benchmark-wise results (%) for the Bag-of-Frames Test, where frames are processed independently without modeling temporal relations. Table S9: Prompt template used in the visual dependency tests with different context. Algorithm 1 Temporal Dependency Diagnostic Procedure Table S10: Statistics of the identified video-native challenges: (a) category distribution and (b) video duration statistics. Table S11: Multiple-Choice Answer distribution across categories. Table S12 : Per-benchmark distribution of samples across video-native challenges. Figure S1: Qualitative examples of Fine-Grained Perception Challenges. Figure S2: Qualitative examples of Spatial World Understanding Challenges. Figure S3: Qualitative examples of Temporal Dynamics & Tracking Challenges. Figure S4: Qualitative examples of Causality & Logical Reasoning Challenges. Figure S5: Qualitative examples of Global Narrative Challenges. Figure S6: Qualitative examples of shortcut problems identified by Video-Oasis. Table S13: Reproduction results on LongVideoBench and VideoMME. For each comparison, higher scores are highlighted in bold , while lower scores are underlined .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2603.29616/fig5_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2603.29616/fig5_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2603.29616/fig5_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2603.29616/fig5_4.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2603.29616/fig5_5.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2603.29616/fig5_6.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2601.16211",
+    "title": "Why Can't I Open My Drawer? Mitigating Object-Driven Shortcuts in Zero-Shot Compositional Action Recognition",
+    "abstract": "Zero-Shot Compositional Action Recognition (ZS-CAR) requires recognizing novel verb-object combinations composed of previously observed primitives. In this work, we tackle a key failure mode: models predict verbs via object-driven shortcuts (i.e., relying on the labeled object class) rather than temporal evidence. We argue that sparse compositional supervision and verb-object learning asymmetry can promote object-driven shortcut learning. Our analysis with proposed diagnostic metrics shows that existing methods overfit to training co-occurrence patterns and underuse temporal verb cues, resulting in weak generalization to unseen compositions. To address object-driven shortcuts, we propose Robust COmpositional REpresentations (RCORE) with two components. Co-occurrence Prior Regularization (CPR) adds explicit supervision for unseen compositions and regularizes the model against frequent co-occurrence priors by treating them as hard negatives. Temporal Order Regularization for Composition (TORC) enforces temporal-order sensitivity to learn temporally grounded verb representations. Across Sth-com and EK100-com, RCORE reduces shortcut diagnostics and consequently improves compositional generalization.",
+    "upvotes": 48,
+    "authors": [
+      "Geo Ahn",
+      "Inwoong Lee",
+      "Taeoh Kim",
+      "Minho Shim",
+      "Dongyoon Wee",
+      "Jinwoo Choi"
+    ],
+    "organization": "NAVER",
+    "github_repo": "https://github.com/KHU-VLL/RCORE",
+    "github_stars": 9,
+    "ai_keywords": [
+      "zero-shot compositional action recognition",
+      "verb-object combinations",
+      "object-driven shortcuts",
+      "sparse compositional supervision",
+      "verb-object learning asymmetry",
+      "diagnostic metrics",
+      "co-occurrence prior regularization",
+      "temporal order regularization",
+      "compositional generalization"
+    ],
+    "published_at": "2026-07-02T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2601.16211",
+    "arxiv_url": "https://arxiv.org/abs/2601.16211",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2601.16211v1/x2.png",
+            "https://arxiv.org/html/x2.png"
+          ],
+          [
+            "https://arxiv.org/html/2601.16211v1/x3.png",
+            "https://arxiv.org/html/x3.png"
+          ],
+          [
+            "https://arxiv.org/html/2601.16211v1/x4.png",
+            "https://arxiv.org/html/x4.png"
+          ],
+          [
+            "https://arxiv.org/html/2601.16211v1/x5.png",
+            "https://arxiv.org/html/x5.png"
+          ]
+        ],
+        "caption": "Figure 2 : Controlled experiments demonstrate object-driven shortcut learning in ZS-CAR. We empirically identify a key failure mode in ZS-CAR—object-driven shortcuts. (a) Objects are easier to learn than verbs. We train a randomly initialized ViT [ 10 ] on a balanced 10 × \\times 10 verb-object subset from Sth-com [ 16 ] . The learning curves show that object accuracy increases much faster than verb accuracy, indicating that objects are easier to learn. (b) Under a strong co-occurrence bias, models exploit object cues as shortcuts, failing to learn robust verb representations. We prepare a perfectly biased training set and two kinds of test splits utilizing the Sth-com [ 16 ] dataset: seen compositions (bias-aligned) and unseen compositions (bias-conflict). Both the randomly initialized ViT [ 10 ] and pretrained CLIP [ 28 ] exhibit a consistent trend: while unseen object accuracy increases alongside seen performance, unseen verb accuracy concurrently drops below random chance. Best viewed with zoom and color.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig1_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig1_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig1_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig1_4.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2601.16211v1/x6.png",
+            "https://arxiv.org/html/x6.png"
+          ]
+        ],
+        "caption": "Figure 3 : Learning curve of the SOTA model with our diagnostic metrics. We plot the learning curve of C2C [ 16 ] trained on Sth-com [ 16 ] . We measure the False Seen Prediction (FSP) and False Co-occurrence Prediction (FCP) ratios, and observe that the seen–unseen accuracy gap ( Δ S ​ U \\Delta_{SU} ) correlates strongly with both metrics. There observations indicate that the current SOTA model exhibits overfitting to seen compositions. Best viewed with zoom and color.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2601.16211v1/x7.png",
+            "https://arxiv.org/html/x7.png"
+          ]
+        ],
+        "caption": "Figure 4 : Overview of RCORE . (a) Overview of our proposed RCORE framework. (b) VOCAMix synthesizes plausible yet unseen verb–object compositions while preserving the temporal structure of the primary video. (c) TORC penalizes alignment between original and temporally perturbed feature vectors, enforcing explicit temporal order modeling and reducing object-driven shortcuts.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2601.16211v1/x8.png",
+            "https://arxiv.org/html/x8.png"
+          ],
+          [
+            "https://arxiv.org/html/2601.16211v1/x9.png",
+            "https://arxiv.org/html/x9.png"
+          ],
+          [
+            "https://arxiv.org/html/2601.16211v1/x10.png",
+            "https://arxiv.org/html/x10.png"
+          ]
+        ],
+        "caption": "Figure 5 : Analysis on the effects of RCORE on the Sth-com [ 16 ] dataset. (a) RCORE prevents the False Co-occurrence Prediction (FCP) ratio from increasing during training, whereas the baseline shows a clear rise in FCP. As a result, RCORE consistently maintains a smaller seen–unseen accuracy gap ( Δ S ​ U \\Delta_{SU} ) throughout training. (b) The cosine similarity between the original and reversed verb features becomes strongly negative for RCORE as training progresses, indicating improved temporal discriminative capability. In contrast, the baseline maintains a high similarity (0.91), revealing limited temporal sensitivity. (c) On the Temporal subset, RCORE exhibits a substantially larger performance gap between original and temporally shuffled features compared to the baseline, demonstrating that RCORE learns verb representations that depend on temporal dynamics rather than static object cues. Best viewed with zoom and color.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig4_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig4_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig4_3.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2601.16211v1/x11.png",
+            "https://arxiv.org/html/x11.png"
+          ]
+        ],
+        "caption": "Figure 6 : RCORE mitigates object-driven shortcuts in verb learning. We visualize confusion matrices for six representative verbs to compare the ability of RCORE and C2C to distinguish opposite temporal semantics on unseen compositions of the Sth-com [ 16 ] test set. All values in the confusion matrices are normalized frequencies across the entire verb classes in the dataset.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2601.16211v1/x12.png",
+            "https://arxiv.org/html/x12.png"
+          ],
+          [
+            "https://arxiv.org/html/2601.16211v1/x13.png",
+            "https://arxiv.org/html/x13.png"
+          ]
+        ],
+        "caption": "Figure 7 : Top/Bottom-30 frequent compositions in the EK100-com training set.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig6_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig6_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2601.16211v1/x14.png",
+            "https://arxiv.org/html/x14.png"
+          ],
+          [
+            "https://arxiv.org/html/2601.16211v1/x15.png",
+            "https://arxiv.org/html/x15.png"
+          ],
+          [
+            "https://arxiv.org/html/2601.16211v1/x16.png",
+            "https://arxiv.org/html/x16.png"
+          ],
+          [
+            "https://arxiv.org/html/2601.16211v1/x17.png",
+            "https://arxiv.org/html/x17.png"
+          ]
+        ],
+        "caption": "Figure 8 : Example of seen/unseen composition samples in the EK100-com dataset.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig7_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig7_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig7_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig7_4.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2601.16211v1/x18.png",
+            "https://arxiv.org/html/x18.png"
+          ]
+        ],
+        "caption": "Figure 9 : Learning curve of the baseline and RCORE on the EK100-com dataset. RCORE suppresses the increase of the FCP ratio during training, effectively narrowing the performance gap between seen and unseen composition validation accuracies.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2601.16211v1/x19.png",
+            "https://arxiv.org/html/x19.png"
+          ],
+          [
+            "https://arxiv.org/html/2601.16211v1/x20.png",
+            "https://arxiv.org/html/x20.png"
+          ]
+        ],
+        "caption": "Figure 10 : Performances on Temporal/Static split of Sth-com. We evaluate the models on Sth-com [ 16 ] using both (a) our reconstructed splits and (b) the splits from Sevilla et al [ 31 ] . We utilize both original and temporally shuffled inputs to assess the model’s temporal modeling capability and its reliance on static cues. A larger performance gap between original and shuffled inputs indicates that the model predicts verbs more based on temporal dynamics rather than on static cues.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig9_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig9_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2601.16211v1/x21.png",
+            "https://arxiv.org/html/x21.png"
+          ],
+          [
+            "https://arxiv.org/html/2601.16211v1/x22.png",
+            "https://arxiv.org/html/x22.png"
+          ]
+        ],
+        "caption": "Figure 11 : Conditional modeling overfits to co-occurrence statistics. We track how the composition prediction confidence of C2C [ 16 ] evolves during training both on Sth-com [ 16 ] and EK100-com datasets. As training progresses, C2C [ 16 ] increasingly ignores input evidence and misclassifies unseen compositions as seen ones.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig10_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2601.16211/fig10_2.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.08758",
+    "title": "Ideas Have Genomes: Benchmarking Scientific Lineage Reasoning and Lineage-Grounded Idea Generation",
+    "abstract": "Scientific ideas rarely start from a blank page. They inherit mechanisms, repair known limitations, and recombine pieces of earlier work, much like biological genomes. Current benchmarks still say little about whether AI systems can follow this inheritance structure. We present IdeaGene-Bench (IG-Bench), a benchmark for scientific lineage reasoning and lineage-grounded idea generation. IG-Bench is organized around the IdeaGene framework: each paper or proposal is represented as a set of minimal, typed, evidence-grounded Idea Genome objects, and a GenomeDiff aligns these objects to record inheritance, mutation, loss, external import, and novel insertion under six operational evolutionary dynamics. The benchmark contains 1,961 golden lineage traces, 1,085 curated Idea Genome objects, and 920 pairwise GenomeDiff records across 10 scientific domains. It supports two evaluations. IG-Exam (42 task types, 1,029 instances) tests closed-form lineage reasoning across Idea Genome abstraction, inheritance tracing, evolutionary reasoning, and lineage verification. IG-Arena evaluates generation with a lineage-conditioned Population-Evolution Score(PES), asking whether a proposal can be inserted as a coherent descendant of a given lineage population: it should inherit the right Idea Genome objects, vary meaningfully from nearby work, and offer selection value for future research. Experiments on 14 LLM-based scientists expose a compositional bottleneck. The strongest system reaches only 27.3% exact accuracy on lineage reasoning, and structured lineage context reshuffles system rankings rather than helping every participant uniformly.",
+    "upvotes": 31,
+    "authors": [
+      "Yifan Zhou",
+      "Qihao Yang",
+      "Yan Li",
+      "Donggang Li",
+      "Xiru Hu",
+      "Hokin Deng",
+      "Ziyang Gong",
+      "Xuanyi Zhou",
+      "Huacan Wang",
+      "Xiangchao Yan",
+      "Wanghan Xu",
+      "Wenlong Zhang",
+      "Shaofeng Zhang",
+      "Yue Zhou",
+      "Yifan Yang",
+      "Zhihang Zhong",
+      "Xue Yang"
+    ],
+    "organization": "Shanghai Jiao Tong University",
+    "github_repo": "https://github.com/VisionXLab/IdeasHaveGenomes",
+    "github_stars": 26,
+    "ai_keywords": [
+      "IdeaGene framework",
+      "Idea Genome objects",
+      "GenomeDiff",
+      "lineage reasoning",
+      "idea generation",
+      "evolutionary dynamics",
+      "IG-Bench",
+      "IG-Exam",
+      "IG-Arena",
+      "Population-Evolution Score",
+      "LLM-based scientists"
+    ],
+    "published_at": "2026-07-09T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.08758",
+    "arxiv_url": "https://arxiv.org/abs/2607.08758",
+    "html_available": true,
+    "figures": []
+  },
+  {
+    "arxiv_id": "2607.08770",
+    "title": "LongE2V: Long-Horizon Event-based Video Reconstruction, Prediction, and Frame Interpolation with Video Diffusion Models",
+    "abstract": "Recovering high-quality video from sparse event streams is a challenging task. Regression methods often blur textures, while existing generative models struggle with long-term stability. We propose LongE2V, a novel approach that leverages pre-trained video diffusion priors to jointly handle event-based video reconstruction, prediction, and frame interpolation. By fine-tuning a foundational video model, our approach achieves high data efficiency and superior perceptual quality. We introduce Autoregressive Unrolling and Adaptive Context Switching to mitigate temporal drift in extremely long sequences. We also propose Reencoding Alignment with Cross Residual Correction to ensure precise bidirectional consistency during frame interpolation. Furthermore, Event Voxel Density Augmentation ensures robustness across varying sensor resolutions. Extensive experiments on real-world benchmarks demonstrate that LongE2V outperforms state-of-the-art methods across all three tasks, exhibiting exceptional temporal coherence and zero-shot generalization. Project page: https://cdfan0627.github.io/LongE2V-page/",
+    "upvotes": 28,
+    "authors": [
+      "Cheng-De Fan",
+      "Chun-Wei Tuan Mu",
+      "Chen-Wei Chang",
+      "Chin-Yang Lin",
+      "Kun-Ru Wu",
+      "Yu-Chee Tseng",
+      "Yu-Lun Liu"
+    ],
+    "organization": "National Yang Ming Chiao Tung University",
+    "github_repo": "https://github.com/cdfan0627/LongE2V",
+    "github_stars": 26,
+    "ai_keywords": [
+      "video diffusion priors",
+      "event-based video reconstruction",
+      "frame interpolation",
+      "temporal drift",
+      "autoregressive unrolling",
+      "adaptive context switching",
+      "reencoding alignment",
+      "cross residual correction",
+      "event voxel density augmentation",
+      "zero-shot generalization"
+    ],
+    "published_at": "2026-07-09T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.08770",
+    "arxiv_url": "https://arxiv.org/abs/2607.08770",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08770v1/2607.08770v1/x1.png",
+            "https://arxiv.org/html/2607.08770v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1. Event-based video generation. We leverage pre-trained video diffusion priors to address three distinct inverse problems within a single architecture. Depending on the input condition, our model performs: (a) Video Reconstruction , recovering high-fidelity textures from sparse event streams, (b) Video Prediction , generating long-term sequences from a single start frame with minimal drift via our autoregressive unrolling strategy, and (c) Video Frame Interpolation , achieving zero-shot adaptation to synthesize intermediate frames by leveraging event dynamics as temporal guidance.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2607.08770/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08770v1/2607.08770v1/x2.png",
+            "https://arxiv.org/html/2607.08770v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2. Challenges in event-based video generation. We highlight failure cases in state-of-the-art methods: (a) Reconstruction: Regression-based methods (e.g., E2VID+ (Stoffregen et al . , 2020 ) ) suffer from “regression-to-the-mean,” causing blurry textures and detail loss. (b) Prediction: Direct video diffusion (e.g., VDM-EVFI (Chen et al . , 2025a ) ) on long sequences suffers from error accumulation, leading to severe color temporal drift . (c) Interpolation: Existing networks (e.g., CBMNet-Large (Kim et al . , 2023 ) ) fail to capture complex intermediate motion, producing significant ghosting artifacts . Our method leverages video diffusion priors to ensure high-fidelity and stable generation across all tasks.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2607.08770/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08770v1/2607.08770v1/x3.png",
+            "https://arxiv.org/html/2607.08770v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 3. Autoregressive Unrolling. To bridge the domain gap between training and inference, we employ an iterative training strategy. Initially, the model is trained with Ground Truth (GT) context frames for convergence (left). Subsequently, we activate the unrolling mechanism by performing an inference pass to generate predictions, which then replace the GT context frames for fine-tuning (right). This iterative feedback loop forces the model to adapt to its own generation errors, mitigating error accumulation during long video generation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2607.08770/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08770v1/2607.08770v1/x4.png",
+            "https://arxiv.org/html/2607.08770v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 4. Overview of our training pipeline. To enhance robustness against sensor variations, input event voxels undergo Event Voxel Density Augmentation, and the first frame, context frames, and current video frames are synchronously resized and cropped to ensure spatial alignment. All inputs are encoded into latents via a frozen 3D VAE. These latents are aligned and fused through frame dimension concatenation and channel dimension concatenation. Finally, we expand and fully fine-tune the First Projection Layer to accommodate the additional event channels, while the DiT backbone is efficiently fine-tuned using LoRA.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2607.08770/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08770v1/2607.08770v1/x5.png",
+            "https://arxiv.org/html/2607.08770v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 5. Reencoding Alignment and Cross Residual Correction. To address temporal misalignment caused by the discrepancy between latent-space and pixel-space flipping, we propose Reencoding Alignment. The denoised latents, Z ^ 0 f ​ w ​ d \\hat{Z}_{0}^{fwd} and Z ^ 0 b ​ w ​ d \\hat{Z}_{0}^{bwd} , are decoded into pixel space, flipped temporally ( F ​ l ​ i ​ p p ​ i ​ x Flip_{pix} ), and then re-encoded via the 3D VAE to yield the aligned latents Z ~ 0 f ​ w ​ d \\tilde{Z}_{0}^{fwd} and Z ~ 0 b ​ w ​ d \\tilde{Z}_{0}^{bwd} . To mitigate information loss inherent in this re-encoding process, we employ Cross Residual Correction. We calculate the residual difference between the original and the re-encoded latents (e.g., the subtraction node Z ^ 0 f ​ w ​ d − Z ¯ 0 f ​ w ​ d \\hat{Z}_{0}^{fwd}-\\bar{Z}_{0}^{fwd} ) and inject this detail information into the opposite branch. Specifically, the forward residual is added to the backward aligned latents Z ~ 0 b ​ w ​ d \\tilde{Z}_{0}^{bwd} to produce the final corrected latents Z 0 ′ ⁣ b ​ w ​ d Z^{\\prime bwd}_{0} , and symmetrically, the backward residual is injected into Z ~ 0 f ​ w ​ d \\tilde{Z}_{0}^{fwd} to obtain Z 0 ′ ⁣ f ​ w ​ d Z^{\\prime fwd}_{0} . This symmetric Cross Injection mechanism promotes temporal consensus between branches while preserving fine-grained details. Light-colored boxes represent information loss.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2607.08770/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08770v1/2607.08770v1/x6.png",
+            "https://arxiv.org/html/2607.08770v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 6. Qualitative comparisons on ECD (Mueggler et al . , 2017 ) , MVSEC (Zhu et al . , 2018 ) , and HQF (Stoffregen et al . , 2020 ) datasets. Our LongE2V recovers high-frequency textures where regression baselines (E2VID+, HyperE2VID) suffer from blurring (Row 1). In prediction tasks, we avoid the severe noise accumulation and ghosting artifacts (red arrow) seen in VDM-EVFI (Rows 2–3), maintaining superior structural fidelity and temporal stability.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2607.08770/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08770v1/2607.08770v1/x7.png",
+            "https://arxiv.org/html/2607.08770v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 7. Zero-shot interpolation on BS-ERGB and HQF. Baselines (TLXNet+, CBMNet-Large) suffer from structural collapse or blur under large motion ( Top ), whereas our LongE2V captures accurate dynamics. On fine text ( Bottom ), our Reencoding Alignment eliminates the ghosting seen in baselines, ensuring legibility.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2607.08770/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08770v1/2607.08770v1/x8.png",
+            "https://arxiv.org/html/2607.08770v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 8. Qualitative ablation on reconstruction. Top : Ablated variants; Bottom : Full Method. w/o Pretrained prior yields noise; w/o Context causes structural ambiguity; w/o Autoregressive unrolling leads to point artifacts (drift); and w/o Adaptive context switch causes grid artifacts. Our method ensures stable, high-fidelity results.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2607.08770/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08770v1/2607.08770v1/x9.png",
+            "https://arxiv.org/html/2607.08770v1/x9.png"
+          ]
+        ],
+        "caption": "Figure 9. Visual ablation on interpolation. w/o Reencoding Alignment causes ghosting due to latents misalignment; w/o Cross Residual Correction blurs fine details due to VAE loss; and w/o Event Voxel Density Augmentation yields artifacts from density mismatch. Our Full Method restores sharp, coherent details comparable to Ground Truth .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2607.08770/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08770v1/2607.08770v1/x10.png",
+            "https://arxiv.org/html/2607.08770v1/x10.png"
+          ]
+        ],
+        "caption": "Figure 10. Text-Guided Event Video Colorization. Left to Right : Input events; standard reconstruction (geometry baseline); text-stylized frames; and a temporal XT-slice (at red line ). The results demonstrate our model effectively decouples event-driven motion from text-defined appearance, while the XT-slice confirms the generated textures are temporally coherent.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2607.08770/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08770v1/2607.08770v1/x11.png",
+            "https://arxiv.org/html/2607.08770v1/x11.png"
+          ]
+        ],
+        "caption": "Figure 11. Additional qualitative comparisons on ECD (Mueggler et al . , 2017 ) , MVSEC (Zhu et al . , 2018 ) , and HQF datasets (Stoffregen et al . , 2020 ) .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2607.08770/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08770v1/2607.08770v1/x12.png",
+            "https://arxiv.org/html/2607.08770v1/x12.png"
+          ]
+        ],
+        "caption": "Figure 12. Additional zero-shot interpolation results on BS-ERGB (Tulyakov et al . , 2021 ) and HQF (Stoffregen et al . , 2020 ) datasets.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2607.08770/fig12_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08770v1/2607.08770v1/x13.png",
+            "https://arxiv.org/html/2607.08770v1/x13.png"
+          ]
+        ],
+        "caption": "Figure 13. Limitations. (a) Failure cases under sparse or low-quality event streams. (b) Sensitivity to noise where ”hot pixel” is preserved or amplified in the reconstructed frames.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-10/2607.08770/fig13_1.png"
+        ]
+      }
+    ]
+  }
+]

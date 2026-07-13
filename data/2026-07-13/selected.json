@@ -1,0 +1,517 @@
+[
+  {
+    "arxiv_id": "2607.08964",
+    "title": "Long-Horizon-Terminal-Bench: Testing the Limits of Agents on Long-Horizon Terminal Tasks with Dense Reward-Based Grading",
+    "abstract": "AI agents have become capable of autonomously completing short, well-specified tasks. However, existing terminal benchmarks largely focus on simple problems that finish within minutes and are evaluated only by their final outcome. This setup overlooks intermediate progress and partial solutions, yielding sparse reward signals and an incomplete picture of agent capability. We introduce Long-Horizon-Terminal-Bench, a terminal benchmark of 46 long-horizon tasks spanning nine categories, including experiment reproduction, software engineering, multimodal analysis, interactive games, and scientific computing. Each task follows a Terminal-Bench-style setup with a reference solution or simulation engine, but is further decomposed into fine-grained graded subtasks. This design enables dense intermediate rewards and partial credit, allowing evaluation to capture not only whether an agent reaches the final goal, but also how far it progresses on open-ended workflows. Tasks in Long-Horizon-Terminal-Bench typically require hundreds of episodes and minutes to hours of execution, stressing long-horizon planning, long-context management, and iterative debugging rather than one-shot problem solving. We evaluate 15 frontier models and find that agents consume on average 9.9M tokens per task, with roughly 231 episodes and 85.3 minutes of execution time per run, making Long-Horizon-Terminal-Bench more demanding than prior terminal-based benchmarks. Even the strongest tested model achieves 15.2% pass@1 at a partial-reward threshold of 0.95 and 10.9% at a perfect-reward threshold of 1.0, while the mean pass rate across models is 4.3% and 1.7% under the two thresholds, respectively. These results reveal headroom for improvement. We further analyze failure modes and error patterns, and release Long-Horizon-Terminal-Bench to support future progress on long-horizon terminal agents.",
+    "upvotes": 18,
+    "authors": [
+      "Zongxia Li",
+      "Zhongzhi Li",
+      "Yucheng Shi",
+      "Ruhan Wang",
+      "Junyao Yang",
+      "Zhichao Liu",
+      "Xiyang Wu",
+      "Anhao Li",
+      "Yue Yu",
+      "Ninghao Liu",
+      "Lichao Sun",
+      "Haotao Mi",
+      "LeoweiLiang"
+    ],
+    "organization": "Tencent Hunyuan",
+    "github_repo": "https://github.com/zli12321/LHTB",
+    "github_stars": 25,
+    "ai_keywords": [],
+    "published_at": "2026-07-09T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.08964",
+    "arxiv_url": "https://arxiv.org/abs/2607.08964",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08964v1/2607.08964v1/x1.png",
+            "https://arxiv.org/html/2607.08964v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1 : The overall structure of long-horizon terminal task with dense reward grading. Partial rewards show how far models are into completing the task.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.08964/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08964v1/2607.08964v1/x2.png",
+            "https://arxiv.org/html/2607.08964v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2 : Task distribution across the LHTB categories. The 46 tasks span nine long-horizon domains, ranging from software and reverse engineering to scientific computing, earth and climate science, and multimodal analysis.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.08964/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08964v1/2607.08964v1/x3.png",
+            "https://arxiv.org/html/2607.08964v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 3 : LHTB leaderboard. Pass@1 at reward thresholds 0.9 0.9 , 0.95 0.95 , and 1.0 1.0 , together with mean normalized reward, for each model under a shared agent setup, shown in a single model order sorted by pass@1 at R ≥ 0.95 R\\geq 0.95 . Pass rate is the fraction of the 46 tasks whose overall reward R R meets a threshold τ \\tau , with R ≥ 1.0 R\\geq 1.0 corresponding to full completion, while mean R R captures partial progress across all tasks. GPT-5.5 achieves the strongest overall performance, resolving 15.2 % 15.2\\% of tasks at R ≥ 0.95 R\\geq 0.95 . Tightening the threshold to R ≥ 1.0 R\\geq 1.0 collapses most models to zero pass rate, showing that partial-credit evaluation captures progress that a binary threshold misses.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.08964/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08964v1/2607.08964v1/x4.png",
+            "https://arxiv.org/html/2607.08964v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 4 : Distribution of final rewards over all 15 × 46 15\\times 46 model–task runs. Only 30 30 runs ( 4.3 % 4.3\\% , green) pass the R ≥ 0.95 R\\geq 0.95 threshold, while 227 227 runs ( 32.9 % 32.9\\% , gray) make no meaningful progress ( R < 0.05 R<0.05 ). The remaining 433 433 runs ( 62.8 % 62.8\\% , blue) achieve partial reward but would all be counted as failures under binary pass/fail evaluation. This partial progress is often substantial rather than trivial: 180 180 runs ( 26.1 % 26.1\\% ) reach R ≥ 0.5 R\\geq 0.5 , and the mass in [ 0.85 , 0.95 ) [0.85,0.95) (near-complete solutions that fail only the final checks) is still nearly twice the number of full passes. Binary grading collapses a wide range of partially successful runs into a single failure bucket, whereas dense subtask-level rewards preserve the signal needed to distinguish model progress at this difficulty level.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.08964/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08964v1/2607.08964v1/x5.png",
+            "https://arxiv.org/html/2607.08964v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 5 : Cost–reward frontier on LHTB. Estimated total cost (log scale) against pass rate at R ≥ 0.95 R\\geq 0.95 ; the dashed line traces the Pareto frontier, and models on the frontier are shown in bold. GPT-5.5 achieves the highest pass rate among the reported models, while Hy3 is at the low-cost end of the frontier.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.08964/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08964v1/2607.08964v1/x6.png",
+            "https://arxiv.org/html/2607.08964v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 6 : Composition of unresolved runs per model. Each bar decomposes a model’s unresolved tasks ( R < 0.95 R<0.95 , out of 46) into timeouts (the agent is still working when the 90-minute budget expires), early exits (the agent terminates on its own with no harness error), and harness errors (non-timeout exceptions such as API- or verifier-side failures). The label inside each timeout segment shows the number of timed-out runs and their mean reward; the label inside each early-exit segment shows the number of early exits and their mean reward. Timeouts dominate for every model ( 79 % 79\\% of all unresolved runs), showing that many failures reflect incomplete progress rather than immediate breakdowns, while the smaller early-exit segments highlight cases where agents stop too soon despite not having fully solved the task.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.08964/fig6_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.09657",
+    "title": "Scalable Visual Pretraining for Language Intelligence",
+    "abstract": "The rapid progress of large foundation models has been driven predominantly by pretraining on large-scale text corpora. However, many forms of knowledge are conveyed through visual representations, where figures, typeset equations, and page layouts carry rich information that cannot be faithfully or completely captured by text alone. Yet current pretraining approaches discard these visual cues by converting visually rich sources, such as documents and web pages, into plain text for learning language intelligence. This paper challenges the default assumption that language models must be trained on text-only representations and shows that Visual Pretraining is a scalable learner for foundation model intelligence. To this end, we conduct a systematic study of unsupervised visual pretraining paradigms that directly leverage visual documents without text extraction. Across multiple backbones and benchmarks, visual pretraining on the same underlying corpora consistently outperforms text-only pretraining, offering an efficient pathway to scalable language intelligence.",
+    "upvotes": 15,
+    "authors": [
+      "Yiming Zhang",
+      "Zhonghan Zhao",
+      "Wenwei Zhang",
+      "Haiteng Zhao",
+      "Tianyang Lin",
+      "Yunhua Zhou",
+      "Demin Song",
+      "Kuikun Liu",
+      "Haochen Ye",
+      "Haian Huang",
+      "Yuzhe Gu",
+      "Haijun Lv",
+      "Qipeng Guo",
+      "Bin Liu",
+      "Gaoang Wang",
+      "Kai Chen"
+    ],
+    "organization": null,
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [],
+    "published_at": "2026-07-10T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.09657",
+    "arxiv_url": "https://arxiv.org/abs/2607.09657",
+    "html_available": true,
+    "figures": []
+  },
+  {
+    "arxiv_id": "2607.09024",
+    "title": "Video Generation Models are General-Purpose Vision Learners",
+    "abstract": "Driven by next-token prediction, NLP shifted from task-specific models into powerful generalist foundation models. What, then, is the equivalent catalyst needed to achieve a general-purpose model in computer vision? In this paper, we contend that large-scale text-to-video generation serves as a strong pre-training paradigm for computer vision, providing the necessary spatiotemporal priors, vision-language alignment, and scalability required for general visual intelligence. We introduce GenCeption, which leverages a pre-trained video generative diffusion backbone to define a feed-forward perception model, capable of performing various vision tasks steered by text instructions. Empirical results demonstrate that GenCeption achieves state-of-the-art performance across a diverse suite of tasks, including depth, surface normal, and camera pose estimation, expression-referring segmentation, and 3D keypoint prediction, often matching or surpassing specialized models (e.g. DepthAnything3, SAM3, D4RT, VGGT-Omega, Sapiens, David, Genmo, and Lotus-2). Furthermore, the video generative pretrained backbone outperforms alternative pretraining paradigms (e.g., V-JEPA, and Video MAE) under comparable settings. Importantly, GenCeption exhibits preliminary data and model scaling properties along with exceptional data efficiency, where it achieves comparable performance with leading models like D4RT and VGGT-Omega with 7 to 500 less training data. Finally, GenCeption also exhibits intriguing emergent behaviors: a model trained exclusively on synthetic human videos generalizes to real-world footage and out-of-distribution object categories (e.g., animals and robots). These findings suggest that video generation is not merely a synthesis tool, but a foundational path toward generalist vision intelligence for the physical world. Project page: https://genception.github.io",
+    "upvotes": 11,
+    "authors": [
+      "Letian Wang",
+      "Chuhan Zhang",
+      "Rishabh Kabra",
+      "Jasper Uijlings",
+      "Steven Waslander",
+      "Andrew Zisserman",
+      "Joao Carreira",
+      "Kaiming He",
+      "Misha Andriluka",
+      "Eduard Gabriel Bazavan",
+      "Andrei Zanfir",
+      "Cristian Sminchisescu"
+    ],
+    "organization": "GoogleDeepMind",
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [],
+    "published_at": "2026-07-10T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.09024",
+    "arxiv_url": "https://arxiv.org/abs/2607.09024",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/x1.png",
+            "https://arxiv.org/html/2607.09024v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1 : Methdology (Left): GenCeption treats a video generative diffusion model as a pre-training base to capture rich spatio-temporal world priors and native vision-language alignment at scale. During multi-task post-training , the model is adapted to feed-forward model fine-tuned on predominantly synthetic data to handle diverse perception tasks. GenCeption shows strong performance with intriguing Emerging Behaviors , enabling seamless sim-to-real transfer and generalization to out-of-distribution object categories. Paradigm Shift (Right): This highlights a paradigm shift from specialized task-specific computer vision models, to fully unified generalist vision models.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/x2.png",
+            "https://arxiv.org/html/2607.09024v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2 : SOTA Generalist Capability (Left): GenCeption achieves universally competitive performance on a wide range of vision tasks, matching or outperforming state-of-the-art models dedicated to individual tasks (e.g. DepthAnything3 [ lin2025depth ] , SAM3 [ carion2025sam ] , D4RT [ zhang2025efficiently ] , VGGT- Ω \\Omega [ wang2026vggt ] , Sapiens [ sapienseccv2024 ] , David [ saleh2025david ] , Genmo [ genmo2025 ] , Lotus-2 [ he2025lotus ] ). Our specialist denotes a model trained on each task individually, whereas the generalist represents a single model trained jointly across multiple tasks. Data Efficiency in Finetuning (Right): Validated on depth estimation, the video generative pretrained backbone (i) outperforms the largest available variants alternative pretraining paradigms (e.g., V-JEPA, and VideoMAE V2) under the same finetuning data. (ii) exhibits preliminary scaling properties, where the performance improves with more data and large model size; (iii) shows exceptional data efficiency, achieving comparable performance with leading models like D4RT [ zhang2025efficiently ] and VGGT- Ω \\Omega [ wang2026vggt ] with 7 × \\times to 500 × \\times less training data.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/teaser_06.png",
+            "https://arxiv.org/html/2607.09024v1/figure/teaser_06.png"
+          ]
+        ],
+        "caption": "Figure 3 : Capabilities Illustrations. GenCeption is a versatile video perception model with SOTA performance on a multitude of output modalities including surface normal estimation, depth estimation, foreground segmentation, expression-referring open-world segmentation, dense human pose estimation, 2D/3D keypoints estimation, and camera pose estimation. Our approach has been trained on human-centric synthetic videos, yet it generalizes to real videos both for people as well as other categories such as animals and anthropomorphic characters.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/x3.png",
+            "https://arxiv.org/html/2607.09024v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 4 : Architecture overview of GenCeption, a simple yet powerful architecture adapted from text-to-video diffusion models. Given an input video and a text prompt specifying the desired output, our unified model, trained majorly on synthetic data, is capable of performing a wide range of dense and sparse perception tasks, with a single forward-pass of the model. The dense vision tasks are unified in the RGB ambient space where supervision can be applied in latent space efficiently, and the sparse vision tasks are realized by adding learnable tokens as additional inputs to the diffusion transformer (DiT).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/x4.png",
+            "https://arxiv.org/html/2607.09024v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 5 : The \"Rothko\" Raymap as an example of adapting high-dimensional modal data into standard 3 RGB channels. This representation effectively compresses the camera’s multi-channel ray data by assembling rotation and translation components into a single three-channel map.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/combined_first_frames_rgb_depth_normal.png",
+            "https://arxiv.org/html/2607.09024v1/figure/combined_first_frames_rgb_depth_normal.png"
+          ]
+        ],
+        "caption": "Figure 6 : Demonstration of GenCeption ’s depth and surface normal estimation capabilities.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/OW_Seg.png",
+            "https://arxiv.org/html/2607.09024v1/figure/OW_Seg.png"
+          ]
+        ],
+        "caption": "Figure 7 : Qualitative results of our approach on referring expression segmentation. Our model accurately recognizes objects, colors, spatial relationships, and motion. Furthermore, it demonstrates strong generalization by identifying unseen objects, effectively leveraging the knowledge acquired during text-to-video pretraining.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/ski_snowboard/1/00000020.jpg",
+            "https://arxiv.org/html/2607.09024v1/figure/ski_snowboard/1/00000020.jpg"
+          ],
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/ski_snowboard/1/00000030.jpg",
+            "https://arxiv.org/html/2607.09024v1/figure/ski_snowboard/1/00000030.jpg"
+          ],
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/ski_snowboard/1/00000040.jpg",
+            "https://arxiv.org/html/2607.09024v1/figure/ski_snowboard/1/00000040.jpg"
+          ],
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/ski_snowboard/1/00000050.jpg",
+            "https://arxiv.org/html/2607.09024v1/figure/ski_snowboard/1/00000050.jpg"
+          ],
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/ski_snowboard/1/00000060.jpg",
+            "https://arxiv.org/html/2607.09024v1/figure/ski_snowboard/1/00000060.jpg"
+          ],
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/ski_snowboard/1/00000070.jpg",
+            "https://arxiv.org/html/2607.09024v1/figure/ski_snowboard/1/00000070.jpg"
+          ],
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/ski_snowboard/2/00000041.jpg",
+            "https://arxiv.org/html/2607.09024v1/figure/ski_snowboard/2/00000041.jpg"
+          ],
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/ski_snowboard/2/00000046.jpg",
+            "https://arxiv.org/html/2607.09024v1/figure/ski_snowboard/2/00000046.jpg"
+          ],
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/ski_snowboard/2/00000051.jpg",
+            "https://arxiv.org/html/2607.09024v1/figure/ski_snowboard/2/00000051.jpg"
+          ],
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/ski_snowboard/2/00000056.jpg",
+            "https://arxiv.org/html/2607.09024v1/figure/ski_snowboard/2/00000056.jpg"
+          ],
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/ski_snowboard/2/00000061.jpg",
+            "https://arxiv.org/html/2607.09024v1/figure/ski_snowboard/2/00000061.jpg"
+          ],
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/ski_snowboard/2/00000066.jpg",
+            "https://arxiv.org/html/2607.09024v1/figure/ski_snowboard/2/00000066.jpg"
+          ]
+        ],
+        "caption": "Figure 8 : 3D Pose Estimation . Example 3D pose estimation results on challenging skiing (top) and snowboarding (bottom) video. We show every 10-th frame for a subsequence of the input video. Compared to the existing state-of-the-art 3D human pose estimation methods GenCeption takes a full video frame as input and does not require pre-processing steps such as person detection or 2d keypoint estimation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig8_1.jpg",
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig8_2.jpg",
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig8_3.jpg",
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig8_4.jpg",
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig8_5.jpg",
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig8_6.jpg",
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig8_7.jpg",
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig8_8.jpg",
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig8_9.jpg",
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig8_10.jpg",
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig8_11.jpg",
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig8_12.jpg"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/pretrained_weight.png",
+            "https://arxiv.org/html/2607.09024v1/figure/pretrained_weight.png"
+          ]
+        ],
+        "caption": "Figure 9 : Effect of transferring increasing number of layers from the pre-trained text-to-video model.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/",
+            "https://arxiv.org/html/2607.09024v1/"
+          ],
+          [
+            "https://arxiv.org/html/2607.09024v1/2607.09024v1/figure/oodvisualizations_05.png",
+            "https://arxiv.org/html/2607.09024v1/figure/oodvisualizations_05.png"
+          ]
+        ],
+        "caption": "(a) (a) Generalize to multiple instances. (b) (b) Generalize to unseen categories. Figure 10 : Generalization capabilities. Left: Trained on synthetic data with one single object within each video, our method generalizes in zero-shot to real videos with multiple objects. Right: Our approach has been trained only on videos of a single class (humans), but generalizes to a variety of other classes of articulated objects.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig10_1.09024v1",
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09024/fig10_2.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.09661",
+    "title": "PanoWorld: Real-World Panoramic Generation",
+    "abstract": "In this work, we aim to address the challenge of long-range memory in panoramic world models by exploiting the rotation-equivariant property of omnidirectional representations, where rotation can be treated as an implicit geometric transformation.Building on this insight, we propose PanoWorld, which simplifies camera trajectories into translations via fixed headings for both current-action modeling and long-range memory through Dense Panoramic Ray-Conditioning (DPRC) and Geometry-aware Memory Augmentation (GMA).Then, a three-stage training pipeline is introduced to progressively optimize each component. To better evaluate physical consistency under large-scale spatial variations and diverse illumination conditions, where existing datasets are relatively stable, we construct World360, a large-scale dataset consisting of both real-world video clips collected via panoramic unmanned aerial vehicles and high-quality simulated clips generated by AirSim360.Extensive experiments on World360 demonstrate the effectiveness of PanoWorld, outperforming alternative methods by a large margin.Our models, training code, and dataset will be publicly available. More information can be found on our project page: https://lihaoy-ux.github.io/panoworld-page/.",
+    "upvotes": 5,
+    "authors": [
+      "Haoyuan Li",
+      "Dizhe Zhang",
+      "Yuemei Zhou",
+      "Xiangkai Zhang",
+      "Haoran Feng",
+      "Xiaofan Lin",
+      "Wenjie Jiang",
+      "Bo Du",
+      "Ming-Hsuan Yang",
+      "Lu Qi"
+    ],
+    "organization": "Insta360",
+    "github_repo": "https://github.com/Insta360-Research-Team/PanoWorld",
+    "github_stars": 2,
+    "ai_keywords": [],
+    "published_at": "2026-07-10T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.09661",
+    "arxiv_url": "https://arxiv.org/abs/2607.09661",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09661v1/2607.09661v1/x1.png",
+            "https://arxiv.org/html/2607.09661v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1: PanoWorld is a novel framework for high-fidelity and controllable panoramic video generation. Our approach achieves precise trajectory control across complex movements while maintaining high-fidelity visual synthesis with physical consistency in diverse real-world environments.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09661/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09661v1/2607.09661v1/x2.png",
+            "https://arxiv.org/html/2607.09661v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2: The Data Curation Pipeline. The pipeline converts raw panoramic clips into high-quality sequences by: (1) Rotation Decoupling to isolate pure translation; (2) Uniform Spatial Resampling to standardize motion scales; and (3) Illumination Filtering to ensure exposure consistency.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09661/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09661v1/2607.09661v1/x3.png",
+            "https://arxiv.org/html/2607.09661v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 3: PanoWorld Network Architecture. Built on the Wan2.2 backbone, PanoWorld employs a triple-stream DiT that fuses visual self-attention, DPRC-based action modeling, and a GMA module for memory-anchored synthesis via a shared geometric manifold.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09661/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09661v1/2607.09661v1/x4.png",
+            "https://arxiv.org/html/2607.09661v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 4: Overview of the progressive three-stage pipeline. Stage 1 focuses on geometric adaptation for panoramic video generation; Stage 2 targets view-dependent motion learning ; and Stage 3 enables memory-anchored coherence to enforce long-term temporal consistency.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09661/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09661v1/2607.09661v1/x5.png",
+            "https://arxiv.org/html/2607.09661v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 5: Qualitative comparison on real-world outdoor sequences.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09661/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09661v1/2607.09661v1/x6.png",
+            "https://arxiv.org/html/2607.09661v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 6: Qualitative Comparison Evaluation of Trajectory Fidelity via ViPE. We utilize ViPE to reconstruct camera trajectories from the synthesized videos, comparing them against the GT.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09661/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09661v1/2607.09661v1/x7.png",
+            "https://arxiv.org/html/2607.09661v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 7: Qualitative ablation results of the GMA module. Comparison of synthesized video frames under control: (a) w/o GMA baseline exhibits significant artifacts; (b) Random Memory variant results in broken geometry; (c) Full setting with GMA maintains consistent generation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09661/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09661v1/2607.09661v1/x8.png",
+            "https://arxiv.org/html/2607.09661v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 8: Real-time Generation. The left column shows the initial input frame, followed by consecutive frames generated in real time based on the specified keyboard inputs.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09661/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09661v1/2607.09661v1/x9.png",
+            "https://arxiv.org/html/2607.09661v1/x9.png"
+          ]
+        ],
+        "caption": "Figure 9: More results on real-world outdoor sequences.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09661/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.09661v1/2607.09661v1/x10.png",
+            "https://arxiv.org/html/2607.09661v1/x10.png"
+          ]
+        ],
+        "caption": "Figure 10: Comparison of Generation Efficiency",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-13/2607.09661/fig10_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.07964",
+    "title": "KronQ: LLM Quantization via Kronecker-Factored Hessian",
+    "abstract": "Post-training quantization (PTQ) is a widely adopted technique for compressing large language models (LLMs) without retraining. Existing second-order PTQ methods, including GPTQ, construct quantization objectives exclusively from input activation statistics, effectively assuming that all output channels contribute equally to the layer-wise reconstruction objective. We propose KronQ, a PTQ framework that challenges this assumption by introducing the gradient covariance into the quantization pipeline. Under the Kronecker-factored Hessian approximation, the quantization loss depends jointly on both the activation and gradient covariances, and KronQ exploits this at two complementary levels. (1) KronQ introduces bidirectional incoherence processing, extending the existing input-side random rotation to the output dimension using the gradient covariance, reducing weight magnitude variance across both input and output dimensions. (2) KronQ derives a new sensitivity metric for inter-layer mixed-precision allocation, driven by the gradient and activation Hessian traces. Notably, in the case of 2-bit weight-only quantization on LLaMA-3-70B, while GPTQ and GPTAQ diverge or produce degenerate quantizations (>2000 perplexity on WikiText-2), KronQ achieves 7.93 perplexity.",
+    "upvotes": 5,
+    "authors": [
+      "Donghyun Lee",
+      "Yuhang Li",
+      "Ruokai Yin",
+      "Priyadarshini Panda"
+    ],
+    "organization": "University of Southern California",
+    "github_repo": "https://github.com/Intelligent-Computing-Lab-Panda/KronQ",
+    "github_stars": 2,
+    "ai_keywords": [],
+    "published_at": "2026-07-08T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.07964",
+    "arxiv_url": "https://arxiv.org/abs/2607.07964",
+    "html_available": true,
+    "figures": []
+  }
+]

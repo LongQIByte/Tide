@@ -1,0 +1,941 @@
+[
+  {
+    "arxiv_id": "2607.06559",
+    "title": "RynnWorld-4D: 4D Embodied World Models for Robotic Manipulation",
+    "abstract": "Robotic manipulation in the open world requires not only recognizing what a scene looks like, but also anticipating how its 3D structure moves under interaction. We argue that synchronized RGB, depth, and optical flow, namely RGB-DF, provide a physically grounded representation that captures the underlying 4D dynamics of a scene. Compared to 2D pixel videos, this multi-modal synergy aligns visual appearance with geometric structure and temporal motion, creating a representation space significantly closer to the low-level end-effector actions demanded by robotic systems, thereby narrowing the gap between world prediction and policy learning. Building on this insight, we introduce RynnWorld-4D, a generative model that co-produces future RGB frames, depth maps, and optical flow from a single RGB-D image and a language instruction within one unified diffusion process. This 4D world model features a tri-branch architecture that integrates cross-modal attention with frame-wise 3D RoPE, ensuring that appearance, geometry, and motion evolve consistently. To supply training data at scale, we curate Rynn4DDataset 1.0, a massive dataset of over 254.4 million frames across egocentric human and robotic manipulation videos with high-quality pseudo-labels for depth and optical flow. We further propose RynnWorld-4D-Policy, an inverse dynamics head that consumes the internal 4D representations of RynnWorld-4D in a single forward pass, bypassing expensive multi-step denoising, to output robot actions in a closed-loop manner. Experiments show that RynnWorld-4D produces temporally and spatially coherent 4D predictions, and that RynnWorld-4D-Policy achieves state-of-the-art performance on real-world dexterous bimanual manipulation tasks, particularly excelling in tasks demanding spatial precision and temporal coordination.",
+    "upvotes": 89,
+    "authors": [
+      "Haoyu Zhao",
+      "Xingyue Zhao",
+      "Siteng Huang",
+      "Xin Li",
+      "Deli Zhao",
+      "Zhongyu Li"
+    ],
+    "organization": "DAMO Academy, Alibaba Group, Hong Kong Embodied AI Lab",
+    "github_repo": "https://github.com/alibaba-damo-academy/RynnWorld-4D",
+    "github_stars": 52,
+    "ai_keywords": [
+      "RGB-DF",
+      "diffusion models",
+      "4D world model",
+      "tri-branch architecture",
+      "cross-modal attention",
+      "3D RoPE",
+      "Rynn4DDataset",
+      "inverse dynamics",
+      "closed-loop policy learning"
+    ],
+    "published_at": "2026-07-07T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.06559",
+    "arxiv_url": "https://arxiv.org/abs/2607.06559",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06559v1/2607.06559v1/x3.png",
+            "https://arxiv.org/html/2607.06559v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 1 : Given an input RGB-D image and description, RynnWorld-4D generates RGB, depth, and optical flow videos synchronously, which can be further lifted into 3D scene flow (right).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06559/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06559v1/2607.06559v1/x4.png",
+            "https://arxiv.org/html/2607.06559v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 2 : Composition of the Rynn4DDataset 1.0 dataset. We provide a large-scale hybrid collection of 254.4M frames, balancing human egocentric videos with diverse robotic manipulation data. This diversity ensures that the world model learns both general object interaction priors and robot-specific execution traces.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06559/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06559v1/2607.06559v1/x5.png",
+            "https://arxiv.org/html/2607.06559v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 3 : Data Curation Pipeline. The video data is collected from diverse sources and partitioned into short clips during data preprocessing. Each clip undergoes a multi-modal annotation process: (1) Video Captioning : Qwen3-VL ( bai2025qwen3 ) generates detailed natural language descriptions of the video content; (2) Optical Flow Estimation : DPFlow ( morimitsu2025dpflow ) computes dense per-frame motion fields, which are visualized and saved as flow videos; (3) Depth Estimation : Depth Anything 3 ( lin2025depth ) produces monocular depth predictions, which are upsampled to the original resolution and saved as depth videos with a global depth range of [ 0.0 , 5.0 ] [0.0,5.0] meters.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06559/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06559v1/2607.06559v1/x6.png",
+            "https://arxiv.org/html/2607.06559v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 4 : Overview of RynnWorld-4D. Our pipeline leverages the large-scale Rynn4DDataset 1.0 dataset to train a generative model capable of predicting future 4D sequences. Given a single RGB-D observation and a language instruction, RynnWorld-4D co-generates future RGB frames, depth maps, and optical flow. These predictive 4D representations are then aggregated by RynnWorld-4D-Policy to derive the final robot actions.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06559/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06559v1/2607.06559v1/x7.png",
+            "https://arxiv.org/html/2607.06559v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 5 : Real-world Manipulation Benchmark. We establish a comprehensive evaluation suite comprising six diverse tasks to assess the model’s performance in open-world manipulation, providing a rigorous testbed for our 4D world model.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06559/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06559v1/2607.06559v1/x8.png",
+            "https://arxiv.org/html/2607.06559v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 6 : Qualitative results of RynnWorld-4D. Starting from a single RGB-D image and a text prompt, RynnWorld-4D synchronously generates RGB video, depth maps, and optical flow, preserving sharp geometric structures and producing temporally consistent motion fields.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06559/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06559v1/2607.06559v1/x9.png",
+            "https://arxiv.org/html/2607.06559v1/x9.png"
+          ]
+        ],
+        "caption": "Figure 7 : Standardized Experimental Platform. All real-world experiments are conducted on a unified hardware configuration consisting of the TIANJI M6 7-DOF robotic arm and the 20-DOF WUJI dexterous hand. This integrated system provides the high-precision control and high-dimensional actuation space required for complex manipulation tasks.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06559/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06559v1/2607.06559v1/x10.png",
+            "https://arxiv.org/html/2607.06559v1/x10.png"
+          ]
+        ],
+        "caption": "Figure 8 : Operator to collect real world data.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06559/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06559v1/2607.06559v1/x11.png",
+            "https://arxiv.org/html/2607.06559v1/x11.png"
+          ]
+        ],
+        "caption": "Figure 9 : Extended qualitative results. Each row displays the generated RGB, depth, and optical flow sequences. The results highlight RynnWorld-4D’s ability to produce spatially and temporally coherent 4D predictions across various manipulation scenarios.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06559/fig9_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.06291",
+    "title": "AlayaWorld: Long-Horizon and Playable Video World Generation",
+    "abstract": "Game worlds have traditionally been built through labor-intensive production pipelines, making them costly to develop, difficult to customization, and expensive to modify after deployment. Recent advances in video world models offer a fundamentally different paradigm. Rather than explicitly authoring every component of a virtual environment, these models autoregressively synthesize future observations conditioned on the current world state and user interactions, enabling playable worlds to be generated online. Trained on both gameplay recordings and real-world videos, they can capture diverse visual appearances and physical dynamics, opening new opportunities for interactive applications beyond gaming, including embodied intelligence. In this paper, we present AlayaWorld, a full-stack open-source framework for building interactive generative worlds. AlayaWorld enables open-ended real-time interaction, allowing users to freely navigate and perform diverse actions such as combat, spell casting, and monster summoning. The framework unifies the complete development-from data preparation model architecture, model training, inference acceleration, and deployment-within a modular and extensible architecture. Alongside the framework, we release reproducible pipelines, reference implementations, evaluation tools, and comprehensive documentation, establishing a practical foundation for future research and real-time applications of generative world models.",
+    "upvotes": 85,
+    "authors": [
+      "AlayaWorld Team",
+      "Kaipeng Zhang",
+      "Chuanhao Li",
+      "Yifan Zhan",
+      "Yongtao Ge",
+      "Yuanyang Yin",
+      "Jiaming Tan",
+      "Kang He",
+      "Liaoyuan Fan",
+      "Ruicong Liu",
+      "Xiaojie Xu",
+      "Xuangeng Chu",
+      "Zhen Li",
+      "Zhengyuan Lin",
+      "Zhixiang Wang",
+      "Zian Meng",
+      "Zihui Gao"
+    ],
+    "organization": "Alaya Lab",
+    "github_repo": "https://github.com/AlayaLab/AlayaWorld",
+    "github_stars": 277,
+    "ai_keywords": [
+      "video world models",
+      "autoregressive synthesis",
+      "generative worlds",
+      "real-time interaction",
+      "modular architecture",
+      "reproducible pipelines",
+      "reference implementations",
+      "evaluation tools"
+    ],
+    "published_at": "2026-07-07T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.06291",
+    "arxiv_url": "https://arxiv.org/abs/2607.06291",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06291v1/2607.06291v1/x1.png",
+            "https://arxiv.org/html/2607.06291v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1 : Interactive world simulation across diverse scenes. AlayaWorld synthesizes explorable worlds that span first- and third-person viewpoints, real-world, game, and synthetic domains, and both indoor and outdoor environments. Moreover, it accommodates open-ended actions such as spell-casting, weapon combat, and monster summoning.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06291/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06291v1/2607.06291v1/figures/fig3.jpg",
+            "https://arxiv.org/html/2607.06291v1/figures/fig3.jpg"
+          ]
+        ],
+        "caption": "Figure 2 : Qualitative results of camera-control generation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06291/fig2_1.jpg"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06291v1/2607.06291v1/figures/action.jpg",
+            "https://arxiv.org/html/2607.06291v1/figures/action.jpg"
+          ]
+        ],
+        "caption": "Figure 3 : Qualitative results of prompt-driven actions.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06291/fig3_1.jpg"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06291v1/2607.06291v1/figures/fig6.jpg",
+            "https://arxiv.org/html/2607.06291v1/figures/fig6.jpg"
+          ]
+        ],
+        "caption": "Figure 4 : Consistency comparisons with existing method.",
+        "local_paths": [
+          null
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06291v1/2607.06291v1/figures/fig7.jpg",
+            "https://arxiv.org/html/2607.06291v1/figures/fig7.jpg"
+          ]
+        ],
+        "caption": "Figure 5 : Qualitative results of one-minute generation.",
+        "local_paths": [
+          null
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06291v1/2607.06291v1/figures/fig2.jpg",
+            "https://arxiv.org/html/2607.06291v1/figures/fig2.jpg"
+          ]
+        ],
+        "caption": "Figure 6 : Qualitative results on diverse styles.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06291/fig6_1.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.06558",
+    "title": "RynnWorld-Teleop: An Action-Conditioned World Model for Digital Teleoperation",
+    "abstract": "Scaling robot learning requires massive, diverse trajectory data, yet collection is currently bottlenecked by physical teleoperation, where every demonstration binds operator time to specific hardware and workspaces. We introduce digital teleoperation, a paradigm that decouples data collection from physical constraints by replacing the real robot with a generative world model. In this framework, an operator's hand-pose stream drives a robot-centric generative world model to synthesize high-fidelity egocentric videos from a single reference image. The recorded pose stream serves as an embodiment-agnostic action label transferable to any target robot via standard retargeting, yielding complete state-action trajectories for imitation learning independent of physical hardware. We instantiate this paradigm in RynnWorld-Teleop, a system that integrates depth-aware skeletal conditioning, progressive human-to-robot training on a video Diffusion Transformer, and streaming autoregressive distillation. This pipeline compresses the generative process into a single-pass inference, enabling 40+ FPS, real-time interactive generation on a single H100 GPU. Policies trained exclusively on RynnWorld-Teleop-generated data achieve effective zero-shot Sim2Real transfer across dexterous and diverse bimanual tasks. Moreover, augmenting real-world datasets with our digitally teleoperated data consistently improves success rates, demonstrating that RynnWorld-Teleop serves as a high-fidelity, scalable data engine for the next generation of robotic agents.",
+    "upvotes": 76,
+    "authors": [
+      "Haoyu Zhao",
+      "Xingyue Zhao",
+      "Hangyu Li",
+      "Biao Gong",
+      "Kehan Li",
+      "Siteng Huang",
+      "Xin Li",
+      "Deli Zhao",
+      "Zhongyu Li"
+    ],
+    "organization": "DAMO Academy, Alibaba Group, CUHK",
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [
+      "generative world model",
+      "video Diffusion Transformer",
+      "autoregressive distillation",
+      "zero-shot Sim2Real transfer",
+      "robotic agents",
+      "depth-aware skeletal conditioning",
+      "progressive human-to-robot training",
+      "streaming autoregressive distillation"
+    ],
+    "published_at": "2026-07-07T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.06558",
+    "arxiv_url": "https://arxiv.org/abs/2607.06558",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06558v1/2607.06558v1/x3.png",
+            "https://arxiv.org/html/2607.06558v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 1 : Physical vs. Digital Teleoperation. (Top) Physical teleoperation binds every demonstration to a real robot and a fixed workspace, capping throughput at operator-hours × \\times hardware availability. (Bottom) Digital teleoperation replaces the real robot with RynnWorld-Teleop, a real-time action-conditioned world model that synthesizes the egocentric video the robot would have produced from a single reference image, and retargets the same gesture stream into embodiment-specific robot actions. Both pipelines emit synchronized (RGB observations, robotic actions) pairs, so digital teleoperation is drop-in compatible with downstream imitation learning, without ever moving a real robot.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06558/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06558v1/2607.06558v1/x4.png",
+            "https://arxiv.org/html/2607.06558v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 2 : Depth-Aware Representation. We bridge the gap between 2D projections and 3D dynamics by rendering hand skeletons with depth-modulated color and size.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06558/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06558v1/2607.06558v1/x5.png",
+            "https://arxiv.org/html/2607.06558v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 3 : Overview of RynnWorld-Teleop. (a) Actions are rendered as depth-aware skeletal videos and encoded into the latent space via a VAE. (b) We expand a pretrained video DiT to incorporate hand-pose conditioning using a distribution-aligned patch embedding branch. (c) The model is distilled into a causal student for interactive, autoregressive generation using a streaming rollout schedule.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06558/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06558v1/2607.06558v1/x6.png",
+            "https://arxiv.org/html/2607.06558v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 4 : Task illustration . We design four manipulation tasks for real-world evaluation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06558/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06558v1/2607.06558v1/x7.png",
+            "https://arxiv.org/html/2607.06558v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 5 : Feature Distribution Analysis via t-SNE . We visualize the high-dimensional feature embeddings of real-world trajectories and RynnWorld-Teleop-generated trajectories.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06558/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06558v1/2607.06558v1/x8.png",
+            "https://arxiv.org/html/2607.06558v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 6 : Qualitative Results of RynnWorld-Teleop. Our model effectively maps a single hand-gesture stream to both human and robotic embodiments. By pre-training on large-scale egocentric human videos, RynnWorld-Teleop absorbs rich manipulation priors and successfully transfers this knowledge to robotic execution. The synthesized videos maintain high fidelity and temporal coherence.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06558/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06558v1/2607.06558v1/x9.png",
+            "https://arxiv.org/html/2607.06558v1/x9.png"
+          ]
+        ],
+        "caption": "Figure 7 : Generalization to Out-of-Distribution (OOD) Visual States . RynnWorld-Teleop generalizes along two axes that are absent from training: (i) unseen objects (top two rows), where the manipulated item in the reference frame is replaced by a novel category or shape; and (ii) unseen backgrounds (bottom two rows), where the tabletop texture is swapped for an environment not seen during training. In all cases, the modified reference image is obtained via off-the-shelf image editing, without any real-world object or scene modification. RynnWorld-Teleop preserves high visual fidelity, temporal coherence, and physically plausible dynamics under both object-level and background-level shifts.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06558/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06558v1/2607.06558v1/x10.png",
+            "https://arxiv.org/html/2607.06558v1/x10.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.06558v1/2607.06558v1/x11.png",
+            "https://arxiv.org/html/2607.06558v1/x11.png"
+          ]
+        ],
+        "caption": "Figure 8 : Conditioning Strategy. Compared to concatenation, our distribution-aligned additive scheme (Eq. 3 ) preserves pre-trained weights, ensuring stable synthesis. Figure 9 : Effect of Pretraining. Stage 1 pretraining provides a robust interaction prior. Without it, the model fails to maintain visual quality when fine-tuned on limited robotic data.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06558/fig8_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06558/fig8_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06558v1/2607.06558v1/x12.png",
+            "https://arxiv.org/html/2607.06558v1/x12.png"
+          ]
+        ],
+        "caption": "Figure 10 : Hardware Infrastructure. The evaluation utilizes our standard robotic setup: a bimanual TIANJI M6 system equipped with WUJI hands. Detailed specifications including degrees of freedom (DoF), payload, and fingertip force are summarized to ensure the reproducibility of our manipulation benchmark.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06558/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06558v1/2607.06558v1/x13.png",
+            "https://arxiv.org/html/2607.06558v1/x13.png"
+          ]
+        ],
+        "caption": "Figure 11 : Operator setup for real-world data collection.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06558/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06558v1/2607.06558v1/x14.png",
+            "https://arxiv.org/html/2607.06558v1/x14.png"
+          ]
+        ],
+        "caption": "Figure 12 : Qualitative comparison. Unlike baselines that rely on SAM-generated masks for conditioning, RynnWorld-Teleop uses sparse skeletal poses, achieving superior fidelity and temporal coherence. Note that baselines are visualized at their native supported resolutions.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06558/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.06558v1/2607.06558v1/x15.png",
+            "https://arxiv.org/html/2607.06558v1/x15.png"
+          ]
+        ],
+        "caption": "Figure 13 : Qualitative results of RynnWorld-Teleop on robotic manipulation tasks. Starting from a single reference image and a sequence of human hand-pose streams, RynnWorld-Teleop synthesizes high-fidelity, temporally coherent robotic execution videos. The results demonstrate the model’s ability to render complex dexterous interactions, such as bimanual coordination and high-precision object handling, while maintaining strict adherence to the input action signal.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.06558/fig12_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.02980",
+    "title": "Hierarchical Sparse Attention Done Right: Toward Infinite Context Modeling",
+    "abstract": "Scaling modern large language models (LLMs) to long contexts is limited by the quadratic computation cost, and poor length extrapolation of dense attention. Chunk-wise sparse attention offers a promising alternative, but all existing methods fall short of full attention because of their inaccurate chunk selection. We propose Hierarchical Landmark Sparse (HiLS) Attention, a chunk-wise sparse attention mechanism that learns chunk selection end-to-end under the language-modeling (LM) loss. HiLS factorizes attention hierarchically: each query performs attention independently with each retrieved chunk to extract chunk-specific information, and the resulting outputs are fused according to chunk retrieval scores. By incorporating retrieval scores into the forward attention computation, HiLS optimizes them directly with the LM loss, enabling end-to-end retrieval learning and native sparse training. Experimental results show that HiLS-Attention achieves performance comparable to, and in some cases better than, full attention at in-domain context lengths. Meanwhile, HiLS-Attention extrapolates more than 64times the training context length with 90% retrieval accuracy, far beyond full attention. Moreover, existing full-attention models can be converted to HiLS-Attention with lightweight continued pretraining, preserving in-domain performance while acquiring ultra-long-context extrapolation. Together with its sparse KV access and computation, HiLS-Attention breaks the usual efficiency-performance trade-off, enabling long-context LLMs that are both more efficient and more effective on general long-context tasks than their full-attention counterparts.",
+    "upvotes": 68,
+    "authors": [
+      "Xiang Hu",
+      "Xinyu Wei",
+      "Hao Gu",
+      "Minshen Zhang",
+      "Tian Liang",
+      "Huayang Li",
+      "Lei Zhu",
+      "Yan Wang",
+      "Sirui Han",
+      "Yushi Bai",
+      "Kewei Tu",
+      "Haitao Mi",
+      "Leo Liang"
+    ],
+    "organization": "Tencent Hunyuan",
+    "github_repo": "https://github.com/Tencent-Hunyuan/HiLS-Attention",
+    "github_stars": 85,
+    "ai_keywords": [
+      "large language models",
+      "dense attention",
+      "chunk-wise sparse attention",
+      "hierarchical landmark sparse attention",
+      "language-modeling loss",
+      "attention mechanism",
+      "retrieval scores",
+      "end-to-end learning",
+      "sparse KV access",
+      "long-context extrapolation"
+    ],
+    "published_at": "2026-07-03T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.02980",
+    "arxiv_url": "https://arxiv.org/abs/2607.02980",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.02980v1/2607.02980v1/x1.png",
+            "https://arxiv.org/html/2607.02980v1/x1.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.02980v1/2607.02980v1/x2.png",
+            "https://arxiv.org/html/2607.02980v1/x2.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.02980v1/2607.02980v1/x3.png",
+            "https://arxiv.org/html/2607.02980v1/x3.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.02980v1/2607.02980v1/x4.png",
+            "https://arxiv.org/html/2607.02980v1/x4.png"
+          ]
+        ],
+        "caption": "(a) (b) (c) (d) Figure 1 : After only 50B continued-training tokens, HiLS-Attention inherits the capability of full attention while bringing two key advantages: strong ultra-long context extrapolation beyond the YaRN-extended 4 × \\times length (Fig. 1(a) ) and faster inference (Fig. 1(b) ) . Meanwhile, it preserves comparable performance for short- and medium-context tasks, within both the original training length and the YaRN-extrapolated range (Fig. 1(c) & 1(d) ).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.02980/fig1_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.02980/fig1_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.02980/fig1_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.02980/fig1_4.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.02980v1/2607.02980v1/x5.png",
+            "https://arxiv.org/html/2607.02980v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 2 : In-context retrieval results.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.02980/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.02980v1/2607.02980v1/data/HiLS-Attn.png",
+            "https://arxiv.org/html/2607.02980v1/data/HiLS-Attn.png"
+          ]
+        ],
+        "caption": "Figure 3 : An overview of HiLS-Attention. We omit the scaling factor 1 d \\frac{1}{\\sqrt{d}} for simplicity. Naive block sparse attention selects the top- K K chunks by their exact mass Z c Z_{c} , e.g., chunks 1 and 3 when K = 2 K=2 , but computing all Z c Z_{c} requires a full QK computation. HiLS-Attention instead uses compressed chunk keys k c ′ k^{\\prime}_{c} to efficiently estimate a chunk-mass surrogate Z c ′ ∝ exp ⁡ ( q ⊤ ​ k c ′ ) Z^{\\prime}_{c}\\propto\\exp(q^{\\top}k^{\\prime}_{c}) . It factorizes attention into two stages: an inter-chunk softmax , which specifies the total attention mass assigned to each chunk, and an intra-chunk softmax , which distributes each chunk’s attention mass among its tokens. Since Z c ′ Z^{\\prime}_{c} parameterizes the forward attention weights, gradients from the next-token prediction loss can be directly backpropagated to the compressed key k c ′ k^{\\prime}_{c} , enabling end-to-end learning.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.02980/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.02980v1/2607.02980v1/x6.png",
+            "https://arxiv.org/html/2607.02980v1/x6.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.02980v1/2607.02980v1/x7.png",
+            "https://arxiv.org/html/2607.02980v1/x7.png"
+          ]
+        ],
+        "caption": "(a) NSA kernel (b) HiLS-Attention kernel Figure 4 : Kernel design of NSA and HiLS-Attention. Kernel design of NSA and HiLS-Attention. (a) NSA handles one query token per tile and computes attention over its selected chunks. Each Tensor Core operation has shape ( G , d ) × ( d , S ) (G,d)\\times(d,S) , where G G is the GQA group size and S S is the chunk size. (b) HiLS-Attention packs M M adjacent query tokens, attends to the union of their selected chunks, and enlarges the Tensor Core operation to ( M × G , d ) × ( d , S ) (M\\times G,d)\\times(d,S) . This packing reuses overlapping K/V chunks across adjacent tokens.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.02980/fig4_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.02980/fig4_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.02980v1/2607.02980v1/x8.png",
+            "https://arxiv.org/html/2607.02980v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 5 : Perplexity (a) and RULER accuracy (b) of the 1.4B model at different training steps. Left: Full-Attention with RoPE; right: HiLS-Attention with HoPE. The annotated values on the curves correspond to the final checkpoint (143k steps), which is highlighted with star markers and thicker lines. The detailed per-step results are deferred to Appendix H (Tab. 15 & Tab. 16 ).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.02980/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.02980v1/2607.02980v1/x9.png",
+            "https://arxiv.org/html/2607.02980v1/x9.png"
+          ]
+        ],
+        "caption": "Figure 6 : Inference latency of HiLS-Attention vs. full attention at the 345M scale on a single NVIDIA H800 (batch size 1, bf16, chunk size 64, top- k = 32 k=32 , 512-token sliding window). Prefill is the warm-run latency for the full input; decode is the median per-token latency with CUDA graphs. Speedup is full attention / / HiLS-Attention ( > 1 >1 means HiLS-Attention is faster). HiLS-Attention reaches parity at ∼ \\sim 16K and is 13.5 × 13.5\\times / 15.7 × 15.7\\times faster (prefill/decode) at 512K.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.02980/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.02980v1/2607.02980v1/x10.png",
+            "https://arxiv.org/html/2607.02980v1/x10.png"
+          ]
+        ],
+        "caption": "Figure 7 : Chunk-id overlap among adjacent query tokens. Left: loaded union size for the final M = 16 M=16 queries versus the visible historical chunks; percentages denote loaded fractions. Right: normalized overlap as group size M M increases, with the dashed line showing inter-block reuse at M = 16 M=16 . Error bars show standard deviation across HiLS layers and heads, and shaded regions show the layer-wise min–max range.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.02980/fig7_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.02770",
+    "title": "Gemma 4 Technical Report",
+    "abstract": "We introduce Gemma 4, a new generation of open-weight, natively multimodal language models in the Gemma model family. Designed to advance compute efficiency and reasoning, the Gemma 4 model suite features dense and Mixture-of-Experts architectures, ranging from 2.3B to 31B parameters. Alongside improved vision and audio encoders for all model sizes, we propose a unified, encoder-free architecture for our 12B model, which ingests raw audio and image patches. Furthermore, we integrate a thinking mode, enabling Gemma models to generate reasoning traces prior to responding. We improve inference speed, memory, and compute efficiency, as well as long-context abilities through critical design choices. Gemma 4 establishes a leap in performance across STEM, multimodal, and long-context benchmarks, and rivals larger, frontier open models in human-rated tasks.",
+    "upvotes": 60,
+    "authors": [
+      "Gemma Team",
+      "Sherif El Abd",
+      "Vaibhav Aggarwal",
+      "Robin Algayres",
+      "Alek Andreev",
+      "Olivier Bachem",
+      "Ian Ballantyne",
+      "Cormac Brick",
+      "Victor Cărbune",
+      "Michelle Casbon",
+      "Mayank Chaturvedi",
+      "Victor Cotruta",
+      "Alice Coucke",
+      "Phil Culliton",
+      "Robert Dadashi",
+      "Lucas Dixon",
+      "Mohamed Elhawaty",
+      "Utku Evci",
+      "Clément Farabet",
+      "Johan Ferret",
+      "Filippo Galgani",
+      "Sertan Girgin",
+      "Jean-Bastien Grill",
+      "Maarten Grootendorst",
+      "Jiaxian Guo",
+      "Cassidy Hardin",
+      "Yanzhang He",
+      "Steven M. Hernandez",
+      "Omri Homburger",
+      "Léonard Hussenot",
+      "Juyeong Ji",
+      "Armand Joulin",
+      "Aishwarya Kamath",
+      "Parnian Kassraie",
+      "Olivier Lacombe",
+      "Preethi Lahoti",
+      "Gaël Liu",
+      "Gus Martins",
+      "Luciano Martins",
+      "Tatiana Matejovicova",
+      "Ramona Merhej",
+      "Nikola Momchev",
+      "Sneha Mondal",
+      "Ryan Mullins",
+      "Sindhu Raghuram Panyam",
+      "Shreya Pathak",
+      "Sarah Perrin",
+      "André Susano Pinto",
+      "Etienne Pot",
+      "Angéline Pouget",
+      "Alexandre Ramé",
+      "Sabela Ramos",
+      "Douglas Reid",
+      "David Rim",
+      "Morgane Rivière",
+      "Karsten Roth",
+      "Louis Rouillard",
+      "Omar Sanseviero",
+      "Pier Giuseppe Sessa",
+      "Shane Settle",
+      "Danila Sinopalnikov",
+      "Sara Smoot",
+      "Piotr Stanczyk",
+      "Andreas Steiner",
+      "Lawrence Stewart",
+      "Ilya Tolstikhin",
+      "Michael Tschannen",
+      "Anton Tsitsulin",
+      "Nino Vieillard",
+      "Renjie Wu",
+      "Pingmei Xu",
+      "Haichuan Yang",
+      "Edouard Yvinec",
+      "Li Zhang",
+      "Joe Zou",
+      "Nicolas Aagnes",
+      "Abdelrahman Abdelhamed",
+      "Shivani Agrawal",
+      "Shubham Agrawal",
+      "Ibrahim Alabdulmohsin",
+      "Jean Baptiste Alayrac",
+      "Uri Alon",
+      "Chandramouli Amarnath",
+      "Ankesh Anand",
+      "Chrysovalantis Anastasiou",
+      "Setareh Ariafar",
+      "François-Xavier Aubet",
+      "Kyriakos Axiotis",
+      "Federico Barbero",
+      "Joelle Barral",
+      "Alexei Bendebury",
+      "Urs Bergmann",
+      "Stanley Bileschi",
+      "Kat Black",
+      "Mathieu Blondel",
+      "Sebastian Borgeaud",
+      "Arthur Bražinskas",
+      "Ryan Burnell",
+      "Robert Busa-Fekete",
+      "Mu Cai",
+      "Glenn Cameron",
+      "Charlotte Caucheteux",
+      "Garima Chadha",
+      "Jetha Chan",
+      "Aditya Chawla",
+      "Blake Jianhang Chen",
+      "Jesse Chen",
+      "Lin Chen",
+      "Xu Chen",
+      "Derek Cheng",
+      "Tzu-hsiang Chien",
+      "Nikolai Chinaev",
+      "Yi Chou",
+      "Zhaohui Chu",
+      "Benjamin Coleman",
+      "Pooja Consul",
+      "Sam Conway-Rahman",
+      "Scott Crowell",
+      "Dylan Cutler",
+      "Vivek Dani",
+      "Samira Daruki",
+      "Anil Das",
+      "Daniel Deutsch",
+      "Nishanth Dikkala",
+      "Li Ding",
+      "Qiuhan Ding",
+      "Shenil Dodhia",
+      "Konstantin Donhauser",
+      "Tulsee Doshi",
+      "Anca Dragan",
+      "Alex Druinsky",
+      "Sahil Dua",
+      "Zoltan Egyed",
+      "Danielle Eisenbud",
+      "Daniel Eppens",
+      "Cindy Fan",
+      "Bahare Fatemi",
+      "Yassir Fathullah",
+      "Vlad Feinberg",
+      "Milen Ferev",
+      "Takumi Fujimoto",
+      "Isaac Galatzer-Levy",
+      "João Gante",
+      "Simon Geisler",
+      "Soham Ghosal",
+      "Antonious M. Girgis",
+      "Alec Go",
+      "Alhaad Gokhale",
+      "Alex Grills",
+      "Yiming Gu",
+      "Pramod Gupta",
+      "Guru Guruganesh",
+      "Raia Hadsell",
+      "Hamza Harkous",
+      "Jitendra Harlalka",
+      "Demis Hassabis",
+      "Anja Hauth",
+      "Joe Heyward",
+      "Arian Hosseini",
+      "Chih-Yang Hsia",
+      "I-Hung Hsu",
+      "Xiaopeng Huang",
+      "Yangsibo Huang",
+      "Kevin Hui",
+      "Adrian Hutter",
+      "Te I",
+      "Fotis Iliopoulos",
+      "Advait Jain",
+      "Ganesh Jawahar",
+      "Ziwei Ji",
+      "Qilin Jin",
+      "Melvin Johnson",
+      "Kandarp Joshi",
+      "Arun Kandoor",
+      "Wang-Cheng Kang",
+      "Koray Kavukcuoglu",
+      "Mehran Kazemi",
+      "Kathleen Kenealy",
+      "Amr Khalifa",
+      "Phoebe Kirk",
+      "Suraj Kothawade",
+      "Vitaly Kovalev",
+      "Neel Kovelamudi",
+      "Adam Kraft",
+      "Ravin Kumar",
+      "Harish Kuppam",
+      "Justin Lannin",
+      "Chen-Yu Lee",
+      "Seungji Lee",
+      "Dmitry Lepikhin",
+      "Dongdong Li",
+      "Qiujia Li",
+      "Valentin Liévin",
+      "Ethan Lin",
+      "Ziqian Lin",
+      "Casper Liu",
+      "Tianlin Liu",
+      "Tianqi Liu",
+      "Xin Liu",
+      "Mayank Lunayach",
+      "Min Ma",
+      "Gagan Madan",
+      "Andrii Maksai",
+      "Eric Malmi",
+      "Michal Matuszak",
+      "Daniel McDuff",
+      "Gaurav Menghani",
+      "Daniil Mirylenka",
+      "Karolis Misiunas",
+      "Vedant Misra",
+      "Andreea Mitran",
+      "Kareem Mohamed",
+      "Maksim Mukha",
+      "Eric Noland",
+      "James O'Donnell",
+      "Kate Olszewska",
+      "Bernett Orlando",
+      "Wanqiong Pan",
+      "Rina Panigrahy",
+      "Unnati Parekh",
+      "Chunjong Park",
+      "Eric Paskie",
+      "Liqian Peng",
+      "Bryce Petrini",
+      "Slav Petrov",
+      "Jonas Pfeiffer",
+      "Bilal Piot",
+      "Martyna Plomecka",
+      "Siim Poder",
+      "Octavio Ponce",
+      "Arijit Pramanik",
+      "David Racz",
+      "Anish Rajan",
+      "Michelle Ramanovich",
+      "Anand Rao",
+      "Marvin Ritter",
+      "Vitor Rodrigues",
+      "Evan Rosen",
+      "Mikołaj Rybiński",
+      "Noveen Sachdeva",
+      "Michaël E. Sander",
+      "Rohit Sathyanarayana",
+      "Sagar Savla",
+      "Samuel Schmidgall",
+      "Tal Schuster",
+      "Benoit Seguin",
+      "Andrew Sellergren",
+      "Aliaksei Severyn",
+      "Izhak Shafran",
+      "Dhruv Shah",
+      "Yuan Shangguan",
+      "Ashish Shenoy",
+      "Pradeep Shenoy",
+      "Rakesh Shivanna",
+      "Pauline Sho",
+      "Lucas Spangher",
+      "Wojciech Stokowiec",
+      "Tim Strother",
+      "Yao Su",
+      "Yinghao Sun",
+      "Mukund Sundararajan",
+      "Andrea Tacchetti",
+      "Mor Hazan Taege",
+      "Pouya Tafti",
+      "Chetan Tekur",
+      "Rahul Thapa",
+      "Madeleine Traverse",
+      "Lenart Treven",
+      "Tao Tu",
+      "Chien Te Tung",
+      "Petar Veličković",
+      "Malini Pooni Venkat",
+      "Sagar Gubbi Venkatesh",
+      "Vidya Venkiteswaran",
+      "Francesco Visin",
+      "Alex Vitvitskyi",
+      "Kiran Vodrahalli",
+      "Weiyi Wang",
+      "Xin Wang",
+      "Tris Warkentin",
+      "Jan Wassenberg",
+      "John Wieting",
+      "Lechao Xiao",
+      "Hao Xu",
+      "Yuhui Xu",
+      "Fuzhao Xue",
+      "Arun Yadav",
+      "Jun Yan",
+      "Antoine Yang",
+      "Lin Yang",
+      "Ming-Hsuan Yang",
+      "Ziyu Ying",
+      "Jae Hyeon Yoo",
+      "Sajjad Zafar",
+      "Fred Zhang",
+      "Jiageng Zhang",
+      "Jianyi Zhang",
+      "Xiaofan Zhang",
+      "Chao Zhao",
+      "David Zhou",
+      "Chen Zou"
+    ],
+    "organization": "Google",
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [
+      "Mixture-of-Experts architectures",
+      "vision encoders",
+      "audio encoders",
+      "encoder-free architecture",
+      "thinking mode",
+      "long-context abilities"
+    ],
+    "published_at": "2026-07-02T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.02770",
+    "arxiv_url": "https://arxiv.org/abs/2607.02770",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.02770v1/2607.02770v1/x1.png",
+            "https://arxiv.org/html/2607.02770v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1: The autoregressive MTP drafter (blue blocks on the right) is fed activations and KV cache from the main model (gray blocks).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.02770/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.02770v1/2607.02770v1/x2.png",
+            "https://arxiv.org/html/2607.02770v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2: Image resizing. Here we use patch_size=16 , pooling_kernel_size=3 , max_soft_tokens=10 . The image is thus first resized to 2 × \\times 4 pooled patches (each of size 48 ​ px 2 48\\text{px}^{2} ), which is the closest match that results in a sequence length below the targeted 10. The 72 patches (each of size 16 ​ px 2 16\\text{px}^{2} ) are then processed by the vision encoder, the vision encoder representations are pooled 3 × 3 3\\times 3 , and the resulting 8 soft tokens are processed by the LLM backbone.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-08/2607.02770/fig2_1.png"
+        ]
+      }
+    ]
+  }
+]

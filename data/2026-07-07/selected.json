@@ -1,0 +1,735 @@
+[
+  {
+    "arxiv_id": "2607.04033",
+    "title": "OmniOpt: Taxonomy, Geometry, and Benchmarking of Modern Optimizers",
+    "abstract": "Optimizer selection for large-scale model training has become a system-level design decision constrained jointly by compute, memory, tuning budget, and task diversity, yet the landscape of over one hundred methods remains fragmented. We therefore present OmniOpt, a unified survey and benchmark cookbook of optimizers for the research community. OmniOpt rests on four coupled components. First, we treat every optimizer update as a structured transformation through a five-stage meta-pipeline, and show that most methods engage only one or two of these stages. Second, we use norm-constrained linear minimization oracles (LMOs) to unify different optimizers. Third, these two views ground a dual-dimension taxonomy, one dimension assigning each method to a mechanism family and the other recording the measurable training objectives it aims to improve. Fourth, and at the core of this paper, we instantiate the full taxonomy in a unified cross-domain benchmark spanning representative optimizers, model scales, and training regimes from language model pretraining to image classification, systematically analyzing each method family across multiple effect objectives and laying out their trade-offs. OmniOpt thus supplies the research community with an operational coordinate system for selecting optimizers under explicit mechanism and objective assumptions, and charts a direction for the future development of the optimizer community.",
+    "upvotes": 74,
+    "authors": [
+      "Siyuan Li",
+      "Jiabao Pan",
+      "Yumou Liu",
+      "Zhuoli Ouyang",
+      "Xin Jin",
+      "Xinglong Xu",
+      "Jingxuan Wei",
+      "Shengye Pang",
+      "Jintao Che",
+      "Xuanhe Zhou",
+      "Conghui He",
+      "Cheng Tan"
+    ],
+    "organization": "OpenDataLab",
+    "github_repo": "https://github.com/OpenRaiser/OmniOpt",
+    "github_stars": 34,
+    "ai_keywords": [
+      "optimizer selection",
+      "large-scale model training",
+      "meta-pipeline",
+      "norm-constrained linear minimization oracles",
+      "cross-domain benchmark",
+      "optimizer families",
+      "training objectives",
+      "model scales",
+      "systematic analysis",
+      "trade-offs"
+    ],
+    "published_at": "2026-07-04T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.04033",
+    "arxiv_url": "https://arxiv.org/abs/2607.04033",
+    "html_available": true,
+    "figures": []
+  },
+  {
+    "arxiv_id": "2607.04425",
+    "title": "UI-MOPD: Multi-Platform On-Policy Distillation for Continual GUI Agent Learning",
+    "abstract": "Recent advances in multimodal foundation models and agent systems have driven GUI agents from single-platform task execution toward cross-platform interaction. However, building multi-platform GUI agents remains challenging. On one hand, high-quality and executable cross-platform interaction trajectories are still scarce, and existing data often suffer from limited platform coverage. On the other hand, different platforms exhibit distinct interaction conventions, making joint or continual training prone to behavioral pattern mixing, platform-specific capability degradation, and catastrophic forgetting. To address these challenges, we construct Uni-GUI, a high-quality cross-platform GUI interaction dataset, and propose UI-MOPD, the first method that incorporates multi-teacher on-policy distillation into continual learning for GUI agents. UI-MOPD dynamically selects a platform-specific teacher according to the current environment and transfers platform-specific behavioral priors to a shared policy through platform-conditioned distillation, enabling adaptation to new platforms while preserving capabilities on existing ones. Experiments on OSWorld and MobileWorld show that UI-MOPD achieves task success rates of 38.2% and 12.0%, respectively, demonstrating its effectiveness in balancing cross-platform capability retention and new-platform adaptation.\n  Project page: https://elispectre.github.io/UI-MOPD/.",
+    "upvotes": 68,
+    "authors": [
+      "Niu Lian",
+      "Alan Chen",
+      "Zhehao Yu",
+      "Chengzhen Duan",
+      "Fazhan Liu",
+      "Hui Liu",
+      "Pei Fu",
+      "Jian Luan",
+      "Yaowei Wang",
+      "Shu-Tao Xia",
+      "Jinpeng Wang"
+    ],
+    "organization": "Tsinghua Shenzhen International Graduate School, Tsinghua University, Xiaomi",
+    "github_repo": "https://github.com/EliSpectre/UI-MOPD",
+    "github_stars": 42,
+    "ai_keywords": [
+      "multimodal foundation models",
+      "agent systems",
+      "GUI agents",
+      "cross-platform interaction",
+      "continual learning",
+      "multi-teacher on-policy distillation",
+      "platform-conditioned distillation",
+      "behavioral pattern mixing",
+      "catastrophic forgetting"
+    ],
+    "published_at": "2026-07-05T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.04425",
+    "arxiv_url": "https://arxiv.org/abs/2607.04425",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04425v1/2607.04425v1/x2.png",
+            "https://arxiv.org/html/2607.04425v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 1 : Motivation of UI-MOPD. Naively combining desktop and mobile signals, as in model merging or mixed SFT, can mix platform-specific behavioral conventions and produce an averaged policy. UI-MOPD uses platform-conditioned routing and multi-teacher on-policy distillation to integrate platform-specific expertise into a shared GUI agent.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04425/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04425v1/2607.04425v1/x3.png",
+            "https://arxiv.org/html/2607.04425v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 2 : Overview of UI-MOPD training pipeline. In Stage 1, platform-specific desktop and mobile teachers are obtained by supervised fine-tuning on Uni-GUI trajectories collected from a unified cross-platform harness. In Stage 2, a shared student policy is trained with multi-teacher on-policy distillation, where platform-conditioned routing selects the corresponding teacher to provide reverse-KL guidance together with rule-based rollout rewards.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04425/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04425v1/2607.04425v1/x4.png",
+            "https://arxiv.org/html/2607.04425v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 3 : Mobile task execution example of UI-MOPD.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04425/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04425v1/2607.04425v1/x5.png",
+            "https://arxiv.org/html/2607.04425v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 4 : Overview of Unified Cross-Platform Data Collection Harness.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04425/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04425v1/2607.04425v1/x6.png",
+            "https://arxiv.org/html/2607.04425v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 5 : Desktop task execution example of UI-MOPD.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04425/fig5_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.05373",
+    "title": "PixWorld: Unifying 3D Scene Generation and Reconstruction in Pixel Space",
+    "abstract": "3D reconstruction and generation are commonly tackled by separate paradigms: pixel-based regression for reconstruction, and latent diffusion for generation. Recent works attempt to unify them in latent space, but with notable drawbacks: the diffusion objective is defined on latent features rather than the underlying 3D representation, and both branches suffer from information loss introduced by latent encoding, while requiring a pretrained Variational Autoencoder (VAE) or Representation Autoencoder (RAE). In this paper, we reformulate these two tasks under a unified pixel-space diffusion paradigm and introduce PixWorld, a single model that jointly addresses 3D reconstruction and generation. By supervising diffusion directly on rendered images, PixWorld removes the above limitations and aligns optimization with 3D scene fidelity. Beyond photometric and perceptual supervision that operates at the 2D image level and lacks 3D geometric awareness, we further introduce a geometry perception loss that aligns rendered views with their ground truth in the geometry-aware feature space of a pretrained 3D foundation model, providing 3D structural supervision. PixWorld consistently outperforms prior latent-space generation methods and matches state-of-the-art reconstruction methods, demonstrating the superiority of a unified pixel-space approach.",
+    "upvotes": 61,
+    "authors": [
+      "Sensen Gao",
+      "Zhaoqing Wang",
+      "Qihang Cao",
+      "Dongdong Yu",
+      "Changhu Wang",
+      "Jia-Wang Bian"
+    ],
+    "organization": "Nanyang Technological University",
+    "github_repo": "https://github.com/SensenGao/PixWorld",
+    "github_stars": 167,
+    "ai_keywords": [
+      "3D reconstruction",
+      "3D generation",
+      "latent space",
+      "pixel space",
+      "diffusion models",
+      "Variational Autoencoder",
+      "Representation Autoencoder",
+      "3D foundation model",
+      "geometry perception loss",
+      "rendered images",
+      "3D scene fidelity"
+    ],
+    "published_at": "2026-07-06T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.05373",
+    "arxiv_url": "https://arxiv.org/abs/2607.05373",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.05373v1/2607.05373v1/x1.png",
+            "https://arxiv.org/html/2607.05373v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1: PixWorld unifies 3D scene reconstruction and generation within a single model. Unlike prior approaches that compute losses in the latent space of a VAE (Kingma and Welling, 2013 ) or RAE (Zheng et al. , 2025 ) , PixWorld applies a flow matching objective directly in pixel space over multi-view renderings, enabling end-to-end optimization of the underlying 3D representation. This design avoids the information loss inherent to latent representations and eliminates the cost of pretraining a VAE or RAE.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.05373/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.05373v1/2607.05373v1/x2.png",
+            "https://arxiv.org/html/2607.05373v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2: Overview of PixWorld. (a) PixWorld adopts a unified DiT-based framework that takes noisy and clean multi-view inputs, with optional text conditioning, and jointly predicts depth and 3DGS through shared transformer blocks. (b) A pixel-space flow matching loss is imposed on rendered multi-view images to directly optimize the underlying 3D representation. (c) A geometry perception loss further enforces structural consistency by aligning rendered views with ground-truth observations through a 3D foundation model.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.05373/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.05373v1/2607.05373v1/figs/pose_traj.png",
+            "https://arxiv.org/html/2607.05373v1/figs/pose_traj.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.05373v1/2607.05373v1/x3.png",
+            "https://arxiv.org/html/2607.05373v1/x3.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.05373v1/2607.05373v1/x4.png",
+            "https://arxiv.org/html/2607.05373v1/x4.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.05373v1/2607.05373v1/figs/appendix_vis2.png",
+            "https://arxiv.org/html/2607.05373v1/figs/appendix_vis2.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.05373v1/2607.05373v1/figs/appendix_vis.png",
+            "https://arxiv.org/html/2607.05373v1/figs/appendix_vis.png"
+          ]
+        ],
+        "caption": "Table 2: Quantitative comparison on single-image 3D scene generation, averaged. Results on RealEstate10K (Zhou et al. , 2018 ) and DL3DV-10K (Ling et al. , 2024 ) under the 1-view setting, averaged over First Frame and Bidirectional configurations. Best in bold ; second best underlined . Table 3: Quantitative comparison on two-view 3D scene generation, averaged. Results on RealEstate10K (Zhou et al. , 2018 ) and DL3DV-10K (Ling et al. , 2024 ) under the 2-view setting, averaged over Interpolation and Extrapolation configurations. Best in bold ; second best underlined . Table 4: Quantitative comparison on the WorldScore benchmark (Duan et al. , 2025 ) . We report all seven official metrics together with their average. Bold and underline indicate the best and the second-best results, respectively. Figure 3: Visualization of PixWorld under different settings. PixWorld flexibly handles both 3D reconstruction and generation: when all input views are clean, it performs reconstruction; when clean and noisy views are arbitrarily mixed, it performs generation. We visualize the camera trajectory, where blue and red frustums denote clean input views and generated views, respectively. Table 5: Ablation study on geometry perception loss. We report results on RealEstate10K (Zhou et al. , 2018 ) under the 1-view setting. Figure 4: Visualization of comparisons with baselines. The large view on top denotes the input view, while the two smaller views below show novel views generated by each method. Table 6: Architecture of the two-stream DiT denoiser f θ f_{\\theta} . Each block follows an MMDiT-style design: the clean and noise streams maintain independent pre-LayerNorm, QKV / output projections, SwiGLU MLP, and adaLN-Zero weights, while a single full attention is computed jointly over the concatenated [ Ω c ; Ω n ] [\\,\\Omega_{\\mathrm{c}};\\,\\Omega_{\\mathrm{n}}\\,] tokens with shared q , k q,k -RMSNorm. The cross-attention to text and the timestep embedder are also shared across streams, and output heads are duplicated per stream so that both clean and noisy tokens are decoded into depth and 3D-Gaussian attributes at every patch. Table 7: Quantitative comparison on single-image 3D scene generation, per configuration. We evaluate on RealEstate10K (Zhou et al. , 2018 ) and DL3DV-10K (Ling et al. , 2024 ) under 1-view First Frame and 1-view Bidirectional. Best in bold ; second best underlined . Table 8: Quantitative comparison on two-view 3D scene generation, per configuration. We evaluate on RealEstate10K (Zhou et al. , 2018 ) and DL3DV-10K (Ling et al. , 2024 ) under 2-view Interpolation and 2-view Extrapolation. Best in bold ; second best underlined . Figure 5: Ablation study on the Geometry Perception loss in PixWorld. Given a single input image, our model generates the subsequent 7 frames (8 frames in total); we visualize 4 representative frames here for clarity. Pose accuracy is quantitatively evaluated by comparing the estimated camera poses against the ground-truth poses. Compared to the variant without Geometry Perception ( w/o Geom. ), the full model achieves more precise camera pose control and substantially mitigates the blurriness in later-view predictions, demonstrating that the global 3D perception loss is essential for maintaining both geometric consistency and visual fidelity over long generation horizons. Table 9: Inference speed comparison on a single NVIDIA A100-SXM4-80G GPU. We report the wall-clock time to generate one scene, the number of key frames per scene, and the number of function evaluations (NFE). Figure 6: More visualizations of reconstruction and generation under varying view selections, including camera trajectories with input and generated views marked, and the corresponding depth maps predicted by PixWorld. Figure 7: More visualizations of generated scenes. The first view is the input, and we show both RGB renderings and predicted depth maps.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.05373/fig3_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.05373/fig3_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.05373/fig3_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.05373/fig3_4.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.05373/fig3_5.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.04438",
+    "title": "ResearchStudio-Reel: Automate the Last Mile of Research from Paper to Poster, Video, and Blog",
+    "abstract": "Research dissemination, turning a paper into a poster, a talk video, and a blog post, is still a manual last mile. Prior automation treats each artifact in isolation that each re-extract the paper from scratch, usually ship one-way renders the author cannot reopen in PowerPoint or Word, and gates quality on soft VLM-preference scores that plateau while load-bearing sections still read as empty. We argue this last mile is best built as a composition of skills: thin agent-readable contracts that share one upstream extractor and wrap deterministic primitives in a measured-fill loop whose exits are hard pass/fail render gates. We instantiate this as ResearchStudio-Reel, five Claude Code and Codex skills organized into one shared extractor (Paper2Assets), three editable generators (Paper2Poster, Paper2Video, Paper2Blog), and one interactive convergence layer (Paper2Reel). Paper2Assets extracts each paper once into a shared bundle that can be reused by every downstream skill; The three generators produce a print-ready poster, a synchronized talk video, and a bilingual blog that stay factually consistent and round-trip through PowerPoint or Word; Paper2Reel then binds all three into a self-contained HTML viewer whose section-level clicks jump the video, slides, captions, and blog to matching content. On the Paper2Poster benchmark, our posters lead every aesthetic and information sub-criterion against both prior automated systems and single-shot frontier LLMs, surpassing the authors' own on aesthetics under two held-out VLM judges and winning overall on 84% to 93% of papers; capability audits further show that, by uniquely pairing narration-aligned on-slide highlights with a bilingual blog gated by layout-aware DOCX repair, ResearchStudio-Reel is the only pipeline to ship all three editable artifacts. Project is available at https://aka.ms/ResearchStudio",
+    "upvotes": 61,
+    "authors": [
+      "Lingao Xiao",
+      "Yalun Dai",
+      "Yangyu Huang",
+      "Qihao Zhao",
+      "Wenshan Wu",
+      "Hugo He",
+      "Ruishuo Chen",
+      "Jin Jiang",
+      "Qianli Ma",
+      "Jiahuan Zhang",
+      "Xin Zhang",
+      "Ying Xin",
+      "Yang Ou",
+      "Yan Xia",
+      "Scarlett Li",
+      "Longbo Huang",
+      "Zhipeng Zhang",
+      "Yang He",
+      "Yap Kim Hui",
+      "Yan Lu"
+    ],
+    "organization": "Microsoft",
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [
+      "research dissemination",
+      "automated artifact generation",
+      "paper extraction",
+      "poster generation",
+      "talk video creation",
+      "blog post writing",
+      "VLM preference scores",
+      "deterministic primitives",
+      "measured-fill loop",
+      "render gates",
+      "paper-to-assets extractor",
+      "editable generators",
+      "interactive convergence layer",
+      "HTML viewer",
+      "section-level navigation",
+      "layout-aware DOCX repair",
+      "capability audit"
+    ],
+    "published_at": "2026-07-05T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.04438",
+    "arxiv_url": "https://arxiv.org/abs/2607.04438",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/x1.png",
+            "https://arxiv.org/html/2607.04438v1/x1.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/x2.png",
+            "https://arxiv.org/html/2607.04438v1/x2.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/x3.png",
+            "https://arxiv.org/html/2607.04438v1/x3.png"
+          ]
+        ],
+        "caption": "(a) Poster ( Paper2Poster ) (b) Talk video ( Paper2Video ) (c) Bilingual blog ( Paper2Blog ) Figure 1: Three editor-ready artifacts from one paper. From a single accepted PDF, ResearchStudio-Reel produces a print-ready conference poster, a narration-aligned talk video, and a bilingual blog spread, shown here across example papers. Every deliverable stays editable in its native tool (PowerPoint for the poster and the video deck, Word for the blog), and the three are cross-linked into one navigable surface. A single shared paper2assets extraction (Figure 2 ) keeps the artifacts factually consistent rather than re-deriving the paper three times.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig1_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig1_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig1_3.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/x4.png",
+            "https://arxiv.org/html/2607.04438v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 2: The ResearchStudio-Reel pipeline. One PDF in, three editor-ready artifacts out, with one shared extraction stage in the middle. A single Paper2Assets pass produces the bundle that Paper2Poster, Paper2Video, and Paper2Blog each consume verbatim, and Paper2Reel binds the three into one navigable surface. Sharing the same section identifiers, figure handles, and claim anchors keeps the artifacts mutually cross-referenced rather than disjoint.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/x5.png",
+            "https://arxiv.org/html/2607.04438v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 3: The Paper2Poster pipeline. A Paper2Assets bundle (paper spec, cleaned figures, logos, QR) drives an agent that picks the Method plus secondary figures and composes a self-contained poster.html along four axes: column layout, visual style, title-band header, and the Scan-to-Read block. A staged-fill loop then measures each section (slack + polish) and edits one section per round until every panel reads FULL (90–98%) and every figure is large enough on one axis. Narration audio and header logos are packed in, and the converged page is rendered to PDF and PNG and to an editable, native-shape PowerPoint, released only through a mandatory deliverables gate.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/x6.png",
+            "https://arxiv.org/html/2607.04438v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 4: The staged-fill loop, visualized on the Latent Diffusion Models poster. A debug overlay boxes every section and colors it by fill verdict (red / amber for EMPTY / SPARSE , green for FULL , orange / magenta for SPILLAGE / OVERFLOW ), annotated with its fill percentage. (a) Initial explorations: the freshly composed draft is uneven, with several underfilled sections and small figures. (b) Fill-loop in progress: the loop measures each section and edits one per round, so cards pass through OVERFLOW and SPARSE as content is added or trimmed. (c) Poster completed: the loop stops once every section reads FULL (90–98%) and every figure is large enough, yielding the shipped poster.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/x7.png",
+            "https://arxiv.org/html/2607.04438v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 5: Paper2Video overview. The skill reuses the Paper2Assets bundle, plans narration and duration, delegates deck authoring to the full ppt-master workflow, synthesizes aligned audio and captions, renders visual attention cues, and packages the editable deck with captioned and no-subtitle videos. The root deliverables are video.pptx , video.mp4 , and video_no_subtitles.mp4 , while timelines, captions, audio clips, and visual cues stay under assets/ , the auditable intermediates directory.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/paper2video_showcase.png",
+            "https://arxiv.org/html/2607.04438v1/figures/paper2video_showcase.png"
+          ]
+        ],
+        "caption": "Figure 6: Paper2Video deliverable showcase. The figure pairs the editable video.pptx with the captioned video.mp4 and summarizes the user-facing controls checked by the package gate: target duration, highlight style, caption mode, and video specification.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/x8.png",
+            "https://arxiv.org/html/2607.04438v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 7: Paper2Blog pipeline. The skill reuses the Paper2Assets bundle, builds one shared evidence map, selects a shared article figure set, writes two language-specific outlines and DOCX files, and runs a strict package gate. The root deliverables are the Chinese article and the English article. Outlines, previews, and QA reports stay in the skill’s auditable intermediates directory.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/paper2blog_showcase.png",
+            "https://arxiv.org/html/2607.04438v1/figures/paper2blog_showcase.png"
+          ]
+        ],
+        "caption": "Figure 8: Paper2Blog DOCX showcase. The figure shows the two required Word deliverables, the English article and the Chinese article, together with the layout checks discussed in the text: typography balance, figure fit, caption placement, and pagination risk.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/paper2reel_showcase.png",
+            "https://arxiv.org/html/2607.04438v1/figures/paper2reel_showcase.png"
+          ]
+        ],
+        "caption": "Figure 9: Paper2Reel interaction showcase. (1) Hovering a poster section highlights the active block while neighboring sections fade. (2) Double-clicking the section opens the synchronized modal, with video playback, caption control, and slide thumbnail on the left, a language switch in the header, and the aligned blog passage on the right.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/compare_models/bfly_gt.png",
+            "https://arxiv.org/html/2607.04438v1/figures/compare_models/bfly_gt.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/compare_models/bfly_d48.png",
+            "https://arxiv.org/html/2607.04438v1/figures/compare_models/bfly_d48.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/compare_models/bfly_d48max.png",
+            "https://arxiv.org/html/2607.04438v1/figures/compare_models/bfly_d48max.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/compare_models/bfly_d47.png",
+            "https://arxiv.org/html/2607.04438v1/figures/compare_models/bfly_d47.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/compare_models/bfly_d46.png",
+            "https://arxiv.org/html/2607.04438v1/figures/compare_models/bfly_d46.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/compare_models/bfly_gpt.png",
+            "https://arxiv.org/html/2607.04438v1/figures/compare_models/bfly_gpt.png"
+          ]
+        ],
+        "caption": "Figure 10: Qualitative ablation study. The author ground-truth (top left) is the human reference; the other five are all our method, holding the ResearchStudio-Reel skill, prompt, and pipeline fixed while varying only the harness and base model. Every variant converges to a full, legible single page; they differ in figure choice, phrasing density, and accent, not in structural soundness. All settings use high reasoning effort except the panel marked max reasoning (top-right); the Codex panel runs gpt-5.5 at its default effort.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig10_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig10_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig10_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig10_4.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig10_5.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig10_6.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/compare_auction/gt.png",
+            "https://arxiv.org/html/2607.04438v1/figures/compare_auction/gt.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/compare_auction/ours.png",
+            "https://arxiv.org/html/2607.04438v1/figures/compare_auction/ours.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/compare_auction/paper2poster_tool.png",
+            "https://arxiv.org/html/2607.04438v1/figures/compare_auction/paper2poster_tool.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/compare_auction/postergen.png",
+            "https://arxiv.org/html/2607.04438v1/figures/compare_auction/postergen.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/compare_auction/p2p.png",
+            "https://arxiv.org/html/2607.04438v1/figures/compare_auction/p2p.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/compare_auction/llm_claude.png",
+            "https://arxiv.org/html/2607.04438v1/figures/compare_auction/llm_claude.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/compare_auction/llm_gpt.png",
+            "https://arxiv.org/html/2607.04438v1/figures/compare_auction/llm_gpt.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04438v1/2607.04438v1/figures/compare_auction/llm_gemini.png",
+            "https://arxiv.org/html/2607.04438v1/figures/compare_auction/llm_gemini.png"
+          ]
+        ],
+        "caption": "Figure 11: Poster comparison on one benchmark paper (“A Context-Integrated Transformer-Based Neural Network for Auction Design”). Every system renders from the same source PDF: our poster and the human-made (authors’) poster (left, largest), the Paper2Poster Tool [ 24 ] and PosterGen [ 38 ] baselines (center), the portrait P2P [ 29 ] baseline (right), and three single-shot LLM baselines (Claude-4.8 Opus, GPT-5.5, Gemini-3.1 Pro; bottom row). The single-shot posters carry comparable information but a markedly weaker visual layout than ours.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig11_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig11_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig11_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig11_4.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig11_5.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig11_6.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig11_7.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04438/fig11_8.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.04439",
+    "title": "ResearchStudio-Idea: An Evidence-Grounded Research-Ideation Skill Suite from ML Conference Outcomes",
+    "abstract": "Large language models have made research ideation increasingly accessible, yet effective idea development requires more than generating candidate directions. Researchers must ground a problem in current literature, identify meaningful bottlenecks, differentiate from existing solutions, and evaluate risks before committing to implementation. We present ResearchStudio-Idea as a reusable skill suite for this first mile of research ideation. The suite includes Paper-Search, a standalone multi-source literature search skill; Scoop-Check, a standalone prior-art collision checker for novelty claims; and IdeaSpark, the end-to-end skill that composes evidence grounding, pattern-guided generation, collision retrieval, audit, and idea-card rendering into one workflow. IdeaSpark is constructed from a corpus of 1,947 machine learning conference papers collected from ICLR, ICML, and NeurIPS between 2021 and 2025, including Oral papers, a separately tracked high-citation subset, and rejected submissions. Analysis of these outcomes reveals 31 recurring ideation sub-patterns, consolidated into 15 reusable ideation patterns. Each pattern is operationalized as a structured card containing research contexts, bottleneck types, differentiation strategies, supporting precedents, and common failure modes. Given a research problem and an evidence bundle, IdeaSpark evaluates evidence readiness, reconstructs the surrounding research context, identifies unresolved bottlenecks, selects relevant patterns, instantiates one candidate direction, retrieves potentially conflicting prior work, and performs outcome-informed auditing. This workflow transforms reusable ideation patterns into traceable research proposals. Blind automated-judge evaluations show that IdeaSpark consistently produces stronger research proposals than no-skill and generic-skill baselines while maintaining competitive novelty.",
+    "upvotes": 53,
+    "authors": [
+      "Qihao Zhao",
+      "Yangyu Huang",
+      "Yalun Dai",
+      "Lingao Xiao",
+      "Jianjun Gao",
+      "Xin Zhang",
+      "Wenshan Wu",
+      "Scarlett Li",
+      "Yang He",
+      "Yan Lu",
+      "Yap Kim Hui"
+    ],
+    "organization": "Microsoft",
+    "github_repo": "https://github.com/microsoft/ResearchStudio",
+    "github_stars": 610,
+    "ai_keywords": [
+      "research ideation",
+      "literature search",
+      "prior-art collision checker",
+      "pattern-guided generation",
+      "evidence grounding",
+      "idea-card rendering",
+      "reusable ideation patterns",
+      "research context",
+      "bottleneck identification",
+      "differentiation strategies",
+      "prior work retrieval",
+      "outcome-informed auditing"
+    ],
+    "published_at": "2026-07-05T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.04439",
+    "arxiv_url": "https://arxiv.org/abs/2607.04439",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x1.png",
+            "https://arxiv.org/html/2607.04439v1/x1.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x2.png",
+            "https://arxiv.org/html/2607.04439v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 1 : IdeaSpark improves idea quality while maintaining competitive novelty in blind automated-judge evaluations. Left: quality–novelty trade-off over 100 ICLR-2026-Oral seeds, each judged in 3 blind rounds against three baselines: Opus-4.8 bare, Opus-4.8 self-generated, and GPT-5.5 bare. IdeaSpark occupies the high-quality, competitively novel region, whereas GPT-5.5 illustrates a novel-but-empty failure mode: high apparent novelty but substantially lower quality. Right: mean idea-quality across 21 ICLR primary-area domains; IdeaSpark is highest in every domain, suggesting the gain is broad rather than domain-specific.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig1_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig1_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x3.png",
+            "https://arxiv.org/html/2607.04439v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 2 : IdeaSpark data-to-skill workflow. The upper band constructs reusable ideation assets from the 1,947-paper ICLR / ICML / NeurIPS corpus: papers are outcome-labeled, normalized into strategy signatures, mined into 31 sub-patterns, and induced into 15 operational pattern cards. The lower band shows how the skill uses those cards at inference time: evidence grounding and full-text retrieval feed a staged reasoning loop for bottleneck diagnosis, pattern-guided candidate generation, and collision/audit verdicts, followed by expansion, validation, and idea-card deliverables.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x4.png",
+            "https://arxiv.org/html/2607.04439v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 3 : Acceptance composition of the 31 clusters, sorted by Oral rate among O + R O{+}R . Six clusters clear the 65% Oral threshold; one clears the 65% Reject threshold. The remaining 24 are mixed. Cluster labels are colored by risk flag (green = Oral-safe, red = Reject-warn, gray = mixed; deliberately off the bar palette); the threshold uses p O p_{O} among O + R O{+}R , so it is shown via label color rather than an x x -axis line, because the bars are O / H ​ C / R O/HC/R shares that include HC.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x5.png",
+            "https://arxiv.org/html/2607.04439v1/x5.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x6.png",
+            "https://arxiv.org/html/2607.04439v1/x6.png"
+          ]
+        ],
+        "caption": "(a) 31 clusters, colored; unclustered in gray. (b) Colored by label (Oral / HC / Reject). Figure 4 : 2D UMAP projection of the 1,891-paper embedding. Oral, HC, and Reject papers are interleaved across essentially every cluster: the embedding captures strategy, not acceptance.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig4_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig4_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x7.png",
+            "https://arxiv.org/html/2607.04439v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 5 : Ideation-pattern hierarchy across 989 clustered papers. Three concentric rings share one angular layout, ordered by size clockwise from 12 o’clock; categorical colors identify the 15 patterns and are reused across all rings, with white gaps separating segments. Inner ring : the 15 induced Level-1 ideation patterns, each wedge sized by its clustered-paper count (the count is printed inside the larger wedges; full pattern names are in the right-hand legend). Middle ring : each pattern’s arc is subdivided into its constituent sub-clusters (31 in total), shaded as a lighter tint of the parent pattern; the number of segments within a wedge shows how finely that pattern fragments, while the segment angle is the equal share within the pattern, not the per-sub-cluster paper count. Outer ring : a thin heat band encoding each pattern’s Oral acceptance rate p O = n O / ( n O + n H ​ C + n R ) p_{O}=n_{O}/(n_{O}+n_{HC}+n_{R}) on the light-to-dark gray scale shown at left (light = low, dark = high), so reviewer outcome can be read against methodology at a glance. Totals: 15 patterns, 31 sub-clusters, 989 clustered papers (of 1,891 embedded).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x8.png",
+            "https://arxiv.org/html/2607.04439v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 6 : Centroid-cosine similarity between the 15 ideation patterns. Rows/columns ordered by mean similarity (most “central” ideation patterns first). All off-diagonal entries fall in [ 0.79 , 0.96 ] [0.79,0.96] : ideation patterns are not orthogonal in this embedding; they form a dense neighborhood on a low-dimensional manifold.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x9.png",
+            "https://arxiv.org/html/2607.04439v1/x9.png"
+          ]
+        ],
+        "caption": "Figure 7 : Multi-label ideation pattern assignment. (a) k k distribution as grouped counts by acceptance class. (b) Class-conditional distribution P ​ ( k ∣ decision ) P(k\\mid\\text{decision}) : each curve is a probability mass function summing to 100%. k = 2 k{=}2 is the mode for all three classes.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x10.png",
+            "https://arxiv.org/html/2607.04439v1/x10.png"
+          ]
+        ],
+        "caption": "Figure 8 : Top combinations under multi-label tagging. (a) 2-way combinations ( n ≥ 20 n\\geq 20 ); (b) 3-way combinations ( n ≥ 10 n\\geq 10 ). Dotted line: dataset-wide baseline p O = 58.4 % p_{O}=58.4\\% .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x11.png",
+            "https://arxiv.org/html/2607.04439v1/x11.png"
+          ]
+        ],
+        "caption": "Figure 9 : Per-ideation-pattern acceptance bias. Bars show Δ OR \\Delta_{\\mathrm{OR}} ; positive bars are Oral-enriched and negative bars are Reject-enriched. Diamonds show Δ OH \\Delta_{\\mathrm{OH}} where n H ​ C ≥ 5 n_{HC}\\geq 5 .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x12.png",
+            "https://arxiv.org/html/2607.04439v1/x12.png"
+          ]
+        ],
+        "caption": "Figure 10 : (a) Paper counts per (domain, ideation pattern) cell, with domains and ideation patterns sorted by total. (b) Per-cell Oral rate p O p_{O} (deeper green is higher; gray cells have n O + n R < 5 n_{O}+n_{R}<5 , too few papers to estimate a rate; the colorbar marks the 58.4 % 58.4\\% dataset average). The colored signal in (b) is heterogeneous: the same ideation pattern lands at very different Oral rates across domains.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x13.png",
+            "https://arxiv.org/html/2607.04439v1/x13.png"
+          ]
+        ],
+        "caption": "Figure 11 : Ideation-pattern breadth: number of distinct domains each ideation pattern has ≥ 5 \\geq 5 papers in (out of 28). The annotation gives each pattern’s multi-label paper count: a paper is counted under every pattern it carries, so these counts overlap across patterns and sum to more than the 1 , 891 1{,}891 -paper corpus. Most patterns touch ≥ 18 \\geq 18 domains, supporting the skill’s domain-agnostic positioning.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x14.png",
+            "https://arxiv.org/html/2607.04439v1/x14.png"
+          ]
+        ],
+        "caption": "Figure 12 : Per-pattern share of papers by year under multi-label tagging (% of that year’s papers carrying the pattern in any role; rows sum to k ¯ ≈ 230 % \\bar{k}\\approx 230\\% ). Left: top-8 by total volume. Right: remaining seven. Lines that rise through the window are the patterns currently ascending; those that fall are losing share.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig12_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x15.png",
+            "https://arxiv.org/html/2607.04439v1/x15.png"
+          ]
+        ],
+        "caption": "Figure 13 : Pattern usage by venue under multi-label tagging. Each bar reports the share of papers in a venue that carry the pattern in any role. Patterns are sorted by total volume.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig13_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x16.png",
+            "https://arxiv.org/html/2607.04439v1/x16.png"
+          ]
+        ],
+        "caption": "Figure 14 : Left: Reject-only clustering ( n = 711 n{=}711 , 13 clusters, 40.5 % 40.5\\% unclustered). Right: Reject-only-clustering → \\to main mapping vs. main taxonomy primary distribution over the same Reject papers. The two columns largely agree; the divergences are concentrated on Unify Heterogeneous Inputs into One Space and Audit and Pivot an Assumption (over-attracted) vs. Encode Structure by Construction (absent from the Reject-only clustering).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig14_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x17.png",
+            "https://arxiv.org/html/2607.04439v1/x17.png"
+          ]
+        ],
+        "caption": "Figure 15 : Clustering quality across three embedding-input choices, as min ⁡ _ ​ cluster_size \\min\\_\\text{cluster\\_size} varies. Solid line: silhouette. Dashed line: number of clusters k k . Production (left) is stable. OpenAI + base fields (middle) collapses to k = 2 k=2 degenerate mega-clusters at min ⁡ _ ​ cluster_size = 15 \\min\\_\\text{cluster\\_size}=15 – 20 20 . SPECTER2 (right) stays at lower silhouette across the sweep.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig15_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.04439v1/2607.04439v1/x18.png",
+            "https://arxiv.org/html/2607.04439v1/x18.png"
+          ]
+        ],
+        "caption": "Figure 16 : Distribution of novelty levels per system (L1 = fully scooped → \\rightarrow L5 = no overlap). The skill generators concentrate at L3 (medium overlap: shared framing/domain, distinct mechanism); the bare GPT-5.5 baseline piles up at L4, where its vagueness evades collision.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-07/2607.04439/fig16_1.png"
+        ]
+      }
+    ]
+  }
+]

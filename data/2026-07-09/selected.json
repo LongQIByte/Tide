@@ -1,0 +1,514 @@
+[
+  {
+    "arxiv_id": "2607.07708",
+    "title": "Accurate, Interdisciplinary and Transparent Structure-property Understanding with Deep Native Structural Reasoning",
+    "abstract": "Structure-property relationships are foundational to biology, chemistry and materials science, where function, reactivity and physical response emerge from spatial, chemical and periodic organization. Mechanistically explaining these relationships requires interpreting structural evidence through scientific principles and physical constraints, from stereochemistry and bonding to symmetry, energetics and periodic order. However, applying artificial intelligence to this process presents a joint challenge of representation and reasoning: models must preserve domain-native structural information while showing how specific evidence supports predictions under these constraints. Here we introduce SciReasoner, a multimodal scientific foundation model for native structural reasoning across proteins, small molecules and inorganic crystals. SciReasoner discretizes coordinates, topologies and periodic connectivities into a unified structure-aware vocabulary, treating structural tokens as addressable evidence units during reasoning. In homology-controlled Gene Ontology prediction, SciReasoner improves Cellular Component annotation for low-homology and orphan-like proteins, increasing F_{max} from 0.42 to 0.55. In chemistry, it raises single-step retrosynthesis accuracy from 0.63 to 0.72 while generating fragment-level disconnection and precursor-verification traces. In materials science, its representations separate elemental and compound phases and resolve high- and low-band-gap regimes. Across 86 benchmarks, SciReasoner achieves state-of-the-art performance on 67 tasks. Double-blind expert evaluation rates its reasoning traces as preferred or at least comparable to those of a frontier large language model in 98% of cases. By making structure an inspectable substrate for reasoning under scientific constraints, SciReasoner connects accurate prediction with interpretable scientific inference.",
+    "upvotes": 84,
+    "authors": [
+      "Chen Tang",
+      "Yizhou Wang",
+      "Jianyu Wu",
+      "Lintao Wang",
+      "Shixiang Tang",
+      "Pengze Li",
+      "Encheng Su",
+      "Jun Yao",
+      "Jiabei Xiao",
+      "Yuqi Shi",
+      "Jielan Li",
+      "Hongxia Hao",
+      "Zhangyang Gao",
+      "Fang Wu",
+      "Ben Fei",
+      "Xiangyu Yue",
+      "Pan Tan",
+      "Bozitao Zhong",
+      "Jinouwen Zhang",
+      "Aoran Wang",
+      "Yan Lu",
+      "Jiaheng Liu",
+      "Xinzhu Ma",
+      "Liang Hong",
+      "Mingyue Zheng",
+      "Phil Torr",
+      "Bowen Zhou",
+      "Wanli Ouyang",
+      "Lei Bai"
+    ],
+    "organization": "Shanghai AI Laboratory",
+    "github_repo": "https://github.com/SpectrAI-Initiative/SciReasoner",
+    "github_stars": 18,
+    "ai_keywords": [
+      "multimodal scientific foundation model",
+      "structural reasoning",
+      "homology-controlled Gene Ontology prediction",
+      "single-step retrosynthesis",
+      "fragment-level disconnection",
+      "precursor-verification traces",
+      "elemental and compound phases",
+      "high- and low-band-gap regimes",
+      "double-blind expert evaluation",
+      "reasoning traces"
+    ],
+    "published_at": "2026-07-08T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.07708",
+    "arxiv_url": "https://arxiv.org/abs/2607.07708",
+    "html_available": true,
+    "figures": []
+  },
+  {
+    "arxiv_id": "2607.07675",
+    "title": "Scaling Mixture-of-Experts Video Pretraining for Embodied Intelligence",
+    "abstract": "Despite the recent promise in robot control, video generative models suffer from a domain mismatch due to their primary focus on content creation. For example, their design inherently prioritizes visual fidelity and creativity over computational efficiency and physical realism. In this work, we present LingBot-Video, a DiT-based video pretraining paradigm specifically tailored for embodied intelligence. From the architecture perspective, we adopt the Mixture-of-Experts (MoE), instead of dense, framework to achieve a better trade-off between modeling capacity and inference efficiency, and manage to scale it up from scratch. From the data perspective, we construct a data profiling engine that augments standard internet videos with extensive robot-oriented footage, encompassing manipulation, navigation, and egocentric perspectives, to equip the base model with an intrinsic understanding of actions and world dynamics. From the training perspective, we develop a multi-dimensional reward system to enforce the alignment regarding physical rationality and task completion, going beyond standard criteria such as aesthetics, prompt-following, and motion consistency. Comprehensive evaluations validate its performance and efficiency as a video foundation model. We contribute LingBot-Video as the inaugural large-scale, open-source MoE video foundation model to the community, in a pioneering effort to bridge digital creativity and physical actuation.",
+    "upvotes": 53,
+    "authors": [
+      "Shuailei Ma",
+      "Jiaqi Liao",
+      "Xinyang Wang",
+      "Jingjing Wang",
+      "Chaoran Feng",
+      "Zijing Hu",
+      "Chong Bao",
+      "Zichen Xi",
+      "Yuqi Gan",
+      "Weisen Wang",
+      "Yanhong Zeng",
+      "Qin Zhao",
+      "Zifan Shi",
+      "Wei Wu",
+      "Hao Ouyang",
+      "Qiuyu Wang",
+      "Shangzhan Zhang",
+      "Jiahao Shao",
+      "Yipengjing Sun",
+      "Liangxiao Hu",
+      "Lunke Pan",
+      "Nan Xue",
+      "Kecheng Zheng",
+      "Yinghao Xu",
+      "Xing Zhu",
+      "Yujun Shen",
+      "Ka Leong Cheng"
+    ],
+    "organization": "Robbyant",
+    "github_repo": "https://github.com/robbyant/lingbot-video",
+    "github_stars": 720,
+    "ai_keywords": [
+      "DiT-based video pretraining",
+      "Mixture-of-Experts",
+      "embodied intelligence",
+      "data profiling engine",
+      "robot-oriented footage",
+      "multi-dimensional reward system",
+      "physical rationality",
+      "task completion"
+    ],
+    "published_at": "2026-07-08T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.07675",
+    "arxiv_url": "https://arxiv.org/abs/2607.07675",
+    "html_available": true,
+    "figures": []
+  },
+  {
+    "arxiv_id": "2607.07608",
+    "title": "Dual Latent Memory in Vision-Language-Action Models for Robotic Manipulation",
+    "abstract": "Mainstream Vision-Language-Action (VLA) models predict actions primarily from the current observation under a Markovian assumption, thus struggling with long-horizon, temporally dependent tasks. Existing memory-augmented VLAs either expand the observation window or retrieve history from the memory bank as auxiliary policy-side context. However, they leave memory outside the native latent embedding space of VLA reasoning, preventing historical experience from being fluidly interleaved with multimodal reasoning and action formation. To this end, we introduce LaMem-VLA, a latent-memory-native framework that reconstructs historical experience into latent memory tokens and directly interweaves them with VLA reasoning. At its core, LaMem-VLA introduces four coordinated components: (i) a curator that organizes historical experience into two complementary short-term and long-term memory vaults; (ii) a seeker that queries both vaults using the multimodal cognition to retrieve context-relevant evidence; (iii) a condenser that reconstructs the retrieved evidence into compact short-term and long-term latent memory tokens; and (iv) a weaver that injects these memory tokens with the current observation and instruction into one continuous embedding sequence. By representing, retrieving, and consuming historical experience entirely in the same continuous latent space, LaMem-VLA enables memory to directly participate in VLA reasoning and guide action generation under a bounded context. Extensive experiments on SimplerEnv and LIBERO demonstrate the superiority of our LaMem-VLA.",
+    "upvotes": 51,
+    "authors": [
+      "Hongyu Qu",
+      "Jianzhe Gao",
+      "Xiaobin Hu",
+      "Shaohuan Yang",
+      "Xinlei Yu",
+      "Rui Yan",
+      "Wenguan Wang",
+      "Xiangbo Shu",
+      "Shuicheng Yan"
+    ],
+    "organization": "Nanjing University of Science and Technology, Zhejiang University, National University of Singapore",
+    "github_repo": "https://github.com/quhongyu/LaMem-VLA",
+    "github_stars": 7,
+    "ai_keywords": [
+      "Vision-Language-Action models",
+      "Markovian assumption",
+      "memory-augmented VLAs",
+      "latent embedding space",
+      "latent memory tokens",
+      "short-term memory vaults",
+      "long-term memory vaults",
+      "multimodal cognition",
+      "context-relevant evidence",
+      "compact latent memory tokens",
+      "continuous embedding sequence",
+      "bounded context"
+    ],
+    "published_at": "2026-07-08T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.07608",
+    "arxiv_url": "https://arxiv.org/abs/2607.07608",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07608v1/2607.07608v1/figs/motivation.png",
+            "https://arxiv.org/html/2607.07608v1/figs/motivation.png"
+          ]
+        ],
+        "caption": "Figure 1: Paradigm comparison of memory-augmented VLA Models. (a) Unlike previous VLA models that store historical experience in an auxiliary memory bank and consume retrieved memory as external policy-side context, (b) LaMem-VLA treats historical experience as context-native latent memory, which is stored, retrieved, and consumed in the model embedding space.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07608/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07608v1/2607.07608v1/figs/overview.png",
+            "https://arxiv.org/html/2607.07608v1/figs/overview.png"
+          ]
+        ],
+        "caption": "Figure 2: The Framework of LaMem-VLA . Given an instruction and the current observation, the vision–language encoder first encodes the inputs into a multimodal representation. The memory curator (§ 3.3 ) organizes historical experience into dual memory vaults, and the memory seeker (§ 3.4 ) then retrieves task-relevant evidence from dual memory vaults based on this multimodal representation. This retrieved evidence is compressed into fixed-length latent memory tokens by the memory condenser (§ 3.4 ). Finally, the memory weaver (§ 3.5 ) injects these latent memory tokens into the reasoning sequence, producing memory-grounded action tokens that guide the action expert to generate future action chunks.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07608/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07608v1/2607.07608v1/figs/table6.png",
+            "https://arxiv.org/html/2607.07608v1/figs/table6.png"
+          ]
+        ],
+        "caption": "Figure 3: Ablation study of the latent memory token number on SimplerEnv Li et al. [ 2025b ] and LIBERO-90 Liu et al. [ 2023 ] (§ 4.4 ).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07608/fig3_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.07534",
+    "title": "Infinite Worlds with Versatile Interactions",
+    "abstract": "We present LingBot-World 2.0 (also known as LingBot-World-Infinity), an advanced iteration of LingBot-World featuring four distinct upgrades. (1) Our model achieves an unbounded interaction horizon while maintaining consistent output quality, benefiting from a carefully crafted causal pretraining paradigm. (2) Through distilling a real-time variant from the base model, our system guarantees rapid response time, sufficient to drive 720p video streams at 60 fps. (3) Compared to the previous version, this update introduces highly diverse interactive elements, comprising a broader spectrum of actions (e.g., attacking, archery, spell-casting, and shooting) alongside a richer variety of text-driven events. (4) We pioneer the integration of an agentic harness within the domain of world modeling, wherein a pilot agent is tasked with planning and executing character behaviors, while a director agent is responsible for synthesizing novel environmental elements as the scene progresses. Additionally, to facilitate a shared experience, we develop an interface that permits multiple players to simultaneously immerse themselves in this vivid world simulator. We pair our primary 14B model with a lightweight 1.3B counterpart, which supports effortless deployment on a single GPU.",
+    "upvotes": 32,
+    "authors": [
+      "Zelin Gao",
+      "Qiuyu Wang",
+      "Jiapeng Zhu",
+      "Jingye Chen",
+      "Zichen Liu",
+      "Qingyan Bai",
+      "Jiahao Wang",
+      "Yufeng Yuan",
+      "Hanlin Wang",
+      "Yichong Lu",
+      "Ka Leong Cheng",
+      "Haojie Zhang",
+      "Jian Gao",
+      "Tianrui Feng",
+      "Yuzheng Liu",
+      "Yao Yao",
+      "Yinghao Xu",
+      "Xing Zhu",
+      "Yujun Shen",
+      "Hao Ouyang"
+    ],
+    "organization": "Robbyant",
+    "github_repo": "https://github.com/robbyant/lingbot-world-v2",
+    "github_stars": 958,
+    "ai_keywords": [
+      "causal pretraining paradigm",
+      "real-time variant",
+      "agentic harness",
+      "pilot agent",
+      "director agent",
+      "world modeling",
+      "interactive elements",
+      "text-driven events",
+      "multi-agent behavior control",
+      "shared experience",
+      "collaborative virtual environments"
+    ],
+    "published_at": "2026-07-08T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.07534",
+    "arxiv_url": "https://arxiv.org/abs/2607.07534",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07534v1/2607.07534v1/x1.png",
+            "https://arxiv.org/html/2607.07534v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1 : LingBot-World-Infinity generates infinite worlds in real time, featuring versatile interactions.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07534/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07534v1/2607.07534v1/x2.png",
+            "https://arxiv.org/html/2607.07534v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2 : Overview of the proposed data engine. Heterogeneous raw videos are temporally segmented, filtered, and routed to category-specific annotation pipelines, producing optimized chunk-wise captions.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07534/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07534v1/2607.07534v1/x3.png",
+            "https://arxiv.org/html/2607.07534v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 3 : Overview of LingBot-World-Infinity Pipeline. An interactive world simulator is implemented as a causal video model. Our Infinity World is initialized from an initial image and its background description. The future world states are then autoregressively generated, conditioned on the historical context and user inputs (camera poses and prompts).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07534/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07534v1/2607.07534v1/x4.png",
+            "https://arxiv.org/html/2607.07534v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 4 : Overview of LingBot-World-Infinity DiT Block and MoBA Attention Mask. The action comprises camera poses and chunk-wise prompts, injected into the DiT block to enable user interaction. For self-attention, a bidirectional block is appended to teacher forcing mask, enabling autoregressive generation while preserving visual fidelity. For cross-attention, the autoregressive component attends to a background prompt and chunk-wise prompts of lower-triangular pattern to prevent access to future information, while the bidirectional component attends to a global prompt.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07534/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07534v1/2607.07534v1/x5.png",
+            "https://arxiv.org/html/2607.07534v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 5 : Overview of the Agentic Interaction Harness. Users can either interact with the existing world through semantic or object-centric actions, or intervene by introducing high-level textual events. The VLM (Director) performs causal reasoning and proposes coherent event updates, while the Video Generator (Pilot) grounds these semantic decisions into physically consistent video rollouts, enabling continuous interactive world simulation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07534/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07534v1/2607.07534v1/x6.png",
+            "https://arxiv.org/html/2607.07534v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 6 : In the tracking-mode interface, the Vision-Language Model (VLM) comprehends interactive objects within the scene, while the tracking model continuously tracks these targets to display dynamic interactive floating windows (event cards) in real-time. Powered by the \"Director-Pilot\" co-simulation framework, the model demonstrates robust interactive capabilities by performing causal reasoning based on user actions (e.g., pushing a door open or rotating a soccer ball) and rendering physically logical, highly coherent spatio-temporal dynamics.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07534/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07534v1/2607.07534v1/x7.png",
+            "https://arxiv.org/html/2607.07534v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 7 : Our world model enables controllable world exploration with versatile interactions. It supports flexible prompt switching across different world horizons, allowing the scene semantics to evolve smoothly, while also enabling controllable navigation of diverse protagonists and objects throughout the generated world (1/2).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07534/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07534v1/2607.07534v1/x8.png",
+            "https://arxiv.org/html/2607.07534v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 8 : Our world model enables controllable world exploration with versatile interactions. It supports flexible prompt switching across different world horizons, allowing the scene semantics to evolve smoothly, while also enabling controllable navigation of diverse protagonists and objects throughout the generated world (2/2).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07534/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07534v1/2607.07534v1/figures/UI.png",
+            "https://arxiv.org/html/2607.07534v1/figures/UI.png"
+          ]
+        ],
+        "caption": "Figure 9 : Interface of our interactive system. The center shows the live generation viewport; the bottom panel exposes the low-level control scheme (WASD for movement, IJKL for view control); and the right-hand panel is the agentic control surface, which lists the VLM-proposed “Event Proposals,” each bound to a hotkey. Fixed keys ( Space , P ) are always available, U / O and F / G carry context-aware character actions and environmental events proposed by the VLM, and the numeric keys are user-registered event slots.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07534/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07534v1/2607.07534v1/x9.png",
+            "https://arxiv.org/html/2607.07534v1/x9.png"
+          ]
+        ],
+        "caption": "Figure 10 : Hour-long world rollout. We sample frames from a single 60-minute generated session, covering 20 distinct scenarios. The timeline shows that the model can maintain coherent scene structure, visual quality over an extended uninterrupted rollout, providing a qualitative stress test for long-horizon stability.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07534/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07534v1/2607.07534v1/x10.png",
+            "https://arxiv.org/html/2607.07534v1/x10.png"
+          ]
+        ],
+        "caption": "Figure 11 : Qualitative comparisons. Our model maintains stable visual and physical consistency over long-horizon generation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07534/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07534v1/2607.07534v1/x11.png",
+            "https://arxiv.org/html/2607.07534v1/x11.png"
+          ]
+        ],
+        "caption": "Figure 12 : Qualitative comparisons on causal pretraining. Our model shows stable performance compared with baselines.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07534/fig12_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.07508",
+    "title": "Single-Rollout Asynchronous Optimization for Agentic Reinforcement Learning",
+    "abstract": "Reinforcement learning (RL) is becoming increasingly important for post-training large language models (LLMs). Previous RL pipelines for LLMs were mostly synchronous and batch-interleaved, which is inefficient for long-horizon agentic tasks. Recently, asynchronous RL has emerged as a more efficient alternative by updating the model as rollouts arrive. However, existing asynchronous RL systems often emphasize throughput, while leaving training stability and task effectiveness largely underexplored. For example, a key challenge is that group-wise sampling in the widely-used GRPO framework does not naturally fit asynchronous agentic training. In this paper, we present Single-rollout Asynchronous Optimization (SAO) to address the stability and off-policy challenges in asynchronous RL. To reduce off-policy effects and improve generalization, we replace group-wise sampling with single-rollout sampling, that is, using one rollout per prompt. We further improve this single-rollout strategy with practical value-model training designs. To improve optimization stability, we introduce a strict double-side token-level clipping strategy. SAO is able to train stably for one thousand steps and consistently outperform GRPO and its variants on agentic coding and reasoning benchmarks, such as SWE-Bench Verified, BeyondAIME, and IMOAnswerBench. We also demonstrate that single-rollout RL is particularly effective in a simulated online learning setting, where the model must adapt to changing evolving environments. To this end, SAO is successfully deployed in the agentic RL pipeline for training the open GLM-5.2 model (750B-A40B).",
+    "upvotes": 15,
+    "authors": [
+      "Zhenyu Hou",
+      "Yujiang Li",
+      "Jie Tang",
+      "Yuxiao Dong"
+    ],
+    "organization": "Z.ai",
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [
+      "reinforcement learning",
+      "large language models",
+      "asynchronous RL",
+      "group-wise sampling",
+      "GRPO",
+      "single-rollout sampling",
+      "off-policy effects",
+      "token-level clipping",
+      "agentic tasks",
+      "SWE-Bench Verified",
+      "BeyondAIME",
+      "IMOAnswerBench"
+    ],
+    "published_at": "2026-07-08T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.07508",
+    "arxiv_url": "https://arxiv.org/abs/2607.07508",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07508v1/2607.07508v1/x1.png",
+            "https://arxiv.org/html/2607.07508v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1: The performance of SAO on reasoning and coding benchmarks. The four reasoning benchmarks are evaluated in a reasoning-with-Python-tool setting, where the baseline is the Qwen3-30B-A3B SFT model; SWE-Bench Verified evaluates coding with the Qwen3-30B-A3B baseline. SAO outperforms the corresponding baseline and GRPO across all five benchmarks.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07508/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07508v1/2607.07508v1/x2.png",
+            "https://arxiv.org/html/2607.07508v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2: Overview of SAO with single rollout design. The numbers denote the generation order of trajectories. For SAO, each trajectory becomes available for training immediately upon completion. In contrast, GRPO must wait until all trajectories in a group are generated before training can begin.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07508/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07508v1/2607.07508v1/x3.png",
+            "https://arxiv.org/html/2607.07508v1/x3.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.07508v1/2607.07508v1/x4.png",
+            "https://arxiv.org/html/2607.07508v1/x4.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.07508v1/2607.07508v1/x5.png",
+            "https://arxiv.org/html/2607.07508v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 3: Performance comparison between SAO and GRPO (w/ DIS) during training. It can be observed that SAO almost consistently outperforms the optimized GRPO during the training process on different benchmarks.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07508/fig3_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07508/fig3_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07508/fig3_3.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07508v1/2607.07508v1/x6.png",
+            "https://arxiv.org/html/2607.07508v1/x6.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.07508v1/2607.07508v1/x7.png",
+            "https://arxiv.org/html/2607.07508v1/x7.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.07508v1/2607.07508v1/x8.png",
+            "https://arxiv.org/html/2607.07508v1/x8.png"
+          ]
+        ],
+        "caption": "(a) (b) (c) Figure 4: Training dynamics of asynchronous single-rollout RL. (a) Explained Variance for SAO and a single-critic-update baseline. (b) Critic gradient norm during value training under full-parameter optimization and frozen-attention optimization used in SAO. (c) Token-level clip ratio during training for SAO with the proposed DIS and the VAPO baseline.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07508/fig4_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07508/fig4_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07508/fig4_3.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07508v1/2607.07508v1/x9.png",
+            "https://arxiv.org/html/2607.07508v1/x9.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.07508v1/2607.07508v1/x10.png",
+            "https://arxiv.org/html/2607.07508v1/x10.png"
+          ]
+        ],
+        "caption": "(a) We report the accuracy transition of three writing styles—cute, chuunibyou, and classical—on a held-out evaluation set throughout the online training process. Shaded regions indicate phase transitions where the reward preference is switched to favor a different stylistic archetype. SAO rapidly suppresses the previously dominant style and realigns its policy to the new target based on environmental feedback. (b) We compare the evolution of training rewards between SAO and a Running Mean Advantage Estimation baseline under single-rollout online learning. Shaded regions denote stylistic reward shifts. While both methods eventually recover after distribution changes, the Running Mean baseline exhibits a pronounced adaptation lag and lower stable performance. Figure 5: Online learning simulation under changing writing-style preferences.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07508/fig5_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07508/fig5_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.07508v1/2607.07508v1/x11.png",
+            "https://arxiv.org/html/2607.07508v1/x11.png"
+          ]
+        ],
+        "caption": "Figure 6: Training reward for token-level SAO training and step-level variants, where token-level shows better training rewards.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-09/2607.07508/fig6_1.png"
+        ]
+      }
+    ]
+  }
+]
