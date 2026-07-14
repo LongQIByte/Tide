@@ -10,46 +10,81 @@
 
 ### Background Analysis  
 
-In recent years, vision-language models (VLMs) have demonstrated remarkable performance in natural language processing tasks such as text generation and image understanding. However, applying these technologies to more complex real-world scenarios, like solving a Rubik’s Cube, remains challenging. A Rubik’s Cube, as a 3D puzzle, tests not only a machine’s visual perception but also its spatial reasoning and logical planning capabilities. Traditional Rubik’s Cube robots rely on fixed algorithms and complex vision systems, struggling to adapt to dynamic environments or intricate tasks. Thus, enabling machines to understand and solve Rubik’s Cube problems like humans has become a research direction with both technical value and practical significance.  
+Recent advances in vision-language models (VLMs) have demonstrated remarkable performance in natural language processing tasks, such as text comprehension and image captioning. However, applying these technologies to more complex real-world scenarios—like solving Rubik’s Cubes—remains challenging. As a 3D spatial puzzle, the Rubik’s Cube tests not only an algorithm’s spatial reasoning but also its ability to handle dynamic environmental changes. Traditional robots rely on fixed algorithms and complex vision systems, struggling to adapt to unexpected cube states (e.g., partially scrambled cubes). Thus, enabling machines to flexibly understand and solve such problems like humans is a critical research goal.  
 
-The main limitations of existing approaches are twofold: First, conventional multimodal large language models (e.g., LLaVA, Flamingo) excel in 2D language and image tasks but face difficulties in modeling 3D spatial relationships, such as depth perception and object interactions. Second, even with long-chain reasoning abilities, these models still cannot independently complete highly complex tasks like Rubik’s Cube restoration. Additionally, existing datasets and task designs often lack hierarchical difficulty distinctions, hindering targeted improvement of problem-solving capabilities.  
+Previous methods face two main limitations: first, existing multimodal models (e.g., LLaVA, Flamingo) excel at language and image processing but underperform in 3D tasks like depth perception and object relationship modeling. Second, even with long-chain reasoning capabilities, these models cannot independently solve high-difficulty cube restoration tasks. For instance, while humans solve cubes through logical step-by-step reasoning, machines often require preprogrammed algorithms, lacking flexibility.  
 
-To address these issues, this paper introduces CubeRobot, a VLM specifically designed for Rubik’s Cube solving. Its core idea involves a dual-loop architecture (an outer loop for high-level planning and an inner loop for low-level execution) and a Memory Stream system (logging task-related natural language descriptions and timestamps) to enable the model to plan, decide, and reflect autonomously, similar to human problem-solving. The researchers also created the CubeCoT dataset, featuring 43 subtasks of varying difficulty, to comprehensively evaluate the model’s performance.  
+To address these issues, this paper introduces CubeRobot, a VLM specifically designed for 3×3 Rubik’s Cube solving. Its core idea combines VLM’s multimodal understanding with a specialized dataset (CubeCoT), which includes complex tasks (43 subtasks) that are challenging for humans. Additionally, CubeRobot employs a “dual-loop architecture” and “Memory Stream”: the former processes tasks hierarchically via inner and outer loops, while the latter records natural language descriptions and timestamps to optimize decision-making.  
 
-Compared to previous work, CubeRobot’s key innovations lie in: (1) extending VLM capabilities to 3D spatial tasks rather than just 2D understanding; (2) enhancing autonomy and adaptability through hierarchical task design and memory mechanisms; (3) optimizing performance across different difficulty levels. This approach not only improves Rubik’s Cube-solving accuracy but also provides new insights for future complex robot applications.
+Compared to prior work, this paper’s key differences lie in: 1) focusing on a specific but representative 3D task (Rubik’s Cube) rather than general multimodal problems; 2) improving adaptability in dynamic scenarios through a customized dataset and hierarchical architecture; 3) introducing a memory stream mechanism to enable autonomous reflection and strategy adjustment. This approach not only achieves high accuracy (e.g., 100% for low/medium difficulty tasks) but also provides a new paradigm for solving complex spatial problems.
 
 ## Method, Figure by Figure
+
+![Figure 1. Comparison of Rubik’s Cube Solving Performance.](fig1_1.webp)
+
+> Figure 1. Comparison of Rubik’s Cube Solving Performance.
+
+This figure (Figure 1: Comparison of Rubik’s Cube Solving Performance) clearly illustrates the performance comparison of different models in solving a Rubik's cube task, thereby highlighting the superiority of the CubeRobot method proposed in the paper.
+
+First, let's analyze the overall structure and information flow of the figure:
+- The **left side** represents the "Given goal" area. At the top is the task description: "Restore the Rubik's cube." Below it is a vertically arranged sequence of Rubik's cube states, showing the process from a scrambled cube (the second cube from the top) to a completely ordered state (the first cube at the bottom). This sequence represents the "Correct steps," the desired path to solve the Rubik's cube problem. A downward arrow labeled "Correct steps" indicates the order of this restoration process.
+
+- The **right side** is the "Output" area, showing the results of different models attempting to solve the Rubik's cube task. These models include Gemini-ultra, MiniGPT-4v, GPT-4V, and CubeVLM. The results for each model are presented as a row or multiple rows of Rubik's cube images, accompanied by brief text descriptions of their performance.
+
+Next, we analyze the performance of each model:
+
+1.  **Gemini-ultra**:
+    - Its output is a row of Rubik's cube images, showing the model's problem-solving steps from left to right.
+    - The text description is "Provide incorrect steps."
+    - A red "X" is the conclusion, indicating that this model failed to solve the Rubik's cube because it took incorrect steps during the process.
+
+2.  **MiniGPT-4v**:
+    - Its output consists of two rows of Rubik's cube images.
+    - The text description is "Redundant or repeated steps."
+    - Some Rubik's cube images are highlighted with red boxes, possibly indicating these steps were ineffective, duplicated, or unnecessary.
+    - The conclusion is also a red "X," indicating this model also failed to solve the Rubik's cube, as it fell into redundant or repeated operations.
+
+3.  **GPT-4V**:
+    - Its output is not an image of the cube but a text description.
+    - The text reads: "Since the image suggests an unsolved cube with only two faces visible, a specific solution cannot be given without seeing the other four faces. The solution is highly dependent on the entire configuration of the cube."
+    - The conclusion is a red "X," categorized as "Unable to recognize all faces of the Rubik's Cube." This indicates that the model had difficulty handling a Rubik's cube that was only partially visible and could not plan or solve it effectively.
+
+4.  **CubeVLM** (the method proposed in the paper):
+    - Its output is a row of Rubik's cube images, showing the model's problem-solving steps from left to right.
+    - The text description is "Successfully restored."
+    - The conclusion is a green checkmark (✓), indicating that this model successfully restored the Rubik's cube by following the correct sequence of steps.
+
+**Summarizing what this figure reveals about how the method works:**
+This figure demonstrates the effectiveness of the CubeRobot method (i.e., CubeVLM) through comparison. It shows that, compared to traditional language models (such as Gemini-ultra, MiniGPT-4v, and GPT-4V), CubeVLM can:
+- Understand the overall configuration of the Rubik's cube, even when only partial faces are visible.
+- Plan and execute a correct sequence of non-redundant steps.
+- Ultimately succeed in completing the Rubik's cube restoration task.
+
+The information flow in the figure starts from the "Given goal" on the left (a Rubik's cube problem to be solved), progresses through the "Output" of different models (their problem-solving attempts), and finally shows which models succeed (CubeVLM) and which fail (other models). As a result figure, it visually compares the outcomes (correct cube sequence vs. incorrect steps or inability to solve) and uses clear labels (e.g., "Successfully restored," "Provide incorrect steps") to convey that CubeRobot achieves a high accuracy rate in low-level Rubik's cube restoration tasks (e.g., 100% success as implied by the context and the paper's abstract).
+
+Specific coordinates or numerical values (like accuracy percentages) are not explicitly shown in the figure, but based on the context and the paper's abstract, it can be inferred that CubeVLM performs excellently in this task. The comparison objects are four different models or methods, and the conclusion is that CubeVLM outperforms the other comparison models in the Rubik's cube restoration task.
+
+---
 
 ![Figure 2. Framework of CubeRobot. The orange arrow shows the vision-language pla](fig2_1.webp)
 
 > Figure 2. Framework of CubeRobot. The orange arrow shows the vision-language planning process, while the gray arrow represents that we leverage the queried language plans for better policy learning in Rubik’s Cube Manipulation tasks.
 
-This figure illustrates the framework of CubeRobot, a novel vision-language model (VLM) designed for solving 3x3 Rubik's Cubes, aiming to endow embodied agents with multimodal understanding and execution capabilities.
+This figure illustrates the framework of CubeRobot, a vision-language model designed for solving 3x3 Rubik's Cubes, aiming to endow embodied agents with multimodal understanding and execution capabilities.
 
-Starting from the top-left:
-1.  **Input Representation**: Two Rubik's Cube images represent the input state of the cube. These images are fed into a "Vision Transformer" module (indicated by an orange flame icon, suggesting a computationally intensive or critical perception step). Simultaneously, a "Text Prompt" is provided, which reads: "Please choose the correct order of operations to restore this Rubik's Cube." This text prompt is sent to a "Large Language Model Llama" module (indicated by a blue snowflake icon, possibly signifying a pre-trained or stable language processing core).
+First, let's look at the **visual processing part** at the top. The input on the left consists of two images of a Rubik's Cube in different states, which are fed into a module labeled "Vision Transformer." This module is responsible for processing the image data and extracting features. The output from the "Vision Transformer" points to a module called "Embodied-Projector," along with two types of queries: "Action Queries" (gray bars) and "Memory Queries" (purple bars). These queries, along with the visual features, are processed within the "Embodied-Projector," a process indicated by the orange arrows, corresponding to the "vision-language planning process" in the figure caption.
 
-The flow of information is as follows:
-1.  The output from the "Vision Transformer" flows into an "Embodied-Projector" module (orange rectangle). Additionally, "Action Queries" (gray bars) and "Memory Queries" (purple bars) are input into the "Embodied-Projector." This module appears to be responsible for combining visual information and queries for some form of projection or preliminary processing.
-2.  The output from the "Embodied-Projector" then feeds into the "Large Language Model Llama." After processing this information, Llama generates an "Embodied Plan" (pink rectangle). The "Embodied Plan" contains specific operational instructions, such as "Turn the left face 90 degrees clockwise" and "Turn the clockwise bottom face 90 degrees," as shown in the figure.
-3.  This "Embodied Plan" is passed to the "Embodied Interpreter" (purple rectangle), which translates these high-level instructions into low-level actions executable by a robot.
-4.  Finally, these action commands are sent to the "Robotic arm." The figure displays a sequence of robotic arm poses, along with corresponding coordinate values (e.g., [-23.5, 68.3], [-38.0, -75.0]), indicating the arm is executing these actions.
-5.  The actions of the robotic arm lead to changes in the cube's state, which is demonstrated at the bottom of the figure: an scrambled cube progressively transforms into a fully solved cube (all faces are a single color).
+Next, we examine the **language processing part** on the left-middle. There is a "Text Prompt" box with the content "Please choose the correct order of operations to restore this Rubik's Cube." This text prompt is sent to a module named "Large Language Model Llama." This large language model is responsible for generating a plan based on the text prompt and visual information.
 
-Arrows in the diagram indicate the direction of data and information flow:
-*   **Orange arrows** (according to the figure caption) represent the "vision-language planning process." This primarily involves the process from the input of the cube image and text prompt, through the Vision Transformer, Embodied-Projector, and Llama model, to the generation of the embodied plan.
-*   **Gray arrows** (according to the figure caption) represent "we leverage the queried language plans for better policy learning in Rubik’s Cube Manipulation tasks." This likely refers to the feedback path from the "Embodied-Projector" to the "Memory Queries," or the overall planning-execution-learning loop.
+The output of the "Large Language Model Llama" is an "Embodied Plan," which is presented as a series of specific operation instructions, such as "Turn the left face 90 degrees clockwise," etc. These instructions are then sent to the "Embodied Interpreter."
 
-The small inset image in the top-right corner shows the robotic arm in different poses at various stages, which might be related to "Memory Queries" or policy learning, i.e., observing past actions to improve future decisions.
+The output of the "Embodied Interpreter" is the specific parameters to control the robotic arm, such as the coordinate values shown in the "Robotic arm" box (e.g., [-23.5, 68.3], [-38.0, -75.0], etc.). These parameters directly control the movement of the yellow robotic arm displayed at the bottom.
 
-In summary, the CubeRobot workflow is as follows:
-1.  **Input**: Visual images of the Rubik's Cube and textual instructions.
-2.  **Perception & Understanding**: The Vision Transformer processes the image, while the Llama model processes the text and generates a high-level plan.
-3.  **Planning & Mapping**: The Embodied-Projector combines visual information and queries to assist Llama in generating a concrete embodied plan.
-4.  **Execution**: The Embodied Interpreter translates the plan into actions for the robotic arm.
-5.  **Feedback & Learning**: Through mechanisms like "Memory Queries," the system may learn from the execution process to improve future planning and execution.
+After executing these instructions, the robotic arm causes changes in the state of the Rubik's Cube, as shown in the sequence of images of the Rubik's Cube at the bottom, which gradually change from an initial scrambled state to a solved state.
 
-This framework integrates visual perception, language understanding, and robotic execution, enabling the agent to solve complex Rubik's Cube tasks.
+The figure also includes some feedback loops. For example, there is an arrow from the "Robotic arm" part back to the "Memory Queries" input, indicating that the execution results of the robot might be used to update or optimize the memory queries, thereby improving future planning. Additionally, the figure caption mentions that the gray arrows represent "we leverage the queried language plans for better policy learning in Rubik’s Cube Manipulation tasks," suggesting that the entire system learns and optimizes its planning capabilities through actual operations.
+
+In summary, the workflow of CubeRobot is as follows: first, the Rubik's Cube images are processed by the Vision Transformer, and simultaneously, a plan to restore the Rubik's Cube is generated by combining the text prompt and the language model. Then, this plan is interpreted into specific robot control instructions, which are executed by the robotic arm, thus changing the state of the Rubik's Cube. The system also includes feedback mechanisms that utilize the execution results to optimize future planning and learning.
 
 ---
 
@@ -57,24 +92,68 @@ This framework integrates visual perception, language understanding, and robotic
 
 > Figure 3. Dual-loop CoT. The outer-loop manages high-level tasks, including initial action planning and iterative refinements, while tracking task progress. The inner-loop executes specific sub-tasks assigned by the outer-loop, employing thought, reasoning, and reflection.
 
-This figure illustrates the Dual-loop Chain-of-Thought (CoT) architecture in the CubeRobot method, clearly demonstrating how the approach handles Rubik's Cube manipulation tasks. Let's break down the various components and their workflow:
+This figure illustrates the **Dual - loop Chain - of - Thought (CoT)** architecture in the CubeRobot method, clearly presenting the complete process from text prompt to Rubik's cube manipulation (Manipulation) and the collaborative mode of high - and low - level tasks:
 
-The process begins at the top with the "Text Prompt." This represents the user's input instruction or query, such as "solve this Rubik's cube" or "make the top layer of this cube yellow." This text prompt is the starting point for the entire system, providing the goal and context for subsequent decisions and actions.
+### 1. Input and Initial Trigger
+- **Text Prompt**: As the starting point of the whole process, it is represented by an orange rectangle. It provides a task description or goal related to Rubik's cube manipulation (for example, "solve the Rubik's cube", "perform a specific Rubik's cube transformation", etc.). The information flows to the purple **CubeRobot** module, triggering the subsequent processing flow.
 
-Next, an arrow points from the "Text Prompt" to the "CubeRobot" module. This indicates that the text prompt is fed into the CubeRobot system. CubeRobot is a robot system integrated with a Vision-Language Model (VLM), capable of understanding natural language instructions and translating them into concrete actions.
+### 2. The Role of the CubeRobot Module
+The purple **CubeRobot** module is the core coordinator of the whole system. After receiving the text prompt, it drives the processing of the **Outer - Loop** downward on the one hand, and there is a feedback arrow (pink) on the other hand. This indicates that the results of the outer loop or the subsequent process may be fed back to CubeRobot for adjusting or optimizing the subsequent decisions (for example, re - planning the task according to the reflection result of the inner loop).
 
-Upon entering CubeRobot, the process is divided into two main loops: the "Outer-Loop" and the "Inner-Loop."
+### 3. Outer - Loop: High - level Task Management
+- **Initial Action Generation**: It is the core part of the outer loop, represented by a light - blue rectangle. Its function is to generate a **high - level plan** for solving the Rubik's cube problem according to the text prompt and the task goal, and decompose the large task into multiple **sub - tasks** (three sub - task boxes are shown in the figure, which actually correspond to the 43 sub - tasks at different levels mentioned in the paper). These sub - tasks are specific work units assigned by the outer loop to the inner loop.
+- **Task Tracking and Management**: The outer loop is not only responsible for the initial action planning, but also **tracks the task progress**, and adjusts the plan through iterative optimization (combined with the feedback of the inner loop) to ensure that the high - level task (such as the overall restoration strategy of the Rubik's cube) moves towards the goal.
 
-**Outer-Loop:**
-The Outer-Loop is responsible for managing high-level tasks, including initial action planning and iterative refinement, while tracking task progress. In the figure, the Outer-Loop contains a sub-module called "Initial Action Generation." This module generates an overall action plan or a series of high-level sub-tasks based on the received text prompt. The figure shows three "sub-task" boxes under "Initial Action Generation," indicating that the Initial Action Generation decomposes high-level tasks into multiple specific sub-tasks. These sub-tasks are the objects managed by the Outer-Loop, forming the structural framework for task execution.
+### 4. Inner - Loop: Low - level Sub - task Execution
+- **Thought, Reasoning, Reflection**: These three modules are represented by light - orange rectangles and jointly constitute the core of the inner loop. After the inner loop receives the **specific sub - task** assigned by the outer loop, it executes the following operations in turn:
+  - **Thought**: Conduct preliminary thinking about the current sub - task, understand the requirements of the task and the current state of the Rubik's cube (for example, analyze the current color block distribution of the Rubik's cube and determine the type of operation to be performed).
+  - **Reasoning**: Based on the result of thinking, conduct logical reasoning and plan specific operation steps (for example, determine which face of the Rubik's cube to turn and how many degrees to turn to achieve the goal of the sub - task).
+  - **Reflection**: After performing the operation, reflect on the effect of the operation (for example, check whether the state of the Rubik's cube meets the expectation, and analyze the errors or optimizable points in the operation), and feed the reflection result back to the outer loop for adjusting the subsequent sub - task allocation or high - level plan.
+- **Sub - task Execution Cycle**: The inner loop will repeat the process of "thinking - reasoning - reflection" for each sub - task until the sub - task is completed, and then feed the completion result back to the outer loop. The outer loop will then allocate the next sub - task (or adjust the plan) according to the overall task progress.
 
-**Inner-Loop:**
-The Inner-Loop is responsible for executing the specific sub-tasks assigned by the Outer-Loop. It employs a mechanism of "Thought," "Reasoning," and "Reflection." When the Outer-Loop assigns a sub-task, the Inner-Loop first "Thinks" about how to execute this sub-task. Then, it engages in "Reasoning" to plan the specific operational steps through logical deduction. Finally, it undergoes "Reflection" to assess whether previous operations were correct and if strategies need adjustment. This Inner-Loop mechanism allows the system to self-adjust and optimize during the execution of specific operations, enhancing the accuracy and efficiency of task completion.
+### 5. Output: Manipulation
+After the planning of the outer loop and the execution of the sub - tasks of the inner loop, the final information flows to the gray **Manipulation** module. This module is responsible for executing the specific operations (for example, turning a certain face of the Rubik's cube) planned by the inner loop on the actual Rubik's cube (or the Rubik's cube in the simulation environment), completing the closed - loop from task planning to actual operation.
 
-**Information Flow and Feedback:**
-The direction of the arrows in the figure clearly shows the flow of information. From the "Text Prompt" to "CubeRobot," and then to the "Outer-Loop" and "Inner-Loop," information gradually refines from high-level instructions to specific operations. Additionally, there is an arrow from the "Inner-Loop" back to "CubeRobot," indicating that information generated by the Inner-Loop during sub-task execution (such as reflection results) is fed back to CubeRobot, influencing the decision-making and planning of the Outer-Loop. This feedback mechanism enables the system to dynamically adjust plans based on actual execution conditions, improving task adaptability and success rate.
+### Summary of the Method's Working Logic
+- **Hierarchical Collaboration**: The outer loop handles **high - level tasks** (such as overall restoration strategy, task decomposition), and the inner loop handles **low - level sub - tasks** (such as specific Rubik's cube rotation operations). A closed - loop of "planning - execution - reflection - optimization" is realized through the dual - loop structure.
+- **Feedback Mechanism**: The reflection result of the inner loop is fed back to the outer loop, and the outer loop adjusts the plan according to the feedback to ensure that the system can adapt to the complex state of the Rubik's cube and the dynamically changing scene (for example, when the state of the Rubik's cube does not meet the expectation, the subsequent operations are adjusted through reflection).
+- **Multimodal Understanding and Execution**: Combining the capabilities of the vision - language model (VLM), CubeRobot can understand the text prompt (language) and the Rubik's cube image (vision), and execute operations in the physical or simulated environment, realizing the multimodal understanding and execution of the Rubik's cube.
 
-**Final Manipulation:**
-After planning by the Outer-Loop and execution by the Inner-Loop, the final operational result is output through the "Manipulation" module at the bottom. This signifies that the system performs actual physical operations on the Rubik's cube based on the planning and execution results, completing the task specified by the user.
+This figure clearly shows how CubeRobot combines high - level task planning and low - level operation execution through the dual - loop Chain - of - Thought architecture, solves the problem that traditional Rubik's cube robots are difficult to adapt to complex and dynamic scenes, and realizes the full - process automation (or semi - automation) processing from text prompt to actual Rubik's cube operation.
 
-In summary, this figure demonstrates how CubeRobot transforms natural language instructions into specific Rubik's cube manipulations through a Dual-loop Chain-of-Thought architecture. The Outer-Loop handles high-level planning and task management, while the Inner-Loop manages the execution of specific sub-tasks and self-optimization. The two loops collaborate through a feedback mechanism, enabling the system to effectively solve Rubik's Cube problems in complex and dynamic scenarios.
+---
+
+![Figure 4. Visualization results of CubeRobot. We accurately emulated the movemen](fig4_1.webp)
+
+> Figure 4. Visualization results of CubeRobot. We accurately emulated the movements of the CubeRobot equipped with LR Mate 200iD robotic arm.
+
+This figure (Figure 4) visually demonstrates the workflow and results of the CubeRobot system while completing a high-level task. The figure aims to illustrate how CubeRobot, through its vision-language model (VLM) capabilities, plans and executes a sequence of actions to solve a Rubik's Cube problem.
+
+First, the top title, "CubeRobot is completing a high-level task," clarifies that this is a demonstration of a high-level task. The figure is divided into several main sections:
+
+1.  **Initial State**: This row contains three circular areas, from left to right, showing the initial conditions of the task:
+    *   The first circular area displays a yellow robotic arm (LR Mate 200iD) and an unmanipulated Rubik's Cube, with the cube located to the left of the arm. This represents the starting scene of the task.
+    *   The second circular area is a front view of the robotic arm, possibly to show its current pose or readiness state.
+    *   The third circular area shows the robotic arm having grasped the cube, or the cube being moved into the arm's operational range, ready to begin the task.
+
+2.  **Action Sequence and Intermediate States**: Below the initial state, there is a series of numbered boxes (from 2.B2 to 11.U2), each containing an image of the Rubik's Cube. These boxes represent the sequence of steps executed by CubeRobot:
+    *   The number above each box (e.g., 2, 3, 4...11) indicates the order of the step.
+    *   The letter-number combination after the number (e.g., B2, U2, L2, R2, F2) typically represents a Rubik's Cube move instruction. For example, B2 might mean rotating the back face 180 degrees, and U2 means rotating the top face 180 degrees. These instructions are generated by CubeRobot's planning module.
+    *   The image of the cube within each box shows the state of the cube after the corresponding step is executed. By observing these images, one can see how the color blocks on the cube's surface change with each operation. This visualizes the decision-making and execution process of CubeRobot.
+
+3.  **Success State**: On the far right of this row, there are two images of the Rubik's Cube, both labeled "Success." These images show the final state after the task is completed:
+    *   The left "Success" image displays a solved Rubik's Cube (e.g., one face might be entirely green, another might be a combination of red and green, depending on the initial state and task goal).
+    *   The right "Success" image might show another perspective of the completed cube, another aspect of completion, or an idealized final state (such as orange and blue faces). This indicates that CubeRobot has successfully completed the given high-level task, restoring the cube to the desired state.
+
+**Revelation of Method Operation**:
+This figure reveals how CubeRobot operates as follows:
+*   **Perception and Understanding**: The system first perceives the initial state of the Rubik's Cube (as shown in the first circular area).
+*   **Planning**: Based on visual input and the task goal, CubeRobot's VLM performs independent planning, generating a sequence of action instructions (like B2, U2, etc.). These instructions correspond to cube rotations.
+*   **Execution**: The robotic arm executes the corresponding actions according to the planned sequence of instructions, gradually changing the state of the cube (as shown in the various boxes in the middle row).
+*   **Reflection and Management**: The system may perform reflection and adjustments during execution (though not directly shown in the figure, the paper mentions this) to ensure the task progresses correctly.
+*   **Task Completion**: Ultimately, by executing the planned sequence of actions, the Rubik's Cube is successfully solved (as shown in the "Success" section).
+
+This figure, through a specific example, demonstrates how CubeRobot decomposes a high-level task goal into executable low-level actions and completes complex cube manipulation tasks using its vision-language model and execution capabilities. It emphasizes CubeRobot's ability to handle high-level tasks that are challenging for humans.
+
+**Interpretation of the Result Figure**:
+This figure itself is a result display, proving that CubeRobot can successfully complete a high-level Rubik's Cube task. By showing the complete process from the initial state to the final successful state, the data in the figure (i.e., the changes in the cube's state) clearly demonstrates the effectiveness of the method. The conclusion is that CubeRobot can effectively manipulate the Rubik's Cube and reach the desired target state through the planned sequence of steps.

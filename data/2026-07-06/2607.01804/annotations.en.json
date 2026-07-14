@@ -1,0 +1,26 @@
+[
+  {
+    "term": "open-loop",
+    "definition": "The controller commits to actions planned from the current observation and executes them without using later feedback to correct the remaining actions."
+  },
+  {
+    "term": "closed-loop",
+    "definition": "The controller keeps observing during execution, compares what happened with what was expected, and updates future actions from that feedback."
+  },
+  {
+    "term": "Online Gradient Guidance",
+    "definition": "OGG. During replanning, it turns the gap between expected and observed visual evolution into a corrective direction, nudging the generated action sequence back toward a recoverable trajectory without retraining the policy."
+  },
+  {
+    "term": "OGG",
+    "definition": "Online Gradient Guidance. A correction signal added during replanning: when execution has drifted, the model uses visual deviation to guide the next generated actions instead of blindly sampling a new chunk."
+  },
+  {
+    "term": "flow matching",
+    "definition": "A generative modeling method that learns a continuous path from noise or an intermediate state to the target sample. Here the target sample is a future robot action sequence; OGG adds a corrective guide to that generation path."
+  },
+  {
+    "term": "action horizon",
+    "definition": "The number of consecutive future actions planned and executed from one policy call. A larger h executes a longer chunk with fewer model calls, but stays open-loop longer and can accumulate errors; a smaller h replans more often, improving reactivity at higher inference cost."
+  }
+]
