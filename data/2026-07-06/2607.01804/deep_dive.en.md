@@ -31,6 +31,53 @@ This approach balances efficiency and robustness, particularly for long-horizon,
 
 ## Method, Figure by Figure
 
+![Figure 1 : Open-loop vs. Closed-loop execution. The top row ( H = 10 H=10 ) illu](fig1_1.webp)
+
+> Figure 1 : Open-loop vs. Closed-loop execution. The top row ( H = 10 H=10 ) illustrates how blindly executing long action chunks leads to compounding errors, causing the robot to get stuck during a drawer-opening task. In contrast, the bottom row ( H = 1 H=1 ) demonstrates strict closed-loop execution, which maintains environmental reactivity and yields a smooth, successful manipulation.
+
+Figure 1 presents the basic trade-off behind the paper. A longer action chunk reduces policy calls and improves efficiency, but keeps the robot open-loop for longer. In the top row, \(H=10\) means the robot blindly executes a longer chunk, so small errors compound and the drawer-opening task gets stuck. In the bottom row, \(H=1\) is close to strict closed-loop control: the robot observes and corrects at every step, preserving reactivity and completing the task. VLA-Corrector is designed to keep much of the long-chunk efficiency while recovering closed-loop correction when drift is detected.
+
+---
+
+![Figure 2 : Performance–efficiency trade-off across fixed action horizons. Smalle](fig2_1.webp)
+
+> Figure 2 : Performance–efficiency trade-off across fixed action horizons. Smaller horizon achieves higher success rates, while larger horizon preserves the chunking efficiency.
+
+This figure (Figure 2) illustrates the **performance-efficiency tradeoff** of three methods (π₀.₅, SmolVLA, XVLA) under different **fixed action horizons**.  
+
+First, let’s examine the axes:  
+- The **Y-axis** represents "Success Rate %," where an upward arrow indicates improved performance—higher values mean more successful task execution.  
+- The **X-axis** represents "Avg. Inference Calls," where a downward arrow signifies reduced cost—lower values mean fewer calls to the policy model, resulting in higher efficiency.  
+
+Three curves appear in the graph, each representing a different method (distinguished by the legend):  
+1. **π₀.₅** (dark blue dotted line with circles): Likely a baseline method or a specific configuration of a policy.  
+2. **SmolVLA** (teal line with squares): A method mentioned in the paper.  
+3. **XVLA** (orange line with triangles): An implementation or variant of VLA-Corrector, the main method proposed in the paper.  
+
+Each data point on the curves is labeled "h=some value," where "h" denotes the **action horizon**—the number of consecutive actions planned and executed in a single policy call. For example, "h=50" means one call executes 50 actions.  
+
+### Analyzing Trends and Implications:  
+- **For all three methods**, as the action horizon *h* increases (i.e., more actions are executed per call), the average number of inference calls decreases (moving left on the X-axis). This reflects improved **chunking efficiency**, as policy calls become less frequent.  
+- However, as *h* increases, the success rate generally decreases (moving down on the Y-axis). This is because a larger action horizon means longer "open-loop" execution, making the system less adaptable to environmental changes and more prone to accumulating errors, which increases the task failure rate. This is a limitation of the "predict-then-blindly-execute" paradigm.  
+
+### Specific Method Behaviors:  
+- **XVLA (orange triangles)**: This curve is the highest and furthest to the right, indicating a strong balance between high success rates and low inference calls. For example, at *h*=8, it achieves a high success rate with relatively few calls. When *h* decreases to 4, the success rate drops slightly, but inference calls increase significantly.  
+- **SmolVLA (teal squares)**: Its performance lies between π₀.₅ and XVLA. Like XVLA, its success rate declines as *h* increases, but at the same *h* values, its success rate is typically lower than XVLA’s, while inference calls may be slightly higher or similar.  
+- **π₀.₅ (dark blue circles)**: At low *h* values (e.g., *h*=50), its success rate is low. However, as *h* increases (e.g., *h*=10, 20, 30), its success rate improves significantly, peaking at *h*=10. Beyond *h*=20, further increases in *h* yield diminishing or slightly decreasing returns in success rate.  
+
+### Method Mechanics (From the Paper Abstract):  
+The proposed VLA-Corrector (XVLA in the figure) addresses the limitations of traditional fixed-action-horizon methods. It introduces a lightweight **Latent Visual Monitor (LVM)** to continuously compare predicted and actual visual feature evolution, detecting visual dynamics deviations online. When persistent deviations are detected, the system triggers a "truncation event," discards outdated actions, and performs corrective replanning via **Online Gradient Guidance (OGG)**.  
+
+### Key Findings from the Figure:  
+1. **Fixed Action Horizon Tradeoff**: All methods show that increasing *h* improves success rates (due to reduced inference calls and higher efficiency) but may decrease success rates (due to increased cumulative error risk with long horizons). This aligns with the "predict-then-blindly-execute" limitation noted in the abstract.  
+2. **VLA-Corrector Advantage**: XVLA outperforms the others, especially at moderate to high *h* values. This demonstrates that VLA-Corrector’s **event-triggered adaptive action horizon** (maintaining long horizons when current actions are reliable, or triggering short-horizon corrections when execution drifts) effectively mitigates the tradeoff, achieving high success rates and chunking efficiency.  
+3. **Method Comparison**: XVLA outperforms SmolVLA and π₀.₅ across most *h* values, particularly in balancing success rates and efficiency, validating VLA-Corrector’s effectiveness.  
+
+### Conclusion:  
+The figure clearly illustrates the performance-efficiency tradeoff for three methods under varying fixed action horizons. The key insight is that while larger *h* improves efficiency (fewer inference calls), it may sacrifice some success rate. However, VLA-Corrector (XVLA) optimizes this tradeoff through its adaptive horizon mechanism, achieving strong performance and efficiency. Data points (e.g., *h*=50, 40, 30, 20, 16, 10, 8, 4) highlight specific behaviors at different settings, aiding in understanding method suitability for various scenarios.
+
+---
+
 ![Figure 3 : Overview of VLA-Corrector. Starting from a standard chunked VLA pipel](fig3_1.webp)
 
 > Figure 3 : Overview of VLA-Corrector. Starting from a standard chunked VLA pipeline ( A ), we add a Latent-space Vision Monitor (LVM) that detects persistent execution drift and triggers an interrupt event ( B ). The event truncates stale actions and switches the next replan from normal flow matching to OGG-guided flow matching ( C ). OGG uses the expected and observed latent evolution to guide the replan back toward a recoverable trajectory ( D ).
@@ -67,6 +114,8 @@ In this way, the VLA-Corrector mitigates the lack of open-loop reactivity in the
 
 ![Figure 4 : Performance–efficiency analysis on π 0.5 \pi_{0.5} . Left : performan](fig4_1.webp)
 
+![Figure 4 right panel](fig4_2.webp)
+
 > Figure 4 : Performance–efficiency analysis on π 0.5 \pi_{0.5} . Left : performance–efficiency trade-off across action horizons. Right : success-per-call efficiency. VLA-Corrector improves success rate across action horizons and yields consistent efficiency gains.
 
 This figure (Figure 4) presents a **performance - efficiency analysis** of the VLA - Corrector method on the policy \(\boldsymbol{\pi_{0.5}}\). It focuses on comparing the "Our method (\(\pi_{0.5}\) (Ours), orange dot - line)" and "Baseline method (\(\pi_{0.5}\) (Baseline), blue dot - line)" in terms of **success rate (vertical axis, %)** and **inference cost (horizontal axis, average number of calls)** under different **action horizons** (denoted by \(h\), e.g., \(h = 10, 20, 30, 40, 50\)), while also illustrating the efficiency gain.  
@@ -98,6 +147,32 @@ Through the **event - triggered adaptive action horizon** (long horizon for effi
 2. **Efficiency Gain**: Under the same action horizon (e.g., \(h = 10\)), the improvement of the success rate is accompanied by the optimization of the inference cost (or a higher success is obtained with a lower cost), alleviating the "success rate - efficiency" trade - off of the "prediction - blind execution" paradigm.  
 
 In short, the figure clearly shows that **VLA - Corrector can improve the success rate of the strategy under different action horizons and has a higher efficiency (the balance between success rate and inference cost) than the baseline method**.
+
+---
+
+![Figure 5 : LVM detection analysis. Left : distribution of the inconsistency scor](fig5_1.webp)
+
+![Figure 5 : LVM detection analysis. Left : distribution of the inconsistency scor](fig5_2.webp)
+
+> Figure 5 : LVM detection analysis. Left : distribution of the inconsistency score E t E_{t} , where successful episodes concentrate at low values and failed episodes show a heavier high-score tail. Right : interrupt frequency, where failed episodes trigger more interrupt events than successful ones.
+
+Figure 5 checks whether the Latent-space Vision Monitor (LVM) actually detects meaningful execution errors. The left plot shows the inconsistency score \(E_t\): successful episodes concentrate at low scores, while failed episodes have a heavier high-score tail. The right plot shows interrupt frequency: failed episodes trigger more interrupts than successful ones. Together, these results indicate that LVM interrupts are correlated with real execution drift rather than random noise.
+
+---
+
+![Figure 6 : Task-phase analysis of LVM-triggered truncation. We manually divide M](fig6_1.webp)
+
+> Figure 6 : Task-phase analysis of LVM-triggered truncation. We manually divide MetaWorld trajectories into critical and non-critical phases. Left : representative trajectories show that truncation is triggered much more frequently during critical phases. Right : 83.7% of truncations occur in critical phases, while only 16.3% occur in non-critical phases.
+
+Figure 6 analyzes when LVM-triggered truncation happens. The authors manually divide MetaWorld trajectories into critical and non-critical phases. Critical phases are moments such as contact, grasping, insertion, or placement, where a small deviation can cause failure. The examples and statistics show that 83.7% of truncations occur in critical phases and only 16.3% in non-critical phases, suggesting that the monitor tends to interrupt when correction is actually needed.
+
+---
+
+![Figure 7 : Post-interrupt recovery. OGG-guided inference consistently outperform](fig7_1.webp)
+
+> Figure 7 : Post-interrupt recovery. OGG-guided inference consistently outperforms standard inference.
+
+Figure 7 compares recovery after an interrupt. Standard inference replans from the current state but does not explicitly use the detected visual deviation as a correction direction. OGG-guided inference turns the gap between expected and observed visual evolution into guidance for the new action sequence. The result shows that OGG-guided inference consistently recovers better than standard inference in the post-interrupt setting.
 
 ---
 
@@ -180,39 +255,24 @@ This figure is not a traditional coordinate plot or comparison chart but a proce
 
 ---
 
-![Figure 2 : Performance–efficiency trade-off across fixed action horizons. Smalle](fig2_1.webp)
+![Figure 10 : Demo: Moving-object grasp. The robot picks up the cube and places it](fig10_1.webp)
 
-> Figure 2 : Performance–efficiency trade-off across fixed action horizons. Smaller horizon achieves higher success rates, while larger horizon preserves the chunking efficiency.
+> Figure 10 : Demo: Moving-object grasp. The robot picks up the cube and places it into the white bowl, while a human manually changes the cube’s position during the process.
 
-This figure (Figure 2) illustrates the **performance-efficiency tradeoff** of three methods (π₀.₅, SmolVLA, XVLA) under different **fixed action horizons**.  
+Figure 10 is a real-world moving-object grasp demo. The robot must pick up a cube and place it into the white bowl, while a human changes the cube position during execution. That change makes the remaining actions in the old chunk stale. VLA-Corrector should detect the visual mismatch, truncate the stale chunk, and replan from the cube's new position so the task can continue.
 
-First, let’s examine the axes:  
-- The **Y-axis** represents "Success Rate %," where an upward arrow indicates improved performance—higher values mean more successful task execution.  
-- The **X-axis** represents "Avg. Inference Calls," where a downward arrow signifies reduced cost—lower values mean fewer calls to the policy model, resulting in higher efficiency.  
+---
 
-Three curves appear in the graph, each representing a different method (distinguished by the legend):  
-1. **π₀.₅** (dark blue dotted line with circles): Likely a baseline method or a specific configuration of a policy.  
-2. **SmolVLA** (teal line with squares): A method mentioned in the paper.  
-3. **XVLA** (orange line with triangles): An implementation or variant of VLA-Corrector, the main method proposed in the paper.  
+![Figure 11 : Demo: Moving-placement target. The robot picks up the cube and place](fig11_1.webp)
 
-Each data point on the curves is labeled "h=some value," where "h" denotes the **action horizon**—the number of consecutive actions planned and executed in a single policy call. For example, "h=50" means one call executes 50 actions.  
+> Figure 11 : Demo: Moving-placement target. The robot picks up the cube and places it into the blue bowl, while a human manually changes the bowl’s position during the process.
 
-### Analyzing Trends and Implications:  
-- **For all three methods**, as the action horizon *h* increases (i.e., more actions are executed per call), the average number of inference calls decreases (moving left on the X-axis). This reflects improved **chunking efficiency**, as policy calls become less frequent.  
-- However, as *h* increases, the success rate generally decreases (moving down on the Y-axis). This is because a larger action horizon means longer "open-loop" execution, making the system less adaptable to environmental changes and more prone to accumulating errors, which increases the task failure rate. This is a limitation of the "predict-then-blindly-execute" paradigm.  
+Figure 11 shows a moving placement target. The robot is asked to place the cube into the blue bowl, but a human moves the blue bowl during execution. A fixed action-chunk policy may keep moving toward the old target location. VLA-Corrector instead detects the target displacement, discards outdated actions, and replans actions that place the cube into the bowl at its new position.
 
-### Specific Method Behaviors:  
-- **XVLA (orange triangles)**: This curve is the highest and furthest to the right, indicating a strong balance between high success rates and low inference calls. For example, at *h*=8, it achieves a high success rate with relatively few calls. When *h* decreases to 4, the success rate drops slightly, but inference calls increase significantly.  
-- **SmolVLA (teal squares)**: Its performance lies between π₀.₅ and XVLA. Like XVLA, its success rate declines as *h* increases, but at the same *h* values, its success rate is typically lower than XVLA’s, while inference calls may be slightly higher or similar.  
-- **π₀.₅ (dark blue circles)**: At low *h* values (e.g., *h*=50), its success rate is low. However, as *h* increases (e.g., *h*=10, 20, 30), its success rate improves significantly, peaking at *h*=10. Beyond *h*=20, further increases in *h* yield diminishing or slightly decreasing returns in success rate.  
+---
 
-### Method Mechanics (From the Paper Abstract):  
-The proposed VLA-Corrector (XVLA in the figure) addresses the limitations of traditional fixed-action-horizon methods. It introduces a lightweight **Latent Visual Monitor (LVM)** to continuously compare predicted and actual visual feature evolution, detecting visual dynamics deviations online. When persistent deviations are detected, the system triggers a "truncation event," discards outdated actions, and performs corrective replanning via **Online Gradient Guidance (OGG)**.  
+![Figure 12 : Demo: Moving-insertion target. The robot picks up the cube and place](fig12_1.webp)
 
-### Key Findings from the Figure:  
-1. **Fixed Action Horizon Tradeoff**: All methods show that increasing *h* improves success rates (due to reduced inference calls and higher efficiency) but may decrease success rates (due to increased cumulative error risk with long horizons). This aligns with the "predict-then-blindly-execute" limitation noted in the abstract.  
-2. **VLA-Corrector Advantage**: XVLA outperforms the others, especially at moderate to high *h* values. This demonstrates that VLA-Corrector’s **event-triggered adaptive action horizon** (maintaining long horizons when current actions are reliable, or triggering short-horizon corrections when execution drifts) effectively mitigates the tradeoff, achieving high success rates and chunking efficiency.  
-3. **Method Comparison**: XVLA outperforms SmolVLA and π₀.₅ across most *h* values, particularly in balancing success rates and efficiency, validating VLA-Corrector’s effectiveness.  
+> Figure 12 : Demo: Moving-insertion target. The robot picks up the cube and places it at the upper-left corner of the drawer top, while a human manually changes the drawer’s position during the process.
 
-### Conclusion:  
-The figure clearly illustrates the performance-efficiency tradeoff for three methods under varying fixed action horizons. The key insight is that while larger *h* improves efficiency (fewer inference calls), it may sacrifice some success rate. However, VLA-Corrector (XVLA) optimizes this tradeoff through its adaptive horizon mechanism, achieving strong performance and efficiency. Data points (e.g., *h*=50, 40, 30, 20, 16, 10, 8, 4) highlight specific behaviors at different settings, aiding in understanding method suitability for various scenarios.
+Figure 12 shows a moving insertion target. The robot must place the cube at the upper-left corner of the drawer top, while a human changes the drawer position. This kind of contact-rich placement is sensitive to the target pose, so stale actions can easily fail. The demo illustrates the detect-truncate-correct loop under a real disturbance: detect the mismatch, interrupt the obsolete chunk, and use OGG-guided replanning for the new drawer position.

@@ -1,7 +1,7 @@
 """Deep-dive interpretation of one ingested paper (README's four-part shape).
 
 Usage:
-    python -m pipeline.interpret --date YYYY-MM-DD --id ARXIV_ID [--max-figures N]
+    python -m pipeline.interpret --date YYYY-MM-DD --id ARXIV_ID [--prune]
 
 Reads  data/<date>/<id>/paper.html + figures + selected.json entry.
 Writes data/<date>/<id>/deep_dive.zh.md and deep_dive.en.md.
@@ -135,23 +135,6 @@ def analyze_introduction(title: str, abstract: str, intro: str) -> tuple[str, st
     return _ensure_languages(*_split_bilingual(out))
 
 
-def pick_key_figures(figures: list[dict], max_n: int) -> list[int]:
-    """Ask the text model which figures best explain the method/framework."""
-    numbered = "\n".join(
-        f"[{i}] {f.get('caption') or '(no caption)'}" for i, f in enumerate(figures)
-    )
-    out = llm.chat(
-        "下面是一篇论文所有插图的 caption 列表。选出最能讲清「方法/框架/流程如何工作」"
-        f"的图（优先总体框架图、方法流程图；实验曲线和消融图靠后），最多选 {max_n} 张，"
-        "按讲解顺序排列。只输出 JSON 数组，如 [0,2,5]。\n\n" + numbered
-    )
-    m = re.search(r"\[[\d,\s]*\]", out)
-    if not m:
-        return list(range(min(max_n, len(figures))))
-    idx = [i for i in json.loads(m.group(0)) if 0 <= i < len(figures)]
-    return idx[:max_n] or list(range(min(max_n, len(figures))))
-
-
 def explain_figure(paper: dict, fig: dict, image_path: str) -> tuple[str, str]:
     """Poster-style detailed walkthrough of one figure, zh and en."""
     out = llm.chat_vision(
@@ -219,10 +202,24 @@ def _clean(text: str) -> str:
     return text.strip()
 
 
+def all_figure_images(figures: list[dict]) -> list[tuple[dict, str]]:
+    """Flatten every successfully downloaded image, including multi-panel figures."""
+    return [
+        (figure, image_path)
+        for figure in figures
+        for image_path in figure.get("local_paths", [])
+        if image_path
+    ]
+
+
 # ---------- assembly ----------
 
 
-def deep_dive(date: str, arxiv_id: str, max_figures: int = 5, prune: bool = False) -> None:
+def deep_dive(
+    date: str,
+    arxiv_id: str,
+    prune: bool = False,
+) -> None:
     day_dir = DATA_DIR / date
     paper_dir = day_dir / arxiv_id
     selected = json.loads((day_dir / "selected.json").read_text())
@@ -249,26 +246,24 @@ def deep_dive(date: str, arxiv_id: str, max_figures: int = 5, prune: bool = Fals
     )
 
     figures = [f for f in paper.get("figures", []) if any(f.get("local_paths", []))]
-    key_idx = pick_key_figures(figures, max_figures)
-    print(f"[4/4] Explaining {len(key_idx)} key figures (of {len(figures)}): {key_idx}")
+    image_entries = all_figure_images(figures)
+    print(f"[4/4] Explaining all {len(image_entries)} figure images")
     fig_sections_zh, fig_sections_en = [], []
     kept_images = []
-    for i in key_idx:
-        fig = figures[i]
-        img = next(p for p in fig["local_paths"] if p)
+    for fig, img in image_entries:
         zh, en = explain_figure(paper, fig, img)
         rel = _webp_name(Path(img))
         kept_images.append(paper_dir / rel)
         cap = fig.get("caption", "")
         fig_sections_zh.append(f"![{cap[:80]}]({rel})\n\n> {cap}\n\n{zh}")
         fig_sections_en.append(f"![{cap[:80]}]({rel})\n\n> {cap}\n\n{en}")
-        print(f"      figure [{i}] done")
+        print(f"      {Path(img).name} done")
 
     zh_md = _render_zh(paper, abstract_zh, background_zh, fig_sections_zh)
     en_md = _render_en(paper, background_en, fig_sections_en)
     (paper_dir / "deep_dive.zh.md").write_text(zh_md)
     (paper_dir / "deep_dive.en.md").write_text(en_md)
-    _convert_figures(figures, key_idx)
+    _convert_figures(image_entries)
     if prune:
         _prune(paper_dir, kept_images)
     print(f"Done: {paper_dir}/deep_dive.zh.md, deep_dive.en.md")
@@ -278,15 +273,16 @@ def _webp_name(img: Path) -> str:
     return img.stem + ".webp"
 
 
-def _convert_figures(figures: list[dict], key_idx: list[int]) -> None:
-    """Convert the chosen figures to WebP next to the originals (~8x smaller)."""
+def _convert_figures(image_entries: list[tuple[dict, str]]) -> None:
+    """Convert every downloaded figure image to WebP next to the original."""
     if Image is None:
         raise RuntimeError("pillow required: pip install pillow")
-    for i in key_idx:
-        src_img = Path(next(p for p in figures[i]["local_paths"] if p))
+    for _, image_path in image_entries:
+        src_img = Path(image_path)
         dest = src_img.with_suffix(".webp")
         if not dest.exists():
-            Image.open(src_img).convert("RGB").save(dest, "WEBP", quality=85)
+            with Image.open(src_img) as image:
+                image.convert("RGB").save(dest, "WEBP", quality=85)
 
 
 def _prune(paper_dir: Path, kept_images: list[Path]) -> None:
@@ -351,11 +347,10 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", required=True)
     ap.add_argument("--id", required=True, help="arXiv id")
-    ap.add_argument("--max-figures", type=int, default=5)
     ap.add_argument("--prune", action="store_true",
                     help="delete paper.html and unused figures afterwards")
     args = ap.parse_args()
-    deep_dive(args.date, args.id, args.max_figures, args.prune)
+    deep_dive(args.date, args.id, args.prune)
 
 
 if __name__ == "__main__":

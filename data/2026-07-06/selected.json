@@ -543,7 +543,7 @@
         ],
         "caption": "Figure 1: VoxAct-B uses voxel representations and language to perform bimanual manipulation with 6-DoF manipulation from both arms. We test three language-conditioned bimanual tasks in simulation and two ( Open Drawer and Open Jar ) on a real-world setup with two UR5s. The prompt for Open Drawer assumes the left arm is stabilizing and the right arm is acting, while the reverse is true for the Open Jar prompt.",
         "local_paths": [
-          null
+          "data/2026-07-06/2407.04152/fig1_1.png"
         ]
       },
       {
@@ -555,7 +555,7 @@
         ],
         "caption": "Figure 2: Overview of VoxAct-B. Given RGB-D images and a language goal, we input an RGB image from the front camera and a text query extracted from the language goal into the Vision Language Models (VLMs). The VLMs output the pose of the object of interest with respect to the front camera. This information determines the language goal and the roles of each arm (i.e., acting or stabilizing ). Additionally, we use the object’s position with the RGB-D images to reconstruct a voxel grid that spans α ⁢ x 3 𝛼 superscript 𝑥 3 \\alpha x^{3} italic_α italic_x start_POSTSUPERSCRIPT 3 end_POSTSUPERSCRIPT meters of the workspace using V 3 superscript 𝑉 3 V^{3} italic_V start_POSTSUPERSCRIPT 3 end_POSTSUPERSCRIPT voxels. The zoomed-in voxel grid, the language goal, proprioception data of both robot arms, and an arm ID are provided to an acting policy π a subscript 𝜋 𝑎 \\pi_{a} italic_π start_POSTSUBSCRIPT italic_a end_POSTSUBSCRIPT and a stabilizing policy π s subscript 𝜋 𝑠 \\pi_{s} italic_π start_POSTSUBSCRIPT italic_s end_POSTSUBSCRIPT . The policies predict the discretized pose of the next best voxel, gripper open action, collision avoidance flag, and arm ID for fine-grained bimanual manipulation.",
         "local_paths": [
-          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2407.04152/fig2_1.png"
+          "data/2026-07-06/2407.04152/fig2_1.png"
         ]
       },
       {
@@ -567,7 +567,7 @@
         ],
         "caption": "Figure 3: Top : VLMs usage as part of VoxAct-B, visualizing the Open Jar task in simulation, showing the role of OWL-ViT and Segment Anything. The RGB images from the front camera shown above are examples of actual (uncropped) images provided as input to the models. Bottom : visualization of different α 𝛼 \\alpha italic_α values resulting in coarser grids ( α = 1.0 𝛼 1.0 \\alpha=1.0 italic_α = 1.0 ) to finer grids ( α = 0.1 𝛼 0.1 \\alpha=0.1 italic_α = 0.1 ). We use α = 0.3 𝛼 0.3 \\alpha=0.3 italic_α = 0.3 for Open Jar .",
         "local_paths": [
-          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2407.04152/fig3_1.png"
+          "data/2026-07-06/2407.04152/fig3_1.png"
         ]
       },
       {
@@ -579,7 +579,7 @@
         ],
         "caption": "Figure 4: Example successful rollouts (one per row) of VoxAct-B on a real-world bimanual setup with UR5s.",
         "local_paths": [
-          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2407.04152/fig4_1.png"
+          "data/2026-07-06/2407.04152/fig4_1.png"
         ]
       }
     ]
@@ -611,7 +611,7 @@
         ],
         "caption": "Figure 1 : Rubik’s cube manipulation can be used to benchmark robot manipulation across a wide array of algorithmic approaches and robot platforms, such as the PR2 and HERB.",
         "local_paths": [
-          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2202.07074/fig1_1.png"
+          "data/2026-07-06/2202.07074/fig1_1.png"
         ]
       },
       {
@@ -620,7 +620,7 @@
         ],
         "caption": "Figure 2 : The robot must precisely position its grippers to rotate the left column of the Rubik’s cube while constraining the middle and right columns in place. Top Row: The robot correctly positions its grippers: it is constraining the two right columns of the cube. The yellow box highlights the position of the constraining gripper. Middle Row: The robot only touches one column of the Rubik’s cube and therefore fails to constrain its middle column. Bottom Row: The right gripper is touching all three columns of the cube; this prevents the left gripper from rotating the left column of the cube.",
         "local_paths": [
-          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2202.07074/fig2_1.png"
+          "data/2026-07-06/2202.07074/fig2_1.png"
         ]
       },
       {
@@ -629,7 +629,7 @@
         ],
         "caption": "Figure 3 : HERB’s simulated Barrett hands manipulate the Rubik’s cube in blue. Left: The right gripper uses a push-grasp to make contact with the Rubik’s cube. Upon making contact, the right gripper reaches the desired pre-grasp. Right: The right gripper closes its outer fingers to transition from pre-grasp to grasp.",
         "local_paths": [
-          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2202.07074/fig3_1.png"
+          "data/2026-07-06/2202.07074/fig3_1.png"
         ]
       }
     ]
@@ -663,7 +663,7 @@
         ],
         "caption": "Figure 1. Comparison of Rubik’s Cube Solving Performance.",
         "local_paths": [
-          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2503.19281/fig1_1.png"
+          "data/2026-07-06/2503.19281/fig1_1.png"
         ]
       },
       {
@@ -675,7 +675,7 @@
         ],
         "caption": "Figure 2. Framework of CubeRobot. The orange arrow shows the vision-language planning process, while the gray arrow represents that we leverage the queried language plans for better policy learning in Rubik’s Cube Manipulation tasks.",
         "local_paths": [
-          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2503.19281/fig2_1.png"
+          "data/2026-07-06/2503.19281/fig2_1.png"
         ]
       },
       {
@@ -687,7 +687,7 @@
         ],
         "caption": "Figure 3. Dual-loop CoT. The outer-loop manages high-level tasks, including initial action planning and iterative refinements, while tracking task progress. The inner-loop executes specific sub-tasks assigned by the outer-loop, employing thought, reasoning, and reflection.",
         "local_paths": [
-          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2503.19281/fig3_1.png"
+          "data/2026-07-06/2503.19281/fig3_1.png"
         ]
       },
       {
@@ -699,7 +699,7 @@
         ],
         "caption": "Figure 4. Visualization results of CubeRobot. We accurately emulated the movements of the CubeRobot equipped with LR Mate 200iD robotic arm.",
         "local_paths": [
-          "/Volumes/datas/obsidian/codes/myself/Tide/.claude/worktrees/confident-mestorf-dc2245/data/2026-07-06/2503.19281/fig4_1.png"
+          "data/2026-07-06/2503.19281/fig4_1.png"
         ]
       }
     ]
