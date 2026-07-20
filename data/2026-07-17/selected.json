@@ -1,0 +1,798 @@
+[
+  {
+    "arxiv_id": "2607.14952",
+    "title": "LongStraw: Long-Context RL Beyond 2M Tokens under a Fixed GPU Budget",
+    "abstract": "A growing gap separates inference context lengths from RL post-training: inference systems are approaching million-token contexts, while post-training workloads often remain at 256K tokens or below and rely on length generalization at deployment. The gap is especially important for AI agents, whose observations, tool outputs, documents, and prior decisions accumulate over long trajectories. LongStraw is an architecture-aware execution stack for million-token RL post-training under a fixed GPU budget, instantiated with Group Relative Policy Optimization (GRPO). It evaluates the shared prompt without autograd, retains only model-specific state needed by later tokens, and replays short response branches one at a time, reducing the live training graph at the cost of additional replay time. We implement it for the hybrid recurrent and full-attention Qwen3.6-27B and the compressed-attention mixture-of-experts GLM-5.2. On eight H20 GPUs, LongStraw completes grouped Qwen scoring and response backward at 2.1M positions for groups of 2 and 8; increasing the group size adds only 0.21 GB of peak allocated memory, while a separate stress test reaches 4.46M positions. On 32 H20 GPUs, we validate the end-to-end LongStraw execution path for a 2.1M-token prompt across all 78 layers of GLM-5.2. These experiments establish execution capacity rather than complete training correctness because the captured prompt state is detached and some distributed forward and gradient composition paths remain incomplete.",
+    "upvotes": 178,
+    "authors": [
+      "Changhai Zhou",
+      "Kieran Liu",
+      "Yuhua Zhou",
+      "Qian Qiao",
+      "Jun Gao",
+      "Harry Zhang",
+      "Irvine Lu",
+      "Nolan Ho",
+      "Lucian Li",
+      "Andrew Lei",
+      "Cleon Cheng",
+      "Steven Chiang",
+      "Yihang Zeng",
+      "Di Zhang",
+      "Rio Yang",
+      "Kaijie Chen",
+      "Andrew Chen",
+      "Pony Ma",
+      "Weizhong Zhang",
+      "Cheng Jin"
+    ],
+    "organization": "Mind Lab",
+    "github_repo": "https://github.com/MindLab-Research/longstraw",
+    "github_stars": 10,
+    "ai_keywords": [],
+    "published_at": "2026-07-16T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.14952",
+    "arxiv_url": "https://arxiv.org/abs/2607.14952",
+    "html_available": true,
+    "figures": []
+  },
+  {
+    "arxiv_id": "2607.14935",
+    "title": "VideoChat3: Fully Open Video MLLM for Efficient and Generalist Video Understanding",
+    "abstract": "Recent advances in video understanding have spanned motion, long video, and streaming interaction, driving this field toward real-world applications. Despite this progress, current open-source models remain limited in several ways. They often struggle to generalize across diverse video types, making them effective only in specific domains. High computational demands further restrict their efficiency and scalability. Moreover, most models are only partially open, with key components such as training code, strategy, or datasets unavailable, which hinders reproducibility and slows community-driven development. To address these issues, we introduce VideoChat3, a fully open, efficient, and generalist video-centric MLLM. VideoChat3 advances video understanding through two complementary designs. For efficiency, we introduce Inflated 3D Vision Transformer (I3D-ViT) and Adaptive Frame Resolution for Streaming Video Perception, which enables efficient spatiotemporal representation and reduces the cost of processing video inputs during training and inference. For effectiveness, we develop a scalable video data synthesis pipeline that curates three diverse, high-quality training datasets: VideoChat3-Academic2M, VideoChat3-LV116K, and VideoChat3-OL617K, covering general, long-form, and streaming video scenarios, improving the model's generalization across domains. By integrating these designs, VideoChat3 achieves a rare balance of broad generalization and computational efficiency. Experiments across general, long-form, and streaming benchmarks demonstrate that VideoChat3 surpasses prior open-source models with equal or larger parameter counts with only 4B parameters and higher efficiency.",
+    "upvotes": 149,
+    "authors": [
+      "Xinhao Li",
+      "Yuhan Zhu",
+      "Xiangyu Zeng",
+      "Yuhao Dong",
+      "Haoning Wu",
+      "Zhiqiu Zhang",
+      "Yuandong Yang",
+      "Changlian Ma",
+      "Qingyu Zhang",
+      "Yansong Shi",
+      "Xinyu Chen",
+      "Haoran Chen",
+      "Zizheng Huang",
+      "Jun Zhang",
+      "Kun Ouyang",
+      "Lin Sui",
+      "Ziang Yan",
+      "Yicheng Xu",
+      "Chenting Wang",
+      "Yinan He",
+      "Hongjie Zhang",
+      "Yi Wang",
+      "Yu Qiao",
+      "Yali Wang",
+      "Ziwei Liu",
+      "Kai Chen",
+      "Limin Wang"
+    ],
+    "organization": "Multimedia Computing Group-Nanjing University",
+    "github_repo": "https://github.com/MCG-NJU/VideoChat3",
+    "github_stars": 108,
+    "ai_keywords": [],
+    "published_at": "2026-07-16T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.14935",
+    "arxiv_url": "https://arxiv.org/abs/2607.14935",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x1.png",
+            "https://arxiv.org/html/2607.14935v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1 : VideoChat3 achieves strong performance across diverse evaluation benchmarks, including temporal perception, long video understanding, and temporal grounding, while also supporting online proactive responses.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x2.png",
+            "https://arxiv.org/html/2607.14935v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2 : VideoChat3 architecture with I3D-ViT. VideoChat3 follows the classical ViT–MLP Projector–LLM architecture, with I3D-ViT enabling efficient video encoding before visual tokens are passed to the LLM. Specifically, spatial 2 × 2 2\\times 2 merging and temporal T T -frame pooling reduce the visual sequence length by approximately a factor of 4 ​ T 4T . Under the default setting of T = 4 T=4 , this yields a 16 × 16\\times spatiotemporal compression ratio; for clarity, the figure illustrates the mechanism with T = 2 T=2 .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x3.png",
+            "https://arxiv.org/html/2607.14935v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 3 : Illustration of the Adaptive Frame Resolution . State tokens control whether the next streaming window is encoded at a low or high pixel quota. In the soccer example, routine play is monitored at low cost; when players rush toward the goal, the Standby state enlarges the next window so the model can inspect whether the ball goes in before triggering Response.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x4.png",
+            "https://arxiv.org/html/2607.14935v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 4 : Source Distribution of VideoChat3-Academic2M. VideoChat3-Academic2M contains 2.27M caption/QA instances from six academic sources, dominated by LLaVA-Video [ 26 ] , Spoken-MIT [ 27 ] , and Vript [ 28 ] .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x5.png",
+            "https://arxiv.org/html/2607.14935v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 5 : Example of Annotation Enhancement from Concise Answers to Evidence-Grounded Responses. A short-phrase answer is rewritten into a temporally grounded, evidence-rich response that explains the observed actions and supports the final answer with video-specific cues. This illustrates how annotation enhancement increases supervision density while preserving the original semantic label.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x6.png",
+            "https://arxiv.org/html/2607.14935v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 6 : Source Distribution of VideoChat3-LV116K. The panels summarize the collected long-video repository used to construct VideoChat3-LV116K, with 116.2K rows. The duration statistics reveal a clear temporal-scale gap: academic sources are mostly short clips, with mean durations from 3.0s to 59.0s, whereas our collected long-video shards average 156s to 1.3K seconds and extend to much longer maxima. This complementarity provides both reliable short-clip semantic anchors and long-range supervision for sparse evidence, cross-segment aggregation, and event-level reasoning.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x7.png",
+            "https://arxiv.org/html/2607.14935v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 7 : Long-Video Data Synthesis Pipeline for VideoChat3-LV116k. The pipeline converts raw long videos into structured supervision through candidate filtering, temporal boundary segmentation, segment-level annotation, quality examination, and full-video annotation assembly. Instead of annotating an entire long video directly, it builds a validated segment-level evidence ledger, making sparse long-range events easier to capture and reason over.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x8.png",
+            "https://arxiv.org/html/2607.14935v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 8 : Source composition and temporal coverage of VideoChat3-OL617K. Left: Distribution of 617,183 instances across 40 JSONL shards. StreamForest General and Streamo contribute 272,424 (44.1%) and 259,977 (42.1%) instances, respectively, while StreamForest Drive, Seeker, and Supplement provide the remaining data. Right: Minimum, mean, and maximum observed context spans for 438,902 records with timing information, shown on a logarithmic scale with zero-length spans placed at 1 second for visualization. Mean spans range from 12.7 seconds for StreamForest Drive to 153.5 seconds for Seeker, providing supervision across both short- and long-horizon causal streaming contexts. This diversity supports the evidence accumulation and response-timing behaviors used to construct proactive streaming QA supervision.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x9.png",
+            "https://arxiv.org/html/2607.14935v1/x9.png"
+          ]
+        ],
+        "caption": "Figure 9 : State-transition supervision mask for streaming training. The output sequence consists of </Silence> , </Standby> , and </Response> . Blue arrows indicate the state-token positions whose losses are retained. We keep all Transform positions, where the target state changes between adjacent windows, because they define the temporal decision boundaries. From the remaining continuation positions, we randomly select an equal number of Keep positions to provide supervision for maintaining the current state.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x10.png",
+            "https://arxiv.org/html/2607.14935v1/x10.png"
+          ]
+        ],
+        "caption": "Figure 10 : Qualitative example of fine-grained video captioning. VideoChat3 describes the complete pole-vault sequence, covering the run-up, pole planting, takeoff, bar clearance, and landing.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x11.png",
+            "https://arxiv.org/html/2607.14935v1/x11.png"
+          ]
+        ],
+        "caption": "Figure 11 : Qualitative example of long-video question answering. VideoChat3 retrieves a specific visual detail from an extended video and correctly identifies the color of the floor microphone stand.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x12.png",
+            "https://arxiv.org/html/2607.14935v1/x12.png"
+          ]
+        ],
+        "caption": "Figure 12 : Qualitative example of temporal video reasoning. VideoChat3 recognizes events distributed across the video and arranges them in chronological order.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig12_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x13.png",
+            "https://arxiv.org/html/2607.14935v1/x13.png"
+          ]
+        ],
+        "caption": "Figure 13 : Qualitative example of temporal video grounding. Given a language description, VideoChat3 accurately localizes the corresponding event, with only a minor boundary deviation from the ground-truth interval.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig13_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x14.png",
+            "https://arxiv.org/html/2607.14935v1/x14.png"
+          ]
+        ],
+        "caption": "Figure 14 : Qualitative example of online proactive response. During streaming perception, VideoChat3 remains silent when relevant evidence is absent and produces timely responses once informative visual content appears.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig14_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14935v1/2607.14935v1/x15.png",
+            "https://arxiv.org/html/2607.14935v1/x15.png"
+          ]
+        ],
+        "caption": "Figure 15 : Qualitative example of dense video captioning. VideoChat3 identifies multiple events throughout the video and generates temporally coherent descriptions that capture its evolving content.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14935/fig15_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.14777",
+    "title": "SEED: Self-Evolving On-Policy Distillation for Agentic Reinforcement Learning",
+    "abstract": "Large language models are increasingly trained as interactive agents for long-horizon tasks involving multi-turn interaction, tool use, and environment feedback. Outcome-based reinforcement learning (RL) provides a practical optimization paradigm, but its sparse trajectory-level rewards offer limited guidance on intermediate decisions, leaving a supervision gap between episode-level outcomes and token-level policy learning. We propose SEED (SElf-Evolving On-Policy Distillation), a self-evolving framework that converts completed on-policy trajectories into training-time hindsight skills and distills their behavioral effect back into the policy model. SEED first fine-tunes the policy to analyze completed trajectories and generate natural-language skills that capture reusable workflows, decisive observations, or failure-avoidance rules. During RL, the current policy both collects trajectories and serves as the analyzer that extracts hindsight skills from them. Policy updates therefore improve subsequent decision making and skill analysis together, allowing hindsight supervision to evolve with the policy. SEED then re-scores the sampled actions under ordinary and skill-augmented contexts, converting the skill-induced probability shift into a dense token-level on-policy distillation signal. This signal is jointly optimized with outcome-based RL, keeping the auxiliary supervision aligned with the current trajectory distribution. Extensive experiments on text-based and vision-based agentic tasks show that SEED consistently improves performance and sample efficiency, exhibiting robust generalization to unseen scenarios. Our code is available at https://github.com/jinyangwu/SEED.",
+    "upvotes": 90,
+    "authors": [
+      "Jinyang Wu",
+      "Shuo Yang",
+      "Zhengxi Lu",
+      "Fan Zhang",
+      "Yuhao Shen",
+      "Lang Feng",
+      "Haoran Luo",
+      "Zheng Lian",
+      "Shuai Zhang",
+      "Zhengqi Wen",
+      "Jianhua Tao"
+    ],
+    "organization": "Tsinghua University, Zhejiang University, The Chinese University of Hong Kong",
+    "github_repo": "https://github.com/jinyangwu/SEED",
+    "github_stars": 110,
+    "ai_keywords": [],
+    "published_at": "2026-07-16T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.14777",
+    "arxiv_url": "https://arxiv.org/abs/2607.14777",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x2.png",
+            "https://arxiv.org/html/2607.14777v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 1: Overall performance overview. Compared with powerful baseline methods, Seed achieves the strongest average performance across three representative agentic benchmarks.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x3.png",
+            "https://arxiv.org/html/2607.14777v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 2: Overview of Seed . Stage 1 (Hindsight Skill SFT) equips the policy to extract hindsight skills from completed trajectories. Stage 2 (Self-Evolving On-Policy Distillation) jointly optimizes outcome-based RL and skill-conditioned OPD in a self-evolving agentic loop.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x4.png",
+            "https://arxiv.org/html/2607.14777v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 3: Training dynamics on ALFWorld. We compare Seed and GRPO using Qwen2.5-3B-Instruct as the backbone. Translucent curves show raw measurements, while solid curves show 13-point centered moving averages.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x5.png",
+            "https://arxiv.org/html/2607.14777v1/x5.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x6.png",
+            "https://arxiv.org/html/2607.14777v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 4: Sample efficiency analysis. Seed consistently outperforms GRPO across different data fraction settings and surpasses full-data GRPO using only 60% of the training data. Figure 5: Cross-domain generalizability on ALFWorld Unseen. Seed generally outperforms GRPO across unseen task types, demonstrating stronger cross-domain generalizability.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig4_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig4_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x7.png",
+            "https://arxiv.org/html/2607.14777v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 6: Qualitative comparison on ALFWorld. For the task “put a candle in toilet,” the GRPO- trained agent searches the target receptacle before locating the candle, takes an irrelevant toilet-paper item, and then enters an off-task loop. In contrast, SEED systematically checks plausible shelves, finds the candle, and completes the required placement in five steps.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x8.png",
+            "https://arxiv.org/html/2607.14777v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 7: A representative trajectory on Sokoban. The sequence shows six consecutive actions executed by the agent. Arrows indicate the temporal progression of the trajectory, and the action taken at each step is displayed below the corresponding observation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x9.png",
+            "https://arxiv.org/html/2607.14777v1/x9.png"
+          ]
+        ],
+        "caption": "Figure 8: Success rates across three backbones and three domains. Success rates increase over training in all nine settings, showing consistent learning across model scales and agentic tasks.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x10.png",
+            "https://arxiv.org/html/2607.14777v1/x10.png"
+          ]
+        ],
+        "caption": "Figure 9: OPD loss dynamics. The loss generally decreases and stabilizes during training, indicating that the policy progressively internalizes the behavioral guidance provided by hindsight skills.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x11.png",
+            "https://arxiv.org/html/2607.14777v1/x11.png"
+          ]
+        ],
+        "caption": "Figure 10: Prompt of analyzer.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x12.png",
+            "https://arxiv.org/html/2607.14777v1/x12.png"
+          ]
+        ],
+        "caption": "Figure 11: Prompt of actor (the policy model) in ALFWorld.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x13.png",
+            "https://arxiv.org/html/2607.14777v1/x13.png"
+          ]
+        ],
+        "caption": "Figure 12: ALFWorld Example 1. Seed locates and cleans the ladle, opens the closed drawer, and completes the placement in seven steps, demonstrating task decomposition and correct precondition handling.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x14.png",
+            "https://arxiv.org/html/2607.14777v1/x14.png"
+          ]
+        ],
+        "caption": "Figure 13: ALFWorld Example 2. Seed places two books through repeated trips between the desk and bed while retaining the completed first placement, demonstrating progress tracking over an extended trajectory.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig12_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x15.png",
+            "https://arxiv.org/html/2607.14777v1/x15.png"
+          ]
+        ],
+        "caption": "Figure 14: Search-based QA Example 1. A single query retrieves evidence that both people are mathematicians, allowing Seed to answer without unnecessary searches.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig13_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x16.png",
+            "https://arxiv.org/html/2607.14777v1/x16.png"
+          ]
+        ],
+        "caption": "Figure 15: Search-based QA Example 2. Seed first identifies Finding Neverland , then performs a targeted second search to verify that Marc Forster directed the film.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig14_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x17.png",
+            "https://arxiv.org/html/2607.14777v1/x17.png"
+          ]
+        ],
+        "caption": "Figure 16: WebShop Example 1. Seed identifies a green shower cap and hair turban set under $40, verifies the selected variant, and completes the purchase in four steps.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig15_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14777v1/2607.14777v1/x18.png",
+            "https://arxiv.org/html/2607.14777v1/x18.png"
+          ]
+        ],
+        "caption": "Figure 17: WebShop Example 2. Seed preserves the requested product constraints and selects mossy oak country and 5x-large big before purchasing a matching long-sleeve shirt under $60.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.14777/fig16_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.15257",
+    "title": "SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration",
+    "abstract": "Recent advances in Tool-Integrated Large Language Models have made web search a core capability of information-seeking agents. However, as interaction histories grow, agents increasingly struggle to track task progress. When search attempts fail to yield useful evidence, current single- and multi-agent systems can become trapped in repetitive loops, wasting search budgets and ultimately compromising the quality and completeness of the final output. We introduce SearchOS, a system-level multi-agent framework that turns fragile, implicit search progress into explicit, persistent, and shared state. First, we formulate open-domain information seeking as relational schema completion with grounded citations, where agents discover entities, populate attributes across linked tables, and anchor each value to source evidence. Then we design Search-Oriented Context Management (SOCM), which externalizes the evolving state into Frontier Task, an Evidence Graph, a Coverage Map, and Failure Memory. Built on SOCM, SearchOS applies a pipeline-parallel scheduling mechanism that overlaps the execution of sub-agents and continuously refills freed slots with tasks targeting unresolved coverage gaps to improve utilization and throughput. To schedule and control the execution of search agents, SearchOS introduces a Search Tool Middleware Harness that intercepts model and tool interactions to record grounded evidence and react to stalls or budget exhaustion, and provides a reusable hierarchical skill system comprising strategy and access skills to augment the agents' search process and avoid repeating failed search patterns across runs. On WideSearch and GISA, SearchOS leads all metrics among the evaluated single- and multi-agent baselines, paving the way toward robust information-seeking collaboration.",
+    "upvotes": 60,
+    "authors": [
+      "Yuyao Zhang",
+      "Junjie Gao",
+      "Zhengxian Wu",
+      "Jiaming Fan",
+      "Jin Zhang",
+      "Shihan Ma",
+      "Yao Yao",
+      "Weiran Qi",
+      "Chuyan Jin",
+      "Guiyu Ma",
+      "Xingzhong Xu",
+      "Kai Yang",
+      "Ji-Rong Wen",
+      "Zhicheng Dou"
+    ],
+    "organization": "Ant Group",
+    "github_repo": "https://github.com/antins-labs/SearchOS",
+    "github_stars": 65,
+    "ai_keywords": [],
+    "published_at": "2026-07-16T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.15257",
+    "arxiv_url": "https://arxiv.org/abs/2607.15257",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15257v1/2607.15257v1/figures/searchos-preview.png",
+            "https://arxiv.org/html/2607.15257v1/figures/searchos-preview.png"
+          ]
+        ],
+        "caption": "Figure 1 : SearchOS interface for a long-horizon information-seeking task. The workspace exposes the orchestration trace, pipeline parallel agent activity, and relational schema coverage.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15257/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15257v1/2607.15257v1/x1.png",
+            "https://arxiv.org/html/2607.15257v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 2 : SearchOS architecture.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15257/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15257v1/2607.15257v1/x2.png",
+            "https://arxiv.org/html/2607.15257v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 3 : Illustration of middleware interventions in the Search Agent loop.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15257/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15257v1/2607.15257v1/x3.png",
+            "https://arxiv.org/html/2607.15257v1/x3.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.15257v1/2607.15257v1/x4.png",
+            "https://arxiv.org/html/2607.15257v1/x4.png"
+          ]
+        ],
+        "caption": "(a) Frequent skill keywords. (b) Access-skill counts and functions. Figure 4 : Pre-built skills: (a) weighted keyword frequency; (b) access-skill counts and mean functions by domain.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15257/fig4_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15257/fig4_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15257v1/2607.15257v1/x5.png",
+            "https://arxiv.org/html/2607.15257v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 5 : Middleware-governance trajectories on WideSearch.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15257/fig5_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.15207",
+    "title": "BadWAM: When World-Action Models Dream Right but Act Wrong",
+    "abstract": "World-action models (WAMs) are emerging as a promising foundation for embodied control: rather than predicting actions alone, they learn representations that couple action generation with future world prediction. This coupling is often viewed as a source of robustness, interpretability, and safety, as a robot's action can in principle be checked against its imagined future. In this paper, we show that this assumption is fragile. We introduce BadWAM, a unified framework for modeling and evaluating World-Action Drift Attacks: a new class of WAM-specific adversarial attacks that use small visual perturbations to break the alignment between what a WAM imagines and what it executes. BadWAM characterizes this attack surface along two natural criteria: attack strength and stealthiness. When the adversary prioritizes disruption, BadWAM instantiates an action-only adversarial attack, which directly drives the model toward task-failing actions. When the adversary additionally prioritizes stealth, BadWAM instantiates an imagination-preserving adversarial attack, which seeks to induce harmful action shifts while keeping the model's predicted future close to its clean imagination. Together, these two attacks capture a spectrum of WAM-specific failures: from overt action hijacking to stealthier cases where the model appears to imagine a plausible future but executes a desynchronized action. We evaluate BadWAM across different variants of WAMs. Results show that our attacks substantially reduce task success rates under closed-loop execution. For example, our action-only attack reduces the model performance from 96.5% to 43.1% success. The results of our imagination-preserving attack further exposes a WAM-specific vulnerability: moderate future-preserving regularization can maintain strong attack performance while reducing future imagination drift.",
+    "upvotes": 47,
+    "authors": [
+      "Qi Li",
+      "Xingyi Yang",
+      "Xinchao Wang"
+    ],
+    "organization": "National University of Singapore, The Hong Kong Polytechnic University",
+    "github_repo": "https://github.com/LiQiiiii/BadWAM",
+    "github_stars": 39,
+    "ai_keywords": [],
+    "published_at": "2026-07-16T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.15207",
+    "arxiv_url": "https://arxiv.org/abs/2607.15207",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x1.png",
+            "https://arxiv.org/html/2607.15207v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1 : Empirical motivation for world-action adversarial attacks. Failed episodes tend to have larger action shifts, while predicted-future shifts overlap across successful and failed executions. This motivates attacking the alignment between action and imagination.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x2.png",
+            "https://arxiv.org/html/2607.15207v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2 : Action-only adversarial attack produces structured action shifts. Across three WAM variants, the attack primarily perturbs continuous action channels and specific portions of the action horizon, rather than acting as uniform output noise.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x3.png",
+            "https://arxiv.org/html/2607.15207v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 3 : Overview of BadWAM. BadWAM injects a small visual perturbation into model observations and performs query-based online search over a frozen WAM. The optimized trigger disrupts the action prediction pathway while preserving or minimally altering visual rollout predictions, leading to world-action adversarial attacks during closed-loop execution.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x4.png",
+            "https://arxiv.org/html/2607.15207v1/x4.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x5.png",
+            "https://arxiv.org/html/2607.15207v1/x5.png"
+          ]
+        ],
+        "caption": "(a) Imagined future without preservation. (b) Imagined future with preservation. Figure 4 : Qualitative illustration of the imagination-preserving objective on IDM WAM. Each panel compares predicted futures under clean and adversarial observations at selected future steps. abs diff denotes the absolute pixel difference between clean and adversarial predictions, amplified by 8 × 8\\times for visibility. Both variants induce action-space failure, but the preservation term keeps the adversarial future more consistent with the clean imagination.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig4_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig4_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x6.png",
+            "https://arxiv.org/html/2607.15207v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 5 : Task-level failure profile under attack. Unlike Table 1 , which reports aggregate success, this figure shows how attacked tasks distribute across success-rate bins. Lower bins indicate tasks that are consistently broken rather than merely slightly degraded.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x7.png",
+            "https://arxiv.org/html/2607.15207v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 6 : Comparison with random perturbations on full LIBERO dataset. All methods use the same ℓ ∞ \\ell_{\\infty} budget. Lower task success indicates a stronger attack.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x8.png",
+            "https://arxiv.org/html/2607.15207v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 7 : Mean pass@ k k across trials on different LIBERO suites. BadWAM lowers success throughout the trial budget instead of only causing isolated unlucky failures.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x9.png",
+            "https://arxiv.org/html/2607.15207v1/x9.png"
+          ]
+        ],
+        "caption": "Figure 8 : Per-suite success rates on LIBERO. The attack is especially damaging on spatial and long-horizon tasks, while object-centric tasks remain comparatively more robust.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x10.png",
+            "https://arxiv.org/html/2607.15207v1/x10.png"
+          ]
+        ],
+        "caption": "Figure 9 : Qualitative comparison of clean and attacked rollouts on a LIBERO-10 task. Each row shows synchronized third-person and wrist-camera observations over time. The clean WAM completes the sequential manipulation task, while the attacked WAM initially behaves plausibly but gradually drifts, knocks over objects, fails to grasp the second object, and eventually fails.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x11.png",
+            "https://arxiv.org/html/2607.15207v1/x11.png"
+          ]
+        ],
+        "caption": "Figure 10 : Per-replan action shifts persist across execution and accumulate over time, with failed episodes showing substantially larger cumulative shifts than successful ones. Action shift is measured between clean and attacked action chunks at each replan; shaded regions denote 95% confidence intervals.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x12.png",
+            "https://arxiv.org/html/2607.15207v1/x12.png"
+          ]
+        ],
+        "caption": "Figure 11 : Search dynamics for the imagination-preserving attack. Each panel uses a metric-specific y-axis range and reports mean ± \\pm 95% confidence interval across replans. The query-based optimizer consistently improves the objective and increases action deviation, while the future-video distance changes much less in relative terms.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x13.png",
+            "https://arxiv.org/html/2607.15207v1/x13.png"
+          ]
+        ],
+        "caption": "Figure 12 : Matched-strength stealth trade-off. The imagination-preserving objective produces consistently smaller predicted-future shifts under a comparable input perturbation budget, revealing a stealthier failure mode than the action-only objective. Shaded regions denote 95% confidence intervals over replans.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig12_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x14.png",
+            "https://arxiv.org/html/2607.15207v1/x14.png"
+          ]
+        ],
+        "caption": "Figure 13 : Ablation on future-preserving weight λ \\lambda . Moderate future preservation can improve the action-future tradeoff, while excessive preservation weakens action manipulation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig13_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x15.png",
+            "https://arxiv.org/html/2607.15207v1/x15.png"
+          ]
+        ],
+        "caption": "Figure 14 : Efficiency and budget sensitivity of BadWAM. Increasing the query budget B B raises the per-replan optimization cost, but also gives the optimizer more opportunity to find stronger perturbations. The perturbation-budget study further shows that larger ϵ \\epsilon consistently improves attack effectiveness. Together, the curves expose the practical tradeoff among attack strength, stealthiness, and runtime.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig14_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x16.png",
+            "https://arxiv.org/html/2607.15207v1/x16.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.15207v1/2607.15207v1/x17.png",
+            "https://arxiv.org/html/2607.15207v1/x17.png"
+          ]
+        ],
+        "caption": "Figure 15 : Augmentation-consistency detection is insufficient against imagination-preserving attacks.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig15_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-17/2607.15207/fig15_2.png"
+        ]
+      }
+    ]
+  }
+]

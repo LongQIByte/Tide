@@ -1,0 +1,674 @@
+[
+  {
+    "arxiv_id": "2607.12463",
+    "title": "Function-Aware Fill-in-the-Middle as Mid-Training for Coding Agent Foundation Models",
+    "abstract": "Coding agents must integrate external tool returns into ongoing reasoning - a capability that standard left-to-right pretraining on code exposes only in its forward direction. We observe that the action-observation-continuation loop of a coding agent is structurally isomorphic to a function call site, where a caller binds arguments, a callee returns a value computed elsewhere, and downstream code consumes that value. This conditioning structure exists at internet scale in ordinary code. We exploit it through function-aware fill-in-the-middle (FIM) mid-training: a self-supervised objective that masks functions selected via program dependency graph analysis and a complexity-inferability double criterion. We mid-train Qwen2.5-Coder-Instruct (7B/14B) and Qwen3-8B on a 2.6B-token decontaminated corpus drawn from 968 GitHub repositories, then apply existing agentic post-training pipelines. Mid-training improves SWE-Bench-Verified by +2.8/+3.0 at 7B/14B and by +3.2 on Qwen3-8B; SWE-Bench-Lite gains are +3.7/+4.0/+5.4 on the same models. The improvement holds across two post-training pipelines (R2E-Gym, SWE-Smith) and on a non-Qwen2.5 base (Qwen3-8B with SWE-Lego). Beyond in-domain gains, mid-training also mitigates the capability erosion that agentic post-training otherwise inflicts on non-agent coding (e.g., LiveCodeBench) and non-coding tool-use benchmarks (tau-bench, BFCL): although the mid-training corpus contains Python code only, the function-call inductive bias survives post-training and yields consistent gains.",
+    "upvotes": 104,
+    "authors": [
+      "Yubo Wang",
+      "Jiarong Liang",
+      "Yuxuan Zhang",
+      "Xuye Liu",
+      "Cong Wei",
+      "Yuyu Zhang",
+      "Ping Nie",
+      "Wenhu Chen"
+    ],
+    "organization": "TIGER-Lab",
+    "github_repo": "https://github.com/TIGER-AI-Lab/FIM-Midtraining",
+    "github_stars": 14,
+    "ai_keywords": [],
+    "published_at": "2026-07-14T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.12463",
+    "arxiv_url": "https://arxiv.org/abs/2607.12463",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12463v1/2607.12463v1/x1.png",
+            "https://arxiv.org/html/2607.12463v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1: Left: A function call site and a single step of a coding agent are structurally similar , decomposing into the same four stages: context, call/action, return/observation, continuation. Middle: We exploit this analogy via function-aware FIM mid-training. A function B B is selected from the program dependency graph using complexity ( H ^ \\hat{H} ) and inferability ( I ^ \\hat{I} ) scores; the model is then mid-trained to fill in B B ’s body together with a CoT rationale, given the surrounding file as an FIM-formatted prompt. Right: Mid-training yields consistent gains across both Qwen2.5-Coder-Instruct (7B, 14B) and Qwen3 (8B) on SWE-Bench-Verified (solid bars) and SWE-Bench-Lite (hatched bars).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.12463/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12463v1/2607.12463v1/x2.png",
+            "https://arxiv.org/html/2607.12463v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2: Function-aware FIM target selection on a small calculator example. (a) Program dependency graph parsed from the AST: solid arrows are call edges ℰ call \\mathcal{E}_{\\mathrm{call}} , dashed lines are sibling edges ℰ sib \\mathcal{E}_{\\mathrm{sib}} between same-class methods. (b) Stacked bars decompose the complexity score H ^ = 0.40 \\hat{H}\\!=\\!0.40 (Eq. 1 ; LoC, CC, depth) and the inferability score I ^ = 0.48 \\hat{I}\\!=\\!0.48 (Eq. 2 ; five context signals) for 𝙲𝚊𝚕𝚌𝚞𝚕𝚊𝚝𝚘𝚛 . 𝚝𝚘𝚝𝚊𝚕 \\mathtt{Calculator.total} , yielding FIM ≈ 0.22 ≥ τ = 0.08 \\mathrm{FIM}\\!\\approx\\!0.22\\!\\geq\\!\\tau\\!=\\!0.08 (a hyperparameter; see Appendix B for the full list).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.12463/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12463v1/2607.12463v1/x3.png",
+            "https://arxiv.org/html/2607.12463v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 3: Distribution of the 968 968 source repositories across ten topic categories. The corpus is dominated by reference implementations, scientific computing, and small frameworks; compiler and networking/security tails are kept by design to maintain coverage diversity.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.12463/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12463v1/2607.12463v1/x4.png",
+            "https://arxiv.org/html/2607.12463v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 4: License distribution of the 968 968 -repository corpus. Permissive licenses (MIT, Apache-2.0, BSD) account for over 80 % 80\\% of the corpus. Small categories (LGPL, ISC, Boost, MIT-0, Unlicense, CC0, CC BY, CC BY-NC, etc.) are aggregated as “Other research-permissive licenses,” all of which permit at least non-commercial research use.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.12463/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12463v1/2607.12463v1/x5.png",
+            "https://arxiv.org/html/2607.12463v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 5: Pass rate on SWE-Bench-Verified ( 14 14 B + R2E-Gym) stratified by gold-patch shape, run-means over three evaluation runs per checkpoint.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.12463/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12463v1/2607.12463v1/x6.png",
+            "https://arxiv.org/html/2607.12463v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 6: Outcome distribution per evaluation run on SWE-Bench-Verified (14B, R2E-Gym), averaged over three runs.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.12463/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12463v1/2607.12463v1/x7.png",
+            "https://arxiv.org/html/2607.12463v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 7: Pass rate on SWE-Bench-Lite stratified by gold-patch shape, averaged over three evaluation runs per checkpoint. Lite contains no multi-file tasks; the multi-function single-file bucket is small ( n = 54 n{=}54 ) and shows no gain on this slice, with the + 4.0 +4.0 pp end-task improvement coming entirely from the single-function single-file bucket ( n = 246 n{=}246 , + 4.9 +4.9 pp).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.12463/fig7_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.05382",
+    "title": "Search Beyond What Can Be Taught: Evolving the Knowledge Boundary in Agentic Visual Generation",
+    "abstract": "Visual generators excel at rendering, but they confidently fabricate what they do not know. User requests are unbounded, evolving, and deeply long-tailed: new characters, trending entities, post-cutoff events, and more. This world-knowledge bottleneck is structural: generators are trained on fixed corpora, but the visual world is open-ended. We construct SearchGen-20K and SearchGen-Bench, with 20,839 prompts spanning twelve failure categories and twenty-two domains, paired with a pre-executed multimodal SearchGen-Corpus-1M to support offline, reproducible research. On SearchGen-Bench, frontier open generators score only 21 to 28 out of 100, a 40-point collapse invisible to existing benchmarks. The natural remedy is to employ search tools, enabling agentic visual generation. However, we find that naive search fails: it retrieves indiscriminately, injecting noise into prompts the generator already handles. We trace the root cause to a generator-specific, evolving knowledge boundary: the divide between what a generator can internalize through training and what must remain in external context. Although this boundary is hard to specify in advance, we show that it is discoverable through a teach-then-search co-training framework. Even a minimal version of this co-training recipe produces monotonic improvement, laying the foundation for recursive self-improvement in visual generation that can meet world-knowledge-grounded requests. We release the full dataset, co-training corpus, and search corpus as a replayable harness for tool-augmented, world-knowledge-grounded visual generation.",
+    "upvotes": 85,
+    "authors": [
+      "Haozhe Wang",
+      "Weijia Feng",
+      "Jinpeng Yu",
+      "Che Liu",
+      "Ping Nie",
+      "Fangzhen Lin",
+      "Jiaming Liu",
+      "Ruihua Huang",
+      "Jimmy Lin",
+      "Wenhu Chen",
+      "Cong Wei"
+    ],
+    "organization": "TIGER-Lab",
+    "github_repo": "https://github.com/HaozheH3/SearchGen",
+    "github_stars": 77,
+    "ai_keywords": [],
+    "published_at": "2026-07-09T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.05382",
+    "arxiv_url": "https://arxiv.org/abs/2607.05382",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.05382v1/2607.05382v1/x1.png",
+            "https://arxiv.org/html/2607.05382v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1: Representative search-augmented generations from SearchGen-20K , spanning all twelve failure categories identified from 20,840 production prompts. SearchGen-20K captures the production-scale diverse user requests that demand the unbounded, evolving, and deeply long-tailed world knowledge. The world knowledge ranges from entities that benefit from visual shortcut (left), to complex system or scientific procedures that require textual knowledge. The diversity facilitates research in the structural question this paper addresses: which knowledge gaps can a generator internalize, and which require search at inference time?",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.05382/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.05382v1/2607.05382v1/x2.png",
+            "https://arxiv.org/html/2607.05382v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2: Bilingual composition and prompt length distribution of SearchGen-20K . Left: English (58%) and Chinese (42%) proportions. Right: bimodal prompt length distribution – Chinese prompts are concise (mean 89 characters) while English prompts are more elaborate (mean 266 characters), reflecting authentic cross-lingual user behavior rather than translated templates.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.05382/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.05382v1/2607.05382v1/x3.png",
+            "https://arxiv.org/html/2607.05382v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 3: SearchGen-20K spans diverse, long-tailed domains. Treemap of benchmark mass across domain categories (area reflects relative prompt counts). The cross-category severity structure between failure modes and domains is deferred to Appendix A.1 (Figure 9 ), where uniform severity across all cells rules out the hypothesis that failures concentrate in a few niche categories.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.05382/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.05382v1/2607.05382v1/x4.png",
+            "https://arxiv.org/html/2607.05382v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 4: Dataset composition: entity long-tail and multimodal knowledge gaps. (a) Entity frequency distribution: 93.1% of the 31,537 unique visual entities appear in only a single prompt, confirming the extreme long-tailed nature of real-world image generation requests. (b) Multimodal knowledge gaps: prompts carry a mean of 5.2 simultaneous knowledge gaps (reference slots + text knowledge slots + failure modes); 90.5% carry three or more, confirming the multi-constrained nature of the dataset.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.05382/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.05382v1/2607.05382v1/x5.png",
+            "https://arxiv.org/html/2607.05382v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 5: The world-knowledge bottleneck: per-stratum collapse across nine generators. Grouped bars show the nine-component mean on NoSearch vs. Search-Intensive strata. Every generator, open-weight and commercial alike, collapses on the search-intensive subset, confirming the bottleneck is universal. Drop magnitudes range from − - 0.1 (GPT-Image-2) to − - 39.1 (Qwen-Image-2).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.05382/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.05382v1/2607.05382v1/x6.png",
+            "https://arxiv.org/html/2607.05382v1/x6.png"
+          ]
+        ],
+        "caption": "Table 5: Search is a double-edged sword. Strata: NoSearch (100), VisualSearch (387), TextualSearch (264), totaling 751 prompts. Figure 6: Failure examples of search. Search queries executed are colored. Searched contents introduce noise and may degrade generation quality.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.05382/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.05382v1/2607.05382v1/x7.png",
+            "https://arxiv.org/html/2607.05382v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 7: Co-training framework: teach the generator what it can internalize, then calibrate the reasoner to search what it cannot. Given a user prompt, the VLM reasoner identifies knowledge gaps, executes modality-aware search (image or text), filters and integrates results into an enriched final prompt, and routes visual references to the generator. Co-training proceeds in two phases. Phase 1 (top): online DPO samples search-augmented generations and ranks them by generation quality, constructing preference pairs to push its knowledge boundary outward. Phase 2 (bottom): rejection-sampling finetuning recalibrates the reasoner to the strengthened generator, reinforcing trajectories where reasoned search improves output and discarding what causes degradation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.05382/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.05382v1/2607.05382v1/x8.png",
+            "https://arxiv.org/html/2607.05382v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 8: Co-training progression and knowledge boundary shift. (a) Grouped bars show the three co-training stages (Reasoner SFT, Generator DPO, Reasoner RFT) for Set I (easiest), Set II, and Set III (hardest) search-intensive tiers (Klein-4B). All three tiers show monotonic improvement. (b) Cumulative distribution of per-prompt no-search quality scores for base vs. DPO-finetuned generators on the 647-prompt eval set. The DPO curve sits below the base curve, indicating a rightward shift: fewer prompts receive low scores and more receive high scores from parametric knowledge alone. The shaded region represents newly internalized knowledge: concepts that previously required search but now reside in generator parameters. The shift is consistent across both Klein-4B (top) and Bagel-7B (bottom), confirming that DPO expands the knowledge boundary regardless of architecture.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.05382/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.05382v1/2607.05382v1/x9.png",
+            "https://arxiv.org/html/2607.05382v1/x9.png"
+          ]
+        ],
+        "caption": "Figure 9: The bottleneck is pervasive: every domain–category combination shows knowledge-driven degradation. Heatmap summarizing cross-category structure between failure modes and domain categories in SearchGen-20K . The uniform severity across all cells rules out the hypothesis that failures concentrate in a few niche categories.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.05382/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.05382v1/2607.05382v1/figures/appendix_workflow_eval025_i2i_ref1_scene.jpg",
+            "https://arxiv.org/html/2607.05382v1/figures/appendix_workflow_eval025_i2i_ref1_scene.jpg"
+          ],
+          [
+            "https://arxiv.org/html/2607.05382v1/2607.05382v1/figures/appendix_workflow_eval025_i2i_ref2_clothing.jpg",
+            "https://arxiv.org/html/2607.05382v1/figures/appendix_workflow_eval025_i2i_ref2_clothing.jpg"
+          ],
+          [
+            "https://arxiv.org/html/2607.05382v1/2607.05382v1/figures/appendix_workflow_eval025_i2i_ref3_likeness.jpeg",
+            "https://arxiv.org/html/2607.05382v1/figures/appendix_workflow_eval025_i2i_ref3_likeness.jpeg"
+          ],
+          [
+            "https://arxiv.org/html/2607.05382v1/2607.05382v1/figures/appendix_workflow_eval025_generated.png",
+            "https://arxiv.org/html/2607.05382v1/figures/appendix_workflow_eval025_generated.png"
+          ]
+        ],
+        "caption": "Figure 10: The end-to-end example’s visual output. The three references the reasoner retrieved and selected (top: scene, costume, likeness) and the image the generator produced from the enriched prompt (bottom), for the Yang Chaoyue request traced in the box above. This is the section’s only image example; it grounds what “retrieved references” and “generation” concretely look like. The per-stage boxes that follow are text-only and use different prompts, each chosen to isolate one stage’s behavior.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.05382/fig10_1.jpg",
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.05382/fig10_2.jpg",
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.05382/fig10_3.jpeg",
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.05382/fig10_4.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.11886",
+    "title": "Read It Back: Pretrained MLLMs Are Zero-Shot Reward Models for Text-to-Image Generation",
+    "abstract": "In this paper, we propose SpectraReward, a training-free reward function that turns pretrained MLLMs into off-the-shelf reward models for image-generation reinforcement learning. Instead of asking the MLLM to judge a generated image or answer decomposed verification questions, SpectraReward measures how well the original prompt can be recovered from the generated image through a single image-conditioned, teacher-forced forward pass. We use the average image-conditioned prompt log-likelihood as the reward, directly reusing the MLLM's pretrained image-text alignment ability without preference labels, reward-model fine-tuning. We further introduce Self-SpectraReward, a special case for unified multimodal models where the policy's own understanding branch serves as the reward model for its generation branch, forming a closed-loop self-improving framework without external reward models or external knowledge. Extensive experiments validate SpectraReward through a broad image-generation RL study covering two diffusion models, three RL algorithms, nine reward MLLM backbones from four MLLM families spanning 4B to 235B parameters, and five out-of-distribution text-to-image benchmarks. Results show that both SpectraReward and Self-SpectraReward significantly and consistently improve generation performance and outperform prior MLLM-derived reward training methods. Further analysis reveals that larger reward MLLMs are not always better, while Self-SpectraReward can match or surpass much larger external reward models, suggesting that reward-policy alignment is a key factor for effective image-generation RL. Project Page: https://huangrh99.github.io/SpectraReward/",
+    "upvotes": 82,
+    "authors": [
+      "Runhui Huang",
+      "Qihui Zhang",
+      "Zhe Liu",
+      "Yu Gao",
+      "Jie Wu",
+      "Hengshuang Zhao"
+    ],
+    "organization": "ByteDance Seed",
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [],
+    "published_at": "2026-07-13T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.11886",
+    "arxiv_url": "https://arxiv.org/abs/2607.11886",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.11886v1/2607.11886v1/x1.png",
+            "https://arxiv.org/html/2607.11886v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1 : Overview of SpectraReward. (a) Pretrained MLLMs naturally induce a semantic spectrum that measures how well a generated image aligns with the prompt. SpectraReward aggregates this into a reward for T2I RL. (b) During RL training, SpectraReward steadily increases together with visible improvements in complex scene generation. (c) We study nine reward MLLM backbones from four MLLM families, with external reward MLLMs spanning three families and 4B to 235B parameters. Scaling the reward MLLM backbones brings non-monotonic gains. Qwen3-VL-30B-A3B achieves the best performance among external MLLMs, while Self-SpectraReward, using BAGEL’s own understanding branch as the reward model, outperforms all external MLLMs. (d) Both SpectraReward and Self-SpectraReward bring significant and consistent improvements across all six downstream benchmarks compared to the baselines.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.11886/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.11886v1/2607.11886v1/x2.png",
+            "https://arxiv.org/html/2607.11886v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2 : Comparison of MLLM-based reward functions. (a) Scalar scoring directly asks an MLLM to assign a discrete image-text alignment score, making the reward sensitive to judge calibration and scoring noise. (b) VQA decomposition converts the prompt into atomic questions and aggregates verifier confidence, but introduces a two-stage pipeline and depends on the quality of question decomposition. (c) SpectraReward computes the image-conditioned prompt likelihood through a single teacher-forced forward pass. The resulting token-level likelihoods form a semantic spectrum, whose average is used as the scalar reward. (d) Self-SpectraReward instantiates the same prompt-likelihood reward within a unified multimodal model by using the policy’s own understanding branch, removing the need for an external reward MLLM and improving reward-policy alignment.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.11886/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.11886v1/2607.11886v1/x3.png",
+            "https://arxiv.org/html/2607.11886v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 3 : Token-level semantic sensitivity of SpectraReward. Positive and negative images are evaluated using the same positive prompt. For attribute mismatch, instantiated as a counting error, the negative image mainly lowers the likelihood of “Two”; for object identity mismatch, replacing the guitar with a chair sharply lowers the likelihood of “guitar”. Bars show image-conditioned prompt-token log-likelihoods with error bars calculated over four pairs, and dashed lines show the resulting sequence-level reward value, i.e., SpectraReward.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.11886/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.11886v1/2607.11886v1/x4.png",
+            "https://arxiv.org/html/2607.11886v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 4 : The visual interpretation of SpectraReward. The reward ranking is consistent with the visual quality ranking.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.11886/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.11886v1/2607.11886v1/x5.png",
+            "https://arxiv.org/html/2607.11886v1/x5.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.11886v1/2607.11886v1/x6.png",
+            "https://arxiv.org/html/2607.11886v1/x6.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.11886v1/2607.11886v1/x7.png",
+            "https://arxiv.org/html/2607.11886v1/x7.png"
+          ]
+        ],
+        "caption": "Table 1 : Results on Text-to-Image benchmarks . S and L denote Short and Long prompts, respectively. For WISE, the second score denotes evaluation with CoT. AlphaGRPO is trained on the reasoning text-to-image generation task. Bold indicates the best performance. The results of BAGEL are reproduced. Table 2 : Effect of different reward MLLM backbones. Unless otherwise specified, reward MLLMs all use Instruct models. Bold indicates the best performance. The second best is underlined . Table 3 : Comparison of different RL algorithms and reward models. When trained with Self-SpectraReward, AWM achieves the best downstream performance. Self-SpectraReward further outperforms prior reward models under comparable RL training. Bold indicates the best performance. Table 4 : Ablation of Reward function. Scalar Scoring asks the MLLM to rate the image from 1 to 5. VQA-Score asks “Does this figure show {caption} ?” and uses P ​ ( yes ) P(\\text{yes}) as the reward. Table 5 : Ablation of Reward granularity. Token-level reward does not consistently outperform sequence-level reward, so we use sequence-level reward by default. Figure 5 : Qualitative comparison. Table 6 : The effect of including the EOS token in the reward calculation. Table 7 : Effect of VAE features in Self-SpectraReward reward computation. BAGEL provides two visual inputs to its understanding branch, ViT features from the semantic encoder and VAE features from the generation encoder. Using both inputs improves GenEval and TIIF-Short. Table 8 : Evaluation of text-to-image generation ability on GenEval benchmark. ‘Gen. Only’ stands for an image generation model, and ‘Unified’ denotes a model that has both understanding and generation capabilities. † \\dagger refers to the methods using the LLM rewriter. Our model’s results and BAGEL all use the LLM rewriter. Table 9 : Performance of proprietary models and state-of-the-art open-source models on TIIF-Bench testmini subset. Evaluated systems are grouped into (i) diffusion-based open-source models, (ii)autoregressive open-source models, and (iii) proprietary models. The results of SpectraReward and BAGEL are evaluated by GPT-4.1. “Inf. SRR” indicates executing the inference-time self-reflective refinement. Table 10: Evaluation of text-to-image generation ability on the DPG-Bench [ dpg ] benchmark. * indicates our reproduced results. Table 11 : Comparison of world knowledge reasoning on WISE. WISE examines the complex semantic understanding and world knowledge for T2I generation. ‘Gen. Only’ stands for an image generation model, and ‘Unified’ denotes a model that has both understanding and generation capabilities. Figure 6 : Additional reward-ranking examples. For each prompt, samples are ordered from lower to higher SpectraReward reward. Figure 7 : Additional qualitative comparison. Red text highlights the prompt constraints that are especially sensitive to spatial relation, counting, attribute binding, or long-prompt composition. Self-SpectraReward more consistently satisfies these highlighted constraints than the BAGEL baseline.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.11886/fig5_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.11886/fig5_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.11886/fig5_3.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.10400",
+    "title": "SynthDocBench: Controlled Benchmark for Long-Context Visual Document Understanding",
+    "abstract": "Vision language models (VLMs) have achieved strong performance on visual document understanding benchmarks such as DocVQA, ChartQA, and MMLongBench-Doc. However, real-world documents combine multiple factors such as length, layout complexity, modality, and question difficulty, which makes it difficult to attribute model failures to specific causes. We introduce SynthDocBench, a fully synthetic benchmark for long-context visual document understanding that systematically controls factors including document length, layout structure, modality composition, and question type. The benchmark is constructed using a combinatorial design, each factor is varied independently across generated documents, enabling controlled analysis of model behavior. Documents are generated end to end using an LLM pipeline across six layout archetypes, with a 40 percent random override to prevent models from exploiting spurious correlations. Additionally, SynthDocBench spans long-context documents with substantially greater length and structural diversity than existing benchmarks. Evaluating seven frontier VLMs, we uncover three failure modes that existing benchmarks cannot surface: sharp degradation with document length, a systematic positional sensitivity in which the middle third of a document is hardest for five of six models and five of six models show a negative Early-to-Late trend (steepest decline: 8.3 percentage points), and breakdown of chart comprehension in long-document settings. These results suggest that current models may be overfitting to benchmark artifacts rather than achieving robust long-context visual document understanding.",
+    "upvotes": 69,
+    "authors": [
+      "Abhigya Verma",
+      "Khyati Mahajan",
+      "Amit Kumar Saha",
+      "Shruthan Radhakrishna",
+      "Sagar Davasam",
+      "Vikas Yadav",
+      "Sai Rajeswar Mudumba"
+    ],
+    "organization": "ServiceNow-AI",
+    "github_repo": "https://github.com/ServiceNow/SynthDocBench",
+    "github_stars": 6,
+    "ai_keywords": [],
+    "published_at": "2026-07-11T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.10400",
+    "arxiv_url": "https://arxiv.org/abs/2607.10400",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/images/benchmark_plot.png",
+            "https://arxiv.org/html/2607.10400v1/images/benchmark_plot.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/images/icon2.png",
+            "https://arxiv.org/html/2607.10400v1/images/icon2.png"
+          ]
+        ],
+        "caption": "Figure 1: Landscape of benchmarks Top: benchmark comparison by average document length (pages) and average textual context (tokens). SynthDocBench occupies a unique region with both long multi-page context and high textual density. Bottom: comparison with existing chart and document VQA benchmarks. Prior benchmarks typically isolate either charts or long documents, whereas SynthDocBench is designed to study their intersection under long contexts.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig1_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig1_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/x1.png",
+            "https://arxiv.org/html/2607.10400v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 2: Synthetic visual document generation pipeline. From a topic seed, the pipeline generates grounded report content, applies document-level visual styling, synthesizes visualizations, performs metadata and QA validation, and assembles the final HTML/PDF reports with a machine-readable QA manifest.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/x2.png",
+            "https://arxiv.org/html/2607.10400v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 3: QA generation pipeline. The pipeline parses the generated report into structured evidence channels, extracts and synthesizes key information, and generates chart-reading, cross-modal, and multi-hop questions. A verification stage filters weak or malformed items before serializing the final QA output.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/x3.png",
+            "https://arxiv.org/html/2607.10400v1/x3.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/x4.png",
+            "https://arxiv.org/html/2607.10400v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 4: Document composition statistics across 200 reports.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig4_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig4_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/x5.png",
+            "https://arxiv.org/html/2607.10400v1/x5.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/images/fig_error_analysis_small.png",
+            "https://arxiv.org/html/2607.10400v1/images/fig_error_analysis_small.png"
+          ]
+        ],
+        "caption": "Figure 5: GPT-4o vision vs. OCR+GPT-4o (text-only) ACC by subset. Vision dominates on Chart; OCR dominates on Complex. Figure 6: Hard failures: 109 questions where all six models score ≤ 3 \\leq 3 , broken down by error category and question subset ( Ch. = chart-reading; Cx. = complex; XM. = cross-modal).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig5_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig5_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/x6.png",
+            "https://arxiv.org/html/2607.10400v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 7: ACC ( τ = 6 \\tau{=}6 ) by fine-grained question category. Rows are grouped by subset (Chart Reading, Cross-Modal, Complex Reasoning); columns are models ordered by overall ACC. The colour scale runs from red (0) to green (1). Full numerical values are in Table 12 (Appendix I ).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/x7.png",
+            "https://arxiv.org/html/2607.10400v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 8: Evaluation pipeline. Rendered PDFs are converted to page images at 144 DPI, grouped into concatenated 5-page strips, and supplied directly to candidate models at temperature 0. Candidate answers are then scored against deterministic reference answers by GPT-5 acting as the judge model 𝒥 \\mathcal{J} .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/x8.png",
+            "https://arxiv.org/html/2607.10400v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 9: Distribution of judge scores (0–10) per model.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/x9.png",
+            "https://arxiv.org/html/2607.10400v1/x9.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/x10.png",
+            "https://arxiv.org/html/2607.10400v1/x10.png"
+          ]
+        ],
+        "caption": "Figure 10: Chart-reading ACC ( τ = 6 \\tau{=}6 , judge: GPT-5) by evidence position bucket ( n = 597 n{=}597 , 200 reports). Questions bucketed by relative chart position p = k / K p=k/K into equal thirds. Middle third is hardest for 4 of 6 models; Claude-Sonnet-4.5 steepest decline ( − - 11.7 pp). Figure 11: Gemini-3.1-Pro accuracy (ACC, τ = 6 \\tau{=}6 ) per topic domain, grouped by question type. Black diamonds = overall accuracy per domain. Dashed line at 0.5. Based on the 57 domain-annotated reports (513 questions).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig9_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig9_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/x11.png",
+            "https://arxiv.org/html/2607.10400v1/x11.png"
+          ]
+        ],
+        "caption": "Figure 12: ACC ( τ = 6 \\tau{=}6 ) by question subset. Cross-modal questions are consistently hardest across all models, confirming modality alignment as the primary bottleneck.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.10400v1/2607.10400v1/x12.png",
+            "https://arxiv.org/html/2607.10400v1/x12.png"
+          ]
+        ],
+        "caption": "Figure 13: Distribution of chart types (top 20 shown). The corpus covers 24 distinct types spanning common (bar, line, scatter) and specialized (dumbbell, sankey, lollipop) forms.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.10400/fig11_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.08317",
+    "title": "Blind-Spots-Bench: Evaluating Blind Spots in Multimodal Models",
+    "abstract": "Modern AI models achieve strong performance on many established benchmarks, yet they still fail on tasks that humans find almost trivial, such as manipulating a string or drawing a dog with five legs. These examples suggest that existing benchmarks may under-measure persistent blind spots in current systems. We introduce blind-spots-bench, a benchmark designed to expose such blind spots through tasks that appear simple for humans but remain challenging for modern AI. We collect raw questions from students in an AI course, clean and annotate them with structured reference solutions, and propose a task taxonomy tailored to the resulting dataset of 235 samples. We further develop an automated grading pipeline to evaluate a wide range of models, including open-weight and closed-source language, vision-language, and image-generation models. Our analysis on blind-spots-bench reveals that closed-source frontier models can substantially outperform open-weight models with even approx10% gap, even when they attain comparable performance on existing benchmarks. A more fine-grained analysis shows that no single model dominates across all task types, and that some tasks remain challenging for all evaluated models. These results highlight the value of blind-spots-bench as a diagnostic stress test for identifying concrete weaknesses in current modern models.",
+    "upvotes": 31,
+    "authors": [
+      "Matteo Santelmo",
+      "Xiuying Wei",
+      "Israa Fakih",
+      "Felix Bauer",
+      "Juan Garcia Giraldo",
+      "Chengkun Li",
+      "Etienne Bamas",
+      "Emmanuel Abbé"
+    ],
+    "organization": "EPFL",
+    "github_repo": "https://github.com/matteosantelmo/reasoning-blind-spots",
+    "github_stars": 4,
+    "ai_keywords": [],
+    "published_at": "2026-07-09T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.08317",
+    "arxiv_url": "https://arxiv.org/abs/2607.08317",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08317v1/2607.08317v1/x3.png",
+            "https://arxiv.org/html/2607.08317v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 1 : Left : Accuracy on blind-spots-bench vs. Artificial Analysis Intelligence Index score for text-only problems. Right: Performance of four VLM models on several sub-tasks.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.08317/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08317v1/2607.08317v1/x4.png",
+            "https://arxiv.org/html/2607.08317v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 2 : Representative examples from the dataset. While these tasks are generally easy for human, we find that they remain challenging for frontier models. Each example is annotated with its solution (an abbreviated version here), question format, task and sub-task categories, illustrating the diversity of skills evaluated in the benchmark. Full taxonomy and additional examples in Appendix A .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.08317/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08317v1/2607.08317v1/x5.png",
+            "https://arxiv.org/html/2607.08317v1/x5.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.08317v1/2607.08317v1/x6.png",
+            "https://arxiv.org/html/2607.08317v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 3 : Left: Question format composition. Right: Task category composition. Some questions (about 15) involve multiple subtask categories; for these cases, we count one occurrence for each applicable subtask. The bar chart reports the total number of occurrences for each fine-grained task category, grouped into three major categories.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.08317/fig3_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.08317/fig3_2.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08317v1/2607.08317v1/x7.png",
+            "https://arxiv.org/html/2607.08317v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 4 : Accuracy on blind-spots-bench vs. average cost for 100 samples. Colors distinguish model families; models of the same version but different sizes are connected.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.08317/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08317v1/2607.08317v1/x8.png",
+            "https://arxiv.org/html/2607.08317v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 5 : Performance comparison of leading image generation and VLM models on the largest-sample subtasks within each model type.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.08317/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08317v1/2607.08317v1/x9.png",
+            "https://arxiv.org/html/2607.08317v1/x9.png"
+          ]
+        ],
+        "caption": "Figure 6 : Average accuracy for each model on each task, on text-only problems.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.08317/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08317v1/2607.08317v1/x10.png",
+            "https://arxiv.org/html/2607.08317v1/x10.png"
+          ]
+        ],
+        "caption": "Figure 7 : Average accuracy for each model on each task, on multi-to-text problems.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.08317/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.08317v1/2607.08317v1/x11.png",
+            "https://arxiv.org/html/2607.08317v1/x11.png"
+          ]
+        ],
+        "caption": "Figure 8 : Average accuracy for each model on each task, on image-generation problems.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-15/2607.08317/fig8_1.png"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,529 @@
+[
+  {
+    "arxiv_id": "2607.15314",
+    "title": "Cura 1T: Specialized Model for Agentic Healthcare",
+    "abstract": "Healthcare spans high-stakes communication, expert reasoning, and workflow execution, yet specialized LLMs that cover these use cases together remain limited. A healthcare model must handle patient consultation, clinical reasoning over text and images, interactive diagnosis, and electronic health record (EHR) tool use. These capabilities fail in different ways, and a narrow update for one task can degrade another. We present Cura 1T, a healthcare-specialized LLM trained through a human-gated self-evolution loop. In each evolution round, a training agent plans a target capability, trains the model, evaluates benchmark trajectories, and refines the data mixture from observed failures. This data-centered loop improves the model through targeted synthetic and curated examples rather than a single generic medical-data update. Across the healthcare evaluation suite, Cura 1T ranks at or near the top among frontier baselines, while remaining competitive on out-of-domain reasoning and agentic benchmarks.",
+    "upvotes": 28,
+    "authors": [
+      "actAVA AI",
+      "Haolin Chen",
+      "Leon Qi",
+      "Steve Brown",
+      "Deon Metelski",
+      "Tao Xia",
+      "Joonyul Lee",
+      "Qixuan Wang",
+      "Kevin Riley",
+      "Frank Wang",
+      "Weiran Yao"
+    ],
+    "organization": "actAVA AI Team",
+    "github_repo": "https://github.com/actava-ai/Cura",
+    "github_stars": 13,
+    "ai_keywords": [],
+    "published_at": "2026-07-15T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.15314",
+    "arxiv_url": "https://arxiv.org/abs/2607.15314",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15314v1/2607.15314v1/figures/main_comparison.png",
+            "https://arxiv.org/html/2607.15314v1/figures/main_comparison.png"
+          ]
+        ],
+        "caption": "Figure 1 : Performance of Cura 1T, frontier models, and the Kimi-K2.6 base across six healthcare benchmark panels: MedAgentBench (Jiang et al., 2025 ) , HealthBench Professional and Hard (Arora et al., 2025 ; OpenAI, 2026 ) , MedXpertQA (Zuo et al., 2025 ) , and AgentClinic (Schmidgall et al., 2024 ) .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15314/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15314v1/2607.15314v1/x1.png",
+            "https://arxiv.org/html/2607.15314v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 2 : Left: Agent-managed self-evolution loop for Cura 1T. Human review gates the plan before training and the keep, revert, or deploy decision after evaluation. Right: Data refinement pipeline and training stack.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15314/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15314v1/2607.15314v1/x2.png",
+            "https://arxiv.org/html/2607.15314v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 3 : Evolution map from the base model to Cura 1T. Values are changes from benchmark-specific bases; solid and dashed red arrows mark retained and reverted interventions.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15314/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15314v1/2607.15314v1/figures/ood_comparison.png",
+            "https://arxiv.org/html/2607.15314v1/figures/ood_comparison.png"
+          ]
+        ],
+        "caption": "Figure 4 : Out-of-domain evaluation results for Cura 1T.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15314/fig4_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.14530",
+    "title": "xHC: Expanded Hyper-Connections",
+    "abstract": "Hyper-Connections (HC) expand the residual stream of Transformers into N parallel streams, providing a form of memory scaling beyond model width and depth. Manifold-Constrained HC (mHC) stabilizes this formulation at scale. The large gains from N{=}1 to N{=}4 suggest residual-stream expansion as a promising scaling axis. However, existing HC-family methods typically stop at N{=}4. Our experiments reveal why: scaling mHC beyond this point yields diminishing performance gains and rapidly increasing training cost. We attribute this limitation to two bottlenecks: insufficient write-back information for an expanding number of streams and residual-mixing generation whose cost scales cubically with N. To address both bottlenecks, we propose xHC (Expanded Hyper-Connections), the first HC-family method to achieve meaningful expansion beyond N{=}4. xHC combines temporal feature augmentation for richer write-back with a sparse residual-stream architecture that updates only k=4 of the N=16 streams while retaining dense access to the full residual state. Across 18B and 28B MoE models, xHC delivers strong and consistent downstream improvements. On an 18B MoE model, xHC improves the average downstream score by 4.0 points over mHC, while adding only modest training FLOPs over the vanilla baseline. Scaling-law experiments show that the vanilla and mHC require 1.50times and 1.19times the compute of xHC, respectively, to reach the same loss. Practical large-N training also requires controlling memory traffic from the expanded residual state. We therefore introduce xHC-Flash, which reduces the per-sublayer memory traffic from 73.5C to 40C, comparable to the 34C required by mHC at N{=}4, while retaining the gains of full xHC. Together, xHC and xHC-Flash make large-N residual-stream expansion effective and practical for LLM pre-training.",
+    "upvotes": 26,
+    "authors": [
+      "Xiangdong Zhang",
+      "Xiaohan Qin",
+      "Sunan Zou",
+      "Tuo Dai",
+      "Xiaoming Shi",
+      "Huaijin Wu",
+      "Yebin Yang",
+      "Zhuo Xia",
+      "Shaofeng Zhang",
+      "Lin Yao",
+      "Yuliang Liu",
+      "Yu Cheng",
+      "Junchi Yan"
+    ],
+    "organization": "rednote-hilab",
+    "github_repo": "https://github.com/aHapBean/xHC",
+    "github_stars": 21,
+    "ai_keywords": [],
+    "published_at": "2026-07-16T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.14530",
+    "arxiv_url": "https://arxiv.org/abs/2607.14530",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14530v1/2607.14530v1/scaling_law_xHC_figure_1.png",
+            "https://arxiv.org/html/2607.14530v1/scaling_law_xHC_figure_1.png"
+          ]
+        ],
+        "caption": "Figure 1 : Expansion efficiency: loss vs. FLOPs on a 2.5B MoE model (details in Table 6 ).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.14530/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14530v1/2607.14530v1/18B_loss_comparison.png",
+            "https://arxiv.org/html/2607.14530v1/18B_loss_comparison.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.14530v1/2607.14530v1/18B_avg_score_line_grid.png",
+            "https://arxiv.org/html/2607.14530v1/18B_avg_score_line_grid.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.14530v1/2607.14530v1/18B_bar_benchmarks.png",
+            "https://arxiv.org/html/2607.14530v1/18B_bar_benchmarks.png"
+          ]
+        ],
+        "caption": "(a) Training loss. (b) Average downstream score. (c) Benchmark-level gains. Figure 2 : xHC delivers broad gains at 18B scale. (a) xHC achieves lowest training loss. (b) The loss improvement translates into a significantly higher average downstream score across benchmarks in Table 1 . (c) xHC improves representative benchmarks across reasoning, knowledge, and code.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.14530/fig2_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.14530/fig2_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.14530/fig2_3.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14530v1/2607.14530v1/x1.png",
+            "https://arxiv.org/html/2607.14530v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 3 : Overview of xHC. (a) A standard Transformer layer maintains a single residual stream. (b) mHC expands the residual state into N = 4 N{=}4 streams with dense residual mixing and write-back. (c) xHC scales to N = 16 N{=}16 with only k = 4 k{=}4 active streams: it reads all streams, applies the sublayer ℱ \\mathcal{F} (Attn/MLP), augments MLP outputs, and sparsely writes back to selected streams. Blue/orange streams denote fixed/routed active streams. Restricting residual mapping to the k k active streams reduces the dominant residual-mapping generation cost from O ​ ( N 3 ​ C ) O(N^{3}C) to O ​ ( k 3 ​ C ) O(k^{3}C) .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.14530/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14530v1/2607.14530v1/x2.png",
+            "https://arxiv.org/html/2607.14530v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 4 : Scaling-law comparison. xHC traces a consistently lower loss curve than both mHC and the vanilla residual baseline across training compute.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.14530/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.14530v1/2607.14530v1/scaling_law_xHC_figure_temp_ablation.png",
+            "https://arxiv.org/html/2607.14530v1/scaling_law_xHC_figure_temp_ablation.png"
+          ]
+        ],
+        "caption": "Table 2 : Ablation study. Parentheses show extra training FLOPs over vanilla baseline. “Sparse” is the sparse architecture, “D. Read” is Dense Read, and “Fixed” is the number of always-active streams. Figure 5 : Information bottleneck ablation. The gain grows with N N .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.14530/fig5_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.15330",
+    "title": "Xiaomi-Robotics-1: Scaling Vision-Language-Action Models with over 100K Hours of Real-World Trajectories",
+    "abstract": "We present Xiaomi-Robotics-1, a foundational vision-language-action (VLA) model capable of (1) following diverse language instructions to perform a wide range of mobile manipulation tasks in unseen environments out-of-the-box, and (2) efficiently adapting to novel downstream tasks with minimal fine-tuning data. We propose a two-stage training recipe consisting of pre-training and post-training. During pre-training, we imbue the model with broad and generalizable action-generation capabilities by training on over 100k hours of real-world manipulation trajectories collected via UMI devices. Crucially, we develop a scalable auto-labeling pipeline that annotates trajectory clips with natural languages describing scene state transitions, providing rich and precise conditioning for action learning. During post-training, we aim to align these capabilities with robot embodiments and imperative instructions that humans naturally use to prompt robots. Extensive experiments demonstrate strong scaling behavior. Xiaomi-Robotics-1 consistently improves with increased data scales and model sizes during pre-training. This scaling behavior directly transfers to post-training, where a stronger pre-training model yields better out-of-the-box real-robot performance in unseen environments. Furthermore, Xiaomi-Robotics-1 serves as a strong robot foundation policy that can be efficiently fine-tuned on complex, dexterous tasks with high data efficiency. Across multiple simulation benchmarks, Xiaomi-Robotics-1 outperforms state-of-the-art methods. Notably, it establishes a new state-of-the-art with a 57.6% success rate on RoboCasa365, surpassing the previous best of 46.6%. Furthermore, it achieves an average score of 20.07 on RoboDojo, significantly outperforming the prior state-of-the-art (13.07). Code and model checkpoints will be released. Project page: https://robotics.xiaomi.com/xiaomi-robotics-1.html",
+    "upvotes": 25,
+    "authors": [
+      "Xiaomi Robotics Team",
+      "Jun Guo",
+      "Piaopiao Jin",
+      "Jason Li",
+      "Peiyan Li",
+      "Yingyan Li",
+      "Futeng Liu",
+      "Wanli Peng",
+      "Optimus Qin",
+      "Yifei Su",
+      "Nan Sun",
+      "Qiao Sun",
+      "Runze Suo",
+      "Heyun Wang",
+      "Yunhong Wang",
+      "Rujie Wu",
+      "Caoyu Xia",
+      "Lina Zhang",
+      "Jack Zhao",
+      "Guoliang Chen",
+      "Wenlong Chen",
+      "Xinze He",
+      "Bin Li",
+      "Qing Li",
+      "Zhuorong Li",
+      "Heng Qu",
+      "Wenxuan Song",
+      "Diyun Xiang",
+      "Yifan Xie",
+      "Peiran Xu",
+      "Hangjun Ye",
+      "Wen Ye",
+      "Han Zhao",
+      "Quanyun Zhou"
+    ],
+    "organization": "Xiaomi Robotics",
+    "github_repo": "https://github.com/XiaomiRobotics/Xiaomi-Robotics-1",
+    "github_stars": 72,
+    "ai_keywords": [],
+    "published_at": "2026-07-16T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.15330",
+    "arxiv_url": "https://arxiv.org/abs/2607.15330",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15330v1/2607.15330v1/x1.png",
+            "https://arxiv.org/html/2607.15330v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1 : Overview. Xiaomi-Robotics-1 is pre-trained on over 100k hours of real-world UMI trajectories with auto-labeled state-transition language prompts. It is then aligned to robot embodiments and imperative instruction prompts via cross-embodiment post-training. Xiaomi-Robotics-1 scales effectively with data and model size. It is able to perform multiple tasks in unseen environment out-of-the-box and learn new tasks efficiently.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15330/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15330v1/2607.15330v1/x2.png",
+            "https://arxiv.org/html/2607.15330v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2 : Model Architecture. Xiaomi-Robotics-1 adopts a Mixture-of-Transformers [ 44 ] architecture that couples a pre-trained VLM with a DiT. The VLM encodes the observation and language instruction, and additionally predicts action chunks via Choice Policies [ 59 ] to accelerate training convergence. Conditioned on the robot state and the VLM’s KV cache of the observation and language tokens, the DiT generates the action chunk via flow matching. Note that the action-related tokens from the VLM are excluded from the DiT’s attention computation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15330/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15330v1/2607.15330v1/x3.png",
+            "https://arxiv.org/html/2607.15330v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 3 : Pre-training Dataset. The pre-training dataset of Xiaomi-Robotics-1 contains over 100k hours of real-world manipulation trajectories collected with UMI devices.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15330/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15330v1/2607.15330v1/x4.png",
+            "https://arxiv.org/html/2607.15330v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 4 : Post-training Dataset. The post-training dataset of Xiaomi-Robotics-1 comprises about 10k hours of cross-embodiment trajectories, including over 7.2k hours of in-house robot data collected with mobile manipulators and dual-arm robots, over 1k hours of instruction-labeled UMI data, and open-source robot datasets.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15330/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15330v1/2607.15330v1/x5.png",
+            "https://arxiv.org/html/2607.15330v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 5 : Scaling of Pre-training. We show the validation action errors (MSE) from the data-scaling and model-scaling pre-training experiments. We terminate the training for 12.5% and 25% data in the data-scaling experiment early as the validation loss indicates overfitting.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15330/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15330v1/2607.15330v1/x6.png",
+            "https://arxiv.org/html/2607.15330v1/x6.png"
+          ]
+        ],
+        "caption": "Figure 6 : Qualitative Results of Pre-training. After pre-training, Xiaomi-Robotics-1 is able to predict action trajectories for UMI grippers on a held-out validation set according to the language description of state transitions.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15330/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15330v1/2607.15330v1/x7.png",
+            "https://arxiv.org/html/2607.15330v1/x7.png"
+          ]
+        ],
+        "caption": "Figure 7 : Post-training Evaluation. We evaluate the post-trained model out-of-the-box across four tasks in novel environments. Crucially, both the environments and object instances are unseen during training.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15330/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15330v1/2607.15330v1/x8.png",
+            "https://arxiv.org/html/2607.15330v1/x8.png"
+          ]
+        ],
+        "caption": "Figure 8 : Quantitative Results of Post-training. We showcase the success rates of post-trained models across different pre-training data scales and model sizes.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15330/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15330v1/2607.15330v1/x9.png",
+            "https://arxiv.org/html/2607.15330v1/x9.png"
+          ]
+        ],
+        "caption": "Figure 9 : Downstream Fine-tuning Evaluation. We fine-tune the post-trained model on four new challenging tasks with a minimal amount of data.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15330/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15330v1/2607.15330v1/x10.png",
+            "https://arxiv.org/html/2607.15330v1/x10.png"
+          ]
+        ],
+        "caption": "Figure 10 : Quantitative Results of Downstream Fine-tuning. We report the success rates and progresses of different models across the four different tasks.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15330/fig10_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15330v1/2607.15330v1/x11.png",
+            "https://arxiv.org/html/2607.15330v1/x11.png"
+          ]
+        ],
+        "caption": "Figure 11 : Examples of UMI data in the Pre-training Dataset.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15330/fig11_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15330v1/2607.15330v1/x12.png",
+            "https://arxiv.org/html/2607.15330v1/x12.png"
+          ]
+        ],
+        "caption": "Figure 12 : Examples of UMI data in the Post-training Dataset.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15330/fig12_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.15591",
+    "title": "RecGPT-V3 Technical Report",
+    "abstract": "Large language models (LLMs) are transforming recommender systems from matching co-occurrence patterns in historical behavior toward reasoning about the intent that drives it. RecGPT-V1 pioneered this paradigm on Taobao by centering user understanding, and RecGPT-V2 scaled it via coordinated multi-agent reasoning; both are deployed in production with consistent gains in user experience and commercial outcomes. However, operating RecGPT at scale reveals three challenges: (1) stateless behavior modeling, where each request reprocesses full user history, wasting computation and discarding prior analysis; (2) a tag-to-item information bottleneck, where natural-language tags form a lossy channel between user understanding and item grounding; and (3) inefficient explicit reasoning, whose lengthy chain-of-thought incurs untenable latency and compute overhead.\n  We present RecGPT-V3, a stateful, hybrid-modal recommender that reasons over natural language for open-world knowledge and Semantic IDs (SIDs) for concrete item grounding. A Memory Hub maintains structured, continually evolving user memory that distills long-horizon behavior into condensed units, cutting user-modeling computation by 55.8%. A Hybrid-modal Foundation Model allows the LLM jointly reason over text tags and SIDs, opening a high-bandwidth channel into the item space. Latent Intent Reasoning internalizes verbose rationales into compact learnable latent tokens that remain decodable into readable explanations, lowering output token cost by 200x. Deployed in Taobao's \"Guess What You Like\" feed, RecGPT-V3 achieves consistent gains in large-scale online A/B tests: IPV +1.28%, CTR +1.00%, TC +1.97%, GMV +3.97%, while cutting end-to-end serving resource consumption by 52.4%.",
+    "upvotes": 19,
+    "authors": [
+      "Bowen Zheng",
+      "Chao Yi",
+      "Dian Chen",
+      "Gaoyang Guo",
+      "Han Zhu",
+      "Jiakai Tang",
+      "Jian Wu",
+      "Mao Zhang",
+      "Wen Chen",
+      "Yifan Lu",
+      "Yujie Luo",
+      "Yuning Jiang",
+      "Zhujin Gao",
+      "Bo Zheng",
+      "Dixuan Wang",
+      "Hao Fang",
+      "Jiancai Liu",
+      "Jing Yu",
+      "Ke Chen",
+      "Kewei Zhu",
+      "Mingke Xu",
+      "Wenjun Yang",
+      "Xunke Xi",
+      "Zile Zhou"
+    ],
+    "organization": null,
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [],
+    "published_at": "2026-07-17T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.15591",
+    "arxiv_url": "https://arxiv.org/abs/2607.15591",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15591v1/2607.15591v1/x1.png",
+            "https://arxiv.org/html/2607.15591v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1 : Performance and efficiency of the RecGPT series on Taobao. Each generation brings further gains on CTR, IPV, TC, and GMV in both the Item Scene and Main Feed, while GPU cost drops steadily: RecGPT-V3 uses only 19% of RecGPT-V1 ’s compute, a 52.4% reduction over RecGPT-V2 .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15591/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15591v1/2607.15591v1/x2.png",
+            "https://arxiv.org/html/2607.15591v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2 : Overview of RecGPT-V3 . A Memory Hub distills a user’s long-term behavior into incrementally curated memory units; conditioned on these units and recent behaviors, a planner and its multi-expert modules reason with the Hybrid-modal Foundation Model (natural language and Semantic IDs) and Latent Intent Reasoning (compact latent tokens) to predict the next item to interact with.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15591/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15591v1/2607.15591v1/x3.png",
+            "https://arxiv.org/html/2607.15591v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 3 : Overview of the Memory Hub. Structured Behavior Compression distills a user’s long-term behavioral history into a compact set of structured memory units, reducing token usage by 94.5 % 94.5\\% . Evolving Memory Curation then keeps this memory current by selectively updating existing units and extracting new patterns from unmatched behaviors, yielding a condensed, traceable, and evolvable user representation for downstream recommendation.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15591/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15591v1/2607.15591v1/x4.png",
+            "https://arxiv.org/html/2607.15591v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 4 : Overview of the Hybrid-modal Foundation Model. Multimodal item features are quantized into 65 , 536 65{,}536 SID tokens via CN-CLIP and a two-level RQ-VAE, extending the Qwen3-14B vocabulary. Continual pre-training (Stage 1) and instruction tuning (Stage 2) then align these tokens with language, with general-domain data mixed into both stages.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15591/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15591v1/2607.15591v1/assets/reasoning2.png",
+            "https://arxiv.org/html/2607.15591v1/assets/reasoning2.png"
+          ]
+        ],
+        "caption": "Figure 5 : Overview of Latent Intent Reasoning. Three reconstruction-based alignment tasks compress an explicit chain-of-thought trace into a short sequence of learnable latent tokens z z that faithfully encode it. A two-stage post-training pipeline then internalizes this reasoning into the model: Explicit-to-Implicit CoT Alignment first distills teacher traces into the latent tokens, and Reinforcement Learning from Ranking Feedback then refines the policy against online business rewards.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15591/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.15591v1/2607.15591v1/x5.png",
+            "https://arxiv.org/html/2607.15591v1/x5.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.15591v1/2607.15591v1/x6.png",
+            "https://arxiv.org/html/2607.15591v1/x6.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.15591v1/2607.15591v1/x7.png",
+            "https://arxiv.org/html/2607.15591v1/x7.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.15591v1/2607.15591v1/x8.png",
+            "https://arxiv.org/html/2607.15591v1/x8.png"
+          ]
+        ],
+        "caption": "Table 4 : The three alignment tasks on a running example (a badminton-equipment expert), each a choice of the masked set 𝒥 \\mathcal{J} . Latent tokens <cot> replace the segments they encode, and the model reconstructs the masked segments R 𝒥 R_{\\mathcal{J}} from the surrounding context. The gray anchors x x and y y mark the input and output, whose specific content is omitted here. Table 5 : Training data mixture in Stage 1. Table 6 : Online A/B test results comparing RecGPT-V3 against RecGPT-V2 baseline across item and feed scenarios. All metrics show relative percentage improvements (% omitted). Table 7 : Human evaluation of memory unit quality. “Behavior Pattern” measures whether the assigned pattern identifier correctly categorizes the user’s behavioral cluster; “Behavior Index” measures whether the representative indices correctly point to interactions belonging to the identified pattern. Table 8: User-modeling compute cost with and without the memory hub, expressed relative to the RecGPT-V2 baseline. Figure 6 : General capability evaluation across four benchmarks. The hybrid-modal foundation model ( w/ General-Domain Data ) preserves most of the backbone’s capabilities, while removing general-domain data ( w/o General-Domain Data ) leads to catastrophic collapse. Figure 7 : SID–text semantic alignment across four bidirectional translation tasks. Table 9 : Downstream recommendation quality comparison. Table 10 : Post-training effectiveness comparison. The upper group evaluates reasoning on the base language model; the lower group evaluates on the hybrid-modal foundation model. “–” indicates metrics not applicable to configurations outside the online feedback pipeline. Table 11 : Inference efficiency comparison between explicit CoT and latent reasoning on 1,000 samples under identical hardware. “Output Length” denotes the average number of tokens generated per sample, including reasoning and final output; “Input/Output TPM” denotes the tokens-per-minute throughput during prefill and decoding, respectively; “Total Time” denotes the wall-clock time to process all samples. Table 12 : Comparison between text tags and SIDs on category-level statistics. Figure 8 : PCA visualization of item embeddings retrieved by text tags and SIDs. Table 13 : Item-level hit rate under text tag, SID, and hybrid retrieval configurations. Figure 9 : Case study. The memory hub compresses a user’s raw behavior sequence into structured preference units and incrementally updates them with recent behaviors. Based on the curated memory, RecGPT-V3 performs latent intent reasoning with only 10 tokens, reconstructs an explainable rationale on demand, and generates memory-driven badminton recommendations grounded by SIDs.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15591/fig6_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15591/fig6_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15591/fig6_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-20/2607.15591/fig6_4.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.16051",
+    "title": "Loop the Loopies!",
+    "abstract": "We present Loopie, the most powerful looped Transformer to date. The Loopie series consists of two Mixture-of-Experts (MoE) models: a 20B-parameter model with 2B active parameters and a 6Bparameter model with 0.6B active parameters. Looped Transformers have long faced a challenge: given an N-fold increase in pre-training compute, increasing the parameter count by a factor of N usually outperforms looping a model N times. Loopie addresses this challenge. Extensive ablation studies, including comparisons with a vanilla 30B-A3B model, show that Loopie substantially outperforms vanilla Transformer baselines trained with the same compute budget. Our novel post-training pipeline equips Loopie with strong reasoning abilities. At the 2025 IMO and IPhO, Loopie achieves gold-medal performance without tools.",
+    "upvotes": 17,
+    "authors": [
+      "Zitian Gao",
+      "Yilong Chen",
+      "Yihao Xiao",
+      "Xinyu Yang",
+      "Ran Tao",
+      "Joey Zhou",
+      "Bryan Dai"
+    ],
+    "organization": null,
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [],
+    "published_at": "2026-07-17T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.16051",
+    "arxiv_url": "https://arxiv.org/abs/2607.16051",
+    "html_available": true,
+    "figures": []
+  }
+]

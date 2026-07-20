@@ -1,0 +1,694 @@
+[
+  {
+    "arxiv_id": "2607.13285",
+    "title": "Harness Handbook: Making Evolving Agent Harnesses Readable,Navigable, and Editable",
+    "abstract": "The capability of a modern AI agent depends not only on its foundation model but also on its harness, which constructs prompts, manages state, invokes tools, and coordinates execution. As models, APIs, environments, and requirements evolve, the harness must be continually modified. Before such a change can be made, a developer or coding agent must identify all code locations that implement the target behavior. This is difficult because production harnesses are large, tightly coupled, and behaviorally distributed, while modification requests describe what the system should do and repositories are organized by files and modules. Code search, repository indexing, and long-context processing ease inspection, but still leave this behavior-to-code mapping to be recovered by hand. Behavior localization is therefore a central bottleneck in harness evolution. We introduce the Harness Handbook, a behavior-centric representation synthesized automatically from a harness codebase via static analysis and LLM-assisted structuring, linking each behavior to its corresponding source. We also introduce Behavior-Guided Progressive Disclosure (BGPD), which guides agents from high-level behaviors to relevant implementation details and verifies candidate locations against the current source. On diverse modification requests from two open-source harnesses, Handbook-Assisted planning improves behavior localization and edit-plan quality while using fewer planner tokens, with the largest gains on scattered sites, rarely executed paths, and cross-module interactions. Evolving complex agentic systems thus depends not only on generating edits, but also on determining where those edits should be made.",
+    "upvotes": 199,
+    "authors": [
+      "Ruhan Wang",
+      "Yucheng Shi",
+      "Zongxia Li",
+      "Zhongzhi Li",
+      "Yue Yu",
+      "Junyao Yang",
+      "Kishan Panaganti",
+      "Haitao Mi",
+      "Dongruo Zhou",
+      "Leoweiliang"
+    ],
+    "organization": "Tencent Hunyuan",
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [],
+    "published_at": "2026-07-14T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.13285",
+    "arxiv_url": "https://arxiv.org/abs/2607.13285",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13285v1/2607.13285v1/x1.png",
+            "https://arxiv.org/html/2607.13285v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1 : Overview of the Harness Handbook representation. Its three-level hierarchy progresses from a system-level overview to stage-level component overviews and source-backed unit details. The navigation pane provides component and state indexes for direct access and cross-stage tracing.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13285/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13285v1/2607.13285v1/x2.png",
+            "https://arxiv.org/html/2607.13285v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 2 : Construction pipeline for Harness Handbook. Static analysis extracts source-linked facts, behavioral organization maps source units to execution stages, and hierarchical synthesis builds the L1–L3 handbook.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13285/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13285v1/2607.13285v1/x3.png",
+            "https://arxiv.org/html/2607.13285v1/x3.png"
+          ]
+        ],
+        "caption": "Figure 3 : Plan quality and planner token usage on Codex and Terminus-2. (a) Overall win rates aggregated across the three judges. (b) Win rates reported separately by GPT-5.5, Opus 4.8, and DeepSeek-V4-Pro. (c) Average number of planner tokens per request; lower values indicate greater efficiency.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13285/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13285v1/2607.13285v1/x4.png",
+            "https://arxiv.org/html/2607.13285v1/x4.png"
+          ]
+        ],
+        "caption": "Figure 4 : Per-judge win rates for three evaluation dimensions. Rows show results for Codex and Terminus-2, while columns show Localization, Scope Control, and Reasoning.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13285/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13285v1/2607.13285v1/x5.png",
+            "https://arxiv.org/html/2607.13285v1/x5.png"
+          ]
+        ],
+        "caption": "Figure 5 : Win rates by (a) modification request type and (b) localization difficulty. Q, CF, and SH denote Query, Cross-file, and Search-Hostile requests.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13285/fig5_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.13125",
+    "title": "Boogu-Image-0.1: Boosting Open-Source Unified Multimodal Understanding and Generation",
+    "abstract": "We introduce Boogu-Image-0.1, an open-source unified multimodal understanding and generation model family, comprising Base, Turbo, Edit, and Edit-Turbo variants. It delivers competitive performance in high-quality text-to-image generation, fast inference, instruction-based editing, and bilingual (Chinese-English) text rendering. Closed-source multimodal systems like Nano-Banana-Pro and GPT-Image-2 achieve strong performance through system-level integration rather than a single model, yet their internal practices remain largely undisclosed. In this work, we demonstrate that targeted improvements in model understanding, data quality, and training pipelines, coupled with agentic inference-time scaling, can substantially enhance generation and editing performance even under highly constrained compute budgets. Comprehensive evaluations show that Boogu-Image-0.1 consistently matches or surpasses other open-source models across standard benchmarks, and achieves results approaching leading closed-source systems. Notably, this is accomplished with only 208.62 million unique images. The base model's theoretical training cost is only approximately \\$400K. We share practical discussions that we believe are valuable to the broader research community, and release weights, code, and recipes under Apache 2.0 to advance the open ecosystem for unified multimodal understanding and generation. Our code is available here: https://github.com/Boogu-Project/Boogu-Image.",
+    "upvotes": 127,
+    "authors": [
+      "Guoxuan Chen",
+      "Chufeng Xiao",
+      "Haoran Yang",
+      "Siyue Xie",
+      "Binxiao Huang",
+      "Ming Zhang",
+      "Cheuk Him Chau",
+      "Xinyu Fu",
+      "Yingzhao Lian",
+      "Tom S. Y. Li",
+      "Jintao Lin",
+      "Bowen Dong",
+      "Zian Qian",
+      "Yuhao Liu",
+      "Yuxuan Hu",
+      "Weikang Shi",
+      "Bin Zou",
+      "Bowen Zheng",
+      "Haoxuan Che",
+      "Chang Chen",
+      "Yuyang He",
+      "Heyang Sun",
+      "Tianyu Huang",
+      "Chong Hou Choi",
+      "Cheng Gong",
+      "Han Shi",
+      "Haoli Bai",
+      "Xihui Liu",
+      "Hongsheng Li",
+      "Qifeng Chen",
+      "Chao Huang",
+      "Rui Liu",
+      "Chenyang Lei"
+    ],
+    "organization": "Boogu",
+    "github_repo": "https://github.com/boogu-project/Boogu-Image",
+    "github_stars": 790,
+    "ai_keywords": [],
+    "published_at": "2026-07-14T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.13125",
+    "arxiv_url": "https://arxiv.org/abs/2607.13125",
+    "html_available": true,
+    "figures": []
+  },
+  {
+    "arxiv_id": "2607.12395",
+    "title": "Ring-Zero: Scaling Zero RL to a Trillion Parameters for Emergent Reasoning",
+    "abstract": "Reinforcement learning with verifiable rewards without human-annotated data, often referred to as zero RL, has emerged as a powerful paradigm for eliciting chain-of-thought reasoning. However, due to computational constraints, existing studies are largely restricted to small models, leaving the training dynamics and emergent capabilities at a large scale unexplored. To meaningfully explore this frontier, we aim to elicit high-quality reasoning behaviors from the model. However, we find that naive scaling often suffers from poor readability, token redundancy, and a lack of adaptive reasoning depth. To address these challenges, we present a stable and efficient training pipeline, incorporating algorithmic and system optimizations such as clipped importance sampling, training-inference ratio correction, and mixed-precision control. Our experiments offer three key findings that validate the \"bitter lesson\" of scaling: (1) scaling to 1T parameters significantly enhances sample efficiency and performance ceilings; (2) the training process progresses sequentially through an initial discovery phase followed by a sharpening phase; and (3) the model spontaneously develops advanced cognitive behaviors, including anthropomorphism, structured formatting, self-verification, parallel reasoning, and context anxiety, rendering hand-crafted heuristics redundant. Evaluated on seven mathematical benchmarks, Ring-2.5-1T-Zero achieves competitive performance. Additionally, to assess CoT quality beyond final-answer correctness, we propose a structured evaluation framework across three dimensions: comprehensibility, reproducibility, and efficiency, where our model demonstrates clear advantages in producing structured and concise reasoning traces. By sharing our observed emergent phenomena, we hope to provide the community with deeper insights into scaling behaviors, particularly at the 1-trillion scale.",
+    "upvotes": 91,
+    "authors": [
+      "Xinyu Tang",
+      "Gangqiang Cao",
+      "Yurou Liu",
+      "Yuliang Zhan",
+      "Xiaochong Lan",
+      "Yifan Li",
+      "Yuchen Yan",
+      "Han Peng",
+      "Zican Dong",
+      "Zhenduo Zhang",
+      "Tianshu Wang",
+      "Xinyu Kong",
+      "Zujie Wen",
+      "Wayne Xin Zhao",
+      "Zhiqiang Zhang",
+      "Jun Zhou"
+    ],
+    "organization": "RUC-AIBOX",
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [],
+    "published_at": "2026-07-14T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.12395",
+    "arxiv_url": "https://arxiv.org/abs/2607.12395",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x1.png",
+            "https://arxiv.org/html/2607.12395v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 1 : Overview of Ring-2.5-1T-Zero. (a) The multi-stage training pipeline. First-stage RL incentivizes reasoning from the base model. Self-Distillation compresses CoT traces and resets the training-inference engine gap. Second-stage RL shifts to a sample-level loss for sustained improvement. Third-stage RL introduces tier-based training for adaptive reasoning depth. (b) Infrastructure optimizations for stable and efficient training at scale. (c) Emergent behaviors that arise spontaneously without explicit supervision.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x2.png",
+            "https://arxiv.org/html/2607.12395v1/x2.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x3.png",
+            "https://arxiv.org/html/2607.12395v1/x3.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x4.png",
+            "https://arxiv.org/html/2607.12395v1/x4.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x5.png",
+            "https://arxiv.org/html/2607.12395v1/x5.png"
+          ]
+        ],
+        "caption": "(a) Reward (initial data) (b) Seq Length (initial data) (c) Reward (new data) (d) Seq Length (new data) Figure 2 : Training curves of Ling-2.5-1T-Base during first stage RL. (a,b) First 2800 steps with the initial training data: reward and sequence length increase steadily as the model bootstraps reasoning from scratch. (c,d) After switching to new training data, the model continues to improve with sustained sequence length growth.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig2_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig2_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig2_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig2_4.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x6.png",
+            "https://arxiv.org/html/2607.12395v1/x6.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x7.png",
+            "https://arxiv.org/html/2607.12395v1/x7.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x8.png",
+            "https://arxiv.org/html/2607.12395v1/x8.png"
+          ]
+        ],
+        "caption": "(a) Comprehensibility (b) Reproducibility (c) Efficiency Figure 3 : Evaluation of CoT quality across three dimensions. (a) Comprehensibility: our model’s reasoning traces are judged to be more comprehensible than all baselines. (b) Reproducibility: distilling from our fewer CoT traces yields much stronger student models compared to DeepSeek-R1, highlighting a significantly higher sample efficiency for ability transfer. (c) Efficiency: our model solves problems using significantly fewer tokens.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig3_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig3_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig3_3.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x9.png",
+            "https://arxiv.org/html/2607.12395v1/x9.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x10.png",
+            "https://arxiv.org/html/2607.12395v1/x10.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x11.png",
+            "https://arxiv.org/html/2607.12395v1/x11.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x12.png",
+            "https://arxiv.org/html/2607.12395v1/x12.png"
+          ]
+        ],
+        "caption": "(a) All-Failed Group Ratio (b) Reward (c) Entropy (d) Sequence Length Figure 4 : Comparison of RL algorithms on the flash model. CISPO and DAPO accelerate learning but suffer from greater instability. GSPO maintains high entropy but provides limited sequence length growth.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig4_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig4_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig4_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig4_4.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x13.png",
+            "https://arxiv.org/html/2607.12395v1/x13.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x14.png",
+            "https://arxiv.org/html/2607.12395v1/x14.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x15.png",
+            "https://arxiv.org/html/2607.12395v1/x15.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x16.png",
+            "https://arxiv.org/html/2607.12395v1/x16.png"
+          ]
+        ],
+        "caption": "(a) Log-Prob Difference (b) Entropy (c) Sequence Length (d) Reward Figure 5 : Effect of KL penalty on training stability. Without KL (blue), the training-inference log-probability gap diverges, causing the reward to crash. With KL (red), all metrics remain healthy.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig5_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig5_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig5_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig5_4.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x17.png",
+            "https://arxiv.org/html/2607.12395v1/x17.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x18.png",
+            "https://arxiv.org/html/2607.12395v1/x18.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x19.png",
+            "https://arxiv.org/html/2607.12395v1/x19.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x20.png",
+            "https://arxiv.org/html/2607.12395v1/x20.png"
+          ]
+        ],
+        "caption": "(a) Log-Prob Difference (b) Entropy (c) Sequence Length (d) Reward Figure 6 : Comparison of ratio correction strategies. The baseline (blue) collapses within 800 steps. IcePop (green) delays the collapse but ultimately fails. Our approach (red) maintains stable training completely.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig6_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig6_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig6_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig6_4.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x21.png",
+            "https://arxiv.org/html/2607.12395v1/x21.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x22.png",
+            "https://arxiv.org/html/2607.12395v1/x22.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x23.png",
+            "https://arxiv.org/html/2607.12395v1/x23.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x24.png",
+            "https://arxiv.org/html/2607.12395v1/x24.png"
+          ]
+        ],
+        "caption": "(a) Sequence Length (b) Reward Figure 7 : Format reward comparison. Format A causes uncontrolled length growth without reward improvement. Format B ensures proper stopping. (c) Sequence Length (d) Reward Figure 8 : Window size comparison. The 32k window produces much longer responses than the 16k window, but only marginally improves the reward, demonstrating severe token redundancy.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig7_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig7_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig7_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig7_4.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x25.png",
+            "https://arxiv.org/html/2607.12395v1/x25.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x26.png",
+            "https://arxiv.org/html/2607.12395v1/x26.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x27.png",
+            "https://arxiv.org/html/2607.12395v1/x27.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x28.png",
+            "https://arxiv.org/html/2607.12395v1/x28.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x29.png",
+            "https://arxiv.org/html/2607.12395v1/x29.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x30.png",
+            "https://arxiv.org/html/2607.12395v1/x30.png"
+          ]
+        ],
+        "caption": "(a) LR – Reward (b) Rollout – Reward (c) Loss Reduction – Reward (d) LR – Seq Length (e) Rollout – Seq Length (f) Loss Reduction – Seq Length Figure 9 : Hyperparameter ablation on the flash model during the first stage RL. (a,d) Learning rate has minimal impact in the tested range. (b,e) Larger rollout groups converge faster per step but cost more wall-clock time. (c,f) Token-level loss reduction promotes reasoning length growth, whereas sample-level keeps length flat.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig8_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig8_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig8_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig8_4.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig8_5.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig8_6.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x31.png",
+            "https://arxiv.org/html/2607.12395v1/x31.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x32.png",
+            "https://arxiv.org/html/2607.12395v1/x32.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x33.png",
+            "https://arxiv.org/html/2607.12395v1/x33.png"
+          ],
+          [
+            "https://arxiv.org/html/2607.12395v1/2607.12395v1/x34.png",
+            "https://arxiv.org/html/2607.12395v1/x34.png"
+          ]
+        ],
+        "caption": "(a) Pass@1 (b) Pass@1024 (c) Length Inertia (d) Long Tail Distribution Figure 10 : Comprehensive analysis of zero RL dynamics. (a) Model scale effect. Ring-2.5-1T-Zero consistently outperforms Ring-2.5-flash-Zero. A larger model capacity unlocks a higher performance ceiling and accelerates capability acquisition. (b) Reasoning boundary. Pass@1024 expands during early training but soon saturates. This proves that RL first discovers novel reasoning patterns and then shifts to primarily sharpening its existing capabilities. (c) Length inertia. We track the sequence length of simple questions that the model answers perfectly on the first attempt within a batch. As training progresses, the model inflates its token usage for these already-solved problems. It learns a lazy shortcut to accumulate rewards rather than maintaining conciseness. (d) Data distribution mismatch. By using the sequence length required to correctly solve a problem as a proxy for its difficulty, we observe that real-world mathematical data forms a massive long-tail difficulty distribution skewed toward simple problems ( e.g., 67.6% of problems can be solved within just 4k tokens). However, zero RL does not benefit from mimicking this natural frequency. Over-training on this long tail simply wastes computational budget and stalls the learning process.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig9_1.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig9_2.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig9_3.png",
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12395/fig9_4.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.12625",
+    "title": "KnowAct-GUIClaw: Know Deeply, Act Perfectly, Personal GUI Assistant with Self-Evolving Memory and Skill",
+    "abstract": "OpenClaw has emerged as a leading agent framework for complex task automation, yet it faces insufficient cross-platform GUI interaction support and a well-built self-evolution mechanism. These flaws limit its adaptation to diverse device ecosystems and prevent performance improvements through continuous learning from execution experience. To resolve these issues, we propose the Know Deeply, Act Perfectly paradigm for personal assistants, which holds that accumulated user interaction and task-running experience directly improve execution accuracy and efficiency, unifying cognitive comprehension and operational execution. Based on this paradigm, we introduce KnowAct-GUIClaw, a novel Know-Route-Act-Reflect framework designed to address OpenClaw's GUI manipulation deficits and break through its cross-platform and recursive self-improvement constraints. First, the host agent leverages accumulated interaction experience and task-relevant knowledge for long-horizon task decomposition and allocation (Know). Second, a pluggable GUI subagent with an experience-attributable memory system (Know) and self-evolving skill library (Act), enabling seamless cross-platform migration and fast-path integration. Especially, this framework continuously stores user profiles and feedback to improve the accuracy of task decomposition and tool calls. Extensive experiments across Android, iOS, HarmonyOS and Windows show that KnowAct-GUIClaw achieves superior efficiency, accuracy and cross-platform adaptability. Especially, the GUIClaw with open-source Kimi-2.6 models achieves the best performance (64.1%) on the long-horizon MobileWorld benchmark, beating all agentical frameworks and closed-source agentical models, e.g., Seed-2.0-Pro and GPT-5.5. Additionally, the knowledgeable memory and execution skills supported by our framework are transferable across diverse base models, improving by 8.5% with Kimi-2.6.",
+    "upvotes": 56,
+    "authors": [
+      "Yunxin Li",
+      "Jinchao Li",
+      "Shibo Su",
+      "Zhenran Xu",
+      "Chenrui Zhao",
+      "Tongshu Bian",
+      "Xiaoman Liang",
+      "Meishan Zhang",
+      "Baotian Hu",
+      "Min Zhang"
+    ],
+    "organization": "Lychee Team",
+    "github_repo": "https://github.com/HITsz-TMG/KnowAct",
+    "github_stars": 248,
+    "ai_keywords": [],
+    "published_at": "2026-07-15T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.12625",
+    "arxiv_url": "https://arxiv.org/abs/2607.12625",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12625v1/2607.12625v1/figures/front.png",
+            "https://arxiv.org/html/2607.12625v1/figures/front.png"
+          ]
+        ],
+        "caption": "Figure 1: The success rate (SR) comparison on MobileWorld GUI-Only tasks. The bars summarize Table 1 together with the additional Kimi-based KnowAct-GUIClaw runs; gray bars denote specialized GUI models, colored external bars denote general model families, and highlighted bars denote KnowAct-GUIClaw variants with memory and skills. The experimental results show that KnowAct-GUIClaw achieves SOTA performance and that the memory and skill are effective for different base models.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12625/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12625v1/2607.12625v1/figures/know-route-act-reflect.png",
+            "https://arxiv.org/html/2607.12625v1/figures/know-route-act-reflect.png"
+          ]
+        ],
+        "caption": "Figure 2: Overview of the KnowAct-GUIClaw execution loop . Two persistent stores—a memory and history store and a skill and shortcut store—supply advisory context to every stage. Know gathers evidence and assembles a reasoning context; Route ranks app candidates and turns the request into either a single GUI task or an ordered multi-app workflow whose subtasks exchange typed values through a blackboard; Act runs GUIClaw’s observe–reason–act loop over the hybrid action space of GUI primitives, skills, deeplink/intent shortcuts, and intervention actions; and Reflect distills each trajectory into updated skills and experience memory that feed back into the stores.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12625/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12625v1/2607.12625v1/figures/gui_memory_case.png",
+            "https://arxiv.org/html/2607.12625v1/figures/gui_memory_case.png"
+          ]
+        ],
+        "caption": "Figure 3: Experience memory improves a GUI task by changing the task context before low-level control begins . Without the retrieved memory (Top), GUIClawinvites continues through Mastodon’s mobile settings and reaches a nonproductive path for invite-link creation. With the retrieved memory (bottom), the Know stage supplies an advisory lesson that invite links with advanced settings that require the web administration panel; GUIClaw then opens the web interface, navigates to account settings, and reaches the invite-people page. The example shows that experience memory guides app choice, decomposition, and recovery while live screen observations still ground each action.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12625/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12625v1/2607.12625v1/figures/blackboard-subgoal.png",
+            "https://arxiv.org/html/2607.12625v1/figures/blackboard-subgoal.png"
+          ]
+        ],
+        "caption": "Figure 4: Blackboard-mediated execution in the Route stage . The short-lived blackboard B B stores typed inputs and outputs known so far. Each subtask ( g i , h i , I i , O i ) (g_{i},h_{i},I_{i},O_{i}) checks its declared inputs I i I_{i} , reads their values from B B , runs GUIClaw’s observe–reason–act loop to produce a trajectory τ i \\tau_{i} , and writes only its declared outputs O i O_{i} back to B B ( 2 ). A missing required input or output makes the workflow fail closed, so later subtasks consume observed typed values rather than free-form summaries.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12625/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12625v1/2607.12625v1/figures/demo/case1_trajectory.png",
+            "https://arxiv.org/html/2607.12625v1/figures/demo/case1_trajectory.png"
+          ]
+        ],
+        "caption": "Figure 5: KnowAct-GUIClaw execution of a cross-app price comparison . The host supplies the product model from the user profile and routes two GUI tasks. A validated JD search shortcut lands directly on the results page, whereas Taobao requires five ordinary GUI steps. The blackboard carries both observed prices into the host’s recommendation, illustrating the step and token savings in Table 3 .",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12625/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12625v1/2607.12625v1/figures/demo/appendix_cases.png",
+            "https://arxiv.org/html/2607.12625v1/figures/demo/appendix_cases.png"
+          ]
+        ],
+        "caption": "Figure 6: Cases of our workflow with attribution experience. (a) Email-to-alarm transfers the observed party time through the blackboard; the host subtracts one hour before the GUI subagent sets the alarm. (b) Failure-driven re-planning records a failed contact lookup, recovers the phone number from a resume, and delegates the final Messages GUI task.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12625/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12625v1/2607.12625v1/figures/case_multi-task_tool_and_gui.png",
+            "https://arxiv.org/html/2607.12625v1/figures/case_multi-task_tool_and_gui.png"
+          ]
+        ],
+        "caption": "Figure 7: Host-mediated recovery in a conference-location task. The Email GUI task returns only the hotel name, so the host resolves the full address through web search before delegating the Messages and Maps GUI tasks. Maps reports a 13 13 -minute walk. The workflow combines partial GUI evidence with external tools while preserving typed subtask boundaries.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12625/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12625v1/2607.12625v1/figures/case_multi-task_cart_sms.png",
+            "https://arxiv.org/html/2607.12625v1/figures/case_multi-task_cart_sms.png"
+          ]
+        ],
+        "caption": "Figure 8: Cart-to-SMS cross-app execution. The TaoDian GUI task extracts the product names, order number, and recipient phone number and transfers them to the downstream messaging task. A validated messaging shortcut opens the SMS compose view with the recipient and message body already populated, illustrating both blackboard information transfer and navigation compression.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12625/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.12625v1/2607.12625v1/figures/case_multi-task_tool_and_gui_cn.png",
+            "https://arxiv.org/html/2607.12625v1/figures/case_multi-task_tool_and_gui_cn.png"
+          ]
+        ],
+        "caption": "Figure 9: Chinese annotated companion for the host-mediated recovery case in Figure 7 . The panel highlights the same control flow in which an underspecified GUI output is routed back to the host, grounded through web search, and then consumed by downstream Messages and Maps GUI tasks.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.12625/fig9_1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "arxiv_id": "2607.13639",
+    "title": "OvisOCR2 Technical Report",
+    "abstract": "We introduce OvisOCR2, a 0.8B document parsing model. OvisOCR2 is designed as an end-to-end parser: given a document page image, it generates a Markdown representation in natural reading order, covering text, formulas, tables, and visual regions. We build a data engine that combines filtered real-document annotations with synthetic pages whose rendered images and Markdown targets are derived from the same HTML source. The training recipe includes supervised fine-tuning, reinforcement learning on a 4B branch with a multi-component reward design, on-policy distillation into the 0.8B model, and model fusion. On OmniDocBench v1.6, OvisOCR2 achieves a state-of-the-art overall score of 96.58, placing an end-to-end model at the top of this leaderboard previously dominated by pipeline methods and highlighting the potential of end-to-end document parsing. On PureDocBench, OvisOCR2 also achieves the highest Avg3 score of 75.06. Beyond these two public benchmarks, we evaluate OvisOCR2 on an in-house benchmark designed to cover a broader set of long-tail and challenging scenarios. OvisOCR2 obtains the best overall performance among the compared methods, providing further evidence of its generalization and robustness. OvisOCR2 is available at https://huggingface.co/ATH-MaaS/OvisOCR2.",
+    "upvotes": 52,
+    "authors": [
+      "Shiyin Lu",
+      "Yinglun Li",
+      "Yu Xia",
+      "Yuhui Chen",
+      "An-Yang Ji",
+      "Jun-Peng Jiang",
+      "Qing-Guo Chen",
+      "Jianshan Zhao",
+      "En Lin",
+      "Haijun Li",
+      "Cheng Qin",
+      "Zhao Xu",
+      "Weihua Luo"
+    ],
+    "organization": "Alibaba Group",
+    "github_repo": null,
+    "github_stars": null,
+    "ai_keywords": [],
+    "published_at": "2026-07-15T00:00:00.000Z",
+    "hf_url": "https://huggingface.co/papers/2607.13639",
+    "arxiv_url": "https://arxiv.org/abs/2607.13639",
+    "html_available": true,
+    "figures": [
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13639v1/2607.13639v1/figures/performance.png",
+            "https://arxiv.org/html/2607.13639v1/figures/performance.png"
+          ]
+        ],
+        "caption": "Figure 1: Performance of OvisOCR2 on OmniDocBench v1.6",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13639/fig1_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13639v1/2607.13639v1/figures/data_pipeline.png",
+            "https://arxiv.org/html/2607.13639v1/figures/data_pipeline.png"
+          ]
+        ],
+        "caption": "Figure 2: Architecture of the data engine",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13639/fig2_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13639v1/2607.13639v1/x1.png",
+            "https://arxiv.org/html/2607.13639v1/x1.png"
+          ]
+        ],
+        "caption": "Figure 3: Two-branch training of OvisOCR2. The 4B branch produces an RL-aligned teacher, while the 0.8B branch proceeds through SFT, OPD, and model fusion to obtain the final model.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13639/fig3_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13639v1/2607.13639v1/x2.png",
+            "https://arxiv.org/html/2607.13639v1/x2.png"
+          ]
+        ],
+        "caption": "Figure 4: Training stability comparison between 4B RL and 0.8B RL. Panel (a) reports actor KL loss, with faint traces showing raw per-step values and bold curves showing 15-step centered rolling means. Panel (b) reports table TEDS on the validation set.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13639/fig4_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13639v1/2607.13639v1/x3.png",
+            "https://arxiv.org/html/2607.13639v1/x3.png"
+          ]
+        ],
+        "caption": "Figure A.1: Qualitative comparison on a table document.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13639/fig5_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13639v1/2607.13639v1/x4.png",
+            "https://arxiv.org/html/2607.13639v1/x4.png"
+          ]
+        ],
+        "caption": "Figure A.2: Qualitative comparison on a table document (continued).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13639/fig6_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13639v1/2607.13639v1/x5.png",
+            "https://arxiv.org/html/2607.13639v1/x5.png"
+          ]
+        ],
+        "caption": "Figure A.3: Qualitative comparison on a table document.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13639/fig7_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13639v1/2607.13639v1/x6.png",
+            "https://arxiv.org/html/2607.13639v1/x6.png"
+          ]
+        ],
+        "caption": "Figure A.4: Qualitative comparison on a table document (continued).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13639/fig8_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13639v1/2607.13639v1/x7.png",
+            "https://arxiv.org/html/2607.13639v1/x7.png"
+          ]
+        ],
+        "caption": "Figure A.5: Qualitative comparison on a handwritten document.",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13639/fig9_1.png"
+        ]
+      },
+      {
+        "images": [
+          [
+            "https://arxiv.org/html/2607.13639v1/2607.13639v1/x8.png",
+            "https://arxiv.org/html/2607.13639v1/x8.png"
+          ]
+        ],
+        "caption": "Figure A.6: Qualitative comparison on a handwritten document (continued).",
+        "local_paths": [
+          "/home/runner/work/Tide/Tide/data/2026-07-16/2607.13639/fig10_1.png"
+        ]
+      }
+    ]
+  }
+]
